@@ -30,4 +30,3 @@ const styles = {
 };
 
 export default Card;
-Contact GitHub API Training Shop Blog About

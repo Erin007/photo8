@@ -8,11 +8,11 @@ import {
   View
 } from 'react-native';
 
-import Button from './app/components/common/Button';
-import LoginForm from './app/components/LoginForm';
-import Card from './app/components/common/Card';
-import CardSection from './app/components/common/CardSection';
-import Spinner from './app/components/common/Spinner';
+import Button from './components/common/Button';
+import LoginForm from './components/LoginForm';
+import Card from './components/common/Card';
+import CardSection from './components/common/CardSection';
+import Spinner from './components/common/Spinner';
 
 export default class hunt extends Component {
   state = { loggedIn: null }; //are you logged in?
