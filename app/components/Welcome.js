@@ -12,6 +12,8 @@ import LoginForm from './LoginForm';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
 import Spinner from './common/Spinner';
+import newHunt from './MakeHuntForm';
+import findHunt from './HuntFinder';
 
 class welcome extends Component {
   state = { loggedIn: null }; //are you logged in?
@@ -25,14 +27,38 @@ class welcome extends Component {
     messagingSenderId: '348722860624'
     });
 
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      this.setState({ loggedIn: true });
-    } else {
-      this.setState({ loggedIn: false });
-    }
-  });
-}
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ loggedIn: true });
+      } else {
+        this.setState({ loggedIn: false });
+      }
+    });
+  }
+
+  newHuntPressed() {
+    console.log('>>> Make New Hunt Button Pressed!');
+    this._toMakeHunt();
+  }
+
+  _toMakeHunt = () => {
+    this.props.navigator.push({
+      title: 'Make New Hunt',
+      component: newHunt
+    });
+  }
+
+  joinHuntPressed() {
+    console.log('>>> Join Hunt Button Pressed!');
+    this._toJoinHunt();
+  }
+
+  _toJoinHunt = () => {
+    this.props.navigator.push({
+      title: 'Join Hunt',
+      component: findHunt
+    });
+  }
 
   renderContent(){
     switch (this.state.loggedIn) {
@@ -44,9 +70,9 @@ class welcome extends Component {
               Log Out
             </Button>
 
-            <Button> Make a New Hunt </Button>
+            <Button onPress={this.newHuntPressed.bind(this)}> Make a New Hunt </Button>
 
-            <Button> Join a Hunt </Button>
+            <Button onPress={this.joinHuntPressed.bind(this)}> Join a Hunt </Button>
 
         </View>
       );

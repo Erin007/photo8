@@ -18,7 +18,7 @@ class photo8 extends Component {
       <NavigatorIOS
           initialRoute={{
             component: welcome,
-            title: 'Welcome',
+            title: 'Home',
           }}
           style={{flex: 1}}
         />
