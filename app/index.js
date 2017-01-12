@@ -1,4 +1,5 @@
 //index.ios.js
+import { Router, Scene } from 'react-native-router-flux';
 import firebase from 'firebase';
 import React, { Component } from 'react';
 import {
