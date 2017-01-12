@@ -104,18 +104,18 @@ class Example extends Component {
     });
   }
 
-  // get typeIcon() {
-  //   let icon;
-  //   const { back, front } = Camera.constants.Type;
-  //
-  //   if (this.state.camera.type === back) {
-  //     icon = require('./assets/ic_camera_rear_white.png');
-  //   } else if (this.state.camera.type === front) {
-  //     icon = require('./assets/ic_camera_front_white.png');
-  //   }
-  //
-  //   return icon;
-  // }
+  get typeIcon() {
+    let icon;
+    const { back, front } = Camera.constants.Type;
+
+    if (this.state.camera.type === back) {
+      icon = require('./assets/ic_camera_rear_white.png');
+    } else if (this.state.camera.type === front) {
+      icon = require('./assets/ic_camera_front_white.png');
+    }
+
+    return icon;
+  }
 
   switchFlash() {
     let newFlashMode;
@@ -137,20 +137,20 @@ class Example extends Component {
     });
   }
 
-  // get flashIcon() {
-  //   let icon;
-  //   const { auto, on, off } = Camera.constants.FlashMode;
-  //
-  //   if (this.state.camera.flashMode === auto) {
-  //     icon = require('./assets/ic_flash_auto_white.png');
-  //   } else if (this.state.camera.flashMode === on) {
-  //     icon = require('./assets/ic_flash_on_white.png');
-  //   } else if (this.state.camera.flashMode === off) {
-  //     icon = require('./assets/ic_flash_off_white.png');
-  //   }
-  //
-  //   return icon;
-  // }
+  get flashIcon() {
+    let icon;
+    const { auto, on, off } = Camera.constants.FlashMode;
+
+    if (this.state.camera.flashMode === auto) {
+      icon = require('./assets/ic_flash_auto_white.png');
+    } else if (this.state.camera.flashMode === on) {
+      icon = require('./assets/ic_flash_on_white.png');
+    } else if (this.state.camera.flashMode === off) {
+      icon = require('./assets/ic_flash_off_white.png');
+    }
+
+    return icon;
+  }
 
   render() {
     return (
