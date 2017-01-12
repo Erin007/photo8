@@ -9,7 +9,7 @@ import {
   NavigatorIOS
 } from 'react-native';
 
-import welcome from './Welcome';
+import welcome from './components/Welcome';
 
 class photo8 extends Component {
 

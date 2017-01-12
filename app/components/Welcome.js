@@ -7,11 +7,11 @@ import {
   Text
 } from 'react-native';
 
-import Button from './components/common/Button';
-import LoginForm from './components/LoginForm';
-import Card from './components/common/Card';
-import CardSection from './components/common/CardSection';
-import Spinner from './components/common/Spinner';
+import Button from './common/Button';
+import LoginForm from './LoginForm';
+import Card from './common/Card';
+import CardSection from './common/CardSection';
+import Spinner from './common/Spinner';
 
 class welcome extends Component {
   state = { loggedIn: null }; //are you logged in?
