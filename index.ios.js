@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 
-import hunt from './app/index'
+import photo8 from './app/index'
 
 'use strict';
 

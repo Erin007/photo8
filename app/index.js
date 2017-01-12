@@ -13,8 +13,9 @@ import LoginForm from './components/LoginForm';
 import Card from './components/common/Card';
 import CardSection from './components/common/CardSection';
 import Spinner from './components/common/Spinner';
+import Example from './Camera';
 
-export default class hunt extends Component {
+export default class photo8 extends Component {
   state = { loggedIn: null }; //are you logged in?
 
   componentWillMount(){
@@ -48,6 +49,7 @@ export default class hunt extends Component {
             <Button> Make a New Hunt </Button>
 
             <Button> Join a Hunt </Button>
+
         </View>
       );
       //if the user is not logged in
@@ -90,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('hunt', () => hunt);
+AppRegistry.registerComponent('photo8', () => photo8);

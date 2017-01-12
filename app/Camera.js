@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Camera from 'react-native-camera';
 
-class Camera extends Component {
+class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('Camera', () => Camera);
+AppRegistry.registerComponent('Example', () => Example);
