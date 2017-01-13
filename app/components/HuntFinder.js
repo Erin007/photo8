@@ -9,9 +9,11 @@ import DirectiveList from './DirectiveList';
 import Button from './common/Button';
 import Input from './common/Input';
 import Card from './common/Card';
-//import CardSection from './common/CardSection';
+import CardSection from './common/CardSection';
 
 class findHunt extends Component{
+
+  state = { huntName: '', passcode: '', error: '', loading: false}
 
   goHuntingPressed() {
     console.log('>>> Go Hunting Button Pressed!');
@@ -34,7 +36,24 @@ class findHunt extends Component{
            This is where users will enter the hunt id and passcode for a hunt!
         </Text>
 
+        <Card>
+          <CardSection>
+            <Input
+              label = "Hunt:"
+              placeholder = "Explore Seattle!"
+              value = {this.state.huntName}
+              onChangeText = {huntName => this.setState({ huntName })}/>
+          </CardSection>
 
+          <CardSection>
+            <Input
+              label = "Passcode:"
+              placeholder = "passcode"
+              //secureTextEntry
+              value = {this.state.passcode}
+              onChangeText = {passcode => this.setState({ passcode })}/>
+          </CardSection>
+        </Card>
 
         <Button onPress={this.goHuntingPressed.bind(this)}>Find</Button>
       </View>
