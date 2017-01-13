@@ -5,8 +5,23 @@ import {
   View,
   Text
 } from 'react-native';
+import Button from './common/Button';
+import huntDetails from './ShareHunt';
+import directiveList from './DirectiveList'
 
 class newHunt extends Component{
+  savePressed() {
+    console.log('>>> Save Button Pressed!');
+    this._toShareHunt();
+  }
+
+  _toShareHunt = () => {
+    this.props.navigator.push({
+      title: 'Hunt Details',
+      component: huntDetails
+    });
+  }
+
   render() {
 
     return (
@@ -14,6 +29,7 @@ class newHunt extends Component{
         <Text style={styles.text}>
            This is where there will be a form for users to make a new hunt!
         </Text>
+        <Button onPress={this.savePressed.bind(this)}> Save </Button>
       </View>
     );
   }
