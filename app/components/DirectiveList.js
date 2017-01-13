@@ -9,6 +9,7 @@ import {
   Text } from 'react-native';
 import axios from 'axios';
 import DirectiveDetail from './DirectiveDetail';
+import DirectiveShow from './DirectiveShow';
 
 class DirectiveList extends Component {
 
@@ -41,7 +42,7 @@ class DirectiveList extends Component {
       if (typeof this.state.directives[0] !== 'undefined')  {
 
         return this.state.directives.map(directive =>
-          <DirectiveDetail onPress={this.directiveShowPressed.bind(this)} key={ directive.id } directive = {directive} />);
+          <DirectiveDetail onPress={this.directiveShowPressed.bind(this)} key={ directive.id } directive={directive} />);
       }
     }
 
