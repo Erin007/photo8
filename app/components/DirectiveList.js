@@ -27,17 +27,17 @@ class DirectiveList extends Component {
         });;
     }
 
-    directiveShowPressed() {
+    directiveShowPressed(directive) {
       console.log('>>> Directive Detail Pressed!');
       console.log("this.state", this.state)
-      this._toDirectiveShow();
+      this._toDirectiveShow(directive);
     }
 
-    _toDirectiveShow = () => {
+    _toDirectiveShow = (directive) => {
       this.props.navigator.push({
         title: 'Directive',
         component: DirectiveShow,
-  
+        passProps: { directive: directive}
       });
     }
 
@@ -46,7 +46,7 @@ class DirectiveList extends Component {
 
         return this.state.directives.map(directive =>
 
-          <TouchableOpacity onPress={this.directiveShowPressed.bind(this)} key={ directive.id } directive={directive}>
+          <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
             <Text style={styles.directive}>
               {directive.name}
             </Text>

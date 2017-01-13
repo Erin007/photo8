@@ -26,13 +26,18 @@ class DirectiveShow extends Component {
 
   render(){
     console.log("showing directive description")
-    //console.log("directive", directive)
-    console.log("this.props", this.props)
-    //console.log("this.directive", this.directive )
-    console.log ("this.props.route.directive", this.props.route.directives)
+    console.log ("this.props.directive", this.props.directive)
     return (
       <View>
         <Text style={styles.text}>Details about the directive you just clicked on.</Text>
+
+          <Text>Name: {this.props.directive.name}</Text>
+
+          <Text>Description: {this.props.directive.description}</Text>
+
+          <Text>Complete: {this.props.directive.complete}</Text>
+
+          <Text>Point Value: {this.props.directive.point_value}</Text>
 
         <Button onPress={this.takePhotoPressed.bind(this)}>Take Photo</Button>
       </View>
