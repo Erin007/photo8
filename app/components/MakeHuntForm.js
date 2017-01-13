@@ -39,7 +39,7 @@ class newHunt extends Component{
         <Card>
           <CardSection>
             <Input
-              label = "Name:"
+              label = "Name"
               placeholder = "Explore the Emerald City!"
               value = {this.state.huntName}
               onChangeText = {huntName => this.setState({ huntName })}/>
@@ -47,7 +47,7 @@ class newHunt extends Component{
 
           <CardSection>
             <Input
-              label = "Passcode:"
+              label = "Passcode"
               placeholder = "I<3Seattle"
               value = {this.state.passcode}
               onChangeText = {passcode => this.setState({ passcode })}/>
@@ -55,7 +55,7 @@ class newHunt extends Component{
 
           <CardSection>
             <Input
-              label = "Description:"
+              label = "Description"
               placeholder = ""
               //secureTextEntry
               value = {this.state.description}
