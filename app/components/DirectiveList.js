@@ -6,10 +6,11 @@ import {
   StyleSheet,
   View,
   ScrollView,
+  TouchableOpacity,
   Text } from 'react-native';
 import axios from 'axios';
-import DirectiveDetail from './DirectiveDetail';
-import DirectiveShow from './DirectiveShow';
+//import DirectiveDetail from './DirectiveDetail';
+import DirectiveShow from './DirectiveShow'
 
 class DirectiveList extends Component {
 
@@ -34,7 +35,8 @@ class DirectiveList extends Component {
     _toDirectiveShow = () => {
       this.props.navigator.push({
         title: 'Directive',
-        component: DirectiveShow
+        component: DirectiveShow,
+        //passProps: { directive: {directive} },
       });
     }
 
@@ -42,7 +44,12 @@ class DirectiveList extends Component {
       if (typeof this.state.directives[0] !== 'undefined')  {
 
         return this.state.directives.map(directive =>
-          <DirectiveDetail onPress={this.directiveShowPressed.bind(this)} key={ directive.id } directive={directive} />);
+          <TouchableOpacity onPress={this.directiveShowPressed.bind(this)} key={ directive.id } directive={directive}>
+            <Text style={styles.text}>
+              {directive.name}
+            </Text>
+          </TouchableOpacity>
+          );
       }
     }
 
@@ -69,9 +76,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 20,
-    marginTop: 50,
-    paddingTop: 10
+    margin: 5,
+    // marginTop: 50,
+    // paddingTop: 10
   },
 });
 

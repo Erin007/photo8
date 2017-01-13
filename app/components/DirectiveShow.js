@@ -5,21 +5,37 @@ import {
   View,
   ScrollView,
   Text } from 'react-native';
-
+import Button from './common/Button';
+import Example from '../Camera'
 
 class DirectiveShow extends Component {
 
-  render() {
-
-    return (
-      <View style={styles.container}>
-        <Text>
-          This is where there will be details about the directive you just clicked on.
-        </Text>
-       </View>
-    );
+  takePhotoPressed() {
+    console.log('>>> Take Photo Pressed');
+    this._toCamera();
   }
-}
+
+  _toCamera = () => {
+    this.props.navigator.push({
+      title: 'Camera',
+      component: Example
+      //passProps: { directive: {directive} },
+    });
+  }
+  render(){
+    console.log("showing directive description")
+    //console.log("directive", directive)
+    //console.log("this.props", this.props)
+    //console.log("this.directive", this.directive )
+    return (
+      <View>
+        <Text style={styles.text}>Details about the directive you just clicked on.</Text>
+
+        <Button onPress={this.takePhotoPressed.bind(this)}>Take Photo</Button>
+      </View>
+    )
+  }
+};
 
 const styles = StyleSheet.create({
   container: {

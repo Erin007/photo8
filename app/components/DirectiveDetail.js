@@ -1,23 +1,36 @@
 //DirectiveDetail.js
 
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Card from './common/Card';
 import CardSection from './common/CardSection'
 
-const DirectiveDetail = (props) => {
-console.log("made a directiveDetail")
-//console.log(props)
+class  DirectiveDetail extends Component{
 
-  return (
-    <TouchableOpacity onPress={props.onPress}>
-      <Card>
-        <CardSection>
-          <Text>{ props.directive.name }</Text>
-        </CardSection>
-      </Card>
-    </TouchableOpacity>
-  )
+//state = { directive: }
+
+componentWillMount (){
+  console.log("made a directiveDetail")
+  //console.log(this.props)
+
+    return this.setState( { directive: this.props.directive })
+   //})
+    // .catch(function (error) {
+    //   console.log(error);
+    // });;
+}
+
+render(){
+    return (
+      <TouchableOpacity onPress={this.props.onPress}>
+        <Card>
+          <CardSection>
+            <Text>{ this.props.directive.name }</Text>
+          </CardSection>
+        </Card>
+      </TouchableOpacity>
+    )
+  }
 };
 
 export default DirectiveDetail;
