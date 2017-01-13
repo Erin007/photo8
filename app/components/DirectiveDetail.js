@@ -1,18 +1,22 @@
 //DirectiveDetail.js
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Card from './common/Card';
 import CardSection from './common/CardSection'
 
-const DirectiveDetail = (props) => {
+const DirectiveDetail = (props, onPress) => {
 console.log("made a directiveDetail")
+console.log(props)
+console.log(onPress)
   return (
-    <Card>
-      <CardSection>
-        <Text>{ props.directive.name }</Text>
-      </CardSection>
-    </Card>
+    <TouchableOpacity onPress={onPress}>
+      <Card>
+        <CardSection>
+          <Text>{ props.directive.name }</Text>
+        </CardSection>
+      </Card>
+    </TouchableOpacity>
   )
 };
 

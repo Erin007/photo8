@@ -5,8 +5,24 @@ import {
   View,
   Text
 } from 'react-native';
+import DirectiveList from './DirectiveList';
+import Button from './common/Button';
 
 class findHunt extends Component{
+
+  goHuntingPressed() {
+    console.log('>>> Go Hunting Button Pressed!');
+    //this needs to be conditionally on the successful save of the new hunt to the api, the api will have to send some signal letting the mobile app know it's been successful
+    this._toDirectiveList();
+  }
+
+  _toDirectiveList = () => {
+    this.props.navigator.push({
+      title: 'Hunt',
+      component: DirectiveList
+    });
+  }
+
   render() {
 
     return (
@@ -14,6 +30,8 @@ class findHunt extends Component{
         <Text style={styles.text}>
            This is where users will enter the hunt id and passcode for a hunt!
         </Text>
+
+        <Button onPress={this.goHuntingPressed.bind(this)}>Find</Button>
       </View>
     );
   }

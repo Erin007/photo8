@@ -13,15 +13,11 @@ import DirectiveDetail from './DirectiveDetail';
 class DirectiveList extends Component {
 
     state = { directives: [] }; //initial or empty state, property of this
-    //this.state.directives would return an empty array
 
     componentWillMount (){
-      //console.log('component will mount in directive list')
-      //console.log('this.state.directives', this.state.directives)
 
       //change this to send the url of the specific hunt once everything is working!
       axios.get('https://treasure-chest-api.herokuapp.com/').then( response => {
-        console.log("beep", response.data);
         return this.setState( { directives: response.data.directives })
        })
         .catch(function (error) {
@@ -29,40 +25,35 @@ class DirectiveList extends Component {
         });;
     }
 
-    renderDirectives() {
-      console.log('renderingDirectives() in DirectiveList');
-      console.log('this.state.directives', this.state.directives);
-      console.log('this.state.directives[0]', this.state.directives[0]);
+    directiveShowPressed() {
+      console.log('>>> Directive Detail Pressed!');
+      this._toDirectiveShow();
+    }
 
+    _toDirectiveShow = () => {
+      this.props.navigator.push({
+        title: 'Directive',
+        component: DirectiveShow
+      });
+    }
+
+    renderDirectives() {
       if (typeof this.state.directives[0] !== 'undefined')  {
-        // console.log('this.state.directives[0].name', this.state.directives[0].name)
+
         return this.state.directives.map(directive =>
-          <DirectiveDetail key={ directive.id } directive = {directive} />);
-          // <Text style={styles.text}> {directive.name} </Text>);
+          <DirectiveDetail onPress={this.directiveShowPressed.bind(this)} key={ directive.id } directive = {directive} />);
       }
     }
-    // <ScrollView>
-    //   { this.renderDirectives() }
-    // </ScrollView>
-    // <View style={styles.container}>
-    //   <Text style={styles.text}>
-    //     This is where the directives should show up.
-    //   </Text>
-    //  </View>
+
     render() {
       console.log('this.state from DirectiveList render', this.state);
 
       return (
         <View style={styles.container}>
-          <Text style={styles.text}>
-            This is where the directives should show up.
-          </Text>
-
           <ScrollView>
             { this.renderDirectives() }
           </ScrollView>
          </View>
-
       );
     }
 }
@@ -72,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'teal',
+    backgroundColor: '#F5FCFF',
   },
   text: {
     fontSize: 20,
