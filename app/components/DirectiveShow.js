@@ -23,8 +23,18 @@ class DirectiveShow extends Component {
     });
   }
 
+  checkCompletion(){
+    if (this.props.directive.complete == false){
+      console.log(">>>> Check completion called")
+       return <Text> ✗ </Text>
+    }
+
+    return <Text> ✔︎ </Text>
+  }
 
   render(){
+
+
     console.log("showing directive description")
     console.log ("this.props.directive", this.props.directive)
     return (
@@ -35,7 +45,7 @@ class DirectiveShow extends Component {
 
           <Text>Description: {this.props.directive.description}</Text>
 
-          <Text>Complete: {this.props.directive.complete}</Text>
+          <Text>Complete:{this.checkCompletion()}</Text>
 
           <Text>Point Value: {this.props.directive.point_value}</Text>
 
