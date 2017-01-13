@@ -7,11 +7,11 @@ import CardSection from './common/CardSection'
 
 class  DirectiveDetail extends Component{
 
-//state = { directive: }
+// state = { directive: }
 
 componentWillMount (){
   console.log("made a directiveDetail")
-  //console.log(this.props)
+  console.log(props)
 
     return this.setState( { directive: this.props.directive })
    //})

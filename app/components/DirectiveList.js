@@ -14,7 +14,7 @@ import DirectiveShow from './DirectiveShow'
 
 class DirectiveList extends Component {
 
-    state = { directives: [] }; //initial or empty state, property of this
+    state = { directives: [], directive: {} }; //initial or empty state, property of this
 
     componentWillMount (){
 
@@ -29,6 +29,7 @@ class DirectiveList extends Component {
 
     directiveShowPressed() {
       console.log('>>> Directive Detail Pressed!');
+      console.log("this.state", this.state)
       this._toDirectiveShow();
     }
 
@@ -36,7 +37,7 @@ class DirectiveList extends Component {
       this.props.navigator.push({
         title: 'Directive',
         component: DirectiveShow,
-        //passProps: { directive: {directive} },
+  
       });
     }
 
@@ -44,8 +45,9 @@ class DirectiveList extends Component {
       if (typeof this.state.directives[0] !== 'undefined')  {
 
         return this.state.directives.map(directive =>
+
           <TouchableOpacity onPress={this.directiveShowPressed.bind(this)} key={ directive.id } directive={directive}>
-            <Text style={styles.text}>
+            <Text style={styles.directive}>
               {directive.name}
             </Text>
           </TouchableOpacity>
@@ -58,6 +60,7 @@ class DirectiveList extends Component {
 
       return (
         <View style={styles.container}>
+          <Text style={styles.text}>Name of the Hunt </Text>
           <ScrollView>
             { this.renderDirectives() }
           </ScrollView>
@@ -76,10 +79,26 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 5,
-    // marginTop: 50,
-    // paddingTop: 10
+    //margin: 5,
+    marginTop: 55,
+    paddingTop: 20
   },
+  directive:{
+    fontSize: 16,
+    textAlign: 'center',
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
+  }
 });
 
 export default DirectiveList;

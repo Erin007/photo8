@@ -14,7 +14,7 @@ import CardSection from './common/CardSection';
 
 class newHunt extends Component{
 
-  state = { huntName: '', description: '', directives: [], directive: '', error: '', loading: false}
+  state = { huntName: '', passcode: '', description: '', directives: [], directive: '', error: '', loading: false}
 
   savePressed() {
     console.log('>>> Save Button Pressed!');
@@ -43,6 +43,14 @@ class newHunt extends Component{
               placeholder = "Explore the Emerald City!"
               value = {this.state.huntName}
               onChangeText = {huntName => this.setState({ huntName })}/>
+          </CardSection>
+
+          <CardSection>
+            <Input
+              label = "Passcode:"
+              placeholder = "I<3Seattle"
+              value = {this.state.passcode}
+              onChangeText = {passcode => this.setState({ passcode })}/>
           </CardSection>
 
           <CardSection>

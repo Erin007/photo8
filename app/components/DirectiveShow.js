@@ -22,11 +22,14 @@ class DirectiveShow extends Component {
       //passProps: { directive: {directive} },
     });
   }
+
+
   render(){
     console.log("showing directive description")
     //console.log("directive", directive)
-    //console.log("this.props", this.props)
+    console.log("this.props", this.props)
     //console.log("this.directive", this.directive )
+    console.log ("this.props.route.directive", this.props.route.directives)
     return (
       <View>
         <Text style={styles.text}>Details about the directive you just clicked on.</Text>
