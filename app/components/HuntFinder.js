@@ -24,8 +24,18 @@ class findHunt extends Component{
     this.setState({ error: '', loading: true });
     console.log("this.state.huntName", this.state.huntName)
 
-    //this needs to be conditional on the successful save of the new hunt to the api, the api will have to send some signal letting the mobile app know it's been successful
+    //send the huntName and passcode to the API
+
+    //if the API doesn't find a hunt that matches
+      //this.noHuntFound.bind(this)
+
+    //if the API finds a hunt that matches
+      //this.huntFound.bind.(this)
     this._toDirectiveList();
+  }
+
+  noHuntFound(){
+    this.setState({ error: 'No Hunts matching that name and passcode could be found.', loading: false })
   }
 
   _toDirectiveList = () => {
@@ -70,6 +80,10 @@ class findHunt extends Component{
               onChangeText = {passcode => this.setState({ passcode })}/>
           </CardSection>
 
+          <Text style= {styles.errorTextStyle}>
+            { this.state.error }
+          </Text>
+
           <CardSection>
             { this.renderFindButton() }
           </CardSection>
@@ -93,6 +107,11 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 10
   },
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
 });
 
 export default findHunt;
