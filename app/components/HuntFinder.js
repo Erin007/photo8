@@ -7,6 +7,9 @@ import {
 } from 'react-native';
 import DirectiveList from './DirectiveList';
 import Button from './common/Button';
+import Input from './common/Input';
+import Card from './common/Card';
+import CardSection from './common/CardSection';
 
 class findHunt extends Component{
 
@@ -30,6 +33,8 @@ class findHunt extends Component{
         <Text style={styles.text}>
            This is where users will enter the hunt id and passcode for a hunt!
         </Text>
+
+
 
         <Button onPress={this.goHuntingPressed.bind(this)}>Find</Button>
       </View>

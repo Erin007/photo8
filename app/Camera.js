@@ -86,6 +86,7 @@ class Example extends Component {
     this.props.updateImagesState(path);
     this.props.navigator.pop();
   }
+  
   switchType() {
     let newType;
     const { back, front } = Camera.constants.Type;
