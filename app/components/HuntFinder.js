@@ -8,16 +8,23 @@ import {
 import DirectiveList from './DirectiveList';
 import Button from './common/Button';
 import Input from './common/Input';
+import Spinner from './common/Spinner';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
 
 class findHunt extends Component{
 
-  state = { huntName: '', passcode: '', error: '', loading: false}
+  state = { huntName: '', passcode: '', error: '', loading: false, hunt: {}}
 
-  goHuntingPressed() {
-    console.log('>>> Go Hunting Button Pressed!');
-    //this needs to be conditionally on the successful save of the new hunt to the api, the api will have to send some signal letting the mobile app know it's been successful
+  findPressed() {
+    console.log('>>> Find Hunt Button Pressed!');
+
+    const { huntName, passcode } = this.state;
+
+    this.setState({ error: '', loading: true });
+    console.log("this.state.huntName", this.state.huntName)
+
+    //this needs to be conditional on the successful save of the new hunt to the api, the api will have to send some signal letting the mobile app know it's been successful
     this._toDirectiveList();
   }
 
@@ -26,6 +33,15 @@ class findHunt extends Component{
       title: 'Hunt',
       component: DirectiveList
     });
+  }
+
+  renderFindButton(){
+    if (this.state.loading){
+      return <Spinner size="small"/>
+    }
+    return(
+      <Button onPress={this.findPressed.bind(this)}>Find</Button>
+    )
   }
 
   render() {
@@ -53,9 +69,12 @@ class findHunt extends Component{
               value = {this.state.passcode}
               onChangeText = {passcode => this.setState({ passcode })}/>
           </CardSection>
+
+          <CardSection>
+            { this.renderFindButton() }
+          </CardSection>
         </Card>
 
-        <Button onPress={this.goHuntingPressed.bind(this)}>Find</Button>
       </View>
     );
   }
