@@ -38,6 +38,20 @@ class findHunt extends Component{
     this.setState({ error: 'No Hunts matching that name and passcode could be found.', loading: false })
   }
 
+  huntFound(){
+    console.log('a hunt was found!')
+    this.setState({
+      huntName: '',
+      passcode: '',
+      error: '',
+      loading: false,
+      //hunt: {"the hunt that came back from the API"}
+    })
+
+      this._toDirectiveList("pass in the hunt that came back from the API");
+
+  }
+
   _toDirectiveList = () => {
     this.props.navigator.push({
       title: 'Hunt',

@@ -5,20 +5,60 @@ import {
   View,
   Text
 } from 'react-native';
+import axios from 'axios';
 import huntDetails from './ShareHunt';
 import DirectiveList from './DirectiveList'
 import Button from './common/Button';
 import Input from './common/Input';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
+import Spinner from './common/Spinner';
 
 class newHunt extends Component{
 
-  state = { huntName: '', passcode: '', description: '', directives: [], directive: '', error: '', loading: false}
+  state = { huntName: '', passcode: '', description: '', directives: [], directive: '', organizerId:'', error: '', loading: false}
 
   savePressed() {
     console.log('>>> Save Button Pressed!');
+
+    const { huntName, passcode, description, directives, organizerId } = this.state;
+
+    this.setState({ error: '', loading: true });
+    //*****set the state of organizerID to the id of the user making this hunt via props
+
+    //send the information to the API to make a new hunt
+    console.log(this.state.huntName)
+    axios.post('https://treasure-chest-api.herokuapp.com/hunts',{
+      name: this.state.huntName,
+      passcode: this.state.passcode,
+      description: this.state.description,
+      organizer_id: 1
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    //if the hunt is saved successfully
+      //this.huntSaved.bind(this)
+
+    //if there was a problem saving the hunt
+      //this.huntNOTSaved.bind(this)
     this._toShareHunt();
+  }
+
+  huntNOTSaved(){
+      this.setState({ error: 'There was an error saving your hunt.', loading: false })
+  }
+
+  huntSaved(){
+    console.log("The hunt successfully saved")
+    //clear the form
+
+    //go to the Share Hunt page for this hunt - have to pass in the id as props to ShareHunt navigator action
+      //this._toShareHunt();
   }
 
   _toShareHunt = () => {
@@ -26,6 +66,15 @@ class newHunt extends Component{
       title: 'Hunt Details',
       component: huntDetails
     });
+  }
+
+  renderSaveButton(){
+    if (this.state.loading){
+      return <Spinner size="small"/>
+    }
+    return(
+      <Button onPress={this.savePressed.bind(this)}> Save </Button>
+    )
   }
 
   render() {
@@ -72,9 +121,11 @@ class newHunt extends Component{
               //maybe also a counter of how many directives are already attached to the hunt?
               onChangeText = {directive => this.setState({ directive })}/>
           </CardSection>
-        </Card>
 
-        <Button onPress={this.savePressed.bind(this)}> Save </Button>
+          <CardSection>
+            {this.renderSaveButton()}
+          </CardSection>
+        </Card>
       </View>
     );
   }
