@@ -27,13 +27,16 @@ const styles = {
     fontFamily: 'Chalkboard SE'
   },
   buttonStyle:{
-  // flex: 1,
-    //alignSelf: 'stretch',
+    //flex: 1,
+    alignSelf: 'stretch',
     backgroundColor: '#fff',
     borderRadius: 5,
     borderWidth: 5,
     borderColor: '#21b6cb',
-    margin: 10,
+    marginLeft: 25,
+    marginTop: 10,
+    marginRight: 25,
+    marginBottom: 50
   }
 };
 

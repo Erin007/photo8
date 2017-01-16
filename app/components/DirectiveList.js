@@ -79,8 +79,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     textAlign: 'center',
-    //margin: 5,
-    marginTop: 55,
     paddingTop: 20,
     fontFamily: 'Pacifico'
   },

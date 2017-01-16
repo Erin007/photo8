@@ -6,7 +6,7 @@ import CardSection from './common/CardSection';
 import Input from './common/Input';
 import Spinner from './common/Spinner';
 import firebase from 'firebase';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 class LoginForm extends Component {
 
@@ -73,10 +73,10 @@ class LoginForm extends Component {
 
   render(){
     return (
-      <Card>
+      <View>
         <CardSection>
           <Input
-            label = "Email:"
+            label = "email:"
             placeholder = "user@email.com"
             value = {this.state.email}
             onChangeText = {email => this.setState({ email })}/>
@@ -84,7 +84,7 @@ class LoginForm extends Component {
 
         <CardSection>
           <Input
-            label = "Password:"
+            label = "password:"
             placeholder = "password"
             secureTextEntry
             value = {this.state.password}
@@ -98,7 +98,7 @@ class LoginForm extends Component {
         <CardSection>
           { this.renderButton() }
         </CardSection>
-      </Card>
+      </View>
     )
   }
 };

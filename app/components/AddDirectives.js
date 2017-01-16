@@ -14,6 +14,7 @@ import Spinner from './common/Spinner';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
 import huntDetails from './HuntDetails';
+import axios from 'axios';
 
 class addDirectives extends Component{
   state = { directive: '', huntId:'', error: '', loading: false, hunt: {}, directives : []}
@@ -21,6 +22,30 @@ class addDirectives extends Component{
   addDirectivePressed(directive){
     console.log('>>> Add Directive pressed');
     //axios post the directive
+    //var url = 'https://treasure-chest-api.herokuapp.com/hunts/' + this.props.hunt.id + '/directives'
+    //console.log(url)
+    console.log(this.state.directive)
+    console.log(this.props.hunt.id)
+    axios.post('http://localhost:3000/directives',{
+      name: this.state.directive,
+      complete: "false",
+      point_value: "1",
+      hunt_id: this.props.hunt.id
+    })
+    .then(response => {
+      console.log("response", response)
+      // return this.setState( { hunt: response.data })
+    })
+      //if the directive is saved successfully
+    //.then(this.directiveSaved.bind(this))
+    //if there was a problem saving the hunt
+    .catch((error) => {
+      console.log("The directive did not save")
+
+      this.setState({ error: "There was an error saving your directive. Please try again.", loading: false })
+
+      console.log(error)
+    });
 
     //show the organizer the list of directives they've made so far by rendering them to the screen
     this.state.directives.push(directive)
@@ -34,6 +59,7 @@ class addDirectives extends Component{
       error: ''
     })
   }
+
 
   seeHuntPressed(hunt) {
     console.log('>>> See Hunt pressed');
@@ -64,7 +90,6 @@ class addDirectives extends Component{
     }
   }
 
-
   render(){
     return (
       <View style={styles.container}>
@@ -76,10 +101,6 @@ class addDirectives extends Component{
         <Text>
           {this.props.hunt.description}
         </Text>
-
-        <Button style={styles.button} onPress={() =>
-          this.seeHuntPressed(this.props.hunt)}> See Hunt
-        </Button>
 
         <CardSection>
           <Input
@@ -93,9 +114,19 @@ class addDirectives extends Component{
 
         <Button style={styles.button} onPress={() => this.addDirectivePressed(this.state.directive)}> Add Directive </Button>
 
+        <Text style= {styles.errorTextStyle}>
+          { this.state.error }
+        </Text>
+
+
         <ScrollView style={styles.scrollview}>
           {this.renderDirectives()}
         </ScrollView>
+
+
+          <Button style={styles.button} onPress={() =>
+            this.seeHuntPressed(this.props.hunt)}> See Hunt
+          </Button>
 
       </View>
     )
@@ -110,10 +141,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  button:{
-    flex: 2,
-    justifyContent: 'space-between',
-  },
+  // button:{
+  //   // flex:1,
+  //   marginLeft: 20
+  // },
   name: {
     fontSize: 30,
     textAlign: 'center',
@@ -127,6 +158,16 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 20,
     fontFamily: 'Chalkboard SE'
+  },
+  errorTextStyle: {
+    fontSize: 16,
+    alignSelf: 'center',
+    color: 'red',
+    fontFamily: "Chalkboard SE",
+    marginLeft: 18,
+    textAlign: 'center',
+    marginTop: -25,
+    marginBottom: 10
   },
   directive: {
     fontSize: 16,

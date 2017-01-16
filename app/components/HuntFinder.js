@@ -15,7 +15,7 @@ import CardSection from './common/CardSection';
 
 class findHunt extends Component{
 
-  state = { huntName: '', passcode: '', error: '', loading: false, huntId: ''} 
+  state = { huntName: '', passcode: '', error: '', loading: false, huntId: ''}
 
   findPressed() {
     console.log('>>> Find Hunt Button Pressed!');
@@ -73,14 +73,17 @@ class findHunt extends Component{
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>
-           This is where users will enter the hunt id and passcode for a hunt!
+        <Text style={styles.welcome}>
+           Snapenger Hunt
         </Text>
 
-        <Card>
+        <Text style={styles.text}>
+           Please enter the hunt name and passcode given to you by the organizer.
+        </Text>
+
           <CardSection>
             <Input
-              label = "Hunt:"
+              label = "hunt:"
               placeholder = "Explore Seattle!"
               value = {this.state.huntName}
               onChangeText = {huntName => this.setState({ huntName })}/>
@@ -88,7 +91,7 @@ class findHunt extends Component{
 
           <CardSection>
             <Input
-              label = "Passcode:"
+              label = "passcode:"
               placeholder = "passcode"
               //secureTextEntry
               value = {this.state.passcode}
@@ -99,10 +102,9 @@ class findHunt extends Component{
             { this.state.error }
           </Text>
 
-          <CardSection>
+
             { this.renderFindButton() }
-          </CardSection>
-        </Card>
+
 
       </View>
     );
@@ -116,11 +118,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  welcome: {
+    fontSize: 45,
+    textAlign: 'center',
+    marginTop: -70,
+    paddingTop: 10,
+    fontFamily: 'Pacifico',
+    //justifyContent: 'flex-start'
+  },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
     margin: 10,
-    paddingTop: 10
+    marginTop: 70,
+    paddingTop: 10,
+    fontFamily: 'Chalkboard SE'
   },
   errorTextStyle: {
     fontSize: 20,

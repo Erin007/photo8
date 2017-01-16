@@ -4,9 +4,11 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  Text } from 'react-native';
+  Text,
+Image } from 'react-native';
 import Button from './common/Button';
-import Example from '../Camera'
+import Example from '../Camera';
+import Card from './common/Button';
 
 class DirectiveShow extends Component {
 
@@ -26,28 +28,32 @@ class DirectiveShow extends Component {
   checkCompletion(){
     if (this.props.directive.complete == false){
       console.log(">>>> Check completion called")
-       return <Text> ✗ </Text>
+       return <Text> ❏ </Text>
     }
-
     return <Text> ✔︎ </Text>
   }
 
   render(){
 
-
     console.log("showing directive description")
     console.log ("this.props.directive", this.props.directive)
     return (
-      <View>
-        <Text style={styles.text}>Details about the directive you just clicked on.</Text>
+      <View style={styles.container}>
+        <Text style={styles.name}> {this.checkCompletion()}{this.props.directive.name}
+        </Text>
 
-          <Text>Name: {this.props.directive.name}</Text>
+        <Text style={styles.text}>Worth {this.props.directive.point_value} point(s)</Text>
 
-          <Text>Description: {this.props.directive.description}</Text>
+        <Text>{this.props.directive.description}</Text>
 
-          <Text>Complete:{this.checkCompletion()}</Text>
+        <Text> No Photo Submitted Yet </Text>
 
-          <Text>Point Value: {this.props.directive.point_value}</Text>
+
+          <Image
+            source={require('../assets/placeholder.png')}
+            style={styles.placeholder}
+          />
+
 
         <Button onPress={this.takePhotoPressed.bind(this)}>Take Photo</Button>
       </View>
@@ -63,11 +69,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
-    margin: 20,
-    marginTop: 50,
+    // margin: 15,
     paddingTop: 10
+  },
+  name: {
+    fontSize: 25,
+    textAlign: 'center',
+    marginTop: 80,
+    marginLeft: 10,
+    marginRight: 10,
+    fontFamily: "Chalkboard SE"
+  },
+  placeholder: {
+    margin: 20,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#21b6cb',
+
   },
 });
 

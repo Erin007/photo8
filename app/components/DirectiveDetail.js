@@ -14,10 +14,6 @@ componentWillMount (){
   console.log(props)
 
     return this.setState( { directive: this.props.directive })
-   //})
-    // .catch(function (error) {
-    //   console.log(error);
-    // });;
 }
 
 render(){
