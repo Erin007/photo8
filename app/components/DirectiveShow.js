@@ -11,10 +11,11 @@ import Button from './common/Button';
 import Input from './common/Input';
 import Example from '../Camera';
 import Card from './common/Button';
+import axios from 'axios';
 
 class DirectiveShow extends Component {
 
-  state = { caption: '', error: '', loading: false}
+  state = { caption: '', error: '', loading: false, submission: {}}
 
   takePhotoPressed() {
     console.log('>>> Take Photo Pressed');
@@ -25,6 +26,28 @@ class DirectiveShow extends Component {
     console.log('>>> Save caption pressed')
 
     //axios post this caption to the submission with the directive_id passed in props
+    axios.post('https://localhost:3000/submissions',{
+      directive_id: this.props.directive.id,
+      caption: this.state.caption
+    })
+    .then(response => {
+      console.log("response", response)
+      return this.setState( { submission: response.data })
+    })
+      //if the submission is saved successfully
+    .then(this.submissionSaved.bind(this))
+    //if there was a problem saving the submission
+    .catch((error) => {
+      console.log("The submission caption did not save")
+
+      this.setState({ error: "There was an error with your submission. Please try again.", loading: false })
+
+      console.log("Error:", error)
+    });
+  }
+
+  submissionSaved(){
+    console.log("made it to submissionSaved");
   }
 
   _toCamera = () => {
