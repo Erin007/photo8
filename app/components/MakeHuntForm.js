@@ -8,6 +8,7 @@ import {
 import axios from 'axios';
 import huntDetails from './ShareHunt';
 import DirectiveList from './DirectiveList'
+import addDirectives from './AddDirectives';
 import Button from './common/Button';
 import Input from './common/Input';
 import Card from './common/Card';
@@ -16,7 +17,7 @@ import Spinner from './common/Spinner';
 
 class newHunt extends Component{
 
-  state = { huntName: '', passcode: '', description: '', directives: [], directive: '', organizerId:'', error: '', loading: false}
+  state = { huntName: '', passcode: '', description: '', organizerId:'', error: '', loading: false}
 
   savePressed() {
     console.log('>>> Save Button Pressed!');
@@ -46,7 +47,8 @@ class newHunt extends Component{
 
     //if there was a problem saving the hunt
       //this.huntNOTSaved.bind(this)
-    this._toShareHunt();
+    //this._toShareHunt();
+    this._toAddDirectives();
   }
 
   huntNOTSaved(){
@@ -59,6 +61,13 @@ class newHunt extends Component{
 
     //go to the Share Hunt page for this hunt - have to pass in the id as props to ShareHunt navigator action
       //this._toShareHunt();
+  }
+
+  _toAddDirectives = () => {
+    this.props.navigator.push({
+      title: 'Add Directives',
+      component: addDirectives
+    });
   }
 
   _toShareHunt = () => {
@@ -111,16 +120,6 @@ class newHunt extends Component{
               onChangeText = {description => this.setState({ description })}/>
           </CardSection>
 
-          <CardSection>
-            <Input
-              label = "Directive:"
-              placeholder = "your group at the Space Needle"
-              //secureTextEntry
-              value = {this.state.directive}
-              //What I need to do here is add the directive to an array of directives and then render the directives already in the array below the form so the user knows what they have already entered
-              //maybe also a counter of how many directives are already attached to the hunt?
-              onChangeText = {directive => this.setState({ directive })}/>
-          </CardSection>
 
           <CardSection>
             {this.renderSaveButton()}
@@ -142,7 +141,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-    paddingTop: 10
+    paddingTop: 10,
+    fontFamily: 'Chalkboard SE'
   },
 });
 
