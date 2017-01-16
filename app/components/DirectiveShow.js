@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   Text,
+  TouchableOpacity,
 Image } from 'react-native';
 import Button from './common/Button';
 import Input from './common/Input';
@@ -18,6 +19,12 @@ class DirectiveShow extends Component {
   takePhotoPressed() {
     console.log('>>> Take Photo Pressed');
     this._toCamera();
+  }
+
+  saveCaptionPressed(){
+    console.log('>>> Save caption pressed')
+
+    //axios post this caption to the submission with the directive_id passed in props
   }
 
   _toCamera = () => {
@@ -49,6 +56,7 @@ class DirectiveShow extends Component {
         source={require('../assets/placeholder.png')}
         style={styles.placeholder}
         />
+
         <View style={styles.caption}>
           <Input
             label = ""
@@ -60,7 +68,13 @@ class DirectiveShow extends Component {
 
         <Button onPress={this.saveCaptionPressed.bind(this)}>Save Caption</Button>
 
-        <Button onPress={this.takePhotoPressed.bind(this)}>Take Photo</Button>
+        <TouchableOpacity onPress={this.takePhotoPressed.bind(this)}>
+          <Image
+          source={require('../assets/camerabutton.png')}
+          style={styles.camerabutton}
+
+          />
+        </TouchableOpacity>
     </View>
     )
   }
@@ -93,6 +107,13 @@ const styles = StyleSheet.create({
   },
   caption: {
     paddingLeft: 15
+  },
+  camerabutton:{
+    marginTop: -50,
+    //borderWidth: 1,
+    borderRadius: 5,
+    marginLeft: 150,
+    //borderColor: '#21b6cb',
   },
   text: {
     fontSize: 16,
