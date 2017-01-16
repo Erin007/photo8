@@ -45,7 +45,7 @@ class newHunt extends Component{
     .catch((error) => {
       console.log("The hunt did not save")
 
-      this.setState({ error: "There was an error saving your hunt. Please, try again.", loading: false })
+      this.setState({ error: "There was an error with your hunt. Please try again.", loading: false })
 
       console.log("Error:", error)
     });
@@ -149,9 +149,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   errorTextStyle: {
-    fontSize: 20,
+    fontSize: 16,
     alignSelf: 'center',
-    color: 'red'
+    color: 'red',
+    fontFamily: "Chalkboard SE",
+    marginLeft: 25,
+    marginRight: 15,
+    textAlign: 'center',
+    padding: 5,
+    marginBottom: 10
   },
   welcome: {
     fontSize: 45,
