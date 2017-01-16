@@ -16,7 +16,8 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
         placeholder = {placeholder}
         style = {inputStyle}
         value = {value}
-        onChangeText = {onChangeText}/>
+        onChangeText = {onChangeText}
+        enablesReturnKeyAutomatically = {true}/>
     </View>
   );
 };
@@ -24,25 +25,31 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
 const styles = {
  inputStyle: {
    color: '#000',
-   paddingRight: 5,
-   paddingLeft: 0,
+   //paddingRight: 5,
+   paddingLeft: -105,
    fontSize: 18,
    lineHeight: 23,
-   flex: 2
+   flex: 2,
+   textAlign: 'center'
  },
 
  labelStyle: {
    fontSize: 18,
-   paddingLeft: 10,
+   //paddingLeft: 10,
    flex: 1
  },
 
  containerStyle: {
-   height: 40,
-  //  flex: 1,
-   width: 300,
+   height: 50,
+  // flex: 1,
+   width: 320,
+   margin: 5,
    flexDirection: 'row',
-   alignItems: 'center'
+   alignItems: 'center',
+   borderWidth: 1,
+   borderRadius: 5,
+   borderColor: '#21b6cb',
+   backgroundColor: '#fff',
  }
 };
 

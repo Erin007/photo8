@@ -17,7 +17,7 @@ import Spinner from './common/Spinner';
 
 class newHunt extends Component{
 
-  state = { huntName: '', passcode: '', description: '', organizerId:'', huntID: '', error: '', loading: false}
+  state = { huntName: '', passcode: '', description: '', organizerId:'', huntID: '', error: '', loading: false, hunt: {}}
 
   savePressed() {
     console.log('>>> Save Button Pressed!');
@@ -36,7 +36,8 @@ class newHunt extends Component{
       organizer_id: 1
     })
     .then(response => {
-      return this.setState( { huntId: response.data.id })
+      console.log("response", response)
+      return this.setState( { hunt: response.data })
     })
       //if the hunt is saved successfully
     .then(this.huntSaved.bind(this))
@@ -61,16 +62,16 @@ class newHunt extends Component{
       loading: false,
       error: ''
     })
-    console.log("huntId is: ", this.state.huntId)
+    console.log("hunt is: ", this.state.hunt)
     //go to the AddDirectives page for this Hunt, have to pass the hunt id as props to the AddDirectives navigator action
-    this._toAddDirectives(this.state.huntId);
+    this._toAddDirectives(this.state.hunt);
   }
 
-  _toAddDirectives = (huntId) => {
+  _toAddDirectives = (hunt) => {
     this.props.navigator.push({
       title: 'Add Directives',
       component: addDirectives,
-      passProps: { huntId: huntId}
+      passProps: { hunt: hunt}
     });
   }
 
@@ -87,31 +88,34 @@ class newHunt extends Component{
 
     return (
       <View style={styles.container}>
+        <Text style={styles.welcome}>
+           Snapenger Hunt
+        </Text>
+
         <Text style={styles.text}>
            Make a New Hunt
         </Text>
 
-        <Card>
-          <CardSection>
+        <CardSection>
             <Input
-              label = "Name"
-              placeholder = "Explore the Emerald City!"
+              label = ""
+              placeholder = "name"
               value = {this.state.huntName}
               onChangeText = {huntName => this.setState({ huntName })}/>
-          </CardSection>
+        </CardSection>
 
           <CardSection>
             <Input
-              label = "Passcode"
-              placeholder = "I<3Seattle"
+              label = ""
+              placeholder = "passcode"
               value = {this.state.passcode}
               onChangeText = {passcode => this.setState({ passcode })}/>
           </CardSection>
 
           <CardSection>
             <Input
-              label = "Description"
-              placeholder = ""
+              label = ""
+              placeholder = "description"
               //secureTextEntry
               value = {this.state.description}
               onChangeText = {description => this.setState({ description })}/>
@@ -124,7 +128,7 @@ class newHunt extends Component{
           <CardSection>
             {this.renderSaveButton()}
           </CardSection>
-        </Card>
+
       </View>
     );
   }
@@ -148,7 +152,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: 'center',
     color: 'red'
-  }
+  },
+  welcome: {
+    fontSize: 45,
+    textAlign: 'center',
+    margin: 10,
+    paddingTop: 10,
+    fontFamily: 'Pacifico',
+    justifyContent: 'flex-start'
+  },
 });
 
 export default newHunt;
