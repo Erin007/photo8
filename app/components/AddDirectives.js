@@ -83,7 +83,7 @@ class addDirectives extends Component{
 
       return this.state.directives.map(directive =>
 
-          <Text style={styles.directive}>
+          <Text style={styles.directive} key={directive.length}>
               {directive}
           </Text>
       );
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
     marginLeft: 18,
     textAlign: 'center',
     marginTop: -25,
+    padding: 10,
     marginBottom: 10
   },
   directive: {

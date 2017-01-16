@@ -153,10 +153,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'red',
     fontFamily: "Chalkboard SE",
-    marginLeft: 25,
-    marginRight: 15,
+    marginLeft: 5,
+    //marginRight: 15,
     textAlign: 'center',
-    padding: 5,
+    paddingLeft: 35,
+    paddingRight: 35,
     marginBottom: 10
   },
   welcome: {
