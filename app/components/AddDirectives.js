@@ -4,7 +4,8 @@ import {
   AppRegistry,
   StyleSheet,
   View,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 import DirectiveList from './DirectiveList';
 import Button from './common/Button';
@@ -22,15 +23,16 @@ class addDirectives extends Component{
     //axios post the directive
 
     //show the organizer the list of directives they've made so far by rendering them to the screen
-
-
-
-
-
-    //this.state.directives.push(directive)
+    this.state.directives.push(directive)
     console.log(directive)
     console.log(this.state.directives)
-    //this.setState( { directives: response.data.directives })
+
+    //clear the form
+    this.setState({
+      directive: '',
+      loading: false,
+      error: ''
+    })
   }
 
   seeHuntPressed(hunt) {
@@ -48,16 +50,20 @@ class addDirectives extends Component{
     });
   }
 
-  renderDirective(directive) {
-    if (typeof this.state.directive !== '')  {
+  renderDirectives() {
+    console.log("rendering directives")
+    if (this.state.directives[0] !== '')  {
+      console.log(this.state.directives)
 
-      return(
+      return this.state.directives.map(directive =>
+
           <Text style={styles.directive}>
-             ❏  {directive.name}
+              {directive}
           </Text>
-        );
+      );
     }
   }
+
 
   render(){
     return (
@@ -71,25 +77,25 @@ class addDirectives extends Component{
           {this.props.hunt.description}
         </Text>
 
+        <Button style={styles.button} onPress={() =>
+          this.seeHuntPressed(this.props.hunt)}> See Hunt
+        </Button>
+
         <CardSection>
           <Input
             label = ""
             placeholder = "Directive"
             //secureTextEntry
             value = {this.state.directive}
-            //What I need to do here is add the directive to the backend with the hunt_id set for the current hunt and then render the directives already associated with the hunt below the form so the user knows what they have already entered
-            //maybe also a counter of how many directives are already attached to the hunt?
+
             onChangeText = {directive => this.setState({ directive })}/>
         </CardSection>
 
-        <Button onPress={() => this.addDirectivePressed(this.state.directive)}> Add Directive </Button>
+        <Button style={styles.button} onPress={() => this.addDirectivePressed(this.state.directive)}> Add Directive </Button>
 
-        {this.renderDirective()}
-
-        <Button onPress={() =>
-          this.seeHuntPressed(this.props.hunt)}> See Hunt
-        </Button>
-
+        <ScrollView style={styles.scrollview}>
+          {this.renderDirectives()}
+        </ScrollView>
 
       </View>
     )
@@ -104,11 +110,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  button:{
+    flex: 2,
+    justifyContent: 'space-between',
+  },
   name: {
     fontSize: 30,
     textAlign: 'center',
-    //margin: 5,
-    //marginTop: 55,
     paddingTop: 20,
     paddingBottom: 20,
     fontFamily: 'Pacifico'
@@ -120,6 +128,13 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     fontFamily: 'Chalkboard SE'
   },
+  directive: {
+    fontSize: 16,
+    textAlign: 'center',
+    paddingTop: 5,
+    fontFamily: 'Chalkboard SE',
+    color: '#DCDCDC',
+  }
 });
 
 export default addDirectives;
