@@ -17,7 +17,6 @@ class DirectiveList extends Component {
     state = { directives: [], directive: {} }; //initial or empty state, property of this
 
     componentWillMount (){
-
       //change this to send the url of the specific hunt once everything is working!
       axios.get('https://treasure-chest-api.herokuapp.com/').then( response => {
         return this.setState( { directives: response.data.directives })

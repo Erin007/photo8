@@ -17,7 +17,7 @@ import Spinner from './common/Spinner';
 
 class newHunt extends Component{
 
-  state = { huntName: '', passcode: '', description: '', organizerId:'', error: '', loading: false}
+  state = { huntName: '', passcode: '', description: '', organizerId:'', huntID: '', error: '', loading: false}
 
   savePressed() {
     console.log('>>> Save Button Pressed!');
@@ -28,54 +28,58 @@ class newHunt extends Component{
     //*****set the state of organizerID to the id of the user making this hunt via props
 
     //send the information to the API to make a new hunt
-    console.log(this.state.huntName)
+    //console.log(this.state.huntName)
     axios.post('https://treasure-chest-api.herokuapp.com/hunts',{
       name: this.state.huntName,
       passcode: this.state.passcode,
       description: this.state.description,
       organizer_id: 1
     })
-    .then(function (response) {
-      console.log(response);
+    .then(response => {
+      return this.setState( { huntId: response.data.id })
     })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-    //if the hunt is saved successfully
-      //this.huntSaved.bind(this)
-
+      //if the hunt is saved successfully
+    .then(this.huntSaved.bind(this))
     //if there was a problem saving the hunt
-      //this.huntNOTSaved.bind(this)
-    //this._toShareHunt();
-    this._toAddDirectives();
-  }
+    .catch((error) => {
+      console.log("The hunt did not save")
 
-  huntNOTSaved(){
-      this.setState({ error: 'There was an error saving your hunt.', loading: false })
+      this.setState({ error: "There was an error saving your hunt. Please, try again.", loading: false })
+
+      console.log("Error:", error)
+    });
   }
 
   huntSaved(){
     console.log("The hunt successfully saved")
-    //clear the form
 
-    //go to the Share Hunt page for this hunt - have to pass in the id as props to ShareHunt navigator action
-      //this._toShareHunt();
+    //clear the form
+    this.setState({
+      huntName:'',
+      passcode: '',
+      description: '',
+      loading: false,
+      error: ''
+    })
+    console.log("huntId is: ", this.state.huntId)
+    //go to the AddDirectives page for this Hunt, have to pass the hunt id as props to the AddDirectives navigator action
+    this._toAddDirectives(this.state.huntId);
   }
 
-  _toAddDirectives = () => {
+  _toAddDirectives = (huntId) => {
     this.props.navigator.push({
       title: 'Add Directives',
-      component: addDirectives
+      component: addDirectives,
+      passProps: { huntId: huntId}
     });
   }
 
-  _toShareHunt = () => {
-    this.props.navigator.push({
-      title: 'Hunt Details',
-      component: huntDetails
-    });
-  }
+  // _toShareHunt = () => {
+  //   this.props.navigator.push({
+  //     title: 'Hunt Details',
+  //     component: huntDetails
+  //   });
+  // }
 
   renderSaveButton(){
     if (this.state.loading){
@@ -91,7 +95,7 @@ class newHunt extends Component{
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-           This is where there will be a form for users to make a new hunt!
+           Make a New Hunt
         </Text>
 
         <Card>
@@ -120,6 +124,9 @@ class newHunt extends Component{
               onChangeText = {description => this.setState({ description })}/>
           </CardSection>
 
+          <Text style= {styles.errorTextStyle}>
+            { this.state.error }
+          </Text>
 
           <CardSection>
             {this.renderSaveButton()}
@@ -144,6 +151,11 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontFamily: 'Chalkboard SE'
   },
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
 });
 
 export default newHunt;

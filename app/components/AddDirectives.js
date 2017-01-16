@@ -16,6 +16,16 @@ import CardSection from './common/CardSection';
 class addDirectives extends Component{
   state = { directive: '', organizerId:'', error: '', loading: false}
 
+
+  _toShareHunt = () => {
+    console.log(this.props)
+
+    this.props.navigator.push({
+      title: 'Hunt Details',
+      component: huntDetails
+    });
+  }
+
   render(){
     return (
       <View style={styles.container}>
