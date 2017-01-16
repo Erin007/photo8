@@ -48,6 +48,12 @@ class DirectiveShow extends Component {
 
   submissionSaved(){
     console.log("made it to submissionSaved");
+    //clear the form
+    this.setState({
+      caption:'',
+      loading: false,
+      error: ''
+    })
   }
 
   _toCamera = () => {

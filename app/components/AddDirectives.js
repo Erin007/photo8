@@ -26,7 +26,7 @@ class addDirectives extends Component{
     //console.log(url)
     console.log(this.state.directive)
     console.log(this.props.hunt.id)
-    axios.post('http://localhost:3000/directives',{
+    axios.post('http://treasure-chest-api.herokuapp.com/directives',{
       name: this.state.directive,
       complete: "false",
       point_value: "1",
