@@ -90,7 +90,7 @@ class welcome extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-           Snapenger Hunt!
+           Snapenger Hunt
         </Text>
 
         {this.renderContent()}
@@ -112,7 +112,9 @@ const styles = StyleSheet.create({
     fontSize: 45,
     textAlign: 'center',
     margin: 10,
-    paddingTop: 10
+    paddingTop: 10,
+    fontFamily: 'Pacifico',
+    justifyContent: 'flex-start'
   },
 });
 
