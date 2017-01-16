@@ -15,7 +15,7 @@ import CardSection from './common/CardSection';
 
 class findHunt extends Component{
 
-  state = { huntName: '', passcode: '', error: '', loading: false, hunt: {}}
+  state = { huntName: '', passcode: '', error: '', loading: false, huntId: ''} 
 
   findPressed() {
     console.log('>>> Find Hunt Button Pressed!');
@@ -41,19 +41,19 @@ class findHunt extends Component{
 
   huntFound(){
     console.log('a hunt was found!')
+    //clear the form
     this.setState({
       huntName: '',
       passcode: '',
       error: '',
-      loading: false,
-      //hunt: {"the hunt that came back from the API"}
+      loading: false
     })
 
-      this._toDirectiveList("pass in the hunt that came back from the API");
+      this._toDirectiveList(huntId);
 
   }
 
-  _toDirectiveList = () => {
+  _toDirectiveList = (huntId) => {
     this.props.navigator.push({
       title: 'Hunt',
       component: DirectiveList

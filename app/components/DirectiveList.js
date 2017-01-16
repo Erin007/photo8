@@ -46,8 +46,9 @@ class DirectiveList extends Component {
         return this.state.directives.map(directive =>
 
           <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
+
             <Text style={styles.directive}>
-              {directive.name}
+               ❏  {directive.name}
             </Text>
           </TouchableOpacity>
           );
@@ -59,8 +60,8 @@ class DirectiveList extends Component {
 
       return (
         <View style={styles.container}>
-          <Text style={styles.text}>Name of the Hunt </Text>
           <ScrollView>
+            <Text style={styles.text}>Ada: Explore Seattle </Text>
             { this.renderDirectives() }
           </ScrollView>
          </View>
@@ -76,15 +77,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
     //margin: 5,
     marginTop: 55,
-    paddingTop: 20
+    paddingTop: 20,
+    fontFamily: 'Pacifico'
   },
   directive:{
     fontSize: 16,
-    textAlign: 'center',
+    fontFamily: 'Chalkboard SE',
+    textAlign: 'left',
     borderWidth: 1,
     borderRadius: 2,
     borderColor: '#ddd',
@@ -94,9 +97,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 10,
+    marginRight: 10,
     marginTop: 10,
+    padding: 5,
+    paddingLeft: 10
   }
 });
 
