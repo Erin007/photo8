@@ -23,7 +23,8 @@ const styles = {
     fontWeight: '600',
     paddingTop: 10,
     paddingBottom: 10,
-    margin: 10
+    margin: 10,
+    fontFamily: 'Chalkboard SE'
   },
   buttonStyle:{
   // flex: 1,
