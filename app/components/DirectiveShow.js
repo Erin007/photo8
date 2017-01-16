@@ -33,6 +33,23 @@ class DirectiveShow extends Component {
     return <Text> ✔︎ </Text>
   }
 
+  renderPhoto(){
+    console.log(">>>> Render Photo called")
+    console.log(this.props.directive.complete)
+    if (this.props.directive.complete == true){
+      return <Text> This is where the photo will go</Text>
+    }
+    return(
+      <View>
+        <Text style={styles.text}> No Photo Submitted Yet </Text>
+        <Image
+        source={require('../assets/placeholder.png')}
+        style={styles.placeholder}
+        />
+    </View>
+    )
+  }
+
   render(){
 
     console.log("showing directive description")
@@ -46,14 +63,7 @@ class DirectiveShow extends Component {
 
         <Text>{this.props.directive.description}</Text>
 
-        <Text> No Photo Submitted Yet </Text>
-
-
-          <Image
-            source={require('../assets/placeholder.png')}
-            style={styles.placeholder}
-          />
-
+        { this.renderPhoto() }
 
         <Button onPress={this.takePhotoPressed.bind(this)}>Take Photo</Button>
       </View>
@@ -87,7 +97,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: '#21b6cb',
-
   },
 });
 
