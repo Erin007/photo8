@@ -7,10 +7,13 @@ import {
   Text,
 Image } from 'react-native';
 import Button from './common/Button';
+import Input from './common/Input';
 import Example from '../Camera';
 import Card from './common/Button';
 
 class DirectiveShow extends Component {
+
+  state = { caption: '', error: '', loading: false}
 
   takePhotoPressed() {
     console.log('>>> Take Photo Pressed');
@@ -41,14 +44,28 @@ class DirectiveShow extends Component {
     }
     return(
       <View>
-        <Text style={styles.text}> No Photo Submitted Yet </Text>
+
         <Image
         source={require('../assets/placeholder.png')}
         style={styles.placeholder}
         />
+        <View style={styles.caption}>
+          <Input
+            label = ""
+            placeholder = "caption"
+            value = {this.state.caption}
+            onChangeText = {caption => this.setState({ caption })}
+            />
+        </View>
+
+        <Button onPress={this.saveCaptionPressed.bind(this)}>Save Caption</Button>
+
+        <Button onPress={this.takePhotoPressed.bind(this)}>Take Photo</Button>
     </View>
     )
   }
+
+// <Text style={styles.text}>Worth {this.props.directive.point_value} point(s)</Text>
 
   render(){
 
@@ -59,13 +76,9 @@ class DirectiveShow extends Component {
         <Text style={styles.name}> {this.checkCompletion()}{this.props.directive.name}
         </Text>
 
-        <Text style={styles.text}>Worth {this.props.directive.point_value} point(s)</Text>
-
         <Text>{this.props.directive.description}</Text>
 
         { this.renderPhoto() }
-
-        <Button onPress={this.takePhotoPressed.bind(this)}>Take Photo</Button>
       </View>
     )
   }
@@ -77,6 +90,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  caption: {
+    paddingLeft: 15
   },
   text: {
     fontSize: 16,
