@@ -6,7 +6,7 @@ import {
   Text
 } from 'react-native';
 import axios from 'axios';
-import huntDetails from './ShareHunt';
+import huntDetails from './HuntDetails';
 import DirectiveList from './DirectiveList'
 import addDirectives from './AddDirectives';
 import Button from './common/Button';
@@ -73,13 +73,6 @@ class newHunt extends Component{
       passProps: { huntId: huntId}
     });
   }
-
-  // _toShareHunt = () => {
-  //   this.props.navigator.push({
-  //     title: 'Hunt Details',
-  //     component: huntDetails
-  //   });
-  // }
 
   renderSaveButton(){
     if (this.state.loading){
