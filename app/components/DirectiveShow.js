@@ -28,7 +28,8 @@ class DirectiveShow extends Component {
     //axios post this caption to the submission with the directive_id passed in props
     axios.post('https://treasure-chest-api.herokuapp.com/submissions',{
       directive_id: this.props.directive.id,
-      caption: this.state.caption
+      caption: this.state.caption,
+      //team_id: "Whatever team this player is on right now"
     })
     .then(response => {
       console.log("response", response)
@@ -54,6 +55,32 @@ class DirectiveShow extends Component {
       loading: false,
       error: ''
     })
+
+    //call renderCaption
+    console.log(this.state.submission.caption);
+    this.renderCaption()
+  }
+
+  renderCaption(){
+    if (typeof this.state.submission.caption !== 'undefined'){
+      //if there is a caption, show it on the screen
+      return(
+        <Text> {this.state.submission.caption} </Text>
+      )
+    }
+    //if there isn't a caption, then show the input box and save caption button
+    return(
+      <View style={styles.caption}>
+        <Input
+          label = ""
+          placeholder = "caption"
+          value = {this.state.caption}
+          onChangeText = {caption => this.setState({ caption })}
+          />
+
+          <Button onPress={this.saveCaptionPressed.bind(this)}>Save Caption</Button>
+      </View>
+    )
   }
 
   _toCamera = () => {
@@ -80,32 +107,29 @@ class DirectiveShow extends Component {
     }
     return(
       <View>
-
         <Image
         source={require('../assets/placeholder.png')}
         style={styles.placeholder}
         />
-
-        <View style={styles.caption}>
-          <Input
-            label = ""
-            placeholder = "caption"
-            value = {this.state.caption}
-            onChangeText = {caption => this.setState({ caption })}
-            />
-        </View>
-
-        <Button onPress={this.saveCaptionPressed.bind(this)}>Save Caption</Button>
-
-        <TouchableOpacity onPress={this.takePhotoPressed.bind(this)}>
-          <Image
-          source={require('../assets/camerabutton.png')}
-          style={styles.camerabutton}
-
-          />
-        </TouchableOpacity>
     </View>
     )
+  }
+
+  renderCameraIcon(){
+    console.log('<<< Render CameraIcon called')
+      if (this.props.directive.complete !== true){
+        return(
+          <View>
+            <TouchableOpacity onPress={this.takePhotoPressed.bind(this)}>
+              <Image
+              source={require('../assets/camerabutton.png')}
+              style={styles.camerabutton}
+              />
+            </TouchableOpacity>
+          </View>
+        )
+      }
+
   }
 
 // <Text style={styles.text}>Worth {this.props.directive.point_value} point(s)</Text>
@@ -122,6 +146,8 @@ class DirectiveShow extends Component {
         <Text>{this.props.directive.description}</Text>
 
         { this.renderPhoto() }
+        { this.renderCaption() }
+        { this.renderCameraIcon() }
       </View>
     )
   }
@@ -138,10 +164,10 @@ const styles = StyleSheet.create({
     paddingLeft: 15
   },
   camerabutton:{
-    marginTop: -50,
+    //marginTop: -50,
     //borderWidth: 1,
     borderRadius: 5,
-    marginLeft: 150,
+    //marginLeft: 150,
     //borderColor: '#21b6cb',
   },
   text: {
