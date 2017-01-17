@@ -81,7 +81,7 @@ class addTeams extends Component{
     this.props.navigator.push({
       title: 'Hunt Details',
       component: huntDetails,
-      passProps: { hunt: {hunt}}
+      passProps: { hunt: hunt}
     });
   }
 
@@ -138,7 +138,7 @@ class addTeams extends Component{
         </ScrollView>
 
         <Button style={styles.button} onPress={() =>
-          this.seeHuntPressed(this.props.hunt)}> See Hunt
+          this.seeHuntPressed(this.props.hunt)}> Next
         </Button>
 
       </View>

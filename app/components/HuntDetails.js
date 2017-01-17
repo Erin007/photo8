@@ -6,13 +6,17 @@ import {
   Text
 } from 'react-native';
 import Button from './common/Button';
-import DirectiveList from './DirectiveList'
+import DirectiveList from './DirectiveList';
+import newHunt from './MakeHuntForm';
 
 class huntDetails extends Component{
 
-  goHuntingPressed() {
-    console.log('>>> Go Hunting Button Pressed!');
-    //this needs to be conditionally on the successful save of the new hunt to the api, the api will have to send some signal letting the mobile app know it's been successful
+  showLogs(){
+    console.log(this.props)
+  }
+
+  joinHuntPressed() {
+    console.log('>>> Join Hunt Button Pressed!');
     this._toDirectiveList();
   }
 
@@ -23,15 +27,34 @@ class huntDetails extends Component{
     });
   }
 
+  anotherHuntPressed(){
+    console.log('>>> Make Another Hunt Button Pressed!');
+    this._toMakeHunt();
+  }
+
+  _toMakeHunt = () => {
+    this.props.navigator.push({
+      title: 'New Hunt',
+      component: newHunt
+    });
+  }
+
+
   render() {
 
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-           This is where there will be a message that the hunt was successfully saved and the passcode and id for the hunt will be displayed to the organizer.
+           You have successfully created a hunt. Please share the hunt name and passcode with players.
         </Text>
-        
-        <Button onPress={this.goHuntingPressed.bind(this)}> Go Hunting! </Button>
+        {this.showLogs()}
+        <Text> Name : { this.props.hunt.name } </Text>
+        <Text> Passcode: { this.props.hunt.passcode }</Text>
+
+        <Button onPress={this.joinHuntPressed.bind(this)}> Join Hunt </Button>
+
+        <Button onPress={this.anotherHuntPressed.bind(this)}> Make Another Hunt </Button>
+
       </View>
     );
   }
