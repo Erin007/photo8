@@ -117,12 +117,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginTop: 0
   },
   welcome: {
-    fontSize: 45,
+    fontSize: 36,
     textAlign: 'center',
-    marginTop: -70,
-    paddingTop: 10,
+    // marginTop: -70,
+    // paddingTop: 10,
     fontFamily: 'Pacifico',
     //justifyContent: 'flex-start'
   },
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     margin: 10,
-    marginTop: 70,
+    // marginTop: 70,
     paddingTop: 10,
     fontFamily: 'Chalkboard SE'
   },

@@ -4,7 +4,8 @@ import {
   AppRegistry,
   StyleSheet,
   View,
-  Text
+  Text,
+  SideMenu
 } from 'react-native';
 
 import Button from './common/Button';
@@ -65,12 +66,12 @@ class welcome extends Component {
       //if the user is logged in
       case true:
         return (
-        <View>
+        <View style={styles.container}>
             <Button onPress={() => firebase.auth().signOut()}>
               Log Out
             </Button>
 
-            <Button onPress={this.newHuntPressed.bind(this)}> Make a New Hunt </Button>
+            <Button style={{margin:0}} onPress={this.newHuntPressed.bind(this)}> Make a New Hunt </Button>
 
             <Button onPress={this.joinHuntPressed.bind(this)}> Join a Hunt </Button>
 
@@ -93,6 +94,7 @@ class welcome extends Component {
            Snapenger Hunt
         </Text>
 
+
         {this.renderContent()}
 
       </View>
@@ -104,12 +106,13 @@ class welcome extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginTop: 50
   },
   welcome: {
-    fontSize: 45,
+    fontSize: 36,
     textAlign: 'center',
     margin: 10,
     paddingTop: 10,

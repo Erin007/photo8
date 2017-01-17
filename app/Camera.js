@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Camera from 'react-native-camera';
+import PhotoSelect from './components/PhotoSelect'
 
 const styles = StyleSheet.create({
   container: {
@@ -75,18 +76,27 @@ class Example extends Component {
   }
 
   takePicture() {
+    console.log('<<< Take Picture called')
     if (this.camera) {
       this.camera.capture()
-        .then((data) => console.log(this.handlePicture(data.path)))
+        .then((data) => console.log(this._toPhotoSelect(data.path)))
         .catch(err => console.error(err));
     }
   }
 
-  handlePicture(path){
-    this.props.updateImagesState(path);
-    this.props.navigator.pop();
+  // handlePicture(path){
+  //   //this.props.updateImagesState(path);
+  //   this.props.navigator.pop();
+  // }
+
+  _toPhotoSelect = () => {
+    this.props.navigator.push({
+      title: 'Photo',
+      component: PhotoSelect
+      //passProps: { path: {path} },
+    });
   }
-  
+
   switchType() {
     let newType;
     const { back, front } = Camera.constants.Type;
@@ -114,7 +124,6 @@ class Example extends Component {
     } else if (this.state.camera.type === front) {
       icon = require('./assets/ic_camera_front_white.png');
     }
-
     return icon;
   }
 
@@ -194,7 +203,9 @@ class Example extends Component {
             style={styles.captureButton}
             onPress={this.takePicture}
           >
-
+          <Image
+              source={require('./assets/ic_photo_camera_36pt.png')}
+            />
           </TouchableOpacity>
         </View>
       </View>

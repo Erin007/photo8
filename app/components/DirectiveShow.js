@@ -1,3 +1,4 @@
+//DirectiveShow.js
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -122,7 +123,7 @@ class DirectiveShow extends Component {
           <View>
             <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
               <Image
-              source={require('../assets/camerabutton.png')}
+              source={require('../assets/ic_photo_camera_36pt.png')}
               style={styles.camerabutton}
               />
             </TouchableOpacity>
@@ -157,12 +158,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginTop: 85
   },
   caption: {
-    paddingLeft: 15
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   captiontext:{
-    marginTop: -5,
+    // marginTop: -5,
     fontSize: 16,
     textAlign: 'center',
     // margin: 15,
@@ -179,14 +182,16 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 18,
     textAlign: 'center',
-    marginTop: 80,
+    // marginTop: 80,
     marginLeft: 10,
     marginRight: 10,
     paddingTop: 15,
     fontFamily: "Chalkboard SE"
   },
   placeholder: {
-    margin: 20,
+    margin: 10,
+    height: 250,
+    width: 250,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: '#21b6cb',

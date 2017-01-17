@@ -74,13 +74,13 @@ class LoginForm extends Component {
   render(){
     return (
       <View>
-        <CardSection>
+
           <Input
             label = "email:"
             placeholder = "user@email.com"
             value = {this.state.email}
             onChangeText = {email => this.setState({ email })}/>
-        </CardSection>
+      
 
         <CardSection>
           <Input

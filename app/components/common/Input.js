@@ -43,8 +43,11 @@ const styles = {
  containerStyle: {
    height: 50,
   // flex: 1,
-   width: 320,
-   margin: 5,
+   width: 250,
+   marginTop: 5,
+   marginBottom: 5,
+   marginLeft: 10,
+   marginRight: 10,
    flexDirection: 'row',
    alignItems: 'center',
    borderWidth: 1,
