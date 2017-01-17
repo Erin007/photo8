@@ -132,8 +132,6 @@ class DirectiveShow extends Component {
 
   }
 
-// <Text style={styles.text}>Worth {this.props.directive.point_value} point(s)</Text>
-
   render(){
 
     console.log("showing directive description")
