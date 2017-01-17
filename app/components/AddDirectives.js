@@ -30,7 +30,7 @@ class addDirectives extends Component{
 
     axios.post('https://treasure-chest-api.herokuapp.com/directives',{
       name: this.state.directive,
-      complete: false,
+      complete: true,
       point_value: 1,
       hunt_id: this.props.hunt.id,
       description: ""
@@ -161,8 +161,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#21b6cb",
     padding: 7,
     borderRadius: 5,
-    borderWidth: 2,
-    borderColor:'#21b6cb',
+    borderWidth: 1,
+    shadowColor: '#167c89',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    borderColor:'#167c89',
     marginTop: 15
   },
   name: {
