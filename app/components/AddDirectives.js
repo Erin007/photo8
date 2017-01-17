@@ -30,7 +30,6 @@ class addDirectives extends Component{
 
     axios.post('https://treasure-chest-api.herokuapp.com/directives',{
       name: this.state.directive,
-      complete: true,
       point_value: 1,
       hunt_id: this.props.hunt.id,
       description: ""
