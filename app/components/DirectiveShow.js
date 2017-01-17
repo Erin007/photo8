@@ -65,7 +65,7 @@ class DirectiveShow extends Component {
     if (typeof this.state.submission.caption !== 'undefined'){
       //if there is a caption, show it on the screen
       return(
-        <Text> {this.state.submission.caption} </Text>
+        <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
       )
     }
     //if there isn't a caption, then show the input box and save caption button
@@ -146,8 +146,9 @@ class DirectiveShow extends Component {
         <Text>{this.props.directive.description}</Text>
 
         { this.renderPhoto() }
-        { this.renderCaption() }
         { this.renderCameraIcon() }
+        { this.renderCaption() }
+
       </View>
     )
   }
@@ -163,25 +164,28 @@ const styles = StyleSheet.create({
   caption: {
     paddingLeft: 15
   },
-  camerabutton:{
-    //marginTop: -50,
-    //borderWidth: 1,
-    borderRadius: 5,
-    //marginLeft: 150,
-    //borderColor: '#21b6cb',
-  },
-  text: {
+  captiontext:{
+    marginTop: -5,
     fontSize: 16,
     textAlign: 'center',
     // margin: 15,
     paddingTop: 10
   },
+  camerabutton:{
+    borderRadius: 5,
+  },
+  text: {
+    fontSize: 18,
+    textAlign: 'center',
+    paddingTop: 10
+  },
   name: {
-    fontSize: 25,
+    fontSize: 18,
     textAlign: 'center',
     marginTop: 80,
     marginLeft: 10,
     marginRight: 10,
+    paddingTop: 15,
     fontFamily: "Chalkboard SE"
   },
   placeholder: {

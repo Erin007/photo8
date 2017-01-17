@@ -80,7 +80,7 @@ class newHunt extends Component{
       return <Spinner size="small"/>
     }
     return(
-      <Button onPress={this.savePressed.bind(this)}> Save </Button>
+        <Button onPress={this.savePressed.bind(this)}> Save </Button>
     )
   }
 
