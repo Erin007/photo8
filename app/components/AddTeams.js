@@ -1,4 +1,4 @@
-//AddDirective.js
+//AddTeams.js
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -8,8 +8,7 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-//import DirectiveList from './DirectiveList';
-import AddTeams from './AddTeams'
+import DirectiveList from './DirectiveList';
 import Button from './common/Button';
 import InputPlus from './common/InputPlus';
 import Spinner from './common/Spinner';
@@ -18,76 +17,83 @@ import CardSection from './common/CardSection';
 import huntDetails from './HuntDetails';
 import axios from 'axios';
 
-class addDirectives extends Component{
-  state = { directive: '', huntId:'', error: '', loading: false, hunt: {}, directives : []}
+class addTeams extends Component{
+  state = { error: '', loading: false, hunt: {}, teamName:'', teams: [], team: {}, teamNames: []}
 
-  addDirectivePressed(directive){
-    console.log('>>> Add Directive pressed');
-    //axios post the directive
-    //var url = 'https://treasure-chest-api.herokuapp.com/hunts/' + this.props.hunt.id + '/directives'
-    //console.log(url)
-    console.log(this.state.directive)
-    console.log(this.props.hunt.id)
+  addTeamPressed(teamName){
+    console.log('>>> Add Team pressed');
+    //axios post the team
 
-    axios.post('https://treasure-chest-api.herokuapp.com/directives',{
-      name: this.state.directive,
-      point_value: 1,
+    console.log(this.state.teamName)
+    console.log(this.props.hunt.name)
+
+    axios.post('https://treasure-chest-api.herokuapp.com/teams',{
+      name: this.state.teamName,
+      points: 0,
       hunt_id: this.props.hunt.id,
-      description: ""
     })
     .then(response => {
       console.log("response", response)
       console.log("response.data", response.data)
-      // return this.setState( { hunt: response.data })
+      return this.setState( { team: response.data })
     })
-      //if the directive is saved successfully
-    //.then(this.directiveSaved.bind(this))
-    //if there was a problem saving the hunt
+      //if the team is saved successfully
+    .then(this.teamSaved(this.state.team))
+    //if there was a problem saving the team
     .catch((error) => {
-      console.log("The directive did not save")
+      console.log("The team did not save")
 
-      this.setState({ error: "There was an error saving your directive. Please try again.", loading: false })
+      this.setState({ error: "There was an error saving the team. Please try again.", loading: false })
 
       console.log(error)
     });
-
     //show the organizer the list of directives they've made so far by rendering them to the screen
-    this.state.directives.push(directive)
-    console.log(directive)
-    console.log(this.state.directives)
+    this.state.teamNames.push(teamName)
+    console.log(teamName)
+    console.log(this.state.teamNames)
 
     //clear the form
     this.setState({
-      directive: '',
+      teamName: '',
       loading: false,
       error: ''
     })
   }
 
-  nextPressed(hunt) {
-    console.log('>>> Next pressed');
-    console.log("this.props.hunt.name", this.props.hunt.name)
-    console.log("hunt", hunt)
-    this._toAddTeams(hunt)
+  teamSaved(team){
+    console.log('<<<< Team Saved Called')
+    //push the team into a list of teams associated with this hunt
+    this.state.teams.push(team)
+    console.log(team)
+    console.log(this.state.teams)
+
+    this.renderTeamNames()
   }
 
-  _toAddTeams = (hunt) => {
+  seeHuntPressed(hunt) {
+    console.log('>>> See Hunt pressed');
+    console.log("this.props.hunt.name", this.props.hunt.name)
+    console.log("hunt", hunt)
+    this._toHuntDetails(hunt)
+  }
+
+  _toHuntDetails = (hunt) => {
     this.props.navigator.push({
-      title: 'Add Teams',
-      component: AddTeams,
-      passProps: { hunt: hunt}
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: {hunt}}
     });
   }
 
-  renderDirectives() {
-    console.log("rendering directives")
-    if (this.state.directives[0] !== '')  {
-      console.log(this.state.directives)
+  renderTeamNames() {
+    console.log("rendering teams")
+    if (this.state.teamNames[0] !== '')  {
+      console.log(this.state.teamNames)
 
-      return this.state.directives.map(directive =>
+      return this.state.teamNames.map(teamName=>
 
-          <Text style={styles.directive} key={directive}>
-              {directive}
+          <Text style={styles.directive} key={teamName.length}>
+              {teamName}
           </Text>
       );
     }
@@ -106,18 +112,18 @@ class addDirectives extends Component{
         </Text>
 
         <Text style={styles.text}>
-          What should the hunters look for?
+          Which teams will participate in this hunt?
         </Text>
 
         <View style={{flex: 1, flexDirection: 'row', paddingBottom: 20}}>
           <InputPlus
             label = ""
-            placeholder = "directive"
+            placeholder = "team name"
             //secureTextEntry
-            value = {this.state.directive}
-            onChangeText = {directive => this.setState({ directive })}/>
+            value = {this.state.teamName}
+            onChangeText = {teamName => this.setState({ teamName })}/>
 
-            <TouchableOpacity style={styles.plus} onPress={() => this.addDirectivePressed(this.state.directive)}>
+            <TouchableOpacity style={styles.plus} onPress={() => this.addTeamPressed(this.state.teamName)}>
               <Text>✚</Text>
             </TouchableOpacity>
         </View>
@@ -126,12 +132,13 @@ class addDirectives extends Component{
           { this.state.error }
         </Text>
 
+
         <ScrollView style={styles.scrollview}>
-          {this.renderDirectives()}
+          {this.renderTeamNames()}
         </ScrollView>
 
         <Button style={styles.button} onPress={() =>
-          this.nextPressed(this.props.hunt)}> Next
+          this.seeHuntPressed(this.props.hunt)}> See Hunt
         </Button>
 
       </View>
@@ -201,4 +208,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default addDirectives;
+export default addTeams;
