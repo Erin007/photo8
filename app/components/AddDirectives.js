@@ -5,11 +5,12 @@ import {
   StyleSheet,
   View,
   Text,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import DirectiveList from './DirectiveList';
 import Button from './common/Button';
-import Input from './common/Input';
+import InputPlus from './common/InputPlus';
 import Spinner from './common/Spinner';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
@@ -105,17 +106,22 @@ class addDirectives extends Component{
           {this.props.hunt.description}
         </Text>
 
-        <CardSection>
-          <Input
+        <Text style={styles.text}>
+          What should the hunters look for?
+        </Text>
+
+        <View style={{flex: 1, flexDirection: 'row', paddingBottom: 20}}>
+          <InputPlus
             label = ""
-            placeholder = "Directive"
+            placeholder = "directive"
             //secureTextEntry
             value = {this.state.directive}
-
             onChangeText = {directive => this.setState({ directive })}/>
-        </CardSection>
 
-        <Button style={styles.button} onPress={() => this.addDirectivePressed(this.state.directive)}> Add Directive </Button>
+            <TouchableOpacity style={styles.plus} onPress={() => this.addDirectivePressed(this.state.directive)}>
+              <Text>✚</Text>
+            </TouchableOpacity>
+        </View>
 
         <Text style= {styles.errorTextStyle}>
           { this.state.error }
@@ -127,9 +133,9 @@ class addDirectives extends Component{
         </ScrollView>
 
 
-          <Button style={styles.button} onPress={() =>
-            this.seeHuntPressed(this.props.hunt)}> See Hunt
-          </Button>
+        <Button style={styles.button} onPress={() =>
+          this.seeHuntPressed(this.props.hunt)}> See Hunt
+        </Button>
 
       </View>
     )
@@ -144,10 +150,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  // button:{
-  //   // flex:1,
-  //   marginLeft: 20
-  // },
+  scrollview:{
+    width: 300,
+    margin: 5,
+    height: 100,
+  },
+  plus:{
+    width: 30,
+    height: 30,
+    backgroundColor: "#21b6cb",
+    padding: 7,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor:'#21b6cb',
+    marginTop: 15
+  },
   name: {
     fontSize: 30,
     textAlign: 'center',
@@ -156,7 +173,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Pacifico'
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
     margin: 10,
     paddingTop: 20,
@@ -167,9 +184,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'red',
     fontFamily: "Chalkboard SE",
-    marginLeft: 18,
+    marginLeft: 8,
     textAlign: 'center',
-    marginTop: -25,
+    marginTop: 0,
     padding: 10,
     marginBottom: 10
   },

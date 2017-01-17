@@ -1,9 +1,7 @@
-//input.js
-
 import React from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { TextInput, View, Text, TouchableOpacity } from 'react-native';
 
-const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, onPress }) => {
+const InputPlus = ({ label, value, onChangeText, placeholder, secureTextEntry, onPress }) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
 
   return (
@@ -18,7 +16,6 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, onPre
         value = {value}
         onChangeText = {onChangeText}
         enablesReturnKeyAutomatically = {true}/>
-
     </View>
   );
 };
@@ -43,8 +40,8 @@ const styles = {
  containerStyle: {
    height: 50,
   // flex: 1,
-   width: 320,
-   margin: 5,
+   width: 280,
+   margin: 8,
    flexDirection: 'row',
    alignItems: 'center',
    borderWidth: 1,
@@ -54,4 +51,4 @@ const styles = {
  }
 };
 
-export default Input;
+export default InputPlus;
