@@ -6,7 +6,7 @@ const InputPlus = ({ label, value, onChangeText, placeholder, secureTextEntry, o
 
   return (
     <View style={containerStyle}>
-      <Text style={labelStyle}> {label} </Text>
+
       <TextInput
         autoCorrect = {false}
         autoCapitalize = {'none'}
@@ -24,23 +24,16 @@ const styles = {
  inputStyle: {
    color: '#000',
    //paddingRight: 5,
-   paddingLeft: -105,
+  //  paddingLeft: -105,
    fontSize: 18,
    lineHeight: 23,
    flex: 2,
    textAlign: 'center'
  },
-
- labelStyle: {
-   fontSize: 18,
-   paddingLeft: 10,
-   flex: 1
- },
-
  containerStyle: {
    height: 50,
   // flex: 1,
-   width: 280,
+   width: 250,
    margin: 8,
    flexDirection: 'row',
    alignItems: 'center',

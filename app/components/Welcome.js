@@ -95,7 +95,8 @@ class welcome extends Component {
         </Text>
 
 
-        {this.renderContent()}
+          { this.renderContent()  }
+  
 
       </View>
 
@@ -110,6 +111,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 50
+  },
+  content:{
+    marginTop: 20,
   },
   welcome: {
     fontSize: 36,

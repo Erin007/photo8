@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 85
+    // marginTop: 85
   },
   caption: {
     paddingLeft: 15,
@@ -177,12 +177,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     textAlign: 'center',
-    paddingTop: 10
+    paddingTop: 10,
   },
   name: {
     fontSize: 18,
     textAlign: 'center',
-    // marginTop: 80,
+    marginTop: 90,
     marginLeft: 10,
     marginRight: 10,
     paddingTop: 15,

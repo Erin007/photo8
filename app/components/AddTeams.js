@@ -47,7 +47,7 @@ class addTeams extends Component{
 
       console.log(error)
     });
-    //show the organizer the list of directives they've made so far by rendering them to the screen
+    //show the organizer the list of teams they've made so far by rendering them to the screen
     this.state.teamNames.push(teamName)
     console.log(teamName)
     console.log(this.state.teamNames)
@@ -92,7 +92,7 @@ class addTeams extends Component{
 
       return this.state.teamNames.map(teamName=>
 
-          <Text style={styles.directive} key={teamName.length}>
+          <Text style={styles.teamname} key={teamName.length}>
               {teamName}
           </Text>
       );
@@ -115,7 +115,7 @@ class addTeams extends Component{
           Which teams will participate in this hunt?
         </Text>
 
-        <View style={{flex: 1, flexDirection: 'row', paddingBottom: 20}}>
+        <View style={styles.teambox}>
           <InputPlus
             label = ""
             placeholder = "team name"
@@ -158,6 +158,11 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 5,
     height: 100,
+    marginTop: -50
+  },
+  teambox:{
+    flexDirection: 'row',
+    marginBottom: 50
   },
   plus:{
     width: 30,
@@ -178,14 +183,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     paddingTop: 20,
-    paddingBottom: 20,
+    //paddingBottom: 20,
     fontFamily: 'Pacifico'
   },
   text: {
     fontSize: 16,
     textAlign: 'center',
-    margin: 10,
-    paddingTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    //paddingTop: 20,
     fontFamily: 'Chalkboard SE'
   },
   errorTextStyle: {
@@ -193,13 +199,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'red',
     fontFamily: "Chalkboard SE",
-    marginLeft: 8,
+  //  marginLeft: 8,
     textAlign: 'center',
-    marginTop: 0,
-    padding: 10,
-    marginBottom: 10
+    marginTop: -20,
+    //padding: 10,
+  //  marginBottom: 10
   },
-  directive: {
+  teamname: {
     fontSize: 16,
     textAlign: 'center',
     paddingTop: 5,

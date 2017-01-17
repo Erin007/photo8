@@ -101,7 +101,7 @@ class addDirectives extends Component{
           {this.props.hunt.name}
         </Text>
 
-        <Text>
+        <Text style={styles.text}>
           {this.props.hunt.description}
         </Text>
 
@@ -109,7 +109,7 @@ class addDirectives extends Component{
           What should the hunters look for?
         </Text>
 
-        <View style={{flex: 1, flexDirection: 'row', paddingBottom: 20}}>
+        <View style={styles.directivebox}>
           <InputPlus
             label = ""
             placeholder = "directive"
@@ -151,6 +151,12 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 5,
     height: 100,
+    // backgroundColor: 'green',
+    marginTop: -50
+  },
+  directivebox: {
+    flexDirection: 'row',
+    marginBottom: 50
   },
   plus:{
     width: 30,
@@ -171,14 +177,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     paddingTop: 20,
-    paddingBottom: 20,
+    // paddingBottom: 20,
     fontFamily: 'Pacifico'
   },
   text: {
     fontSize: 16,
     textAlign: 'center',
-    margin: 10,
-    paddingTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    // marginTop: -20,
     fontFamily: 'Chalkboard SE'
   },
   errorTextStyle: {
@@ -186,11 +193,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'red',
     fontFamily: "Chalkboard SE",
-    marginLeft: 8,
+    // marginLeft: 8,
     textAlign: 'center',
-    marginTop: 0,
-    padding: 10,
-    marginBottom: 10
+    marginTop: -20,
+    // padding: 10,
+    // marginBottom: 10
   },
   directive: {
     fontSize: 16,
