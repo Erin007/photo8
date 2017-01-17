@@ -22,7 +22,17 @@ class PhotoSelect extends Component {
         const fetchParams = {
             first: 3,
         };
-        CameraRoll.getPhotos(fetchParams, this.storeImages, this.logImageError);
+        CameraRoll.getPhotos(fetchParams, this.storeImages, this.logImageError).done(
+          (data) =>{
+             console.log(data);
+            this.setState({
+              photoSource: {uri: data.edges[3].node.image.uri}
+            })
+          },
+          (error) => {
+            console.warn(error);
+          }
+        );;
     }
 
     storeImages(data) {
