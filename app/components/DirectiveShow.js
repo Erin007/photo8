@@ -17,8 +17,8 @@ class DirectiveShow extends Component {
 
   state = { caption: '', error: '', loading: false, submission: {}}
 
-  takePhotoPressed() {
-    console.log('>>> Take Photo Pressed');
+  toCameraPressed() {
+    console.log('>>> To Camera Pressed');
     this._toCamera();
   }
 
@@ -120,7 +120,7 @@ class DirectiveShow extends Component {
       if (this.props.directive.complete !== true){
         return(
           <View>
-            <TouchableOpacity onPress={this.takePhotoPressed.bind(this)}>
+            <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
               <Image
               source={require('../assets/camerabutton.png')}
               style={styles.camerabutton}
@@ -129,7 +129,6 @@ class DirectiveShow extends Component {
           </View>
         )
       }
-
   }
 
   render(){
