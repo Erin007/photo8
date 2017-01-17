@@ -26,7 +26,7 @@ class DirectiveShow extends Component {
     console.log('>>> Save caption pressed')
 
     //axios post this caption to the submission with the directive_id passed in props
-    axios.post('https://localhost:3000/submissions',{
+    axios.post('https://treasure-chest-api.herokuapp.com/submissions',{
       directive_id: this.props.directive.id,
       caption: this.state.caption
     })

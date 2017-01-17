@@ -26,14 +26,17 @@ class addDirectives extends Component{
     //console.log(url)
     console.log(this.state.directive)
     console.log(this.props.hunt.id)
-    axios.post('http://treasure-chest-api.herokuapp.com/directives',{
+
+    axios.post('https://treasure-chest-api.herokuapp.com/directives',{
       name: this.state.directive,
-      complete: "false",
-      point_value: "1",
-      hunt_id: this.props.hunt.id
+      complete: false,
+      point_value: 1,
+      hunt_id: this.props.hunt.id,
+      description: ""
     })
     .then(response => {
       console.log("response", response)
+      console.log("response.data", response.data)
       // return this.setState( { hunt: response.data })
     })
       //if the directive is saved successfully
@@ -83,7 +86,7 @@ class addDirectives extends Component{
 
       return this.state.directives.map(directive =>
 
-          <Text style={styles.directive} key={directive.length}>
+          <Text style={styles.directive} key={directive}>
               {directive}
           </Text>
       );
