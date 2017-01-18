@@ -10,6 +10,8 @@ import {
   Text } from 'react-native';
 import axios from 'axios';
 import Roster from './PlayersOnTeam';
+import Button from './common/Button';
+import DirectiveList from './DirectiveList';
 
 class TeamList extends Component {
   state = { teams: [], team: {} };
@@ -66,6 +68,19 @@ class TeamList extends Component {
     });
   }
 
+  seeHuntPressed(hunt){
+    console.log('>>> See Hunt Pressed!');
+    this._toHunt(hunt);
+  }
+
+  _toHunt(hunt){
+    this.props.navigator.push({
+      title: 'Hunt',
+      component: DirectiveList,
+      passProps: { hunt : hunt }
+    });
+  }
+
   renderTeams(){
     //makes a clickable box for each team name, like in directive list
     if (typeof this.state.teams[0] !== 'undefined')  {
@@ -92,6 +107,8 @@ class TeamList extends Component {
 
         { this.renderTeams() }
       </ScrollView>
+
+      <Button onPress={() => this.seeHuntPressed(this.props.hunt)}> See Hunt </Button>
       </View>
     );
   }
