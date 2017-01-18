@@ -15,9 +15,10 @@ import CardSection from './common/CardSection';
 import Spinner from './common/Spinner';
 import newHunt from './MakeHuntForm';
 import findHunt from './HuntFinder';
+import axios from 'axios';
 
 class welcome extends Component {
-  state = { loggedIn: null }; //are you logged in?
+  state = { loggedIn: null, userId: '', username: '', user: '', email: '' }; //are you logged in?
 
   componentWillMount(){
     firebase.initializeApp({
@@ -30,18 +31,48 @@ class welcome extends Component {
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ loggedIn: true });
+        console.log("<<<<USER:", user)
+        console.log("user.uid:", user.uid)
+        console.log("user.email:", user.email)
+
+        this.setState({ loggedIn: true, userId: user.uid, email: user.email });
+
+        this.verifyUserWithBackend()
       } else {
         this.setState({ loggedIn: false });
       }
     });
   }
 
-//SEE VERIFY USER WITH BACKEND ON LOGIN FORM 
-//Once the user is logged in, axios find-user-by-email get
-  //if they are already in the database, pass the user as props
-    //welcome them by username or ask for username
-  // if they aren't in the database yet, make a new user with an axios post with the user email
+  verifyUserWithBackend(){
+    //see if that user already exists by searching for a user with that uid
+    console.log('verifying user with backend function called')
+    //Once the user is logged in, axios find-user-by-email get
+    console.log(this.state.userId)
+    const url = 'https://treasure-chest-api.herokuapp.com/user/find/' + this.state.userId
+
+    axios.get(url).then( response => {
+      console.log("response", response)
+      //console.log("this.state.hunt", this.state.hunt)
+      //this.setState( { hunt: response.data })
+      //console.log("this.state.hunt", this.state.hunt)
+      //this.checkForHunt()
+    })
+      .catch(function (error) {
+        console.log(error);
+      });;
+
+    //if a user is not returned, make one
+    //if a user is returned, check for their username
+      //if they have a username, store it in state and welcome them
+      //if they don't have a username, render a text input box so they can make one
+        //update the user in the backend with the new username
+
+        //retrieve the updated user
+
+    //store the user as state so it can be passed as props
+
+  }
 
   newHuntPressed() {
     console.log('>>> Make New Hunt Button Pressed!');
@@ -100,9 +131,7 @@ class welcome extends Component {
            Snapenger Hunt
         </Text>
 
-
           { this.renderContent()  }
-
 
       </View>
 

@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 20,
     fontFamily: 'Pacifico',
-    marginTop: 75,
+    marginTop: 10,
   },
   smalltext: {
     fontSize: 25,

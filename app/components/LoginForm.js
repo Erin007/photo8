@@ -7,10 +7,11 @@ import Input from './common/Input';
 import Spinner from './common/Spinner';
 import firebase from 'firebase';
 import { Text, View } from 'react-native';
+import axios from 'axios';
 
 class LoginForm extends Component {
 
-  state = { email: '', password: '', error: '', loading: false}
+  state = { email: '', password: '', error: '', loading: false, user: ''}
 
   onButtonPress(){
     const { email, password } = this.state;
@@ -36,30 +37,13 @@ class LoginForm extends Component {
 
   onLoginSuccess() {
     console.log('login was succesful!')
+    //this.verifyUserWithBackend()
     this.setState({
       email: '',
       password: '',
       loading: false,
       error: ''
     })
-  }
-
-  verifyUserWithBackend() {
-    console.log('verifying user with backend function called')
-    firebase.auth().currentUser.getToken(true).then(function(idToken) {
-    // Send token to backend via HTTPS
-
-    //if the user exists as a player or organizer in the backend, welcome them
-
-    //if the user doesn't exits as a player or organizer in the backend, ask them for a username
-
-
-    //save them as a player or organizer depending on which button(make hunt or play) they pick with their username and firebase uid
-
-
-    }).catch(function(error) {
-    // Handle error
-    });
   }
 
   renderButton(){
@@ -87,7 +71,7 @@ class LoginForm extends Component {
             secureTextEntry
             value = {this.state.password}
             onChangeText = {password => this.setState({ password })}/>
-    
+
         <Text style= {styles.errorTextStyle}>
           { this.state.error }
         </Text>
