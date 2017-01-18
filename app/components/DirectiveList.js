@@ -57,11 +57,15 @@ class DirectiveList extends Component {
 
     render() {
       console.log('this.state from DirectiveList render', this.state);
+      console.log('this.props', this.props)
 
       return (
         <View style={styles.container}>
           <ScrollView>
             <Text style={styles.text}>Ada: Explore Seattle </Text>
+
+            <Text style={styles.text}> { this.props.hunt.name } </Text>
+
             { this.renderDirectives() }
           </ScrollView>
          </View>

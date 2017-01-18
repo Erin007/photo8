@@ -47,8 +47,8 @@ class findHunt extends Component{
     console.log(this.state.hunt.length === 0)
     if (this.state.hunt.length !== 0){
       //if the API finds a hunt that matches
-      this.huntFound(this.state.hunt)
-      return 
+      this.huntFound(this.state.hunt[0])
+      return
     }
     //if the API doesn't find a hunt
       this.noHuntFound()
@@ -56,10 +56,11 @@ class findHunt extends Component{
 
   noHuntFound(){
     console.log('>>>> no hunt found called')
-    this.setState({ error: 'No hunt matching that name and passcode could be found.', loading: false })
+    this.setState({ error: 'No hunt matching that name and passcode could be found.', loading: false, hunt: '' })
   }
 
   huntFound(){
+    console.log("this.state.hunt[0]", this.state.hunt[0])
     console.log('a hunt was found!')
     //clear the form
     this.setState({
@@ -68,13 +69,14 @@ class findHunt extends Component{
       error: '',
       loading: false
     })
-      this._toDirectiveList(this.state.hunt.id);
+      this._toDirectiveList(this.state.hunt[0]);
   }
 
-  _toDirectiveList = (huntId) => {
+  _toDirectiveList = (hunt) => {
     this.props.navigator.push({
       title: 'Hunt',
-      component: DirectiveList
+      component: DirectiveList,
+      passProps: { hunt: hunt}
     });
   }
 
