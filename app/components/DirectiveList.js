@@ -61,11 +61,11 @@ class DirectiveList extends Component {
 
       return (
         <View style={styles.container}>
+          <Text style={styles.text}> { this.props.hunt.name } </Text>
+
+          <Text style={styles.smalltext}> { this.props.hunt.description } </Text>
+
           <ScrollView>
-            <Text style={styles.text}>Ada: Explore Seattle </Text>
-
-            <Text style={styles.text}> { this.props.hunt.name } </Text>
-
             { this.renderDirectives() }
           </ScrollView>
          </View>
@@ -85,6 +85,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 20,
     fontFamily: 'Pacifico'
+  },
+  smalltext: {
+    fontSize: 14,
+    textAlign: 'left',
+    padding: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    fontFamily: 'Chalkboard SE'
   },
   directive:{
     fontSize: 16,

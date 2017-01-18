@@ -7,10 +7,10 @@ import {
   Text
 } from 'react-native';
 import DirectiveList from './DirectiveList';
+import TeamList from './TeamsList';
 import Button from './common/Button';
 import Input from './common/Input';
 import Spinner from './common/Spinner';
-import Card from './common/Card';
 import CardSection from './common/CardSection';
 import axios from 'axios';
 
@@ -69,13 +69,13 @@ class findHunt extends Component{
       error: '',
       loading: false
     })
-      this._toDirectiveList(this.state.hunt[0]);
+      this._toTeamsList(this.state.hunt[0]);
   }
 
-  _toDirectiveList = (hunt) => {
+  _toTeamsList = (hunt) => {
     this.props.navigator.push({
-      title: 'Hunt',
-      component: DirectiveList,
+      title: 'Teams',
+      component: TeamList,
       passProps: { hunt: hunt}
     });
   }
