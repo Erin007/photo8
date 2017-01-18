@@ -12,10 +12,11 @@ import Input from './common/Input';
 import Spinner from './common/Spinner';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
+import axios from 'axios';
 
 class findHunt extends Component{
 
-  state = { huntName: '', passcode: '', error: '', loading: false, huntId: ''}
+  state = { huntName: '', passcode: '', error: '', loading: false, huntId: '', hunt: ''}
 
   findPressed() {
     console.log('>>> Find Hunt Button Pressed!');
@@ -25,18 +26,37 @@ class findHunt extends Component{
     this.setState({ error: '', loading: true });
     console.log("this.state.huntName", this.state.huntName)
 
-    //send the huntName and passcode to the API
+    //send the huntName to the API
+    const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/' + this.state.huntName
 
-    //if the API doesn't find a hunt that matches
-      //this.noHuntFound.bind(this)
+    axios.get(url).then( response => {
+      console.log("response", response)
+      console.log("this.state.hunt", this.state.hunt)
+      this.setState( { hunt: response.data })
+      console.log("this.state.hunt", this.state.hunt)
+      this.checkForHunt()
+    })
+      .catch(function (error) {
+        console.log(error);
+      });;
+  }
 
-    //if the API finds a hunt that matches
-      //this.huntFound.bind.(this)
-    this._toDirectiveList();
+  checkForHunt(){
+    console.log('<<< CheckForHunt called')
+    console.log(this.state.hunt.length)
+    console.log(this.state.hunt.length === 0)
+    if (this.state.hunt.length !== 0){
+      //if the API finds a hunt that matches
+      this.huntFound(this.state.hunt)
+      return 
+    }
+    //if the API doesn't find a hunt
+      this.noHuntFound()
   }
 
   noHuntFound(){
-    this.setState({ error: 'No Hunts matching that name and passcode could be found.', loading: false })
+    console.log('>>>> no hunt found called')
+    this.setState({ error: 'No hunt matching that name and passcode could be found.', loading: false })
   }
 
   huntFound(){
@@ -48,9 +68,7 @@ class findHunt extends Component{
       error: '',
       loading: false
     })
-
-      this._toDirectiveList(huntId);
-
+      this._toDirectiveList(this.state.hunt.id);
   }
 
   _toDirectiveList = (huntId) => {
@@ -83,8 +101,8 @@ class findHunt extends Component{
 
           <CardSection>
             <Input
-              label = "hunt:"
-              placeholder = "Explore Seattle!"
+              label = ""
+              placeholder = "hunt name"
               value = {this.state.huntName}
               onChangeText = {huntName => this.setState({ huntName })}/>
           </CardSection>
