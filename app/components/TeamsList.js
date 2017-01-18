@@ -27,9 +27,13 @@ class TeamList extends Component {
     //make the axios call to retrieve all of the teams associated with this hunt
   }
 
-  deleteTeamPressed(team){
-    //confirm that the user is the organizer
+  renderDeleteButtons(){
+    //check if the current user is the organizer
+      //if they are the organizer, render the delete buttons for each team
+      //if they are not, don't show the delete buttons 
+  }
 
+  deleteTeamPressed(team){
     //confirm that the user wants to delete the team
 
     //delete the team from the database with axios
