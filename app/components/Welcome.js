@@ -37,6 +37,12 @@ class welcome extends Component {
     });
   }
 
+//SEE VERIFY USER WITH BACKEND ON LOGIN FORM 
+//Once the user is logged in, axios find-user-by-email get
+  //if they are already in the database, pass the user as props
+    //welcome them by username or ask for username
+  // if they aren't in the database yet, make a new user with an axios post with the user email
+
   newHuntPressed() {
     console.log('>>> Make New Hunt Button Pressed!');
     this._toMakeHunt();
@@ -96,7 +102,7 @@ class welcome extends Component {
 
 
           { this.renderContent()  }
-  
+
 
       </View>
 
