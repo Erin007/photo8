@@ -82,7 +82,9 @@ class welcome extends Component {
     console.log('a user was found!')
     //if a user is returned, check for their username
     console.log(this.state.user[0].username)
+    this.setState( { username: this.state.user[0].username })
     this.renderWelcomeUsername()
+    //this.forceUpdate()
   }
 
   renderWelcomeUsername(){

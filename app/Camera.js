@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import Camera from 'react-native-camera';
-import PhotoSelect from './components/PhotoSelect'
+//import PhotoSelect from './components/PhotoSelect'
 
 const styles = StyleSheet.create({
   container: {

@@ -25,6 +25,7 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		AFC60679204345A287226613 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC35A50EFE34E69B28E293A /* libRCTCamera.a */; };
+		D704E5E01E30464A009A6398 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D704E5CF1E303F96009A6398 /* libRCTCameraRoll.a */; };
 		D74B51B91E2C53490024D36A /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D74B51B81E2C53490024D36A /* Pacifico-Regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -239,6 +240,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				AFC60679204345A287226613 /* libRCTCamera.a in Frameworks */,
+				D704E5E01E30464A009A6398 /* libRCTCameraRoll.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
