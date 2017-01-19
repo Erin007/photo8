@@ -24,7 +24,7 @@ class PhotoSelect extends Component {
   state = { image:'', error: '', loading: false }
 
  componentDidMount() {
-
+     console.log(this.props)
      CameraRoll.getPhotos({ first: 1}).done(
         (data) =>{
        console.log("data", data);
@@ -57,7 +57,7 @@ class PhotoSelect extends Component {
      if (this.props.directive.complete !== true){
        return(
          <View>
-           <TouchableOpacity onPress={this.toCameraPressed(this.props.directive)}>
+           <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
              <Image
              source={require('../assets/ic_photo_camera_36pt.png')}
              style={styles.camerabutton}
@@ -68,16 +68,16 @@ class PhotoSelect extends Component {
      }
  }
 
- toCameraPressed(directive) {
+ toCameraPressed() {
    console.log('>>> To Camera Pressed');
-   this._toCamera(directive);
+   this._toCamera();
  }
 
- _toCamera = (directive) => {
+ _toCamera = () => {
    this.props.navigator.push({
      title: 'Camera',
      component: Example,
-     passProps: { directive: directive },
+     passProps: { directive: this.props.directive },
    });
  }
 
@@ -116,6 +116,11 @@ const styles = StyleSheet.create({
     height: 300,
     margin: 10,
     borderRadius: 5
+  },
+  camerabutton:{
+    borderRadius: 5,
+    marginLeft: 150,
+    marginTop: 15
   },
   text: {
     fontSize: 20,

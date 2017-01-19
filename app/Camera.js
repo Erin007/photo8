@@ -37,7 +37,7 @@ class Example extends Component {
     console.log('<<< Take Picture called')
     if (this.camera) {
       this.camera.capture()
-        .then((data) => console.log(this._toPhotoSelect(data.path, this.props.directive)))
+        .then((data) => console.log(this._toPhotoSelect(data.path)))
         .catch(err => console.error(err));
     }
   }
@@ -47,11 +47,11 @@ class Example extends Component {
   //   this.props.navigator.pop();
   // }
 
-  _toPhotoSelect = (path, directive) => {
+  _toPhotoSelect = (path) => {
     this.props.navigator.push({
       title: 'Photo',
       component: PhotoSelect,
-      passProps: { directive : directive },
+      passProps: { directive : this.props.directive },
     });
   }
 
