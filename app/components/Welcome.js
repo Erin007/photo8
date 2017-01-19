@@ -37,11 +37,11 @@ class welcome extends Component {
         console.log("user.uid:", user.uid)
         console.log("user.email:", user.email)
 
-        this.setState({ loggedIn: true, userId: user.uid, email: user.email, username: ''});
+        this.setState({ loggedIn: true, userId: user.uid, email: user.email});
 
         this.verifyUserWithBackend()
       } else {
-        this.setState({ loggedIn: false });
+        this.setState({ loggedIn: false, user: '' });
       }
     });
   }
@@ -88,18 +88,15 @@ class welcome extends Component {
     this.renderUsername()
   }
 
-  savePressed() {
-    console.log('>>> Save Caption Pressed!');
-
-    this.setState({ error: '', loading: true });
+  makeUser() {
+    console.log('>>> Make User called!');
 
     //send the information to the API to make a new user
-    console.log(this.state.username)
     console.log(this.state.email)
     console.log(this.state.userId)
 
     axios.post('https://treasure-chest-api.herokuapp.com/users',{
-      username: this.state.username,
+      username: '',
       email: this.state.email,
       firebase: this.state.userId
     })
@@ -108,12 +105,12 @@ class welcome extends Component {
       return this.setState( { user: response.data })
     })
       //if the user is saved successfully
-    .then(this.userSaved())
+    .then(this.userSaved.bind(this))
     //if there was a problem saving the hunt
     .catch((error) => {
       console.log("The user did not save")
 
-      this.setState({ error: "There was an error with your username. Please try again.", loading: false })
+      this.setState({ error: "There was an error with your information. Please try again.", loading: false })
 
       console.log("Error:", error)
     });
@@ -121,47 +118,42 @@ class welcome extends Component {
 
   userSaved(){
     console.log("the user was saved")
+    console.log(this.state.user)
   }
 
   renderUsername(){
-    console.log('welcoming the user')
-    if (this.state.username !== ''){
-      return (
-        <Text style={styles.smalltext}> Welcome, {this.state.username}! </Text>
-      )
+    console.log('rendering username')
+    console.log('this.state.user[0]', this.state.user[0])
+    if (typeof this.state.user[0] !== 'undefined' ){
+      if (this.state.user[0].username !== ''){
+        return (
+          <Text style={styles.smalltext}> Welcome, {this.state.user[0].username}! </Text>
+        )
+      }
     }
   }
 
   userNotFound(){
     console.log('a user was not found')
     //if a user is not returned, make one
-      //ask them for a username
-      this.makeUsername()
+      this.makeUser()
   }
 
-
-    //if they have a username, store it in state and welcome them
-    //if they don't have a username, render a text input box so they can make one
-      //update the user in the backend with the new username
-
-      //retrieve the updated user
-
-  //store the user as state so it can be passed as props
   signOut(){
-    this.setState( { username: '' })
+    this.setState({ user: ''})
     firebase.auth().signOut()
   }
 
   newHuntPressed() {
     console.log('>>> Make New Hunt Button Pressed!');
-    this.setState( { username: '' })
     this._toMakeHunt();
   }
 
   _toMakeHunt = () => {
     this.props.navigator.push({
       title: 'Make New Hunt',
-      component: newHunt
+      component: newHunt,
+      passProps: { user: this.state.user[0]},
     });
   }
 
@@ -174,7 +166,8 @@ class welcome extends Component {
   _toJoinHunt = () => {
     this.props.navigator.push({
       title: 'Join Hunt',
-      component: findHunt
+      component: findHunt,
+      passProps: { user: this.state.user[0]},
     });
   }
 
@@ -186,10 +179,13 @@ class welcome extends Component {
         <View style={styles.container}>
 
             { this.renderUsername() }
+
           <ScrollView>
             <Button onPress={() => this.signOut()}>
               Log Out
             </Button>
+
+            <Button> Update Profile </Button>
 
             <Button style={{margin:0}} onPress={this.newHuntPressed.bind(this)}> Make a New Hunt </Button>
 

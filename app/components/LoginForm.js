@@ -71,12 +71,6 @@ class LoginForm extends Component {
             value = {this.state.password}
             onChangeText = {password => this.setState({ password })}/>
 
-          <Input
-            label = ""
-            placeholder = "username"
-            value = {this.state.username}
-            onChangeText = {username => this.setState({ username })}/>
-
         <Text style= {styles.errorTextStyle}>
           { this.state.error }
         </Text>
