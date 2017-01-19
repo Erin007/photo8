@@ -25,19 +25,17 @@ class LoginForm extends Component {
         //try to make an account for the user
         firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(this.onLoginSuccess.bind(this))
-          .then(this.verifyUserWithBackend.bind(this))
           .catch(this.onLoginFail.bind(this));
       });
-
   }
 
   onLoginFail(){
+    console.log('Login Fail called')
     this.setState({ error: 'Authenication Failed', loading: false })
   }
 
   onLoginSuccess() {
-    console.log('login was succesful!')
-    //this.verifyUserWithBackend()
+    console.log('Login Success called')
     this.setState({
       email: '',
       password: '',

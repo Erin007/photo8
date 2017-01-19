@@ -46,11 +46,11 @@ class DirectiveList extends Component {
 
     renderDirectives() {
       console.log('<<<Render Directives Called')
-      console.log('this.state.directives', this.state.directives.directives)
-      console.log('this.state.directives.length', this.state.directives.directives.length)
-      if (this.state.directives.directives.length > 0)  {
+      console.log('this.state.directives', this.state.directives)
+      //console.log('this.state.directives.length', this.state.directives.directives.length)
+      if (this.state.directives.length > 0)  {
 
-        return this.state.directives.directives.map(directive =>
+        return this.state.directives.map(directive =>
 
           <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
 
