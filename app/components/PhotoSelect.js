@@ -16,12 +16,14 @@ import {
  } from 'react-native';
  import Button from './common/Button';
  import Example from '../Camera';
+ import axios from 'axios';
+ import DirectiveShow from './DirectiveShow'
 
 var RCTCameraRollManager = require('NativeModules').CameraRollManager;
 
 class PhotoSelect extends Component {
  //
-  state = { image:'', error: '', loading: false }
+  state = { image:'', error: '', loading: false, dbimage: '' }
 
  componentDidMount() {
      console.log(this.props)
@@ -81,6 +83,50 @@ class PhotoSelect extends Component {
    });
  }
 
+ usePhotoPressed(){
+   console.log('<<< usePhotoPressed')
+   //store the image uri in the backend
+   //***Change the team id to be specific to the user's team ***//
+   axios.post('https://treasure-chest-api.herokuapp.com/submissions',{
+     directive_id: this.props.directive.id,
+     team_id: 1,
+     photo: this.state.image.uri,
+     status: 'yellow'
+   })
+   .then(response => {
+     console.log("response", response)
+     console.log("response.data", response.data)
+     return this.setState( { dbimage: response.data })
+   })
+     //if the team is saved successfully
+   .then(this.photoSaved.bind(this))
+   //if there was a problem saving the team
+   .catch((error) => {
+     console.log("The photo did not save")
+
+     this.setState({ error: "There was an error saving the photo. Please try again.", loading: false })
+
+     console.log(error)
+   });
+ }
+
+ photoSaved(){
+   console.log('<<<Photo Saved Called')
+   console.log('submission id:', this.state.dbimage.id )
+   //go to Directive Show and make an axios call for the photo
+   this._toDirectiveShow();
+ }
+
+ _toDirectiveShow = () => {
+   this.props.navigator.push({
+     title: 'Directive',
+     component: DirectiveShow,
+     passProps: { submissionId: this.state.dbimage.id,
+                  directive: this.props.directive },
+   });
+ }
+
+
  render() {
    return (
      <View style={styles.container}>
@@ -89,7 +135,7 @@ class PhotoSelect extends Component {
 
       <Image style={styles.image} source={{ uri: this.state.image.uri }} />
 
-       <Button> Use Photo </Button>
+       <Button onPress={this.usePhotoPressed.bind(this)}> Use Photo </Button>
 
        { this.renderCameraIcon() }
 

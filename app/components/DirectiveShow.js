@@ -16,7 +16,7 @@ import axios from 'axios';
 
 class DirectiveShow extends Component {
 
-  state = { caption: '', error: '', loading: false, submission: {}}
+  state = { caption: '', error: '', loading: false, submission: {}, submissionId: ''}
 
   saveCaptionPressed(){
     console.log('>>> Save caption pressed')
@@ -103,9 +103,33 @@ class DirectiveShow extends Component {
   renderPhoto(){
     console.log(">>>> Render Photo called")
     console.log(this.props.directive.complete)
-    if (this.props.directive.complete == true){
-      return <Text> This is where the photo will go</Text>
+    console.log("<<<<<< submissionID", this.props.submissionId)
+    if (typeof this.props.submissionId !== 'undefined'){
+      //make the axios call to retrieve the submission
+      const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.props.submissionId
+      console.log(url)
+
+      axios.get(url).then( response => {
+        console.log("response", response)
+        console.log(this.state.submission.photo)
+
+        this.setState( { submission: response.data })
+
+      })
+        .catch(function (error) {
+          console.log(error);
+        });;
+
+      return (
+        <View>
+          <Image
+          source={{ uri: this.state.submission.photo}}
+          style={styles.placeholder}
+          />
+      </View>
+      )
     }
+
     return(
       <View>
         <Image
