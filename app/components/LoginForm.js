@@ -11,7 +11,7 @@ import axios from 'axios';
 
 class LoginForm extends Component {
 
-  state = { email: '', password: '', error: '', loading: false, user: ''}
+  state = { email: '', password: '', error: '', loading: false, user: '', username: ''}
 
   onButtonPress(){
     const { email, password } = this.state;
@@ -39,6 +39,7 @@ class LoginForm extends Component {
     this.setState({
       email: '',
       password: '',
+      username: '',
       loading: false,
       error: ''
     })
@@ -69,6 +70,12 @@ class LoginForm extends Component {
             secureTextEntry
             value = {this.state.password}
             onChangeText = {password => this.setState({ password })}/>
+
+          <Input
+            label = ""
+            placeholder = "username"
+            value = {this.state.username}
+            onChangeText = {username => this.setState({ username })}/>
 
         <Text style= {styles.errorTextStyle}>
           { this.state.error }

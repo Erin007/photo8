@@ -5,7 +5,8 @@ import {
   StyleSheet,
   View,
   Text,
-  SideMenu
+  SideMenu,
+  ScrollView
 } from 'react-native';
 
 import Button from './common/Button';
@@ -13,6 +14,7 @@ import LoginForm from './LoginForm';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
 import Spinner from './common/Spinner';
+import Input from './common/Input';
 import newHunt from './MakeHuntForm';
 import findHunt from './HuntFinder';
 import axios from 'axios';
@@ -35,7 +37,7 @@ class welcome extends Component {
         console.log("user.uid:", user.uid)
         console.log("user.email:", user.email)
 
-        this.setState({ loggedIn: true, userId: user.uid, email: user.email });
+        this.setState({ loggedIn: true, userId: user.uid, email: user.email, username: ''});
 
         this.verifyUserWithBackend()
       } else {
@@ -83,11 +85,45 @@ class welcome extends Component {
     //if a user is returned, check for their username
     console.log(this.state.user[0].username)
     this.setState( { username: this.state.user[0].username })
-    this.renderWelcomeUsername()
-    //this.forceUpdate()
+    this.renderUsername()
   }
 
-  renderWelcomeUsername(){
+  savePressed() {
+    console.log('>>> Save Caption Pressed!');
+
+    this.setState({ error: '', loading: true });
+
+    //send the information to the API to make a new user
+    console.log(this.state.username)
+    console.log(this.state.email)
+    console.log(this.state.userId)
+
+    axios.post('https://treasure-chest-api.herokuapp.com/users',{
+      username: this.state.username,
+      email: this.state.email,
+      firebase: this.state.userId
+    })
+    .then(response => {
+      console.log("response", response)
+      return this.setState( { user: response.data })
+    })
+      //if the user is saved successfully
+    .then(this.userSaved())
+    //if there was a problem saving the hunt
+    .catch((error) => {
+      console.log("The user did not save")
+
+      this.setState({ error: "There was an error with your username. Please try again.", loading: false })
+
+      console.log("Error:", error)
+    });
+  }
+
+  userSaved(){
+    console.log("the user was saved")
+  }
+
+  renderUsername(){
     console.log('welcoming the user')
     if (this.state.username !== ''){
       return (
@@ -99,6 +135,8 @@ class welcome extends Component {
   userNotFound(){
     console.log('a user was not found')
     //if a user is not returned, make one
+      //ask them for a username
+      this.makeUsername()
   }
 
 
@@ -109,9 +147,14 @@ class welcome extends Component {
       //retrieve the updated user
 
   //store the user as state so it can be passed as props
+  signOut(){
+    this.setState( { username: '' })
+    firebase.auth().signOut()
+  }
 
   newHuntPressed() {
     console.log('>>> Make New Hunt Button Pressed!');
+    this.setState( { username: '' })
     this._toMakeHunt();
   }
 
@@ -124,6 +167,7 @@ class welcome extends Component {
 
   joinHuntPressed() {
     console.log('>>> Join Hunt Button Pressed!');
+    this.setState( { username: '' })
     this._toJoinHunt();
   }
 
@@ -141,15 +185,18 @@ class welcome extends Component {
         return (
         <View style={styles.container}>
 
-            { this.renderWelcomeUsername() }
-
-            <Button onPress={() => firebase.auth().signOut()}>
+            { this.renderUsername() }
+          <ScrollView>
+            <Button onPress={() => this.signOut()}>
               Log Out
             </Button>
 
             <Button style={{margin:0}} onPress={this.newHuntPressed.bind(this)}> Make a New Hunt </Button>
 
-            <Button onPress={this.joinHuntPressed.bind(this)}> Join a Hunt </Button>
+            <Button onPress={this.joinHuntPressed.bind(this)}> Join a New Hunt </Button>
+
+            <Button> See Your Hunts </Button>
+          </ScrollView>
 
         </View>
       );
@@ -203,6 +250,16 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 5,
     marginRight: 5,
+    marginTop: -50,
+    fontFamily: 'Chalkboard SE'
+  },
+  smallertext: {
+    fontSize: 14,
+    textAlign: 'left',
+    padding: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: -50,
     fontFamily: 'Chalkboard SE'
   },
 });

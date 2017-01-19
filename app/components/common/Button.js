@@ -36,7 +36,7 @@ const styles = {
     marginLeft: 25,
     marginTop: 10,
     marginRight: 25,
-    marginBottom: 50
+    // marginBottom: 50
   }
 };
 
