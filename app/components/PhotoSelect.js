@@ -14,12 +14,14 @@ import {
   NativeModules,
   TextInput
  } from 'react-native';
+ import Button from './common/Button';
+ import Example from '../Camera';
 
 var RCTCameraRollManager = require('NativeModules').CameraRollManager;
 
 class PhotoSelect extends Component {
  //
-  state = { image:'', error: '', loading: false, images: [], selected: ''}
+  state = { image:'', error: '', loading: false }
 
  componentDidMount() {
 
@@ -50,28 +52,49 @@ class PhotoSelect extends Component {
      console.log(err);
  }
 
- selectImage(uri) {
-     NativeModules.ReadImageData.readImage(uri, (image) => {
-         this.setState({
-             selected: image,
-         });
-         console.log(image);
-     });
+ renderCameraIcon(){
+   console.log('<<< Render CameraIcon called')
+     if (this.props.directive.complete !== true){
+       return(
+         <View>
+           <TouchableOpacity onPress={this.toCameraPressed(this.props.directive)}>
+             <Image
+             source={require('../assets/ic_photo_camera_36pt.png')}
+             style={styles.camerabutton}
+             />
+           </TouchableOpacity>
+         </View>
+       )
+     }
+ }
+
+ toCameraPressed(directive) {
+   console.log('>>> To Camera Pressed');
+   this._toCamera(directive);
+ }
+
+ _toCamera = (directive) => {
+   this.props.navigator.push({
+     title: 'Camera',
+     component: Example,
+     passProps: { directive: directive },
+   });
  }
 
  render() {
    return (
-       <ScrollView style={styles.container}>
-        <Text> This is where the picture will show up? </Text>
+     <View style={styles.container}>
 
-         <View style={styles.imageGrid}>
+      <Text style={styles.text}> {this.props.directive.name} </Text>
 
-           <TouchableOpacity onPress={this.selectImage.bind(null, this.state.image.uri)}>
-               <Image style={styles.image} source={{ uri: this.state.image.uri }} />
-           </TouchableOpacity>
+      <Image style={styles.image} source={{ uri: this.state.image.uri }} />
 
-         </View>
-       </ScrollView>
+       <Button> Use Photo </Button>
+
+       { this.renderCameraIcon() }
+
+    </View>
+
    );
  }
 }
@@ -80,6 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
+    marginTop: 50,
   },
   imageGrid: {
     flex: 1,
@@ -91,7 +115,14 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     margin: 10,
-  }
+    borderRadius: 5
+  },
+  text: {
+    fontSize: 20,
+    textAlign: 'center',
+    paddingTop: 10,
+    fontFamily: 'Chalkboard SE'
+  },
 });
 export default PhotoSelect;
 

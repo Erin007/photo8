@@ -18,11 +18,6 @@ class DirectiveShow extends Component {
 
   state = { caption: '', error: '', loading: false, submission: {}}
 
-  toCameraPressed() {
-    console.log('>>> To Camera Pressed');
-    this._toCamera();
-  }
-
   saveCaptionPressed(){
     console.log('>>> Save caption pressed')
 
@@ -84,11 +79,16 @@ class DirectiveShow extends Component {
     )
   }
 
-  _toCamera = () => {
+  toCameraPressed(directive) {
+    console.log('>>> To Camera Pressed');
+    this._toCamera(directive);
+  }
+
+  _toCamera = (directive) => {
     this.props.navigator.push({
       title: 'Camera',
-      component: Example
-      //passProps: { directive: {directive} },
+      component: Example,
+      passProps: { directive: directive },
     });
   }
 
@@ -121,7 +121,7 @@ class DirectiveShow extends Component {
       if (this.props.directive.complete !== true){
         return(
           <View>
-            <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
+            <TouchableOpacity onPress={this.toCameraPressed(this.props.directive)}>
               <Image
               source={require('../assets/ic_photo_camera_36pt.png')}
               style={styles.camerabutton}
