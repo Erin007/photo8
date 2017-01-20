@@ -17,6 +17,7 @@ import Spinner from './common/Spinner';
 import Input from './common/Input';
 import newHunt from './MakeHuntForm';
 import findHunt from './HuntFinder';
+import UpdateProfile from './UpdateProfile';
 import axios from 'axios';
 
 class welcome extends Component {
@@ -171,6 +172,19 @@ class welcome extends Component {
     });
   }
 
+  updateProfilePressed(){
+    console.log('<<< Update Profile was pressed')
+    this._toUpdateProfile();
+  }
+
+  _toUpdateProfile = () => {
+    this.props.navigator.push({
+      title: 'Profile',
+      component: UpdateProfile,
+      passProps: { user: this.state.user[0]},
+    });
+  }
+
   renderContent(){
     switch (this.state.loggedIn) {
       //if the user is logged in
@@ -185,7 +199,7 @@ class welcome extends Component {
               Log Out
             </Button>
 
-            <Button> Update Profile </Button>
+            <Button onPress={this.updateProfilePressed.bind(this)}> Update Profile </Button>
 
             <Button style={{margin:0}} onPress={this.newHuntPressed.bind(this)}> Make a New Hunt </Button>
 

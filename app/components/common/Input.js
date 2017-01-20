@@ -7,14 +7,14 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, onPre
   const { inputStyle, labelStyle, containerStyle } = styles;
 
   return (
-    <View style={containerStyle}>
-      
+    <View style={styles.containerStyle}>
+
       <TextInput
         autoCorrect = {false}
         autoCapitalize = {'none'}
         secureTextEntry = {secureTextEntry}
         placeholder = {placeholder}
-        style = {inputStyle}
+        style = {styles.inputStyle}
         value = {value}
         onChangeText = {onChangeText}
         enablesReturnKeyAutomatically = {true}/>
@@ -34,17 +34,10 @@ const styles = {
    textAlign: 'center',
    alignItems: 'center'
  },
-
- // labelStyle: {
- //   fontSize: 14,
- //   paddingLeft: 10,
- //   flex: 1
- // },
-
  containerStyle: {
    height: 50,
-  // flex: 1,
-   width: 250,
+   flex: 1,
+   width: 275,
    marginTop: 5,
    marginBottom: 5,
    marginLeft: 10,
