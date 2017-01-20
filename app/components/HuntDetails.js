@@ -13,7 +13,7 @@ import newHunt from './MakeHuntForm';
 class huntDetails extends Component{
 
   showLogs(){
-    console.log(this.props)
+    console.log("Hunt Details Props", this.props)
   }
 
   seeDirectivesPressed() {
@@ -24,7 +24,9 @@ class huntDetails extends Component{
   _toDirectiveList = () => {
     this.props.navigator.push({
       title: 'Hunt',
-      component: DirectiveList
+      component: DirectiveList,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
     });
   }
 
@@ -32,7 +34,7 @@ class huntDetails extends Component{
 
     return (
       <ScrollView style={styles.container}>
-
+        { this.showLogs() }
         <Text style={styles.huntname}> { this.props.hunt.name } </Text>
 
         <Text style={styles.text}>Passcode: { this.props.hunt.passcode }</Text>
@@ -40,8 +42,6 @@ class huntDetails extends Component{
         <Text style={styles.smallertext}>{this.props.hunt.description} </Text>
 
         <Button onPress={this.seeDirectivesPressed.bind(this)}> Directives </Button>
-
-        <Button> Submissions </Button>
 
         <Button> Teams </Button>
 
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   huntname:{
-    fontSize: 36,
+    fontSize: 30,
     textAlign: 'center',
     margin: 10,
     fontFamily: 'Pacifico',

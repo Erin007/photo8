@@ -17,7 +17,7 @@ import axios from 'axios';
 
 class HuntListOrganizer extends Component {
 
-  state = { hunts: [], hunt: {} };
+  state = { hunts: [], hunt: {}, user: this.props.user };
 
   componentWillMount (){
     console.log('componentWillMount HuntsListOrganizer')
@@ -43,7 +43,8 @@ class HuntListOrganizer extends Component {
     this.props.navigator.push({
       title: 'Hunt Details',
       component: huntDetails,
-      passProps: { hunt: hunt}
+      passProps: { hunt: hunt,
+                  user: this.state.user }
     });
   }
 
