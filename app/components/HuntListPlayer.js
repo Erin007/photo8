@@ -9,6 +9,7 @@ import {
   SideMenu,
   ScrollView
 } from 'react-native';
+import Button from './common/Button';
 
 class HuntListPlayer extends Component {
   joinHuntPressed() {
@@ -32,6 +33,7 @@ class HuntListPlayer extends Component {
         <Text style={styles.text}>
            HuntListPlayer
         </Text>
+        <Button>Join a New Hunt</Button>
       </View>
 
     );
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50
+    marginTop: 65
   },
   text: {
     fontSize: 18,
@@ -52,7 +54,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: -50,
     fontFamily: 'Chalkboard SE'
   },
 });

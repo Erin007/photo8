@@ -9,6 +9,8 @@ import {
   SideMenu,
   ScrollView
 } from 'react-native';
+import Button from './common/Button';
+import newHunt from './MakeHuntForm';
 
 class HuntListOrganizer extends Component {
 
@@ -21,19 +23,18 @@ class HuntListOrganizer extends Component {
     this.props.navigator.push({
       title: 'Make New Hunt',
       component: newHunt,
-      passProps: { user: this.state.user},
+      passProps: { user: this.props.user},
     });
   }
 
   render() {
-
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
            HuntListOrganizer
         </Text>
+        <Button onPress={ this.newHuntPressed.bind(this)}>Make a New Hunt</Button>
       </View>
-
     );
   }
 }
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50
+    marginTop: 65
   },
   text: {
     fontSize: 18,
@@ -52,7 +53,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: -50,
     fontFamily: 'Chalkboard SE'
   },
 });

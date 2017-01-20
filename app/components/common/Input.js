@@ -28,6 +28,7 @@ const styles = {
    color: '#000',
   //  paddingRight: 5,
   //  paddingLeft: -50,
+  // padding: 0,
    fontSize: 18,
    lineHeight: 23,
    flex: 2,
@@ -36,7 +37,7 @@ const styles = {
  },
  containerStyle: {
    height: 50,
-   flex: 1,
+  //  flex: 1,
    width: 275,
    marginTop: 5,
    marginBottom: 5,

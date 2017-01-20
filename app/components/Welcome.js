@@ -202,7 +202,7 @@ class welcome extends Component {
 
             <Button onPress={this.updateProfilePressed.bind(this)}> Update Profile </Button>
 
-            <Button style={{margin:0}} onPress={this.organaizePressed.bind(this)}> Organize </Button>
+            <Button style={{margin:0}} onPress={this.organizePressed.bind(this)}> Organize </Button>
 
             <Button onPress={this.playPressed.bind(this)}> Play </Button>
 

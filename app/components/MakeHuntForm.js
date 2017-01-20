@@ -96,38 +96,32 @@ class newHunt extends Component{
            Make a New Hunt
         </Text>
 
-        <CardSection>
-            <Input
-              label = ""
-              placeholder = "name"
-              value = {this.state.huntName}
-              onChangeText = {huntName => this.setState({ huntName })}/>
-        </CardSection>
+          <Input
+            label = ""
+            placeholder = "name"
+            value = {this.state.huntName}
+            onChangeText = {huntName => this.setState({ huntName })}/>
 
-          <CardSection>
-            <Input
-              label = ""
-              placeholder = "passcode"
-              value = {this.state.passcode}
-              onChangeText = {passcode => this.setState({ passcode })}/>
-          </CardSection>
+          <Input
+            label = ""
+            placeholder = "passcode"
+            value = {this.state.passcode}
+            onChangeText = {passcode => this.setState({ passcode })}/>
 
-          <CardSection>
-            <Input
-              label = ""
-              placeholder = "description"
-              //secureTextEntry
-              value = {this.state.description}
-              onChangeText = {description => this.setState({ description })}/>
-          </CardSection>
+          <Input
+            label = ""
+            placeholder = "description"
+            //secureTextEntry
+            value = {this.state.description}
+            onChangeText = {description => this.setState({ description })}/>
 
           <Text style= {styles.errorTextStyle}>
             { this.state.error }
           </Text>
 
-          <CardSection>
+
             {this.renderSaveButton()}
-          </CardSection>
+
 
       </View>
     );
@@ -144,7 +138,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    // margin: 10,
     paddingTop: 10,
     fontFamily: 'Chalkboard SE'
   },
