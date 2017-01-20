@@ -30,8 +30,11 @@ class HuntListOrganizer extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.welcome}>
+           Snapenger Hunt
+        </Text>
         <Text style={styles.text}>
-           HuntListOrganizer
+           Hunts You Organize
         </Text>
         <Button onPress={ this.newHuntPressed.bind(this)}>Make a New Hunt</Button>
       </View>
@@ -45,7 +48,15 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 65
+    marginTop: 50
+  },
+  welcome: {
+    fontSize: 36,
+    textAlign: 'center',
+    margin: 10,
+    paddingTop: 10,
+    fontFamily: 'Pacifico',
+    justifyContent: 'flex-start'
   },
   text: {
     fontSize: 18,

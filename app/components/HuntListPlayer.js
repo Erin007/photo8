@@ -10,11 +10,11 @@ import {
   ScrollView
 } from 'react-native';
 import Button from './common/Button';
+import findHunt from './HuntFinder';
 
 class HuntListPlayer extends Component {
   joinHuntPressed() {
     console.log('>>> Join Hunt Button Pressed!');
-    this.setState( { username: '' })
     this._toJoinHunt();
   }
 
@@ -22,7 +22,7 @@ class HuntListPlayer extends Component {
     this.props.navigator.push({
       title: 'Join Hunt',
       component: findHunt,
-      passProps: { user: this.state.user[0]},
+      passProps: { user: this.props.user},
     });
   }
 
@@ -30,10 +30,13 @@ class HuntListPlayer extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>
-           HuntListPlayer
+        <Text style={styles.welcome}>
+           Snapenger Hunt
         </Text>
-        <Button>Join a New Hunt</Button>
+        <Text style={styles.text}>
+           Hunts You Play
+        </Text>
+        <Button onPress={this.joinHuntPressed.bind(this)}>Join a New Hunt</Button>
       </View>
 
     );
@@ -46,7 +49,15 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 65
+    marginTop: 50
+  },
+  welcome: {
+    fontSize: 36,
+    textAlign: 'center',
+    margin: 10,
+    paddingTop: 10,
+    fontFamily: 'Pacifico',
+    justifyContent: 'flex-start'
   },
   text: {
     fontSize: 18,

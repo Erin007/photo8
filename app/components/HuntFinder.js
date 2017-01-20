@@ -101,30 +101,24 @@ class findHunt extends Component{
            Please enter the hunt name and passcode given to you by the organizer.
         </Text>
 
-          <CardSection>
-            <Input
-              label = ""
-              placeholder = "hunt name"
-              value = {this.state.huntName}
-              onChangeText = {huntName => this.setState({ huntName })}/>
-          </CardSection>
+          <Input
+            label = ""
+            placeholder = "hunt name"
+            value = {this.state.huntName}
+            onChangeText = {huntName => this.setState({ huntName })}/>
 
-          <CardSection>
-            <Input
-              label = "passcode:"
-              placeholder = "passcode"
-              //secureTextEntry
-              value = {this.state.passcode}
-              onChangeText = {passcode => this.setState({ passcode })}/>
-          </CardSection>
+          <Input
+            label = "passcode:"
+            placeholder = "passcode"
+            //secureTextEntry
+            value = {this.state.passcode}
+            onChangeText = {passcode => this.setState({ passcode })}/>
 
-          <Text style= {styles.errorTextStyle}>
-            { this.state.error }
-          </Text>
+        <Text style= {styles.errorTextStyle}>
+          { this.state.error }
+        </Text>
 
-
-            { this.renderFindButton() }
-
+          { this.renderFindButton() }
 
       </View>
     );
@@ -134,10 +128,10 @@ class findHunt extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 0
+    marginTop: 60
   },
   welcome: {
     fontSize: 36,
