@@ -52,9 +52,9 @@ class welcome extends Component {
   verifyUserWithBackend(){
     //see if that user already exists by searching for a user with that uid
     console.log('verifying user with backend function called')
-    //Once the user is logged in, axios find-user-by-email get
+    //Once the user is logged in, axios find-user-by-firebase get
     console.log(this.state.userId)
-    const url = 'https://treasure-chest-api.herokuapp.com/user/find/' + this.state.userId
+    const url = 'https://treasure-chest-api.herokuapp.com/user/find/firebase/' + this.state.userId
 
     axios.get(url).then( response => {
       console.log("response", response)

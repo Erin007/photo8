@@ -3,7 +3,8 @@ import {
   AppRegistry,
   StyleSheet,
   View,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 import Button from './common/Button';
 import DirectiveList from './DirectiveList';
@@ -15,8 +16,8 @@ class huntDetails extends Component{
     console.log(this.props)
   }
 
-  joinHuntPressed() {
-    console.log('>>> Join Hunt Button Pressed!');
+  seeDirectivesPressed() {
+    console.log('>>> seeDirectives Button Pressed!');
     this._toDirectiveList();
   }
 
@@ -27,35 +28,24 @@ class huntDetails extends Component{
     });
   }
 
-  anotherHuntPressed(){
-    console.log('>>> Make Another Hunt Button Pressed!');
-    this._toMakeHunt();
-  }
-
-  _toMakeHunt = () => {
-    this.props.navigator.push({
-      title: 'New Hunt',
-      component: newHunt
-    });
-  }
-
-
   render() {
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>
-           You have successfully created a hunt. Please share the hunt name and passcode with players.
-        </Text>
-        {this.showLogs()}
-        <Text> Name : { this.props.hunt.name } </Text>
-        <Text> Passcode: { this.props.hunt.passcode }</Text>
+      <ScrollView style={styles.container}>
 
-        <Button onPress={this.joinHuntPressed.bind(this)}> Join Hunt </Button>
+        <Text style={styles.huntname}> { this.props.hunt.name } </Text>
 
-        <Button onPress={this.anotherHuntPressed.bind(this)}> Make Another Hunt </Button>
+        <Text style={styles.text}>Passcode: { this.props.hunt.passcode }</Text>
 
-      </View>
+        <Text style={styles.smallertext}>{this.props.hunt.description} </Text>
+
+        <Button onPress={this.seeDirectivesPressed.bind(this)}> Directives </Button>
+
+        <Button> Submissions </Button>
+
+        <Button> Teams </Button>
+
+      </ScrollView>
     );
   }
 }
@@ -63,15 +53,29 @@ class huntDetails extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  text: {
-    fontSize: 20,
+  huntname:{
+    fontSize: 36,
     textAlign: 'center',
     margin: 10,
-    paddingTop: 10
+    fontFamily: 'Pacifico',
+  },
+  text: {
+    fontSize: 18,
+    textAlign: 'left',
+    padding: 5,
+    marginLeft: 25,
+    marginRight: 15,
+    fontFamily: 'Chalkboard SE'
+  },
+  smallertext: {
+    fontSize: 14,
+    textAlign: 'left',
+    padding: 5,
+    marginLeft: 25,
+    marginRight: 15,
+    fontFamily: 'Chalkboard SE'
   },
 });
 

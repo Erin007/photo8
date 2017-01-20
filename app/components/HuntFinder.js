@@ -27,7 +27,7 @@ class findHunt extends Component{
     console.log("this.state.huntName", this.state.huntName)
 
     //send the huntName to the API
-    const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/' + this.state.huntName
+    const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/name/' + this.state.huntName
 
     axios.get(url).then( response => {
       console.log("response", response)
