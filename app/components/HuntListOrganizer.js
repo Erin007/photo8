@@ -1,4 +1,4 @@
-//HuntListPlayer.js
+//HuntListOrganizer.js
 
 import React, { Component } from 'react';
 import {
@@ -10,18 +10,18 @@ import {
   ScrollView
 } from 'react-native';
 
-class HuntListPlayer extends Component {
-  joinHuntPressed() {
-    console.log('>>> Join Hunt Button Pressed!');
-    this.setState( { username: '' })
-    this._toJoinHunt();
+class HuntListOrganizer extends Component {
+
+  newHuntPressed() {
+    console.log('>>> Make New Hunt Button Pressed!');
+    this._toMakeHunt();
   }
 
-  _toJoinHunt = () => {
+  _toMakeHunt = () => {
     this.props.navigator.push({
-      title: 'Join Hunt',
-      component: findHunt,
-      passProps: { user: this.state.user[0]},
+      title: 'Make New Hunt',
+      component: newHunt,
+      passProps: { user: this.state.user},
     });
   }
 
@@ -30,7 +30,7 @@ class HuntListPlayer extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-           HuntListPlayer
+           HuntListOrganizer
         </Text>
       </View>
 
@@ -57,4 +57,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HuntListPlayer;
+
+export default HuntListOrganizer;

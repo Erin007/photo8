@@ -18,6 +18,8 @@ import Input from './common/Input';
 import newHunt from './MakeHuntForm';
 import findHunt from './HuntFinder';
 import UpdateProfile from './UpdateProfile';
+import HuntListOrganizer from './HuntListOrganizer';
+import HuntListPlayer from './HuntListPlayer';
 import axios from 'axios';
 
 class welcome extends Component {
@@ -145,33 +147,6 @@ class welcome extends Component {
     firebase.auth().signOut()
   }
 
-  newHuntPressed() {
-    console.log('>>> Make New Hunt Button Pressed!');
-    this._toMakeHunt();
-  }
-
-  _toMakeHunt = () => {
-    this.props.navigator.push({
-      title: 'Make New Hunt',
-      component: newHunt,
-      passProps: { user: this.state.user[0]},
-    });
-  }
-
-  joinHuntPressed() {
-    console.log('>>> Join Hunt Button Pressed!');
-    this.setState( { username: '' })
-    this._toJoinHunt();
-  }
-
-  _toJoinHunt = () => {
-    this.props.navigator.push({
-      title: 'Join Hunt',
-      component: findHunt,
-      passProps: { user: this.state.user[0]},
-    });
-  }
-
   updateProfilePressed(){
     console.log('<<< Update Profile was pressed')
     this._toUpdateProfile();
@@ -183,6 +158,32 @@ class welcome extends Component {
       component: UpdateProfile,
       passProps: { user: this.state.user[0]},
     });
+  }
+
+  organizePressed(){
+    console.log('>>> Organize Pressed')
+    this._toHuntListOrganizer();
+  }
+
+  _toHuntListOrganizer = () => {
+    this.props.navigator.push({
+      title: 'Organize Hunts',
+      component: HuntListOrganizer,
+      passProps: { user: this.state.user[0]}
+    })
+  }
+
+  playPressed(){
+    console.log('>>> Play Pressed')
+    this._toHuntListPlayer();
+  }
+
+  _toHuntListPlayer = () => {
+    this.props.navigator.push({
+      title: 'Play',
+      component: HuntListPlayer,
+      passProps: { user: this.state.user[0]}
+    })
   }
 
   renderContent(){
@@ -201,11 +202,10 @@ class welcome extends Component {
 
             <Button onPress={this.updateProfilePressed.bind(this)}> Update Profile </Button>
 
-            <Button style={{margin:0}} onPress={this.newHuntPressed.bind(this)}> Make a New Hunt </Button>
+            <Button style={{margin:0}} onPress={this.organaizePressed.bind(this)}> Organize </Button>
 
-            <Button onPress={this.joinHuntPressed.bind(this)}> Join a New Hunt </Button>
+            <Button onPress={this.playPressed.bind(this)}> Play </Button>
 
-            <Button> See Your Hunts </Button>
           </ScrollView>
 
         </View>
