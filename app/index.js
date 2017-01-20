@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import welcome from './components/Welcome';
+console.disableYellowBox = true;
 
 class photo8 extends Component {
 

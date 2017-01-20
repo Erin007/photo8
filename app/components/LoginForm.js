@@ -6,7 +6,7 @@ import CardSection from './common/CardSection';
 import Input from './common/Input';
 import Spinner from './common/Spinner';
 import firebase from 'firebase';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import axios from 'axios';
 
 class LoginForm extends Component {
@@ -56,7 +56,7 @@ class LoginForm extends Component {
 
   render(){
     return (
-      <View>
+      <ScrollView style={styles.scrollview}>
 
           <Input
             label = ""
@@ -78,7 +78,7 @@ class LoginForm extends Component {
         <CardSection>
           { this.renderButton() }
         </CardSection>
-      </View>
+      </ScrollView>
     )
   }
 };
@@ -88,7 +88,10 @@ const styles = {
     fontSize: 20,
     alignSelf: 'center',
     color: 'red'
-  }
+  },
+  scrollview:{
+    marginTop: 25
+  },
 };
 
 export default LoginForm;
