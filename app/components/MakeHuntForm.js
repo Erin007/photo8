@@ -3,7 +3,8 @@ import {
   AppRegistry,
   StyleSheet,
   View,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 import axios from 'axios';
 import huntDetails from './HuntDetails';
@@ -92,9 +93,10 @@ class newHunt extends Component{
            Snapenger Hunt
         </Text>
 
-        <Text style={styles.text}>
-           Make a New Hunt
-        </Text>
+        <ScrollView style={styles.scrollview}>
+          <Text style={styles.text}>
+             Make a New Hunt
+          </Text>
 
           <Input
             label = ""
@@ -121,7 +123,7 @@ class newHunt extends Component{
 
 
             {this.renderSaveButton()}
-
+        </ScrollView>
 
       </View>
     );
@@ -131,15 +133,18 @@ class newHunt extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginTop: 50
+  },
+  scrollview:{
+    marginTop: -50
   },
   text: {
     fontSize: 20,
     textAlign: 'center',
-    // margin: 10,
     paddingTop: 10,
+    paddingBottom: 5,
     fontFamily: 'Chalkboard SE'
   },
   errorTextStyle: {
@@ -158,9 +163,8 @@ const styles = StyleSheet.create({
     fontSize: 36,
     textAlign: 'center',
     margin: 10,
-    paddingTop: 10,
+    // paddingTop: 10,
     fontFamily: 'Pacifico',
-    justifyContent: 'flex-start'
   },
 });
 
