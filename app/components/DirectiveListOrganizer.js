@@ -18,7 +18,7 @@ class DirectiveList extends Component {
 
     componentWillMount (){
       console.log('Component will Mount in DirectiveList called')
-      //change this to send the url of the specific hunt once everything is working!
+
       const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
 
       axios.get(url).then( response => {
@@ -44,14 +44,34 @@ class DirectiveList extends Component {
       });
     }
 
-    deleteDirectivePressed(){
+    deleteDirectivePressed(directive){
       console.log("delete directive pressed.")
+    //delete the directive from the backend
+      const url = 'https://treasure-chest-api.herokuapp.com/directives/' + directive.id
+      console.log(url)
+      axios.delete(url)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    //fetch the new directives list and change the state to reflect the deletiion
+      const url2 = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
+
+      axios.get(url2).then( response => {
+        console.log("response from directivelist", response)
+        return this.setState( { directives: response.data })
+       })
+        .catch(function (error) {
+          console.log(error);
+        });;
     }
 
     renderDirectives() {
       console.log('<<<Render Directives Called')
       console.log('this.state.directives', this.state.directives)
-      //console.log('this.state.directives.length', this.state.directives.directives.length)
+  
       if (this.state.directives.length > 0)  {
 
         return this.state.directives.map(directive =>
@@ -64,7 +84,7 @@ class DirectiveList extends Component {
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.x} onPress={() => this.deleteDirectivePressed(this.state.directive)}>
+            <TouchableOpacity style={styles.x} onPress={() => this.deleteDirectivePressed(directive)}>
               <Text>✗</Text>
             </TouchableOpacity>
 
@@ -141,7 +161,8 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     backgroundColor: "#21b6cb",
-    padding: 7,
+    padding: 5,
+    alignItems: 'center',
     borderRadius: 5,
     borderWidth: 1,
     shadowColor: '#167c89',
@@ -150,7 +171,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     borderColor:'#167c89',
-    marginTop: 15
+    marginTop: 12
   },
   directivebox: {
     flexDirection: 'row',
@@ -158,8 +179,8 @@ const styles = StyleSheet.create({
     width: 300
   },
   scrollview: {
-    marginTop: 10,
-    marginBottom: 25,
+    marginTop: 15,
+    marginBottom: 15,
     height: 300
   }
 });

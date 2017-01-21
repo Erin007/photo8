@@ -171,7 +171,8 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     borderColor:'#167c89',
-    marginTop: 15
+    marginTop: 15,
+    alignItems: 'center',
   },
   name: {
     fontSize: 30,
