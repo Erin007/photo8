@@ -54,7 +54,7 @@ class welcome extends Component {
     console.log('verifying user with backend function called')
     //Once the user is logged in, axios find-user-by-firebase get
     console.log(this.state.userId)
-    const url = 'https://treasure-chest-api.herokuapp.com/user/find/firebase/' + this.state.userId
+    const url = 'https://treasure-chest-api.herokuapp.com/users/find/firebase/' + this.state.userId
 
     axios.get(url).then( response => {
       console.log("response", response)

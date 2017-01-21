@@ -10,15 +10,16 @@ import {
   Text } from 'react-native';
 import axios from 'axios';
 import Button from './common/Button';
+import DirectiveList from './DirectiveList';
 
 
 class Roster extends Component {
-  state = { users: [] };
+  state = { users: [], teamplayer: {}, thisplayersteam: ''}; // thisplayersteam is a teamplayer object
 
   componentWillMount(){
     //axios fetch all of the players associated with this team
     console.log('PlayerOnTeam team_id', this.props.team.id)
-    const url = 'https://treasure-chest-api.herokuapp.com/user/find/team/' + this.props.team.id
+    const url = 'https://treasure-chest-api.herokuapp.com/users/find/team/' + this.props.team.id
 
     axios.get(url).then( response => {
       console.log("response for Players on Team", response)
@@ -40,19 +41,21 @@ class Roster extends Component {
       );
     }
   }
-  //is this player on any teams associated with this hunt?
-  checkIfLoneWolf(){
-    console.log('lonewolf', this.props.loneWolf)
-    if(this.props.lonewolf){
-      return(
-        <View style={styles.container}>
-          <Button> Join Team </Button>
-        </View>
-      )
-    }
-  }
 
-  checkIfUserIsOnThisTeam(){
+  renderButtons(){
+    console.log("RENDERING BUTTONS ON ROSTER")
+    //if the user is not on a team show them join team button
+    console.log("this.props.thisplayersteam", this.props.thisplayersteam)
+    console.log("this.props.thisplayersteam.name", this.props.thisplayersteam.name)
+    if (typeof this.props.thisplayersteam.name == 'undefined' && this.state.thisplayersteam == ''){
+      console.log("We a have a lonewolf!!!!!!!!! ")
+      return(
+            <View style={styles.bottombuttons}>
+              <Button onPress={() => this.joinTeamPressed() }> Join Team </Button>
+            </View>
+      );
+    }
+    //if the user is on this team, show them a leave team button
     console.log("checking if the user is on this team")
     console.log("this.state.users", this.state.users)
 
@@ -66,43 +69,93 @@ class Roster extends Component {
         if (this.state.users[i].id == currentUserId){
           //the user is on this team
           return(
-                <View style={styles.container}>
-                  <Button> Leave Team </Button>
+                <View style={styles.bottombuttons}>
+                  <Button onPress={() => this.leaveTeamPressed() }> Leave Team </Button>
+
+                  <Button onPress={() => this.seeDirectives() }> See Directives </Button>
                 </View>
           );
         }
       }
-    }//end of first if
-  }//end of checkIf function
-
-
-  renderButtons(){
-    console.log('rendering buttons')
-    //this.checkIfUserIsOnTeam()
-    //check if the current user is already on a team
-
-      //if they are already on a team, other than this one, don't show any button
-
-      //if they are on this team, show the leave button
-
-
+    }
   }
 
-
   joinTeamPressed(){
-    //confirm with the user that they would like to join the team
-
-    //if they confirm that they want to be on the team:
+    console.log("Join Team Pressed")
       //make an axios post to make a team-player object
-
-      //re-make an axios get request to fetch all of the players associated with this team
-        //re-render the list of player names
+      axios.post('https://treasure-chest-api.herokuapp.com/teamplayers',{
+        player_id: this.props.user.id ,
+        team_id: this.props.team.id,
+      })
+      .then(response => {
+        console.log("response", response)
+        this.setState({ thisplayersteam: response.data })
+      })
+        //if the teamplayer saved successfully, re-render the list of player names
+      .then(this.reFetchPlayers.bind(this))
+      //if there was a problem saving the teamPlayer
+      .catch((error) => {
+        console.log("Error:", error)
+      });
   }
 
   leaveTeamPressed(){
+    console.log('leaveTeamPressed')
+    //make an axios get call for the teamplayer that pairs this user with this team
+    const url = 'https://treasure-chest-api.herokuapp.com/teamplayers/find/' + this.props.team.id + '/' + this.props.user.id
 
+    axios.get(url).then( response => {
+      console.log("teamplayer", response)
+      return this.setState( { teamplayer: response.data })
+      })
+      .then(this.deleteTeamPlayer.bind(this))
+      .catch(function (error) {
+        console.log(error);
+      });;
   }
 
+  deleteTeamPlayer(){
+    console.log('<<<<<< DELETE TEAM PLAYER CALLED')
+    //make an axios delete call using the returned id
+    const url2 = 'https://treasure-chest-api.herokuapp.com/teamplayers/' + this.state.teamplayer.id
+    console.log("this.state.teamplayer.id", this.state.teamplayer.id)
+
+    axios.delete(url2).then( response => {
+      console.log("teamplayer delete", response)
+      return this.setState( { teamplayer: '' })
+      })
+      .then(this.reFetchPlayers.bind(this))
+      .catch(function (error) {
+        console.log("Errors from delete request", error);
+      });;
+  }
+
+  reFetchPlayers(){
+    //fetch the players list again and change the state to reflect the deletiion
+    const url = 'https://treasure-chest-api.herokuapp.com/users/find/team/' + this.props.team.id
+
+    axios.get(url).then( response => {
+      console.log("response for Players on Team", response)
+      return this.setState( { users: response.data })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });;
+  }
+
+  seeDirectives() {
+    console.log('>>> seeDirectives Button Pressed!');
+    this._toDirectiveList();
+  }
+
+  _toDirectiveList = () => {
+    this.props.navigator.push({
+      title: 'Hunt',
+      component: DirectiveList,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
 
   render() {
 
@@ -111,13 +164,13 @@ class Roster extends Component {
 
         <Text style={styles.text}>{this.props.hunt.name}</Text>
 
-        <Text style={styles.smalltext}> Players </Text>
+        <Text style={styles.smalltext}> Players on {this.props.team.name} </Text>
 
-        { this.renderPlayers() }
+        <ScrollView style={styles.scrollview}>
+          { this.renderPlayers() }
+        </ScrollView>
 
-        {this.checkIfLoneWolf()}
-
-        {this.checkIfUserIsOnThisTeam() }
+        {this.renderButtons() }
 
       </View>
     );
@@ -129,7 +182,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 50,
-    flex: 1
+    // flex: 1
+    paddingBottom: 50
   },
   text: {
     fontSize: 30,
@@ -139,7 +193,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   smalltext: {
-    fontSize: 25,
+    fontSize: 22,
     textAlign: 'center',
     padding: 5,
     marginLeft: 5,
@@ -176,10 +230,14 @@ const styles = StyleSheet.create({
   },
   scrollview: {
     marginTop: 0,
-    marginBottom: 25,
-    //borderWidth: 3,
-    //borderRadius: 5,
-    height: 210,
+    // marginBottom: 25,
+    // borderWidth: 3,
+    borderRadius: 5,
+    height: 200,
+  },
+  bottombuttons:{
+    marginTop: 20,
+    // paddingBottom: 40
   }
 });
 

@@ -14,7 +14,7 @@ import Button from './common/Button';
 import DirectiveList from './DirectiveList';
 
 class TeamList extends Component {
-  state = { teams: [], team: {}, loneWolf: false };
+  state = { teams: [], thisplayersteam: {} };
 
   componentWillMount(){
     //make the axios call to retrieve all of the teams associated with this hunt
@@ -36,28 +36,24 @@ class TeamList extends Component {
 
     axios.get(url).then( response => {
       console.log(response)
-      return this.setState( { team: response.data })
+      return this.setState( { thisplayersteam: response.data })
      })
       .then(this.teamFound.bind(this))
       .catch(function (error) {
-        this.setState( { loneWolf: true })
         console.log(error);
       });;
-  }
-
-  setLoneWolf(){
-    this.setState({loneWolf: true})
   }
 
   teamFound(){
     //tell the user which team they are on
     console.log('telling the user which team they are on')
-    if (this.state.team.name != null){
+    if (this.state.thisplayersteam.name != null){
       return (
-        <Text style={styles.smallertext}>You are on {this.state.team.name} </Text>
+        <Text style={styles.smallertext}>You are on {this.state.thisplayersteam.name} </Text>
       )
     }
-    this.setLoneWolf()
+    return( <Text style={styles.smallertext}>You are not on a team. </Text>
+    )
   }
 
   seeRosterPressed(team){
@@ -74,7 +70,7 @@ class TeamList extends Component {
                    user: this.props.user,
                    hunt: this.props.hunt,
                    teams: this.state.teams,
-                   loneWolf: this.state.loneWolf}
+                   thisplayersteam: this.state.thisplayersteam}
     });
   }
 
@@ -133,6 +129,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 50,
+    paddingBottom: 60
   },
   text: {
     fontSize: 30,
