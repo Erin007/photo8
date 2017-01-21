@@ -41,7 +41,8 @@ class DirectiveListOrganizer extends Component {
       this.props.navigator.push({
         title: 'Directive',
         component: DirectiveShow,
-        passProps: { directive: directive}
+        passProps: { directive: directive,
+                    hunt: this.props.hunt}
       });
     }
 

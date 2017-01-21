@@ -81,7 +81,8 @@ class addDirectives extends Component {
     this.props.navigator.push({
       title: 'Add Teams',
       component: AddTeams,
-      passProps: { hunt: hunt}
+      passProps: { hunt: hunt,
+                  user: this.props.user}
     });
   }
 

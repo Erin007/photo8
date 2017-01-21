@@ -81,7 +81,8 @@ class addTeams extends Component{
     this.props.navigator.push({
       title: 'Hunt Details',
       component: huntDetails,
-      passProps: { hunt: hunt}
+      passProps: { hunt: hunt,
+                  user: this.props.user}
     });
   }
 
@@ -105,10 +106,6 @@ class addTeams extends Component{
 
         <Text style={styles.name}>
           {this.props.hunt.name}
-        </Text>
-
-        <Text>
-          {this.props.hunt.description}
         </Text>
 
         <Text style={styles.text}>
@@ -148,21 +145,21 @@ class addTeams extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     //justifyContent: '',
     marginTop: 50,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   scrollview:{
-    width: 300,
-    margin: 5,
-    height: 100,
-    marginTop: -50
+    marginTop: 10,
+    height: 180,
+    marginBottom: 10,
   },
   teambox:{
     flexDirection: 'row',
-    marginBottom: 50
+    marginBottom: 5,
+    width: 300
   },
   plus:{
     width: 30,
@@ -177,7 +174,8 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     borderColor:'#167c89',
-    marginTop: 15
+    marginTop: 15,
+    alignItems: 'center',
   },
   name: {
     fontSize: 30,
@@ -191,7 +189,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginLeft: 10,
     marginRight: 10,
-    //paddingTop: 20,
+    // paddingTop: 20,
+    // paddingBottom: 20,
     fontFamily: 'Chalkboard SE'
   },
   errorTextStyle: {

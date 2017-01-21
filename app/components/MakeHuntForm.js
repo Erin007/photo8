@@ -26,15 +26,13 @@ class newHunt extends Component{
     const { huntName, passcode, description, directives, organizerId } = this.state;
 
     this.setState({ error: '', loading: true });
-    //*****set the state of organizerID to the id of the user making this hunt via props
 
     //send the information to the API to make a new hunt
-    //console.log(this.state.huntName)
     axios.post('https://treasure-chest-api.herokuapp.com/hunts',{
       name: this.state.huntName,
       passcode: this.state.passcode,
       description: this.state.description,
-      organizer_id: 1
+      organizer_id: this.props.user.id
     })
     .then(response => {
       console.log("response", response)
@@ -72,7 +70,8 @@ class newHunt extends Component{
     this.props.navigator.push({
       title: 'Add Directives',
       component: addDirectives,
-      passProps: { hunt: hunt}
+      passProps: { hunt: hunt,
+                  user: this.props.user}
     });
   }
 

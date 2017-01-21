@@ -93,7 +93,9 @@ class DirectiveShow extends Component {
   }
 
   checkCompletion(){
-    if (this.props.directive.complete == false){
+    console.log('<<< Checking completion of directive in status show')
+    console.log(this.props.directive)
+    if (this.props.directive.complete == null || this.props.directive.complete == false ){
       console.log(">>>> Check completion called")
        return <Text> ❏ </Text>
     }
@@ -115,7 +117,7 @@ class DirectiveShow extends Component {
 
         this.setState( { submission: response.data })
 
-      })
+        })
         .catch(function (error) {
           console.log(error);
         });;
@@ -126,7 +128,7 @@ class DirectiveShow extends Component {
           source={{ uri: this.state.submission.photo}}
           style={styles.placeholder}
           />
-      </View>
+        </View>
       )
     }
 
@@ -142,18 +144,16 @@ class DirectiveShow extends Component {
 
   renderCameraIcon(){
     console.log('<<< Render CameraIcon called')
-      if (this.props.directive.complete !== true){
-        return(
-          <View>
-            <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
-              <Image
-              source={require('../assets/ic_photo_camera_36pt.png')}
-              style={styles.camerabutton}
-              />
-            </TouchableOpacity>
-          </View>
-        )
-      }
+    return(
+      <View>
+        <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
+          <Image
+          source={require('../assets/ic_photo_camera_36pt.png')}
+          style={styles.center}
+          />
+        </TouchableOpacity>
+      </View>
+    )
   }
 
   render(){
@@ -161,8 +161,11 @@ class DirectiveShow extends Component {
     console.log("showing directive description")
     console.log ("this.props.directive", this.props.directive)
     return (
-      <View style={styles.container}>
-        <Text style={styles.name}> {this.checkCompletion()}{this.props.directive.name}
+      <ScrollView style={styles.container}>
+
+        <Text style={styles.huntname}>{this.props.hunt.name} </Text>
+
+        <Text style={styles.directive}> {this.checkCompletion()}{this.props.directive.name}
         </Text>
 
         <Text>{this.props.directive.description}</Text>
@@ -171,45 +174,44 @@ class DirectiveShow extends Component {
         { this.renderCameraIcon() }
         { this.renderCaption() }
 
-      </View>
+      </ScrollView>
     )
   }
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    // marginTop: 85
   },
   caption: {
     paddingLeft: 15,
     paddingRight: 15,
   },
-  captiontext:{
-    // marginTop: -5,
-    fontSize: 16,
+  huntname: {
+    fontSize: 30,
     textAlign: 'center',
-    // margin: 15,
-    paddingTop: 10
+    fontFamily: 'Pacifico'
   },
-  camerabutton:{
-    borderRadius: 5,
+  captiontext:{
+    fontSize: 20,
+    textAlign: 'center',
+    paddingTop: 10,
+    fontFamily: "Chalkboard SE"
+  },
+  center:{
+    alignSelf: 'center'
   },
   text: {
     fontSize: 18,
     textAlign: 'center',
     paddingTop: 10,
   },
-  name: {
-    fontSize: 18,
+  directive: {
+    fontSize: 25,
     textAlign: 'center',
-    marginTop: 90,
     marginLeft: 10,
     marginRight: 10,
-    paddingTop: 15,
+    paddingTop: 5,
     fontFamily: "Chalkboard SE"
   },
   placeholder: {
@@ -219,6 +221,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: '#21b6cb',
+    alignSelf: 'center'
   },
 });
 
