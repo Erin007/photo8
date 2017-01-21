@@ -22,7 +22,7 @@ class HuntListOrganizer extends Component {
   componentWillMount (){
     console.log('componentWillMount HuntsListOrganizer')
     console.log( "HuntsListOrganizer props", this.props)
-    //change this to send the url of the specific hunt once everything is working!
+  
     const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/organizer/' + this.props.user.id
 
     axios.get(url).then( response => {

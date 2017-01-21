@@ -13,7 +13,7 @@ import Button from './common/Button';
 import DirectiveShow from './DirectiveShow';
 import addDirectives from './AddDirectives';
 
-class DirectiveList extends Component {
+class DirectiveListOrganizer extends Component {
 
     state = { directives: [], directive: {} }; //initial or empty state, property of this
 
@@ -195,4 +195,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DirectiveList;
+export default DirectiveListOrganizer;

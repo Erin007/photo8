@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import Button from './common/Button';
 import DirectiveList from './DirectiveList';
-import DirectiveListOrganizer from './DirectiveListOrganizer'
+import DirectiveListOrganizer from './DirectiveListOrganizer';
+import TeamListOrganizer from './TeamListOrganizer'
 import newHunt from './MakeHuntForm';
 
 class huntDetails extends Component{
@@ -41,13 +42,27 @@ class huntDetails extends Component{
     });
   }
 
+  teamsOrganizer(){
+    console.log('The Organizer wants to the see the teams');
+    this._toTeamListOrganizer();
+  }
+
+  _toTeamListOrganizer = () => {
+    this.props.navigator.push({
+      title: 'Teams',
+      component: TeamListOrganizer,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
+
   renderButtons(){
     if (this.props.hunt.organizer_id == this.props.user.id){
       return(
         <View>
-          <Button onPress={this.directivesOrganizer.bind(this)}> Directives </Button>
+          <Button onPress={this.directivesOrganizer.bind(this)}> Directives</Button>
 
-          <Button> Teams </Button>
+          <Button onPress={this.teamsOrganizer.bind(this)}> Teams </Button>
         </View>
       );
     }
