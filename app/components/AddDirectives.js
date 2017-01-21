@@ -18,14 +18,25 @@ import CardSection from './common/CardSection';
 import huntDetails from './HuntDetails';
 import axios from 'axios';
 
-class addDirectives extends Component{
+class addDirectives extends Component {
   state = { directive: '', huntId:'', error: '', loading: false, hunt: {}, directives : []}
+
+  componentWillMount (){
+    console.log('Component will Mount in DirectiveList called')
+
+    const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
+
+    axios.get(url).then( response => {
+      console.log("response from directivelist", response)
+      return this.setState( { directives: response.data })
+     })
+      .catch(function (error) {
+        console.log(error);
+      });;
+  }
 
   addDirectivePressed(directive){
     console.log('>>> Add Directive pressed');
-    //axios post the directive
-    //var url = 'https://treasure-chest-api.herokuapp.com/hunts/' + this.props.hunt.id + '/directives'
-    //console.log(url)
     console.log(this.state.directive)
     console.log(this.props.hunt.id)
 
@@ -38,10 +49,10 @@ class addDirectives extends Component{
     .then(response => {
       console.log("response", response)
       console.log("response.data", response.data)
-      // return this.setState( { hunt: response.data })
+      return this.setState( { directive: response.data })
     })
       //if the directive is saved successfully
-    //.then(this.directiveSaved.bind(this))
+    .then(this.componentWillMount())
     //if there was a problem saving the hunt
     .catch((error) => {
       console.log("The directive did not save")
@@ -50,11 +61,6 @@ class addDirectives extends Component{
 
       console.log(error)
     });
-
-    //show the organizer the list of directives they've made so far by rendering them to the screen
-    this.state.directives.push(directive)
-    console.log(directive)
-    console.log(this.state.directives)
 
     //clear the form
     this.setState({
@@ -81,13 +87,14 @@ class addDirectives extends Component{
 
   renderDirectives() {
     console.log("rendering directives")
+
     if (this.state.directives[0] !== '')  {
       console.log(this.state.directives)
 
       return this.state.directives.map(directive =>
 
-          <Text style={styles.directive} key={directive}>
-              {directive}
+          <Text style={styles.directive} key={directive.id}>
+              {directive.name}
           </Text>
       );
     }
@@ -99,10 +106,6 @@ class addDirectives extends Component{
 
         <Text style={styles.name}>
           {this.props.hunt.name}
-        </Text>
-
-        <Text style={styles.text}>
-          {this.props.hunt.description}
         </Text>
 
         <Text style={styles.text}>
@@ -131,7 +134,7 @@ class addDirectives extends Component{
         </ScrollView>
 
         <Button style={styles.button} onPress={() =>
-          this.nextPressed(this.props.hunt)}> Next
+          this.nextPressed(this.props.hunt)}> Teams
         </Button>
 
       </View>
@@ -141,22 +144,21 @@ class addDirectives extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     //justifyContent: '',
     marginTop: 50,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  scrollview:{
-    width: 300,
-    margin: 5,
-    height: 100,
-    // backgroundColor: 'green',
-    marginTop: -50
+  scrollview: {
+    marginTop: 10,
+    marginBottom: 10,
+    height: 180,
   },
   directivebox: {
     flexDirection: 'row',
-    marginBottom: 50
+    marginBottom: 5,
+    width: 300
   },
   plus:{
     width: 30,
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     paddingTop: 20,
-    // paddingBottom: 20,
+    paddingBottom: 20,
     fontFamily: 'Pacifico'
   },
   text: {

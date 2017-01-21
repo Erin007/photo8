@@ -10,7 +10,8 @@ import {
   Text } from 'react-native';
 import axios from 'axios';
 import Button from './common/Button';
-import DirectiveShow from './DirectiveShow'
+import DirectiveShow from './DirectiveShow';
+import addDirectives from './AddDirectives';
 
 class DirectiveList extends Component {
 
@@ -44,6 +45,15 @@ class DirectiveList extends Component {
       });
     }
 
+    _toAddMoreDirectives = () => {
+      this.props.navigator.push({
+        title: 'Add Directives',
+        component: addDirectives,
+        passProps: { hunt: this.props.hunt,
+                    user: this.props.user }
+      });
+    }
+
     deleteDirectivePressed(directive){
       console.log("delete directive pressed.")
     //delete the directive from the backend
@@ -71,7 +81,7 @@ class DirectiveList extends Component {
     renderDirectives() {
       console.log('<<<Render Directives Called')
       console.log('this.state.directives', this.state.directives)
-  
+
       if (this.state.directives.length > 0)  {
 
         return this.state.directives.map(directive =>
@@ -108,7 +118,7 @@ class DirectiveList extends Component {
 
           </ScrollView>
 
-          <Button style={styles.button}> Add More Directives </Button>
+          <Button style={styles.button} onPress={this._toAddMoreDirectives.bind(this)}> Add More Directives </Button>
 
          </View>
       );
