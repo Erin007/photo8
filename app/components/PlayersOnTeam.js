@@ -13,7 +13,7 @@ import Button from './common/Button';
 
 
 class Roster extends Component {
-  state = { users: [], user: this.props.user };
+  state = { users: [] };
 
   componentWillMount(){
     //axios fetch all of the players associated with this team
@@ -40,8 +40,19 @@ class Roster extends Component {
       );
     }
   }
+  //is this player on any teams associated with this hunt?
+  checkIfLoneWolf(){
+    console.log('lonewolf', this.props.loneWolf)
+    if(this.props.lonewolf){
+      return(
+        <View style={styles.container}>
+          <Button> Join Team </Button>
+        </View>
+      )
+    }
+  }
 
-  checkIfUserIsOnTeam(){
+  checkIfUserIsOnThisTeam(){
     console.log("checking if the user is on this team")
     console.log("this.state.users", this.state.users)
 
@@ -61,12 +72,6 @@ class Roster extends Component {
           );
         }
       }
-      console.log(this.props.team.id )
-      return(
-        <View style={styles.container}>
-          <Button> Join Team </Button>
-        </View>
-      )
     }//end of first if
   }//end of checkIf function
 
@@ -110,7 +115,9 @@ class Roster extends Component {
 
         { this.renderPlayers() }
 
-        {this.checkIfUserIsOnTeam() }
+        {this.checkIfLoneWolf()}
+
+        {this.checkIfUserIsOnThisTeam() }
 
       </View>
     );

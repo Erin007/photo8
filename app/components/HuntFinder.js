@@ -76,7 +76,8 @@ class findHunt extends Component{
     this.props.navigator.push({
       title: 'Teams',
       component: TeamList,
-      passProps: { hunt: hunt}
+      passProps: { hunt: hunt,
+                   user: this.props.user}
     });
   }
 

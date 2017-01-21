@@ -14,7 +14,7 @@ import Button from './common/Button';
 import DirectiveList from './DirectiveList';
 
 class TeamList extends Component {
-  state = { teams: [], team: {} };
+  state = { teams: [], team: {}, loneWolf: false };
 
   componentWillMount(){
     //make the axios call to retrieve all of the teams associated with this hunt
@@ -40,21 +40,25 @@ class TeamList extends Component {
      })
       .then(this.teamFound.bind(this))
       .catch(function (error) {
+        this.setState( { loneWolf: true })
         console.log(error);
       });;
+  }
+
+  setLoneWolf(){
+    this.setState({loneWolf: true})
   }
 
   teamFound(){
     //tell the user which team they are on
     console.log('telling the user which team they are on')
-    return (
-      <Text style={styles.smallertext}>You are on {this.state.team.name} </Text>
-    )
+    if (this.state.team.name != null){
+      return (
+        <Text style={styles.smallertext}>You are on {this.state.team.name} </Text>
+      )
+    }
+    this.setLoneWolf()
   }
-
-  //if the call does NOT return a team
-    //prompt the user to join a team
-
 
   seeRosterPressed(team){
     //handles going to the roster
@@ -68,7 +72,9 @@ class TeamList extends Component {
       component: Roster,
       passProps: { team : team,
                    user: this.props.user,
-                   hunt: this.props.hunt}
+                   hunt: this.props.hunt,
+                   teams: this.state.teams,
+                   loneWolf: this.state.loneWolf}
     });
   }
 
