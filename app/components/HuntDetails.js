@@ -8,13 +8,10 @@ import {
 } from 'react-native';
 import Button from './common/Button';
 import DirectiveList from './DirectiveList';
+import DirectiveListOrganizer from './DirectiveListOrganizer'
 import newHunt from './MakeHuntForm';
 
 class huntDetails extends Component{
-
-  showLogs(){
-    console.log("Hunt Details Props", this.props)
-  }
 
   seeDirectivesPressed() {
     console.log('>>> seeDirectives Button Pressed!');
@@ -30,20 +27,51 @@ class huntDetails extends Component{
     });
   }
 
+  directivesOrganizer(){
+    console.log('The Organizer wants to the see the directives');
+    this._toDirectiveListOrganizer();
+  }
+
+  _toDirectiveListOrganizer = () => {
+    this.props.navigator.push({
+      title: 'Hunt',
+      component: DirectiveListOrganizer,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
+
+  renderButtons(){
+    if (this.props.hunt.organizer_id == this.props.user.id){
+      return(
+        <View>
+          <Button onPress={this.directivesOrganizer.bind(this)}> Directives </Button>
+
+          <Button> Teams </Button>
+        </View>
+      );
+    }
+    return(
+      <View>
+        <Button onPress={this.seeDirectivesPressed.bind(this)}> Directives </Button>
+
+        <Button> Teams </Button>
+      </View>
+    )
+  }
+
   render() {
 
     return (
       <ScrollView style={styles.container}>
-        { this.showLogs() }
+
         <Text style={styles.huntname}> { this.props.hunt.name } </Text>
 
         <Text style={styles.text}>Passcode: { this.props.hunt.passcode }</Text>
 
         <Text style={styles.smallertext}>{this.props.hunt.description} </Text>
 
-        <Button onPress={this.seeDirectivesPressed.bind(this)}> Directives </Button>
-
-        <Button> Teams </Button>
+        {this.renderButtons()}
 
       </ScrollView>
     );
