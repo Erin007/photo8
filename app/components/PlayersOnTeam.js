@@ -14,14 +14,16 @@ import axios from 'axios';
 class Roster extends Component {
 
   componentWillMount(){
-    //axios fetch all of the players associated with this hunt 
+    //axios fetch all of the players associated with this hunt
   }
 
-  renderJoinTeamButtons(){
+  renderButtons(){
     //check if the current user is already on a team
       //if they are already on a team, don't show the join team button
 
       //if they aren't on a team yet, show the join team button
+
+      //if they are on this team, show the leave button
   }
 
   joinTeamPressed(){
@@ -34,11 +36,16 @@ class Roster extends Component {
         //re-render the list of player names
   }
 
+  leaveTeamPressed(){
+
+  }
+
+
   render() {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>This will have a list of player usernames that organizers can add to or delete from </Text>
+        <Text style={styles.text}>This will have a list of player usernames. If the user is on the team they can leave, if they are not they can join </Text>
       </View>
     );
   }

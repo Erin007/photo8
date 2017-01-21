@@ -16,43 +16,45 @@ import DirectiveList from './DirectiveList';
 class TeamList extends Component {
   state = { teams: [], team: {} };
 
-  checkUserTeam(){
-    //make an axios call to get all of the player ids associated with this hunt
-
-    //check if the current user id matches any of those player ids
-      //if it does match, tell the user which team they are on
-        //axios call with the team id from from the team-player, display the name of the team
-
-      //if it doesn't match prompt user to select a team to join
-  }
-
   componentWillMount(){
     //make the axios call to retrieve all of the teams associated with this hunt
     const url = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id
 
     axios.get(url).then( response => {
       return this.setState( { teams: response.data })
-     })
+      })
+      .then(this.checkUserTeam())
       .catch(function (error) {
         console.log(error);
       });;
   }
 
-  renderDeleteButtons(){
-    //check if the current user is the organizer
-      //if they are the organizer, render the delete buttons for each team
-      //if they are not, don't show the delete buttons
+  checkUserTeam(){
+    console.log('checking if the user is on a team')
+    //make an axios call to see if the user is on a team
+    const url = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id + '/' + this.props.user.id
+
+    axios.get(url).then( response => {
+      console.log(response)
+      return this.setState( { team: response.data })
+     })
+      .then(this.teamFound.bind(this))
+      .catch(function (error) {
+        console.log(error);
+      });;
   }
 
-  deleteTeamPressed(team){
-    //confirm that the user wants to delete the team
-
-    //delete the team from the database with axios
-
-    //re-make the call to axios to retrieve the teams associated with the hunt
-
-    //re-render the teams
+  teamFound(){
+    //tell the user which team they are on
+    console.log('telling the user which team they are on')
+    return (
+      <Text style={styles.smallertext}>You are on {this.state.team.name} </Text>
+    )
   }
+
+  //if the call does NOT return a team
+    //prompt the user to join a team
+
 
   seeRosterPressed(team){
     //handles going to the roster
@@ -103,7 +105,9 @@ class TeamList extends Component {
 
         <Text style={styles.text}> { this.props.hunt.name } </Text>
 
-        <Text style = {styles.smalltext}> Teams </Text>
+        <Text style={styles.smalltext}> Teams </Text>
+
+        { this.teamFound() }
 
         <ScrollView style={styles.scrollview}>
           { this.renderTeams() }
@@ -138,6 +142,14 @@ const styles = StyleSheet.create({
     marginRight: 5,
     fontFamily: 'Chalkboard SE'
   },
+  smallertext: {
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    fontFamily: 'Chalkboard SE'
+  },
   team:{
     fontSize: 16,
     fontFamily: 'Chalkboard SE',
@@ -159,11 +171,11 @@ const styles = StyleSheet.create({
     width: 250
   },
   scrollview: {
-    marginTop: -50,
+    marginTop: 0,
     marginBottom: 25,
     //borderWidth: 3,
     //borderRadius: 5,
-    height: 275,
+    height: 210,
   //  borderColor: '#ddd',
   }
 });
