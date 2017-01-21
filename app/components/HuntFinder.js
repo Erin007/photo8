@@ -7,7 +7,7 @@ import {
   Text
 } from 'react-native';
 import DirectiveList from './DirectiveList';
-import TeamList from './TeamsList';
+import TeamList from './TeamList';
 import Button from './common/Button';
 import Input from './common/Input';
 import Spinner from './common/Spinner';

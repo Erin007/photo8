@@ -101,14 +101,15 @@ class TeamList extends Component {
     return (
       <View style={styles.container}>
 
-      <ScrollView>
         <Text style={styles.text}> { this.props.hunt.name } </Text>
+
         <Text style = {styles.smalltext}> Teams </Text>
 
-        { this.renderTeams() }
-      </ScrollView>
+        <ScrollView style={styles.scrollview}>
+          { this.renderTeams() }
+        </ScrollView>
 
-      <Button onPress={() => this.seeHuntPressed(this.props.hunt)}> See Hunt </Button>
+        <Button onPress={() => this.seeHuntPressed(this.props.hunt)}> See Hunt </Button>
       </View>
     );
   }
@@ -116,23 +117,23 @@ class TeamList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    // flex: 1,
+    // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    // marginTop: 75,
+    marginTop: 50,
   },
   text: {
     fontSize: 30,
     textAlign: 'center',
-    paddingTop: 20,
+    paddingTop: 10,
     fontFamily: 'Pacifico',
     marginTop: 10,
   },
   smalltext: {
     fontSize: 25,
     textAlign: 'center',
-    padding: 10,
+    padding: 5,
     marginLeft: 5,
     marginRight: 5,
     fontFamily: 'Chalkboard SE'
@@ -154,7 +155,16 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     padding: 5,
-    paddingLeft: 10
+    paddingLeft: 10,
+    width: 250
+  },
+  scrollview: {
+    marginTop: -50,
+    marginBottom: 25,
+    //borderWidth: 3,
+    //borderRadius: 5,
+    height: 275,
+  //  borderColor: '#ddd',
   }
 });
 

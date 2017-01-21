@@ -22,7 +22,7 @@ class HuntListOrganizer extends Component {
   componentWillMount (){
     console.log('componentWillMount HuntsListOrganizer')
     console.log( "HuntsListOrganizer props", this.props)
-  
+
     const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/organizer/' + this.props.user.id
 
     axios.get(url).then( response => {
@@ -64,6 +64,7 @@ class HuntListOrganizer extends Component {
         </TouchableOpacity>
         );
     }
+    return <Text style={styles.smallertext}> You are not organizing any hunts </Text>
   }
 
   newHuntPressed() {
@@ -140,6 +141,15 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingLeft: 10,
     width: 275
+  },
+  smallertext: {
+    fontSize: 14,
+    textAlign: 'center',
+    padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    fontFamily: 'Chalkboard SE',
+    color: '#DCDCDC',
   }
 });
 

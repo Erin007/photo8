@@ -8,13 +8,14 @@ import {
 } from 'react-native';
 import Button from './common/Button';
 import DirectiveList from './DirectiveList';
+import TeamList from './TeamList';
 import DirectiveListOrganizer from './DirectiveListOrganizer';
 import TeamListOrganizer from './TeamListOrganizer'
 import newHunt from './MakeHuntForm';
 
 class huntDetails extends Component{
 
-  seeDirectivesPressed() {
+  seeDirectives() {
     console.log('>>> seeDirectives Button Pressed!');
     this._toDirectiveList();
   }
@@ -23,6 +24,20 @@ class huntDetails extends Component{
     this.props.navigator.push({
       title: 'Hunt',
       component: DirectiveList,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
+
+  seeTeams() {
+    console.log(' a player wants to see the teams');
+    this._toTeamList();
+  }
+
+  _toTeamList = () => {
+    this.props.navigator.push({
+      title: 'Teams',
+      component: TeamList,
       passProps: { hunt : this.props.hunt,
                    user : this.props.user}
     });
@@ -68,9 +83,9 @@ class huntDetails extends Component{
     }
     return(
       <View>
-        <Button onPress={this.seeDirectivesPressed.bind(this)}> Directives </Button>
+        <Button onPress={this.seeDirectives.bind(this)}> Directives </Button>
 
-        <Button> Teams </Button>
+        <Button onPress={this.seeTeams.bind(this)}> Teams </Button>
       </View>
     )
   }
