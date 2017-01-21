@@ -66,7 +66,9 @@ class TeamList extends Component {
     this.props.navigator.push({
       title: 'Players',
       component: Roster,
-      passProps: { team : team }
+      passProps: { team : team,
+                   user: this.props.user,
+                   hunt: this.props.hunt}
     });
   }
 
@@ -79,7 +81,8 @@ class TeamList extends Component {
     this.props.navigator.push({
       title: 'Hunt',
       component: DirectiveList,
-      passProps: { hunt : hunt }
+      passProps: { hunt : hunt,
+                   user: this.props.user }
     });
   }
 
@@ -121,8 +124,6 @@ class TeamList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 50,
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   smallertext: {
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
     padding: 5,
     marginLeft: 5,
@@ -171,11 +172,11 @@ const styles = StyleSheet.create({
     width: 250
   },
   scrollview: {
-    marginTop: 0,
+    marginTop: -55,
     marginBottom: 25,
     //borderWidth: 3,
     //borderRadius: 5,
-    height: 210,
+    height: 250,
   //  borderColor: '#ddd',
   }
 });
