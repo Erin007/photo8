@@ -21,8 +21,8 @@ const styles = {
     color:  '#21b6cb',
     fontSize: 16,
     fontWeight: '600',
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
     margin: 10,
     fontFamily: 'Chalkboard SE'
   },
@@ -33,9 +33,9 @@ const styles = {
     borderRadius: 5,
     borderWidth: 5,
     borderColor: '#21b6cb',
-    marginLeft: 25,
+    marginLeft: 30,
     marginTop: 10,
-    marginRight: 25,
+    marginRight: 30,
     // marginBottom: 50
   }
 };
