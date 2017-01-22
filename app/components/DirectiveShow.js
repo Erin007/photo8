@@ -152,7 +152,11 @@ class DirectiveShow extends Component {
     this.props.navigator.push({
       title: 'Camera',
       component: Example,
-      passProps: { directive: this.props.directive},
+      passProps: { user: this.props.user,
+                  directive: this.props.directive,
+                  hunt: this.props.hunt,
+                  submission: this.state.submission,
+                  thisplayersteam: this.state.thisplayersteam},
     });
   }
 

@@ -13,7 +13,7 @@ import Input from './common/Input';
 import axios from 'axios';
 
 class addCaption extends Component {
-state = { caption: '', error: '', loading: false, thisplayersteam: '', submission: '' }
+state = { caption: '', error: '', loading: false, submission: '' }
 
   saveCaptionPressed(){
     console.log('>>> Save caption pressed')

@@ -23,7 +23,7 @@ var RCTCameraRollManager = require('NativeModules').CameraRollManager;
 
 class PhotoSelect extends Component {
  //
-  state = { image:'', error: '', loading: false, dbimage: '' }
+  state = { image:'', error: '', loading: false, submission: '' }
 
  componentDidMount() {
      console.log(this.props)
@@ -40,9 +40,7 @@ class PhotoSelect extends Component {
   }
 
  storeImages(data) {
-
     console.log(data.edges[0].node.image)
-
      this.setState({
          image: data.edges[0].node.image
      });
@@ -54,18 +52,17 @@ class PhotoSelect extends Component {
 
  renderCameraIcon(){
    console.log('<<< Render CameraIcon called')
-     if (this.props.directive.complete !== true){
-       return(
-         <View>
-           <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
-             <Image
-             source={require('../assets/ic_photo_camera_36pt.png')}
-             style={styles.camerabutton}
-             />
-           </TouchableOpacity>
-         </View>
-       )
-     }
+
+   return(
+     <View>
+       <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
+         <Image
+         source={require('../assets/ic_photo_camera_36pt.png')}
+         style={styles.camerabutton}
+         />
+       </TouchableOpacity>
+     </View>
+   )
  }
 
  toCameraPressed() {
@@ -84,34 +81,26 @@ class PhotoSelect extends Component {
  usePhotoPressed(){
    console.log('<<< usePhotoPressed')
    //store the image uri in the backend
-   //***Change the team id to be specific to the user's team ***//
-   axios.post('https://treasure-chest-api.herokuapp.com/submissions',{
-     directive_id: this.props.directive.id,
-     team_id: 1,
+   console.log("submission", this.props.submission)
+
+   const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.props.submission.id
+
+   axios.patch(url,{
      photo: this.state.image.uri,
-     status: 'yellow'
    })
    .then(response => {
      console.log("response", response)
-     console.log("response.data", response.data)
-     return this.setState( { dbimage: response.data })
+     this.setState({ submission: response.data })
    })
-     //if the team is saved successfully
    .then(this.photoSaved.bind(this))
-   //if there was a problem saving the team
    .catch((error) => {
-     console.log("The photo did not save")
-
-     this.setState({ error: "There was an error saving the photo. Please try again.", loading: false })
-
-     console.log(error)
+     console.log("Error:", error)
+     this.setState({ error: "There was an error with your submission. Please try again.", loading: false })
    });
  }
 
  photoSaved(){
    console.log('<<<Photo Saved Called')
-   console.log('submission id:', this.state.dbimage.id )
-   //go to Directive Show and make an axios call for the photo
    this._toDirectiveShow();
  }
 
@@ -119,11 +108,10 @@ class PhotoSelect extends Component {
    this.props.navigator.push({
      title: 'Directive',
      component: DirectiveShow,
-     passProps: { submissionId: this.state.dbimage.id,
+     passProps: { submission: this.state.submission,
                   directive: this.props.directive },
    });
  }
-
 
  render() {
    return (
@@ -173,64 +161,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
 });
-export default PhotoSelect;
 
-//     componentDidMount() {
-//         const fetchParams = {
-//             first: 3,
-//         };
-//         CameraRoll.getPhotos(fetchParams, this.storeImages, this.logImageError).done(
-//           (data) =>{
-//              console.log(data);
-//             this.setState({
-//               photoSource: {uri: data.edges[3].node.image.uri}
-//             })
-//           },
-//           (error) => {
-//             console.warn(error);
-//           }
-//         );;
-//     }
-//
-//     storeImages(data) {
-//         const assets = data.edges;
-//         const images = assets.map((asset) => asset.node.image);
-//         console.log("images", images);
-//         this.setState({
-//             images: images,
-//         });
-//     }
-//
-//     logImageError(err) {
-//         console.log(err);
-//     }
-//
-//     selectImage(uri) {
-//         NativeModules.ReadImageData.readImage(uri, (image) => {
-//             this.setState({
-//                 selected: image,
-//             });
-//             console.log(image);
-//         });
-//     }
-//
-//   render() {
-//     return (
-//       <ScrollView style={styles.container}>
-//         <View style={styles.imageGrid}>
-//         {
-//           this.state.images.map((image, index) => {
-//             return (
-//                 <TouchableHighlight key={"image" + index} onPress={this.selectImage.bind(null, image.uri)}>
-//                     <Image style={styles.image} source={{ uri: this.state.image.uri }} />
-//                 </TouchableHighlight>
-//             );
-//           })
-//         }
-//         </View>
-//       </ScrollView>
-//     )
-//   }
-// }
-//
-//
+export default PhotoSelect;
