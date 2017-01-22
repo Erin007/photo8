@@ -14,7 +14,7 @@ import DirectiveShow from './DirectiveShow'
 
 class DirectiveList extends Component {
 
-    state = { directives: [], directive: {} }; //initial or empty state, property of this
+    state = { directives: [], directive: {} };
 
     componentWillMount (){
       console.log('Component will Mount in DirectiveList called')
@@ -41,7 +41,8 @@ class DirectiveList extends Component {
         title: 'Directive',
         component: DirectiveShow,
         passProps: { directive: directive,
-                     hunt: this.props.hunt}
+                     hunt: this.props.hunt,
+                     user: this.props.user}
       });
     }
 

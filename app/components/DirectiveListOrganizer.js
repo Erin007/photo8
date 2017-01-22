@@ -10,7 +10,7 @@ import {
   Text } from 'react-native';
 import axios from 'axios';
 import Button from './common/Button';
-import DirectiveShow from './DirectiveShow';
+import DirectiveShowOrganizer from './DirectiveShowOrganizer';
 import addDirectives from './AddDirectives';
 
 class DirectiveListOrganizer extends Component {
@@ -40,7 +40,7 @@ class DirectiveListOrganizer extends Component {
     _toDirectiveShow = (directive) => {
       this.props.navigator.push({
         title: 'Directive',
-        component: DirectiveShow,
+        component: DirectiveShowOrganizer,
         passProps: { directive: directive,
                     hunt: this.props.hunt}
       });

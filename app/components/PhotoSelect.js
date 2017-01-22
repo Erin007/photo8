@@ -40,8 +40,6 @@ class PhotoSelect extends Component {
   }
 
  storeImages(data) {
-    //  const assets = data.edges;
-    //  const images = assets.map((asset) => asset.node.image);
 
     console.log(data.edges[0].node.image)
 

@@ -11,37 +11,39 @@ Image } from 'react-native';
 import Button from './common/Button';
 import Input from './common/Input';
 import Example from '../Camera';
-import Card from './common/Button';
 import axios from 'axios';
+import addCaption from './AddCaption'
 
 class DirectiveShow extends Component {
 
   state = { caption: '', error: '', loading: false, submission: {}, submissionId: ''}
 
-  saveCaptionPressed(){
-    console.log('>>> Save caption pressed')
 
-    //axios post this caption to the submission with the directive_id passed in props
-    axios.post('https://treasure-chest-api.herokuapp.com/submissions',{
-      directive_id: this.props.directive.id,
-      caption: this.state.caption,
-      //team_id: "Whatever team this player is on right now"
-    })
-    .then(response => {
-      console.log("response", response)
-      return this.setState( { submission: response.data })
-    })
-      //if the submission is saved successfully
-    .then(this.submissionSaved.bind(this))
-    //if there was a problem saving the submission
-    .catch((error) => {
-      console.log("The submission caption did not save")
 
-      this.setState({ error: "There was an error with your submission. Please try again.", loading: false })
+  //check for submissions to this directive by this team
 
-      console.log("Error:", error)
+  //if a submission was found, render the photo and caption, and status of  that submission
+
+  //if a submission wasn't found, make a new 'shell' submission so adding a caption and adding a photo can both be updates/put requests
+
+  //navigate to the camera
+
+  //navigate to add a caption
+  updateCaptionPressed(){
+    console.log("update caption was pressed")
+    this._toAddCaption()
+  }
+
+  _toAddCaption = () => {
+    this.props.navigator.push({
+      title: 'Caption',
+      component: addCaption,
+      passProps: { user: this.props.user,
+      directive: this.props.directive,
+      hunt: this.props.hunt},
     });
   }
+
 
   submissionSaved(){
     console.log("made it to submissionSaved");
@@ -66,16 +68,8 @@ class DirectiveShow extends Component {
     }
     //if there isn't a caption, then show the input box and save caption button
     return(
-      <View style={styles.caption}>
-        <Input
-          label = ""
-          placeholder = "caption"
-          value = {this.state.caption}
-          onChangeText = {caption => this.setState({ caption })}
-          />
-
-          <Button onPress={this.saveCaptionPressed.bind(this)}>Save Caption</Button>
-      </View>
+      <Text style={styles.text}> You have not yet submitted a caption.
+      </Text>
     )
   }
 
@@ -138,7 +132,7 @@ class DirectiveShow extends Component {
         source={require('../assets/placeholder.png')}
         style={styles.placeholder}
         />
-    </View>
+      </View>
     )
   }
 
@@ -174,6 +168,7 @@ class DirectiveShow extends Component {
         { this.renderCameraIcon() }
         { this.renderCaption() }
 
+        <Button onPress={this.updateCaptionPressed.bind(this)}> Update Caption </Button>
       </ScrollView>
     )
   }
@@ -202,12 +197,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   text: {
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'center',
     paddingTop: 10,
+    fontFamily: "Chalkboard SE",
+    color: '#DCDCDC',
   },
   directive: {
-    fontSize: 25,
+    fontSize: 18,
     textAlign: 'center',
     marginLeft: 10,
     marginRight: 10,
@@ -215,7 +212,7 @@ const styles = StyleSheet.create({
     fontFamily: "Chalkboard SE"
   },
   placeholder: {
-    margin: 10,
+    margin: 2,
     height: 250,
     width: 250,
     borderWidth: 1,

@@ -58,7 +58,7 @@ class HuntListPlayer extends Component {
       title: 'Hunt Details',
       component: huntDetails,
       passProps: { hunt: hunt,
-                  user: this.state.user }
+                   user: this.state.user }
     });
   }
 
