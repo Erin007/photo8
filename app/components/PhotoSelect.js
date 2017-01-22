@@ -74,7 +74,10 @@ class PhotoSelect extends Component {
    this.props.navigator.push({
      title: 'Camera',
      component: Example,
-     passProps: { directive: this.props.directive },
+     passProps: { directive: this.props.directive,
+       hunt: this.props.hunt,
+       user: this.props.user,
+       submission: this.props.submission },
    });
  }
 
@@ -109,7 +112,9 @@ class PhotoSelect extends Component {
      title: 'Directive',
      component: DirectiveShow,
      passProps: { submission: this.state.submission,
-                  directive: this.props.directive },
+                  directive: this.props.directive,
+                  hunt: this.props.hunt,
+                  user: this.props.user },
    });
  }
 

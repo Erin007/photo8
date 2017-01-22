@@ -51,7 +51,10 @@ class Example extends Component {
     this.props.navigator.push({
       title: 'Photo',
       component: PhotoSelect,
-      passProps: { directive : this.props.directive },
+      passProps: { directive : this.props.directive,
+        hunt: this.props.hunt,
+        user: this.props.user,
+      submission: this.props.submission },
     });
   }
 

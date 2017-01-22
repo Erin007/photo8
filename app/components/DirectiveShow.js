@@ -25,6 +25,7 @@ class DirectiveShow extends Component {
 
   getPlayersTeamInfo(){
     console.log("Getting the player's team info")
+    console.log(' Directive VIew this.props', this.props)
     console.log("hunt_id", this.props.hunt.id)
     console.log("user_id", this.props.user.id)
 

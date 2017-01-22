@@ -11,6 +11,7 @@ Image } from 'react-native';
 import Button from './common/Button';
 import Input from './common/Input';
 import axios from 'axios';
+import DirectiveShow from './DirectiveShow';
 
 class addCaption extends Component {
 state = { caption: '', error: '', loading: false, submission: '' }
@@ -45,7 +46,20 @@ state = { caption: '', error: '', loading: false, submission: '' }
       loading: false,
       error: ''
     })
+    this._toDirectiveShow()
   }
+
+  _toDirectiveShow = () => {
+    this.props.navigator.push({
+      title: 'Directive',
+      component: DirectiveShow,
+      passProps: { submission: this.state.submission,
+                   directive: this.props.directive,
+                   hunt: this.props.hunt,
+                   user: this.props.user },
+    });
+  }
+
 
   render(){
     return(
