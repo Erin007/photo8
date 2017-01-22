@@ -15,10 +15,25 @@ import Spinner from './common/Spinner';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
 import huntDetails from './HuntDetails';
+import TeamListOrganizer from './TeamListOrganizer';
 import axios from 'axios';
 
+
 class addTeams extends Component{
-  state = { error: '', loading: false, hunt: {}, teamName:'', teams: [], team: {}, teamNames: []}
+  state = { error: '', loading: false, hunt: {}, teamName:'', teams: [], team: {} }
+
+  componentWillMount (){
+
+    const url = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id
+
+    axios.get(url).then( response => {
+      console.log("response from directivelist", response)
+      return this.setState( { teams: response.data })
+     })
+      .catch(function (error) {
+        console.log(error);
+      });;
+  }
 
   addTeamPressed(teamName){
     console.log('>>> Add Team pressed');
@@ -38,7 +53,7 @@ class addTeams extends Component{
       return this.setState( { team: response.data })
     })
       //if the team is saved successfully
-    .then(this.teamSaved(this.state.team))
+    .then(this.componentWillMount())
     //if there was a problem saving the team
     .catch((error) => {
       console.log("The team did not save")
@@ -47,10 +62,6 @@ class addTeams extends Component{
 
       console.log(error)
     });
-    //show the organizer the list of teams they've made so far by rendering them to the screen
-    this.state.teamNames.push(teamName)
-    console.log(teamName)
-    console.log(this.state.teamNames)
 
     //clear the form
     this.setState({
@@ -60,41 +71,46 @@ class addTeams extends Component{
     })
   }
 
-  teamSaved(team){
-    console.log('<<<< Team Saved Called')
-    //push the team into a list of teams associated with this hunt
-    this.state.teams.push(team)
-    console.log(team)
-    console.log(this.state.teams)
-
-    this.renderTeamNames()
+//navigate to huntDetails
+  seeHuntPressed() {
+    console.log('seeHunt pressed');
+    this._toHuntDetails()
   }
 
-  seeHuntPressed(hunt) {
-    console.log('>>> See Hunt pressed');
-    console.log("this.props.hunt.name", this.props.hunt.name)
-    console.log("hunt", hunt)
-    this._toHuntDetails(hunt)
-  }
-
-  _toHuntDetails = (hunt) => {
+  _toHuntDetails = () => {
     this.props.navigator.push({
       title: 'Hunt Details',
       component: huntDetails,
-      passProps: { hunt: hunt,
+      passProps: { hunt: this.props.hunt,
                   user: this.props.user}
     });
   }
 
+//navigate back to the TeamsListOrganizer
+  seeTeamsPressed(){
+    console.log("seeTeamsPressed")
+    this._toTeamList()
+  }
+
+  _toTeamList = () => {
+    this.props.navigator.push({
+      title: 'Teams',
+      component: TeamListOrganizer,
+      passProps: { hunt: this.props.hunt,
+                  user: this.props.user}
+    });
+  }
+
+//helper functions to render things
   renderTeamNames() {
     console.log("rendering teams")
-    if (this.state.teamNames[0] !== '')  {
-      console.log(this.state.teamNames)
+    if (this.state.teams[0] !== '')  {
+      console.log(this.state.teams)
 
-      return this.state.teamNames.map(teamName=>
+      return this.state.teams.map(team=>
 
-          <Text style={styles.teamname} key={teamName.length}>
-              {teamName}
+          <Text style={styles.teamname} key={team.id}>
+              {team.name}
           </Text>
       );
     }
@@ -104,9 +120,12 @@ class addTeams extends Component{
     return (
       <View style={styles.container}>
 
-        <Text style={styles.name}>
-          {this.props.hunt.name}
-        </Text>
+        <TouchableOpacity onPress={() =>
+          this.seeHuntPressed()}>
+          <Text style={styles.name}>
+            {this.props.hunt.name}
+          </Text>
+        </TouchableOpacity>
 
         <Text style={styles.text}>
           Which teams will participate in this hunt?
@@ -135,7 +154,7 @@ class addTeams extends Component{
         </ScrollView>
 
         <Button style={styles.button} onPress={() =>
-          this.seeHuntPressed(this.props.hunt)}> Next
+          this.seeTeamsPressed()}> See Teams
         </Button>
 
       </View>
@@ -145,16 +164,14 @@ class addTeams extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    //justifyContent: '',
     marginTop: 50,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   scrollview:{
     marginTop: 10,
-    height: 180,
     marginBottom: 10,
+    height: 180,
   },
   teambox:{
     flexDirection: 'row',
@@ -178,10 +195,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   name: {
-    fontSize: 30,
+    fontSize: 32,
     textAlign: 'center',
     paddingTop: 20,
-    //paddingBottom: 20,
+    paddingBottom: 20,
     fontFamily: 'Pacifico'
   },
   text: {
@@ -189,8 +206,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginLeft: 10,
     marginRight: 10,
-    // paddingTop: 20,
-    // paddingBottom: 20,
     fontFamily: 'Chalkboard SE'
   },
   errorTextStyle: {
@@ -198,11 +213,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'red',
     fontFamily: "Chalkboard SE",
-  //  marginLeft: 8,
     textAlign: 'center',
     marginTop: -20,
-    //padding: 10,
-  //  marginBottom: 10
   },
   teamname: {
     fontSize: 16,

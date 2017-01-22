@@ -8,13 +8,11 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-//import DirectiveList from './DirectiveList';
 import AddTeams from './AddTeams'
 import Button from './common/Button';
 import InputPlus from './common/InputPlus';
 import Spinner from './common/Spinner';
-import Card from './common/Card';
-import CardSection from './common/CardSection';
+import DirectiveListOrganizer from './DirectiveListOrganizer';
 import huntDetails from './HuntDetails';
 import axios from 'axios';
 
@@ -22,7 +20,6 @@ class addDirectives extends Component {
   state = { directive: '', huntId:'', error: '', loading: false, hunt: {}, directives : []}
 
   componentWillMount (){
-    console.log('Component will Mount in DirectiveList called')
 
     const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
 
@@ -70,22 +67,37 @@ class addDirectives extends Component {
     })
   }
 
-  nextPressed(hunt) {
-    console.log('>>> Next pressed');
-    console.log("this.props.hunt.name", this.props.hunt.name)
-    console.log("hunt", hunt)
-    this._toAddTeams(hunt)
+//navigate to huntDetails
+  seeHuntPressed() {
+    console.log('seeHunt pressed');
+    this._toHuntDetails()
   }
 
-  _toAddTeams = (hunt) => {
+  _toHuntDetails = () => {
     this.props.navigator.push({
-      title: 'Add Teams',
-      component: AddTeams,
-      passProps: { hunt: hunt,
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: this.props.hunt,
                   user: this.props.user}
     });
   }
 
+//navigate back to the DirectiveListOrganizer
+  seeDirectivesPressed() {
+    console.log("seeDirectivesPressed")
+    this._toDirectiveList()
+  }
+
+  _toDirectiveList = () => {
+    this.props.navigator.push({
+      title: 'Directives',
+      component: DirectiveListOrganizer,
+      passProps: { hunt: this.props.hunt,
+                  user: this.props.user}
+    });
+  }
+
+//helper functions to render things
   renderDirectives() {
     console.log("rendering directives")
 
@@ -105,9 +117,12 @@ class addDirectives extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.name}>
-          {this.props.hunt.name}
-        </Text>
+        <TouchableOpacity onPress={() =>
+        this.seeHuntPressed()}>
+          <Text style={styles.name}>
+            {this.props.hunt.name}
+          </Text>
+        </TouchableOpacity>
 
         <Text style={styles.text}>
           What should the hunters look for?
@@ -135,7 +150,7 @@ class addDirectives extends Component {
         </ScrollView>
 
         <Button style={styles.button} onPress={() =>
-          this.nextPressed(this.props.hunt)}> Teams
+          this.seeDirectivesPressed()}> See Directives
         </Button>
 
       </View>
@@ -145,8 +160,6 @@ class addDirectives extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    //justifyContent: '',
     marginTop: 50,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
@@ -178,7 +191,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   name: {
-    fontSize: 30,
+    fontSize: 32,
     textAlign: 'center',
     paddingTop: 20,
     paddingBottom: 20,
@@ -189,7 +202,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginLeft: 10,
     marginRight: 10,
-    // marginTop: -20,
     fontFamily: 'Chalkboard SE'
   },
   errorTextStyle: {
@@ -197,11 +209,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'red',
     fontFamily: "Chalkboard SE",
-    // marginLeft: 8,
     textAlign: 'center',
     marginTop: -20,
-    // padding: 10,
-    // marginBottom: 10
   },
   directive: {
     fontSize: 16,
