@@ -13,58 +13,38 @@ import Input from './common/Input';
 import axios from 'axios';
 
 class addCaption extends Component {
-state = { caption: '', error: '', loading: false, thisplayersteam: '' }
+state = { caption: '', error: '', loading: false, thisplayersteam: '', submission: '' }
 
-
-
-//   .then(response => {
-//     console.log("response", response)
-//     return this.setState( { submission: response.data })
-//   })
-//     //if the submission is saved successfully
-//   .then(this.submissionSaved.bind(this))
-//   //if there was a problem saving the submission
-//   .catch((error) => {
-//     console.log("The submission caption did not save")
-//
-//     this.setState({ error: "There was an error with your submission. Please try again.", loading: false })
-//
-//     console.log("Error:", error)
-//   });
-// }
   saveCaptionPressed(){
     console.log('>>> Save caption pressed')
 
-    this.getPlayersTeamInfo()
-
     //make an update request to the backend with the caption info for the submission
-    axios.patch('https://treasure-chest-api.herokuapp.com/submissions',{
-      directive_id: this.props.directive.id,
+    console.log("caption", this.state.caption)
+    console.log("submission", this.props.submission)
+
+    const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.props.submission.id
+
+    axios.patch(url,{
       caption: this.state.caption,
-      team_id: this.state.thisplayersteam.id
     })
     .then(response => {
       console.log("response", response)
       this.setState({ submission: response.data })
     })
+    .then(this.submissionUpdated.bind(this))
     .catch((error) => {
       console.log("Error:", error)
+      this.setState({ error: "There was an error with your submission. Please try again.", loading: false })
     });
   }
 
-  getPlayersTeamInfo(){
-    console.log(">>> Getting the player's team info")
-
-    //make an axios call to get the team that this player is on for this hunt
-    const url = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id + '/' + this.props.user.id
-
-    axios.get(url).then( response => {
-      console.log(response)
-      return this.setState( { thisplayersteam: response.data })
-     })
-      .catch(function (error) {
-        console.log(error);
-      });;
+  submissionUpdated(){
+    //clear the form
+    this.setState({
+      caption:'',
+      loading: false,
+      error: ''
+    })
   }
 
   render(){
@@ -85,7 +65,7 @@ state = { caption: '', error: '', loading: false, thisplayersteam: '' }
             />
         </View>
 
-          <Button>Save Caption</Button>
+          <Button onPress={this.saveCaptionPressed.bind(this)}>Save Caption</Button>
       </View>
 
     )

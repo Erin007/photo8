@@ -16,116 +16,109 @@ import addCaption from './AddCaption'
 
 class DirectiveShow extends Component {
 
-  state = { caption: '', error: '', loading: false, submission: {}, submissionId: ''}
-
-
+  state = { caption: '', error: '', loading: false, submission: {}, submissionId: '', thisplayersteam: ''}
 
   //check for submissions to this directive by this team
-
-  //if a submission was found, render the photo and caption, and status of  that submission
-
-  //if a submission wasn't found, make a new 'shell' submission so adding a caption and adding a photo can both be updates/put requests
-
-  //navigate to the camera
-
-  //navigate to add a caption
-  updateCaptionPressed(){
-    console.log("update caption was pressed")
-    this._toAddCaption()
+  componentWillMount(){
+    this.getPlayersTeamInfo()
   }
 
-  _toAddCaption = () => {
-    this.props.navigator.push({
-      title: 'Caption',
-      component: addCaption,
-      passProps: { user: this.props.user,
-      directive: this.props.directive,
-      hunt: this.props.hunt},
-    });
-  }
+  getPlayersTeamInfo(){
+    console.log("Getting the player's team info")
+    console.log("hunt_id", this.props.hunt.id)
+    console.log("user_id", this.props.user.id)
 
+    //make an axios call to get the team that this player is on for this hunt
+    const url = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id + '/' + this.props.user.id
 
-  submissionSaved(){
-    console.log("made it to submissionSaved");
-    //clear the form
-    this.setState({
-      caption:'',
-      loading: false,
-      error: ''
+    axios.get(url).then( response => {
+      console.log("TEAM", response)
+      return this.setState( { thisplayersteam: response.data })
     })
+      .then(this.getSubmission.bind(this))
+      .catch(function (error) {
+        console.log(error);
+      });;
+  }
 
-    //call renderCaption
-    console.log(this.state.submission.caption);
-    this.renderCaption()
+  getSubmission(){
+    console.log("team_id", this.state.thisplayersteam.id)
+    console.log("directive_id", this.props.directive.id )
+    const url = 'https://treasure-chest-api.herokuapp.com/submissions/find/' + this.state.thisplayersteam.id + '/' + this.props.directive.id
+
+    axios.get(url).then( response => {
+      console.log("response SUBMISSION", response.data)
+      this.setState( { submission: response.data[0] })
+      })
+      .then(this.handleSubmission.bind(this))
+      .catch(function (error) {
+        console.log(error);
+      });;
+  }
+
+  handleSubmission(){
+    console.log("HANDLING THE SUBMISSION RETURNED")
+    console.log("submission", this.state.submission)
+    if (typeof this.state.submission == 'undefined' ){
+      console.log("THERE ARE NOT ANY SUBMISSIONS FOR THIS DIRECTIVE FROM THIS TEAM YET!")
+      //if a submission wasn't found, make a new 'shell' submission so adding a caption and adding a photo can both be updates/put requests
+      const url = 'https://treasure-chest-api.herokuapp.com/submissions/'
+
+      axios.post(url,{
+        directive_id: this.props.directive.id,
+        team_id: this.state.thisplayersteam.id,
+        photo: '',
+        caption: '',
+        status: 0
+      })
+      .then(response => {
+        console.log("response", response)
+        this.setState({ submission: response.data })
+      })
+      .catch((error) => {
+        console.log("Error:", error)
+      });
+    }
+  }
+
+  checkCompletion(){
+    if (this.props.directive.complete == null || this.props.directive.complete == false ){
+
+       return <Text> ❏ </Text>
+    }
+    return <Text> ✔︎ </Text>
   }
 
   renderCaption(){
-    if (typeof this.state.submission.caption !== 'undefined'){
-      //if there is a caption, show it on the screen
-      return(
-        <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
-      )
+    if (typeof this.state.submission !== 'undefined'){
+      if (this.state.submission.caption !== ''){
+        console.log("ALL THE CRITERIA FOR SHOWING CAPTION HAS BEEN MET")
+        return(
+          <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
+        )
+      }
     }
-    //if there isn't a caption, then show the input box and save caption button
     return(
       <Text style={styles.text}> You have not yet submitted a caption.
       </Text>
     )
   }
 
-  toCameraPressed() {
-    console.log('>>> To Camera Pressed');
-    this._toCamera();
-  }
-
-  _toCamera = () => {
-    this.props.navigator.push({
-      title: 'Camera',
-      component: Example,
-      passProps: { directive: this.props.directive},
-    });
-  }
-
-  checkCompletion(){
-    console.log('<<< Checking completion of directive in status show')
-    console.log(this.props.directive)
-    if (this.props.directive.complete == null || this.props.directive.complete == false ){
-      console.log(">>>> Check completion called")
-       return <Text> ❏ </Text>
-    }
-    return <Text> ✔︎ </Text>
-  }
-
   renderPhoto(){
-    console.log(">>>> Render Photo called")
-    console.log(this.props.directive.complete)
-    console.log("<<<<<< submissionID", this.props.submissionId)
-    if (typeof this.props.submissionId !== 'undefined'){
-      //make the axios call to retrieve the submission
-      const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.props.submissionId
-      console.log(url)
+    console.log("Render Photo called")
 
-      axios.get(url).then( response => {
-        console.log("response", response)
-        console.log(this.state.submission.photo)
-
-        this.setState( { submission: response.data })
-
-        })
-        .catch(function (error) {
-          console.log(error);
-        });;
-
-      return (
-        <View>
-          <Image
-          source={{ uri: this.state.submission.photo}}
-          style={styles.placeholder}
-          />
-        </View>
-      )
+    if (typeof this.state.submission !== 'undefined'){
+      if (this.state.submission.photo !== ''){
+        return (
+          <View>
+            <Image
+            source={{ uri: this.state.submission.photo}}
+            style={styles.placeholder}
+            />
+          </View>
+        )
+      }
     }
-
     return(
       <View>
         <Image
@@ -137,7 +130,6 @@ class DirectiveShow extends Component {
   }
 
   renderCameraIcon(){
-    console.log('<<< Render CameraIcon called')
     return(
       <View>
         <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
@@ -150,10 +142,39 @@ class DirectiveShow extends Component {
     )
   }
 
-  render(){
+//navigate to the camera
+  toCameraPressed() {
+    console.log('To Camera Pressed');
+    this._toCamera();
+  }
 
-    console.log("showing directive description")
-    console.log ("this.props.directive", this.props.directive)
+  _toCamera = () => {
+    this.props.navigator.push({
+      title: 'Camera',
+      component: Example,
+      passProps: { directive: this.props.directive},
+    });
+  }
+
+//navigate to add a caption
+  updateCaptionPressed(){
+    console.log("update caption was pressed")
+    this._toAddCaption()
+  }
+
+  _toAddCaption = () => {
+    this.props.navigator.push({
+      title: 'Caption',
+      component: addCaption,
+      passProps: { user: this.props.user,
+                  directive: this.props.directive,
+                  hunt: this.props.hunt,
+                  submission: this.state.submission,
+                  thisplayersteam: this.state.thisplayersteam},
+    });
+  }
+
+  render(){
     return (
       <ScrollView style={styles.container}>
 
@@ -188,7 +209,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Pacifico'
   },
   captiontext:{
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
     paddingTop: 10,
     fontFamily: "Chalkboard SE"
