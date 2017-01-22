@@ -83,14 +83,18 @@ class HuntListOrganizer extends Component {
   render() {
     return (
       <View style={styles.container}>
+
         <Text style={styles.welcome}>
            Snapenger Hunt
         </Text>
+
         <Text style={styles.text}>
            Hunts You Organize
         </Text>
 
-        { this.renderHunts() }
+        <ScrollView style={styles.scrollview}>
+          { this.renderHunts() }
+        </ScrollView>
 
         <Button onPress={ this.newHuntPressed.bind(this)}>Make a New Hunt</Button>
       </View>
@@ -100,11 +104,12 @@ class HuntListOrganizer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50
+    marginTop: 50,
+    paddingBottom: 50
   },
   welcome: {
     fontSize: 36,
@@ -115,15 +120,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   text: {
-    fontSize: 18,
+    fontSize: 20,
     textAlign: 'left',
-    padding: 10,
+    padding: 5,
     marginLeft: 5,
     marginRight: 5,
     fontFamily: 'Chalkboard SE'
   },
   hunt:{
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
     borderWidth: 1,
@@ -139,17 +144,22 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     padding: 5,
-    paddingLeft: 10,
+    paddingLeft: 15,
     width: 275
   },
   smallertext: {
-    fontSize: 14,
+    fontSize: 18,
     textAlign: 'center',
     padding: 10,
     marginLeft: 10,
     marginRight: 10,
     fontFamily: 'Chalkboard SE',
     color: '#DCDCDC',
+  },
+  scrollview:{
+    height: 250,
+    marginBottom: 10,
+    // borderWidth: 3
   }
 });
 

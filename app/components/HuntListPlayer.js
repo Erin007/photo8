@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50
+    marginTop: 50,
+    paddingBottom: 70
   },
   welcome: {
     fontSize: 36,
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   hunt:{
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
     borderWidth: 1,
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     padding: 5,
-    paddingLeft: 10,
+    paddingLeft: 15,
     width: 275
   },
   smallertext: {
