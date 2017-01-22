@@ -1,3 +1,4 @@
+//HuntDetails.js
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -9,12 +10,14 @@ import {
 import Button from './common/Button';
 import DirectiveList from './DirectiveList';
 import TeamList from './TeamList';
+import Submissions from './Submissions';
 import DirectiveListOrganizer from './DirectiveListOrganizer';
-import TeamListOrganizer from './TeamListOrganizer'
-import newHunt from './MakeHuntForm';
+import TeamListOrganizer from './TeamListOrganizer';
+import SubmissionsOrganizer from './SubmissionsOrganizer';
 
 class huntDetails extends Component{
 
+//to the player pages for directives, teams and submissions
   seeDirectives() {
     console.log('>>> seeDirectives Button Pressed!');
     this._toDirectiveList();
@@ -43,6 +46,21 @@ class huntDetails extends Component{
     });
   }
 
+  seeSubmissions(){
+    console.log('a player wants to the see the submissions');
+    this._toSubmissions();
+  }
+
+  _toSubmissions = () => {
+    this.props.navigator.push({
+      title: 'Submissions',
+      component: Submissions,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
+
+//to the organizer pages for directives, teams and submissions
   directivesOrganizer(){
     console.log('The Organizer wants to the see the directives');
     this._toDirectiveListOrganizer();
@@ -71,21 +89,41 @@ class huntDetails extends Component{
     });
   }
 
+  submissionsOrganizer(){
+    console.log('The Organizer wants to the see the submissions');
+    this._toSubmissionsOrganizer();
+  }
+
+  _toSubmissionsOrganizer = () => {
+    this.props.navigator.push({
+      title: 'Submissions',
+      component: SubmissionsOrganizer,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
+
   renderButtons(){
+    //if the user is the organizer
     if (this.props.hunt.organizer_id == this.props.user.id){
       return(
         <View>
           <Button onPress={this.directivesOrganizer.bind(this)}> Directives</Button>
 
           <Button onPress={this.teamsOrganizer.bind(this)}> Teams </Button>
+
+          <Button onPress={this.submissionsOrganizer.bind(this)}> Submissions </Button>
         </View>
       );
     }
+    //if the user is NOT the organizer
     return(
       <View>
         <Button onPress={this.seeDirectives.bind(this)}> Directives </Button>
 
         <Button onPress={this.seeTeams.bind(this)}> Teams </Button>
+
+        <Button onPress={this.seeSubmissions.bind(this)}> Submissions </Button>
       </View>
     )
   }
