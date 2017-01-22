@@ -12,118 +12,138 @@ import axios from 'axios';
 import Button from './common/Button';
 import DirectiveShowOrganizer from './DirectiveShowOrganizer';
 import addDirectives from './AddDirectives';
+import huntDetails from './HuntDetails';
 
 class DirectiveListOrganizer extends Component {
 
-    state = { directives: [], directive: {} }; //initial or empty state, property of this
+  state = { directives: [], directive: {} }; //initial or empty state, property of this
 
-    componentWillMount (){
-      console.log('Component will Mount in DirectiveList called')
+  componentWillMount (){
+    console.log('Component will Mount in DirectiveList called')
 
-      const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
+    const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
 
-      axios.get(url).then( response => {
-        console.log("response from directivelist", response)
-        return this.setState( { directives: response.data })
-       })
-        .catch(function (error) {
-          console.log(error);
-        });;
-    }
-
-    directiveShowPressed(directive) {
-      console.log('>>> Directive Detail Pressed!');
-      console.log("this.state", this.state)
-      this._toDirectiveShow(directive);
-    }
-
-    _toDirectiveShow = (directive) => {
-      this.props.navigator.push({
-        title: 'Directive',
-        component: DirectiveShowOrganizer,
-        passProps: { directive: directive,
-                    hunt: this.props.hunt}
-      });
-    }
-
-    _toAddMoreDirectives = () => {
-      this.props.navigator.push({
-        title: 'Add Directives',
-        component: addDirectives,
-        passProps: { hunt: this.props.hunt,
-                    user: this.props.user }
-      });
-    }
-
-    deleteDirectivePressed(directive){
-      console.log("delete directive pressed.")
-    //delete the directive from the backend
-      const url = 'https://treasure-chest-api.herokuapp.com/directives/' + directive.id
-      console.log(url)
-      axios.delete(url)
-      .then(function (response) {
-        console.log(response);
-      })
+    axios.get(url).then( response => {
+      console.log("response from directivelist", response)
+      return this.setState( { directives: response.data })
+     })
       .catch(function (error) {
         console.log(error);
-      });
-    //fetch the new directives list and change the state to reflect the deletiion
-      const url2 = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
+      });;
+  }
 
-      axios.get(url2).then( response => {
-        console.log("response from directivelist", response)
-        return this.setState( { directives: response.data })
-       })
-        .catch(function (error) {
-          console.log(error);
-        });;
+  deleteDirectivePressed(directive){
+    console.log("delete directive pressed.")
+  //delete the directive from the backend
+    const url = 'https://treasure-chest-api.herokuapp.com/directives/' + directive.id
+    console.log(url)
+    axios.delete(url)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  //fetch the new directives list and change the state to reflect the deletiion
+    const url2 = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
+
+    axios.get(url2).then( response => {
+      console.log("response from directivelist", response)
+      return this.setState( { directives: response.data })
+     })
+      .catch(function (error) {
+        console.log(error);
+      });;
+  }
+
+//navigate to the details of the directive available to the organizer
+  directiveShowPressed(directive) {
+    console.log('>>> Directive Detail Pressed!');
+    console.log("this.state", this.state)
+    this._toDirectiveShow(directive);
+  }
+
+  _toDirectiveShow = (directive) => {
+    this.props.navigator.push({
+      title: 'Directive',
+      component: DirectiveShowOrganizer,
+      passProps: { directive: directive,
+                  hunt: this.props.hunt}
+    });
+  }
+
+//navigate to form to add more directives
+  _toAddMoreDirectives = () => {
+    this.props.navigator.push({
+      title: 'Add Directives',
+      component: addDirectives,
+      passProps: { hunt: this.props.hunt,
+                  user: this.props.user }
+    });
+  }
+
+//navigate back to HuntDetails
+  seeHuntPressed() {
+    console.log('seeHunt pressed');
+    this._toHuntDetails()
+  }
+
+  _toHuntDetails = () => {
+    this.props.navigator.push({
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: this.props.hunt,
+                  user: this.props.user}
+    });
+  }
+
+//helper functions to render things
+  renderDirectives() {
+    console.log('<<<Render Directives Called')
+    console.log('this.state.directives', this.state.directives)
+
+    if (this.state.directives.length > 0)  {
+
+      return this.state.directives.map(directive =>
+        <View style={styles.directivebox}>
+
+          <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
+
+            <Text style={styles.directive}>
+               ❏  {directive.name}
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.x} onPress={() => this.deleteDirectivePressed(directive)}>
+            <Text>✗</Text>
+          </TouchableOpacity>
+
+        </View>
+        );
     }
+  }
 
-    renderDirectives() {
-      console.log('<<<Render Directives Called')
-      console.log('this.state.directives', this.state.directives)
+  render() {
 
-      if (this.state.directives.length > 0)  {
+    return (
+      <View style={styles.container}>
 
-        return this.state.directives.map(directive =>
-          <View style={styles.directivebox}>
+      <TouchableOpacity onPress={() =>
+      this.seeHuntPressed()}>
+        <Text style={styles.text}> { this.props.hunt.name } </Text>
+      </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
+        <ScrollView style={styles.scrollview}>
 
-              <Text style={styles.directive}>
-                 ❏  {directive.name}
-              </Text>
-            </TouchableOpacity>
+          { this.renderDirectives() }
 
-            <TouchableOpacity style={styles.x} onPress={() => this.deleteDirectivePressed(directive)}>
-              <Text>✗</Text>
-            </TouchableOpacity>
+        </ScrollView>
 
-          </View>
-          );
-      }
-    }
+        <Button style={styles.button} onPress={this._toAddMoreDirectives.bind(this)}> Add Directives </Button>
 
-    render() {
-      console.log('this.state from DirectiveList render', this.state);
-      console.log('this.props', this.props)
-
-      return (
-        <View style={styles.container}>
-
-          <Text style={styles.text}> { this.props.hunt.name } </Text>
-
-          <ScrollView style={styles.scrollview}>
-
-            { this.renderDirectives() }
-
-          </ScrollView>
-
-          <Button style={styles.button} onPress={this._toAddMoreDirectives.bind(this)}> Add More Directives </Button>
-
-         </View>
-      );
-    }
+       </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
