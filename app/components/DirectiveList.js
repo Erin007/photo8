@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 //import DirectiveDetail from './DirectiveDetail';
 import DirectiveShow from './DirectiveShow'
+import huntDetails from './HuntDetails';
 
 class DirectiveList extends Component {
 
@@ -64,6 +65,15 @@ class DirectiveList extends Component {
       }
     }
 
+    _toHuntDetails = (hunt) => {
+      this.props.navigator.push({
+        title: 'Hunt Details',
+        component: huntDetails,
+        passProps: { hunt: this.props.hunt,
+                     user: this.state.user }
+      });
+    }
+
     render() {
       console.log('this.state from DirectiveList render', this.state);
       console.log('this.props', this.props)
@@ -72,7 +82,10 @@ class DirectiveList extends Component {
         <View style={styles.container}>
 
           <ScrollView>
-            <Text style={styles.text}> { this.props.hunt.name } </Text>
+
+            <TouchableOpacity onPress={this._toHuntDetails.bind(this)}>
+              <Text style={styles.text}> { this.props.hunt.name } </Text>
+            </TouchableOpacity>
 
             <Text style={styles.smalltext}> { this.props.hunt.description } </Text>
 

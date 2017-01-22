@@ -156,7 +156,7 @@ class welcome extends Component {
     this.props.navigator.push({
       title: 'Profile',
       component: UpdateProfile,
-      passProps: { user: this.state.user[0]},
+      passProps: { user: this.state.user},
     });
   }
 

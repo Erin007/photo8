@@ -6,11 +6,13 @@ import {
   View,
   Text,
   SideMenu,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import Input from './common/Input';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
+import welcome from './Welcome';
 import axios from 'axios';
 
 class UpdateProfile extends Component {
@@ -35,10 +37,11 @@ class UpdateProfile extends Component {
     this.setState({ error: '', loading: true });
 
     //send the updated info to the backend
-    const url = 'https://treasure-chest-api.herokuapp.com/users/' + this.state.user.id
+    const url = 'https://treasure-chest-api.herokuapp.com/users/' + this.props.user[0].id
+    console.log(this.props.user[0].id)
 
     axios.patch(url, {
-      username: this.state.username,
+      username: this.state.username
     })
     .then(response => {
       console.log("response", response)
@@ -46,7 +49,7 @@ class UpdateProfile extends Component {
     })
       //if the user is saved successfully
     .then(this.userUpdated.bind(this))
-    //if there was a problem saving the hunt
+    //if there was a problem saving the user
     .catch((error) => {
       console.log("The username did not save")
 
@@ -65,11 +68,16 @@ class UpdateProfile extends Component {
       loading: false,
       error: ''
     })
-
   }
+
   render(){
     return (
       <View style={styles.container}>
+
+        <Text style={styles.welcome}>
+           Snapenger Hunt
+        </Text>
+
         <ScrollView>
           <Text style={styles.text}> What would you like your username to be? </Text>
 
@@ -113,7 +121,15 @@ const styles = {
     fontSize: 20,
     alignSelf: 'center',
     color: 'red'
-  }
+  },
+  welcome: {
+    fontSize: 40,
+    textAlign: 'center',
+    margin: 5,
+    paddingTop: 10,
+    fontFamily: 'Pacifico',
+    justifyContent: 'flex-start'
+  },
 };
 
 export default UpdateProfile;

@@ -20,7 +20,7 @@ class HuntListPlayer extends Component {
   state = { hunts: [], hunt: {}, user: this.props.user };
 
   componentWillMount(){
-
+    console.log("huntListPlayer", this.props.user )
     const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/player/' + this.props.user.id
 
     axios.get(url).then( response => {
