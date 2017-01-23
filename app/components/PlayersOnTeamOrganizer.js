@@ -62,7 +62,7 @@ class RosterOrganizer extends Component {
   renderPlayers(){
     console.log("rendering players organizer")
     console.log('this.state', this.state)
-    if (typeof this.state.users !== 'undefined')  {
+    if (typeof this.state.users[0] !== 'undefined')  {
 
     return this.state.users.map(user =>
       <View style={styles.playerbox}>

@@ -13,7 +13,6 @@ import RosterOrganizer from './PlayersOnTeamOrganizer';
 import addTeams from './AddTeams';
 import huntDetails from './HuntDetails';
 
-
 class TeamListOrganizer extends Component {
 
   state = { teams: [], team: {} };
@@ -126,6 +125,9 @@ class TeamListOrganizer extends Component {
         </View>
         );
     }
+    return(
+      <Text style={styles.smallertext}> There are not any teams participating in this hunt yet. </Text>
+    )
   }
 
   render(){
@@ -177,7 +179,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color: '#DCDCDC',
   },
   team:{
     fontSize: 20,

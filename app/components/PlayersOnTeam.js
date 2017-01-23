@@ -31,7 +31,7 @@ class Roster extends Component {
   }
 
   renderPlayers(){
-    if (typeof this.state.users !== 'undefined')  {
+    if (typeof this.state.users[0] !== 'undefined')  {
 
     return this.state.users.map(user =>
 
