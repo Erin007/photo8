@@ -11,9 +11,11 @@ import axios from 'axios';
 import Button from './common/Button';
 
 class RosterOrganizer extends Component {
+  state = { users: [], teamplayer: ''};
 
   componentWillMount(){
-    state = { users: []};
+    console.log("componentwillmount in player organizer")
+    console.log("this.state", this.state)
     //axios fetch all of the players associated with this team
     const url = 'https://treasure-chest-api.herokuapp.com/users/find/team/' + this.props.team.id
 
@@ -26,14 +28,51 @@ class RosterOrganizer extends Component {
       });;
   }
 
+  deletePlayerPressed(user){
+    console.log('delete player pressed')
+    //find the teamplayer that associates this player with this team
+    const url = 'https://treasure-chest-api.herokuapp.com/teamplayers/find/' + this.props.team.id + '/' + user.id
+
+    axios.get(url)
+    .then(response => {
+      console.log(response);
+      return this.setState( { teamplayer: response.data })
+    })
+    .then(this.deleteTeamPlayer.bind(this))
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+    //delete the returned teamplayer
+  deleteTeamPlayer(){
+    const url2 = 'https://treasure-chest-api.herokuapp.com/teamplayers/' + this.state.teamplayer.id
+
+    axios.delete(url2).then( response => {
+      console.log("teamplayer delete", response)
+      return this.setState( { teamplayer: '' })
+      })
+      //fetch the new player list
+      .then(this.componentWillMount())
+      .catch(function (error) {
+        console.log("Errors from delete request", error);
+      });;
+  }
+
   renderPlayers(){
+    console.log("rendering players organizer")
+    console.log('this.state', this.state)
     if (typeof this.state.users !== 'undefined')  {
 
     return this.state.users.map(user =>
-
+      <View style={styles.playerbox}>
         <Text style={styles.team} key={user.id}>
              {user.username}
         </Text>
+
+        <TouchableOpacity style={styles.x} onPress={() => this.deletePlayerPressed(user)}>
+          <Text>✗</Text>
+        </TouchableOpacity>
+      </View>
       );
     }
   }
@@ -81,6 +120,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     marginTop: 50,
     paddingBottom: 50
+  },
+  playerbox: {
+    flexDirection: 'row',
+    marginBottom: 5,
+    width: 300
+  },
+  x:{
+    width: 30,
+    height: 30,
+    backgroundColor: "#21b6cb",
+    padding: 5,
+    alignItems: 'center',
+    borderRadius: 5,
+    borderWidth: 1,
+    shadowColor: '#167c89',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    borderColor:'#167c89',
+    marginTop: 12
   },
   text: {
     fontSize: 32,

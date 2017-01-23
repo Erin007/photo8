@@ -105,14 +105,13 @@ class TeamListOrganizer extends Component {
     });
   }
 
-//render the team list
   renderTeams(){
-    //makes a clickable box for each team name, like in directive list
+
     if (typeof this.state.teams[0] !== 'undefined')  {
 
       return this.state.teams.map(team =>
 
-        <View style={styles.teambox}>
+        <View key={team.id} style={styles.teambox}>
           <TouchableOpacity onPress={() => this.seeRosterPressed(team)} key={ team.id } team={team}>
 
             <Text style={styles.team}>
