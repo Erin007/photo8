@@ -380,7 +380,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     marginTop: -5,
     fontFamily: "Chalkboard SE",
-    color: '#991c1c',
+    color: '#b22121',
   },
   directive: {
     fontSize: 18,

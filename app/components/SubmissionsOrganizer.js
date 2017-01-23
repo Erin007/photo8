@@ -70,6 +70,15 @@ class SubmissionsOrganizer extends Component{
 
              <Text style={styles.caption}> {submissionsToRender[i].caption} </Text>
 
+            <View style={styles.buttonbox}>
+              <TouchableOpacity>
+               <Text style={styles.x}>✘</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+               <Text style={styles.check}>✔︎</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )
       }
@@ -198,5 +207,41 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignSelf: 'center'
   },
+  x:{
+    fontSize: 36,
+    width: 50,
+    height: 50,
+    backgroundColor: '#b22121',
+    borderWidth: 2,
+    paddingLeft: 10,
+    alignItems: 'center',
+    shadowColor: '#167c89',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginTop: 12,
+    marginBottom: 12,
+    marginLeft: 65,
+    marginRight: 65
+  },
+  check:{
+    fontSize: 36,
+    width: 50,
+    height: 50,
+    backgroundColor: '#24AE62',
+    borderWidth: 2,
+    paddingLeft: 10,
+    alignItems: 'center',
+    shadowColor: '#167c89',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginTop: 12
+  },
+  buttonbox:{
+    flexDirection: 'row',
+  }
 })
 export default SubmissionsOrganizer;
