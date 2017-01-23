@@ -50,7 +50,7 @@ class DirectiveShow extends Component {
 
     axios.get(url).then( response => {
       console.log("response SUBMISSION", response.data)
-      this.setState( { submission: response.data[0] })
+      this.setState( { submission: response.data })
       })
       .then(this.updateStatus.bind(this))
       .then(this.handleSubmission.bind(this))
@@ -62,7 +62,7 @@ class DirectiveShow extends Component {
   handleSubmission(){
     console.log("handling the submission returned")
 
-    if (typeof this.state.submission == 'undefined' ){
+    if (typeof this.state.submission[0] == 'undefined' ){
       //if a submission wasn't found, make a new 'shell' submission so adding a caption and adding a photo can both be updates/put requests
       const url = 'https://treasure-chest-api.herokuapp.com/submissions/'
 
@@ -74,7 +74,7 @@ class DirectiveShow extends Component {
         status: 0
       })
       .then(response => {
-        console.log("response", response)
+        console.log("response from handling the submission", response)
         this.setState({ submission: response.data })
       })
       .then(this.updateStatus.bind(this))
@@ -95,9 +95,9 @@ class DirectiveShow extends Component {
   updateStatus(){
     console.log('update status called')
     // check if a photo and caption have been submitted
-    if (this.state.submission.photo !== '' && this.state.submission.caption !== '' && this.state.submission.status !== 2){
+    if (this.state.submission[0].photo !== '' && this.state.submission[0].caption !== '' && this.state.submission[0].status !== 2){
     //update the submission status to 1 in the backend
-      const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.state.submission.id
+      const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.state.submission[0].id
       axios.patch(url, {
         status: 1
       })
@@ -164,8 +164,8 @@ class DirectiveShow extends Component {
 
 //render helper methods
   renderCaption(){
-    if (typeof this.state.submission !== 'undefined'){
-      if (this.state.submission.caption !== ''){
+    if (typeof this.state.submission[0] !== 'undefined'){
+      if (this.state.submission[0].caption !== ''){
 
         return(
           <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
@@ -179,45 +179,47 @@ class DirectiveShow extends Component {
   }
 
   renderCaptionButton(){
-    if (this.state.submission.status !== 2){
-      return(
-        <Button onPress={this.updateCaptionPressed.bind(this)}> Update Caption </Button>
-      )
+    if (typeof this.state.submission[0] !== 'undefined'){
+      if (this.state.submission[0].status !== 2){
+        return(
+          <Button onPress={this.updateCaptionPressed.bind(this)}> Update Caption </Button>
+        )
+      }
     }
   }
 
   renderPhoto(){
     console.log("Render Photo called")
 
-    if (typeof this.state.submission !== 'undefined'){
+    if (typeof this.state.submission[0] !== 'undefined'){
       //if there is a photo, awaiting approval
-      if (this.state.submission.status == 1){
+      if (this.state.submission[0].status == 1){
         return (
           <View>
             <Image
-            source={{ uri: this.state.submission.photo}}
+            source={{ uri: this.state.submission[0].photo}}
             style={styles.status1image}
             />
           </View>
         )
       }
       //if there is an approved photo
-      if (this.state.submission.status == 2){
+      if (this.state.submission[0].status == 2){
         return (
           <View>
             <Image
-            source={{ uri: this.state.submission.photo}}
+            source={{ uri: this.state.submission[0].photo}}
             style={styles.status2image}
             />
           </View>
         )
       }
       //if there is a denied photo
-      if (this.state.submission.status == 3){
+      if (this.state.submission[0].status == 3){
         return (
           <View>
             <Image
-            source={{ uri: this.state.submission.photo}}
+            source={{ uri: this.state.submission[0].photo}}
             style={styles.status3image}
             />
           </View>
@@ -236,43 +238,47 @@ class DirectiveShow extends Component {
   }
 
   renderCameraIcon(){
-    if (this.state.submission.status !== 2){
-      return(
-        <View>
-          <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
-            <Image
-            source={require('../assets/ic_photo_camera_36pt.png')}
-            style={styles.center}
-            />
-          </TouchableOpacity>
-        </View>
-      )
+    if (typeof this.state.submission[0] !== 'undefined'){
+      if (this.state.submission[0].status !== 2){
+        return(
+          <View>
+            <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
+              <Image
+              source={require('../assets/ic_photo_camera_36pt.png')}
+              style={styles.center}
+              />
+            </TouchableOpacity>
+          </View>
+        )
+      }
     }
   }
 
   renderStatus(){
     console.log("rendering the status")
-    console.log(this.state.submission.status)
 
-    if (this.state.submission.status == 1){
-      return(
-        <Text style={styles.status1}> submission is awaiting approval </Text>
-      )
-    }
+    if (typeof this.state.submission[0] !== 'undefined'){
 
-    if (this.state.submission.status == 2){
-      return(
-        <View>
-          <Text style={styles.status2}> Submission approved! </Text>
-          <Text style={styles.status2}> {this.props.directive.point_value} point(s) </Text>
-        </View>
-      )
-    }
+      if (this.state.submission[0].status == 1){
+        return(
+          <Text style={styles.status1}> submission is awaiting approval </Text>
+        )
+      }
 
-    if (this.state.submission.status == 3){
-      return(
-        <Text style={styles.status3}> Submission denied. Try again. </Text>
-      )
+      if (this.state.submission[0].status == 2){
+        return(
+          <View>
+            <Text style={styles.status2}> Submission approved! </Text>
+            <Text style={styles.status2}> {this.props.directive.point_value} point(s) </Text>
+          </View>
+        )
+      }
+
+      if (this.state.submission[0].status == 3){
+        return(
+          <Text style={styles.status3}> Submission denied. Try again. </Text>
+        )
+      }
     }
   }
 
