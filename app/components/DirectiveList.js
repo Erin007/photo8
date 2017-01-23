@@ -70,7 +70,7 @@ class DirectiveList extends Component {
         title: 'Hunt Details',
         component: huntDetails,
         passProps: { hunt: this.props.hunt,
-                     user: this.state.user }
+                     user: this.props.user }
       });
     }
 
@@ -81,14 +81,13 @@ class DirectiveList extends Component {
       return (
         <View style={styles.container}>
 
-          <ScrollView>
+          <TouchableOpacity onPress={this._toHuntDetails.bind(this)}>
+            <Text style={styles.text}> { this.props.hunt.name } </Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity onPress={this._toHuntDetails.bind(this)}>
-              <Text style={styles.text}> { this.props.hunt.name } </Text>
-            </TouchableOpacity>
+          <Text style={styles.listname}> Directives </Text>
 
-            <Text style={styles.smalltext}> { this.props.hunt.description } </Text>
-
+          <ScrollView style={styles.scrollview}>
             { this.renderDirectives() }
           </ScrollView>
          </View>
@@ -98,11 +97,17 @@ class DirectiveList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    // marginTop: 65,
+    marginTop: 40,
+  },
+  listname: {
+    fontSize: 25,
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    fontFamily: 'Chalkboard SE'
   },
   text: {
     fontSize: 30,

@@ -116,6 +116,8 @@ class Submissions extends Component{
           </Text>
         </TouchableOpacity>
 
+          <Text style={styles.smalltext}> Submissions </Text>
+
         <ScrollView style={styles.scrollview}>
           {this.filterSubmissions()}
         </ScrollView>
@@ -136,6 +138,15 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
     fontFamily: 'Pacifico'
+  },
+  smalltext: {
+    fontSize: 25,
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: -20,
+    fontFamily: 'Chalkboard SE'
   },
   submissionbox:{
     borderWidth: 1,
@@ -160,7 +171,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   scrollview:{
-    height: 400
+    height: 400,
+    marginTop: -10
   },
   caption: {
     fontSize: 16,
