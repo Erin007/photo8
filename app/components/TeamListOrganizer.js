@@ -120,7 +120,7 @@ class TeamListOrganizer extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.x} onPress={() => this.deleteTeamPressed(team)}>
-            <Text>✗</Text>
+            <Text>✘</Text>
           </TouchableOpacity>
 
         </View>
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   team:{
-    fontSize: 16,
+    fontSize: 20,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
     borderWidth: 1,
@@ -205,10 +205,10 @@ const styles = StyleSheet.create({
     width: 300
   },
   x:{
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     backgroundColor: "#21b6cb",
-    padding: 5,
+    padding: 10,
     alignItems: 'center',
     borderRadius: 5,
     borderWidth: 1,
@@ -222,11 +222,7 @@ const styles = StyleSheet.create({
   },
   scrollview: {
     marginTop: -55,
-    marginBottom: 25,
-    //borderWidth: 3,
-    //borderRadius: 5,
     height: 325,
-  //  borderColor: '#ddd',
   }
 });
 

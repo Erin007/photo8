@@ -115,7 +115,7 @@ class DirectiveListOrganizer extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.x} onPress={() => this.deleteDirectivePressed(directive)}>
-            <Text>✗</Text>
+            <Text>✘</Text>
           </TouchableOpacity>
 
         </View>
@@ -133,11 +133,13 @@ class DirectiveListOrganizer extends Component {
         <Text style={styles.text}> { this.props.hunt.name } </Text>
       </TouchableOpacity>
 
-        <ScrollView style={styles.scrollview}>
+      <Text style={styles.smalltext}> Directives </Text>
 
-          { this.renderDirectives() }
+      <ScrollView style={styles.scrollview}>
 
-        </ScrollView>
+        { this.renderDirectives() }
+
+      </ScrollView>
 
         <Button style={styles.button} onPress={this._toAddMoreDirectives.bind(this)}> Add Directives </Button>
 
@@ -148,11 +150,9 @@ class DirectiveListOrganizer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 55,
+    marginTop: 40,
   },
   text: {
     fontSize: 30,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Pacifico'
   },
   smalltext: {
-    fontSize: 14,
+    fontSize: 25,
     textAlign: 'left',
     padding: 10,
     marginLeft: 5,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 5,
     paddingLeft: 10,
-    width: 250
+    width: 245
   },
   x:{
     width: 30,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     borderColor:'#167c89',
-    marginTop: 12
+    marginTop: 12,
   },
   directivebox: {
     flexDirection: 'row',

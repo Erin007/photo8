@@ -9,6 +9,7 @@ import {
   Text } from 'react-native';
 import axios from 'axios';
 import Button from './common/Button';
+import huntDetails from './HuntDetails';
 
 class RosterOrganizer extends Component {
   state = { users: [], teamplayer: ''};
@@ -70,7 +71,7 @@ class RosterOrganizer extends Component {
         </Text>
 
         <TouchableOpacity style={styles.x} onPress={() => this.deletePlayerPressed(user)}>
-          <Text>✗</Text>
+          <Text>✘</Text>
         </TouchableOpacity>
       </View>
       );
@@ -108,7 +109,6 @@ class RosterOrganizer extends Component {
           { this.renderPlayers() }
         </ScrollView>
 
-        <Button> Invite Players </Button>
       </View>
     )
   }
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50,
-    paddingBottom: 50
+    marginTop: 40,
+    paddingBottom: 90
   },
   playerbox: {
     flexDirection: 'row',
@@ -127,10 +127,10 @@ const styles = StyleSheet.create({
     width: 300
   },
   x:{
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     backgroundColor: "#21b6cb",
-    padding: 5,
+    paddingTop: 10,
     alignItems: 'center',
     borderRadius: 5,
     borderWidth: 1,
@@ -152,13 +152,13 @@ const styles = StyleSheet.create({
   smalltext: {
     fontSize: 25,
     textAlign: 'center',
-    padding: 5,
+    padding: 10,
     marginLeft: 5,
     marginRight: 5,
     fontFamily: 'Chalkboard SE'
   },
   team:{
-    fontSize: 16,
+    fontSize: 20,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
     borderWidth: 1,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 5,
     paddingLeft: 10,
-    width: 250
+    width: 225
   },
   scrollview: {
     height: 300,
