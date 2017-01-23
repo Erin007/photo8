@@ -62,7 +62,7 @@ class Submissions extends Component{
     for (i = 0; i < submissionsToRender.length; i++) {
       if (submissionsToRender[i].status == 1){
         return(
-          <View>
+          <View style={styles.submissionbox}>
 
             <Image
              source={{ uri: submissionsToRender[i].photo}}
@@ -76,7 +76,7 @@ class Submissions extends Component{
 
       if (submissionsToRender[i].status == 2){
         return(
-          <View>
+          <View style={styles.submissionbox}>
 
             <Image
              source={{ uri: submissionsToRender[i].photo}}
@@ -90,7 +90,7 @@ class Submissions extends Component{
 
       if (submissionsToRender[i].status == 3){
         return(
-          <View>
+          <View style={styles.submissionbox}>
 
             <Image
              source={{ uri: submissionsToRender[i].photo}}
@@ -116,7 +116,7 @@ class Submissions extends Component{
           </Text>
         </TouchableOpacity>
 
-          <Text style={styles.smalltext}> Submissions </Text>
+        <Text style={styles.smalltext}> Submissions </Text>
 
         <ScrollView style={styles.scrollview}>
           {this.filterSubmissions()}
@@ -160,15 +160,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-  },
-  placeholder: {
-    margin: 2,
-    height: 300,
-    width: 300,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: '#21b6cb',
-    alignSelf: 'center'
   },
   scrollview:{
     height: 400,
