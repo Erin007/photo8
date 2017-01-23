@@ -166,7 +166,7 @@ class DirectiveShow extends Component {
   renderCaption(){
     if (typeof this.state.submission !== 'undefined'){
       if (this.state.submission.caption !== ''){
-    
+
         return(
           <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
         )
@@ -190,16 +190,40 @@ class DirectiveShow extends Component {
     console.log("Render Photo called")
 
     if (typeof this.state.submission !== 'undefined'){
-      if (this.state.submission.photo !== ''){
+      //if there is a photo, awaiting approval
+      if (this.state.submission.status == 1){
         return (
           <View>
             <Image
             source={{ uri: this.state.submission.photo}}
-            style={styles.placeholder}
+            style={styles.status1image}
             />
           </View>
         )
       }
+      //if there is an approved photo
+      if (this.state.submission.status == 2){
+        return (
+          <View>
+            <Image
+            source={{ uri: this.state.submission.photo}}
+            style={styles.status2image}
+            />
+          </View>
+        )
+      }
+      //if there is a denied photo
+      if (this.state.submission.status == 3){
+        return (
+          <View>
+            <Image
+            source={{ uri: this.state.submission.photo}}
+            style={styles.status3image}
+            />
+          </View>
+        )
+      }
+    //if there isn't a photo
     }
     return(
       <View>
@@ -293,11 +317,12 @@ const styles = StyleSheet.create({
   captiontext:{
     fontSize: 16,
     textAlign: 'center',
-    paddingTop: 10,
+    paddingTop: 5,
     fontFamily: "Chalkboard SE"
   },
   center:{
-    alignSelf: 'center'
+    alignSelf: 'center',
+    margin: 3
   },
   text: {
     fontSize: 14,
@@ -305,6 +330,33 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontFamily: "Chalkboard SE",
     color: '#DCDCDC',
+  },
+  status1image:{
+    borderColor: '#DCDCDC',
+    borderWidth: 5,
+    margin: 2,
+    height: 250,
+    width: 250,
+    borderRadius: 5,
+    alignSelf: 'center'
+  },
+  status2image:{
+    borderColor: '#24AE62',
+    borderWidth: 5,
+    margin: 2,
+    height: 250,
+    width: 250,
+    borderRadius: 5,
+    alignSelf: 'center'
+  },
+  status3image:{
+    borderColor: '#991c1c',
+    borderWidth: 5,
+    margin: 2,
+    height: 250,
+    width: 250,
+    borderRadius: 5,
+    alignSelf: 'center'
   },
   status1:{
     fontSize: 16,
@@ -342,7 +394,7 @@ const styles = StyleSheet.create({
     margin: 2,
     height: 250,
     width: 250,
-    borderWidth: 1,
+    borderWidth: 5,
     borderRadius: 5,
     borderColor: '#21b6cb',
     alignSelf: 'center'

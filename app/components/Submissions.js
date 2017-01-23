@@ -47,7 +47,7 @@ class Submissions extends Component{
     });
   }
 
-//helper functions for render 
+//helper functions for render
   filterSubmissions(){
     console.log("filtering submissions")
     const submissionsToRender = []
