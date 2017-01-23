@@ -57,20 +57,20 @@ class DirectiveListOrganizer extends Component {
   }
 
 //navigate to the details of the directive available to the organizer
-  directiveShowPressed(directive) {
-    console.log('>>> Directive Detail Pressed!');
-    console.log("this.state", this.state)
-    this._toDirectiveShow(directive);
-  }
-
-  _toDirectiveShow = (directive) => {
-    this.props.navigator.push({
-      title: 'Directive',
-      component: DirectiveShowOrganizer,
-      passProps: { directive: directive,
-                  hunt: this.props.hunt}
-    });
-  }
+  // directiveShowPressed(directive) {
+  //   console.log('>>> Directive Detail Pressed!');
+  //   console.log("this.state", this.state)
+  //   this._toDirectiveShow(directive);
+  // }
+  //
+  // _toDirectiveShow = (directive) => {
+  //   this.props.navigator.push({
+  //     title: 'Directive',
+  //     component: DirectiveShowOrganizer,
+  //     passProps: { directive: directive,
+  //                 hunt: this.props.hunt}
+  //   });
+  // }
 
 //navigate to form to add more directives
   _toAddMoreDirectives = () => {
@@ -107,12 +107,9 @@ class DirectiveListOrganizer extends Component {
       return this.state.directives.map(directive =>
         <View style={styles.directivebox}>
 
-          <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
-
-            <Text style={styles.directive}>
-               ❏  {directive.name}
-            </Text>
-          </TouchableOpacity>
+          <Text style={styles.directive} key={ directive.id } directive={directive}>
+             {directive.name}
+          </Text>
 
           <TouchableOpacity style={styles.x} onPress={() => this.deleteDirectivePressed(directive)}>
             <Text>✘</Text>
@@ -153,7 +150,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 50,
-    paddingBottom: 20 
+    paddingBottom: 20
   },
   text: {
     fontSize: 30,
