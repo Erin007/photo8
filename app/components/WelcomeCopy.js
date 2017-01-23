@@ -238,10 +238,13 @@ class welcomeCopy extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 40
+  },
+  scrollview:{
+    marginTop: 20,
+    height: 200
   },
   content:{
     marginTop: 25,
@@ -252,7 +255,6 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 10,
     fontFamily: 'Pacifico',
-    // justifyContent: 'flex-start'
   },
   smalltext: {
     fontSize: 25,
@@ -271,10 +273,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: -50,
     fontFamily: 'Chalkboard SE'
-  },
-  scrollview:{
-    marginTop: 20,
-    height: 200
   },
 });
 

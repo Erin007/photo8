@@ -15,7 +15,7 @@ import huntDetails from './HuntDetails';
 import axios from 'axios';
 
 class SubmissionsOrganizer extends Component{
-  state = { submissions: [], error: '', loading: false, submission: '', team: '' }
+  state = { submissions: [], error: '', loading: false, submission: '', team: '', submissionsAwaitingApproval: [], approvedSubmissions: [], deniedSubmissions: []}
 
   componentWillMount(){
     console.log("componentwillmount in submissions organizer")
@@ -27,6 +27,7 @@ class SubmissionsOrganizer extends Component{
       console.log(response)
       return this.setState( { submissions: response.data })
       })
+      .then(this.filterSubmissions.bind(this))
       .catch(function (error) {
         console.log(error);
       });;
@@ -134,7 +135,7 @@ class SubmissionsOrganizer extends Component{
   }
 
 //helper functions for render
-  renderSubmissions(){
+  filterSubmissions(){
     console.log("filtering submissions")
     const submissionsToRender = []
 
@@ -150,61 +151,98 @@ class SubmissionsOrganizer extends Component{
       )
     }
 
+    const submissionsAwaitingApproval1 = []
+    const approvedSubmissions2 = []
+    const deniedSubmission3 = []
+
     for (i = 0; i < submissionsToRender.length; i++) {
+
       if (submissionsToRender[i].status == 1){
-        return(
-          <View style={styles.submissionbox}>
-
-            <Image
-             source={{ uri: submissionsToRender[i].photo}}
-             style={styles.status1}/>
-
-             <Text style={styles.caption}> {submissionsToRender[i].caption} </Text>
-
-            <View style={styles.buttonbox}>
-              <TouchableOpacity onPress={() => this.denySubmission(submissionsToRender[i])}>
-               <Text style={styles.x}>✘</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => this.approveSubmission(submissionsToRender[i])}>
-               <Text style={styles.check}>✔︎</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )
+        submissionsAwaitingApproval1.push(submissionsToRender[i])
       }
 
       if (submissionsToRender[i].status == 2){
-        return(
-          <View style={styles.submissionbox}>
-
-            <Image
-             source={{ uri: submissionsToRender[i].photo}}
-             style={styles.status2}/>
-
-             <Text style={styles.caption}> {submissionsToRender[i].caption} </Text>
-
-          </View>
-        )
+        approvedSubmissions2.push(submissionsToRender[i])
       }
 
       if (submissionsToRender[i].status == 3){
-        return(
-          <View style={styles.submissionbox}>
-
-            <Image
-             source={{ uri: submissionsToRender[i].photo}}
-             style={styles.status3}/>
-
-             <Text style={styles.caption}> {submissionsToRender[i].caption} </Text>
-
-             <TouchableOpacity onPress={() => this.approveSubmission(submissionsToRender[i])}>
-              <Text style={styles.check2}>✔︎</Text>
-             </TouchableOpacity>
-
-          </View>
-        )
+        deniedSubmission3.push(submissionsToRender[i])
       }
+    }
+    console.log("submissionsAwaitingApproval1", submissionsAwaitingApproval1)
+    console.log("approvedSubmissions2", approvedSubmissions2)
+    console.log("deniedSubmission3", deniedSubmission3)
+
+    this.setState({ submissionsAwaitingApproval: submissionsAwaitingApproval1, approvedSubmissions: approvedSubmissions2, deniedSubmissions: deniedSubmission3 });
+  }
+
+  renderAwaitingSubmissions(){
+    console.log("rendering submission awaiting approval")
+    if (typeof this.state.submissionsAwaitingApproval !== 'undefined'){
+
+      return this.state.submissionsAwaitingApproval.map(submission =>
+
+        <View style={styles.submissionbox} key={submission.id}>
+
+          <Image
+           source={{ uri: submission.photo}}
+           style={styles.status1}/>
+
+           <Text style={styles.caption}> {submission.caption} </Text>
+
+          <View style={styles.buttonbox}>
+            <TouchableOpacity onPress={() => this.denySubmission(submission)}>
+             <Text style={styles.x}>✘</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => this.approveSubmission(submission)}>
+             <Text style={styles.check}>✔︎</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
+    }
+  }
+
+  renderApprovedSubmissions(submissions){
+    console.log("rendering approved submissions")
+    if (typeof this.state.approvedSubmissions !== 'undefined'){
+
+      return submissions.map(submission =>
+
+        <View style={styles.submissionbox} key={submission.id}>
+
+          <Image
+           source={{ uri: submission.photo}}
+           style={styles.status2}/>
+
+           <Text style={styles.caption}> {submission.caption} </Text>
+
+        </View>
+      )
+    }
+  }
+
+  renderDeniedSubmissions(submissions){
+    console.log("rendering denied submissions")
+    if (typeof this.state.deniedSubmissions !== 'undefined'){
+
+      return submissions.map(submission =>
+
+        <View style={styles.submissionbox} key={submission.id}>
+
+          <Image
+           source={{ uri: submission.photo}}
+           style={styles.status3}/>
+
+           <Text style={styles.caption}> {submission.caption} </Text>
+
+           <TouchableOpacity onPress={() => this.approveSubmission(submission)}>
+            <Text style={styles.check2}>✔︎</Text>
+           </TouchableOpacity>
+
+        </View>
+      )
     }
   }
 
@@ -222,7 +260,9 @@ class SubmissionsOrganizer extends Component{
         <Text style={styles.smalltext}> Submissions </Text>
 
         <ScrollView style={styles.scrollview}>
-          { this.renderSubmissions() }
+          { this.renderAwaitingSubmissions() }
+          { this.renderDeniedSubmissions(this.state.deniedSubmissions) }
+          { this.renderApprovedSubmissions(this.state.approvedSubmissions) }
         </ScrollView>
       </View>
     )
@@ -274,7 +314,7 @@ const styles = StyleSheet.create({
   },
   scrollview:{
     height: 450,
-    marginTop: -20
+    marginTop: -10
   },
   caption: {
     fontSize: 16,

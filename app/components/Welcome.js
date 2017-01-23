@@ -191,11 +191,11 @@ class welcome extends Component {
       //if the user is logged in
       case true:
         return (
-        <View style={styles.container}>
+        <View style={styles.content}>
 
             { this.renderUsername() }
 
-          <ScrollView styel={styles.scrollview}>
+          <ScrollView style={styles.scrollview}>
             <Button onPress={() => this.signOut()}>
               Log Out
             </Button>
@@ -238,7 +238,6 @@ class welcome extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 40
@@ -256,7 +255,6 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 10,
     fontFamily: 'Pacifico',
-    // justifyContent: 'flex-start'
   },
   smalltext: {
     fontSize: 25,
