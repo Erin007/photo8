@@ -80,7 +80,7 @@ class SubmissionsOrganizer extends Component{
     //determine what the new team point value should be
     const newPoints = this.state.team.points + 1
     //****** CHANGE 1 to point value in added features *********////
-
+    console.log("newPoints", newPoints)
     //patch to team to give them points for this directive
     axios.patch(url3, {
       points: newPoints,
