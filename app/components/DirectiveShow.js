@@ -166,7 +166,7 @@ class DirectiveShow extends Component {
   renderCaption(){
     if (typeof this.state.submission !== 'undefined'){
       if (this.state.submission.caption !== ''){
-        console.log("ALL THE CRITERIA FOR SHOWING CAPTION HAS BEEN MET")
+    
         return(
           <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
         )
