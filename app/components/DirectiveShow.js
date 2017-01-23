@@ -13,6 +13,7 @@ import Input from './common/Input';
 import Example from '../Camera';
 import axios from 'axios';
 import addCaption from './AddCaption'
+import huntDetails from './HuntDetails';
 
 class DirectiveShow extends Component {
 
@@ -51,6 +52,7 @@ class DirectiveShow extends Component {
       console.log("response SUBMISSION", response.data)
       this.setState( { submission: response.data[0] })
       })
+      .then(this.updateStatus.bind(this))
       .then(this.handleSubmission.bind(this))
       .catch(function (error) {
         console.log(error);
@@ -58,10 +60,9 @@ class DirectiveShow extends Component {
   }
 
   handleSubmission(){
-    console.log("HANDLING THE SUBMISSION RETURNED")
-    console.log("submission", this.state.submission)
+    console.log("handling the submission returned")
+
     if (typeof this.state.submission == 'undefined' ){
-      console.log("THERE ARE NOT ANY SUBMISSIONS FOR THIS DIRECTIVE FROM THIS TEAM YET!")
       //if a submission wasn't found, make a new 'shell' submission so adding a caption and adding a photo can both be updates/put requests
       const url = 'https://treasure-chest-api.herokuapp.com/submissions/'
 
@@ -76,6 +77,7 @@ class DirectiveShow extends Component {
         console.log("response", response)
         this.setState({ submission: response.data })
       })
+      .then(this.updateStatus.bind(this))
       .catch((error) => {
         console.log("Error:", error)
       });
@@ -90,57 +92,23 @@ class DirectiveShow extends Component {
     return <Text> ✔︎ </Text>
   }
 
-  renderCaption(){
-    if (typeof this.state.submission !== 'undefined'){
-      if (this.state.submission.caption !== ''){
-        console.log("ALL THE CRITERIA FOR SHOWING CAPTION HAS BEEN MET")
-        return(
-          <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
-        )
-      }
+  updateStatus(){
+    console.log('update status called')
+    // check if a photo and caption have been submitted
+    if (this.state.submission.photo !== '' && this.state.submission.caption !== ''){
+    //update the submission status to 1 in the backend
+      const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.state.submission.id
+      axios.patch(url, {
+        status: 1
+      })
+      .then(response => {
+        console.log("response", response)
+       this.setState({ submission: response.data })
+      })
+      .catch((error) => {
+        console.log("Error:", error)
+      });
     }
-    return(
-      <Text style={styles.text}> You have not yet submitted a caption.
-      </Text>
-    )
-  }
-
-  renderPhoto(){
-    console.log("Render Photo called")
-
-    if (typeof this.state.submission !== 'undefined'){
-      if (this.state.submission.photo !== ''){
-        return (
-          <View>
-            <Image
-            source={{ uri: this.state.submission.photo}}
-            style={styles.placeholder}
-            />
-          </View>
-        )
-      }
-    }
-    return(
-      <View>
-        <Image
-        source={require('../assets/placeholder.png')}
-        style={styles.placeholder}
-        />
-      </View>
-    )
-  }
-
-  renderCameraIcon(){
-    return(
-      <View>
-        <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
-          <Image
-          source={require('../assets/ic_photo_camera_36pt.png')}
-          style={styles.center}
-          />
-        </TouchableOpacity>
-      </View>
-    )
   }
 
 //navigate to the camera
@@ -179,22 +147,131 @@ class DirectiveShow extends Component {
     });
   }
 
+//navigate back to HuntDetails
+  seeHuntPressed() {
+    console.log('seeHunt pressed');
+    this._toHuntDetails()
+  }
+
+  _toHuntDetails = () => {
+    this.props.navigator.push({
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: this.props.hunt,
+                  user: this.props.user}
+    });
+  }
+
+//render helper methods
+  renderCaption(){
+    if (typeof this.state.submission !== 'undefined'){
+      if (this.state.submission.caption !== ''){
+        console.log("ALL THE CRITERIA FOR SHOWING CAPTION HAS BEEN MET")
+        return(
+          <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
+        )
+      }
+    }
+    return(
+      <Text style={styles.text}> You have not yet submitted a caption.
+      </Text>
+    )
+  }
+
+  renderCaptionButton(){
+    if (this.state.submission.status !== 2){
+      return(
+        <Button onPress={this.updateCaptionPressed.bind(this)}> Update Caption </Button>
+      )
+    }
+  }
+
+  renderPhoto(){
+    console.log("Render Photo called")
+
+    if (typeof this.state.submission !== 'undefined'){
+      if (this.state.submission.photo !== ''){
+        return (
+          <View>
+            <Image
+            source={{ uri: this.state.submission.photo}}
+            style={styles.placeholder}
+            />
+          </View>
+        )
+      }
+    }
+    return(
+      <View>
+        <Image
+        source={require('../assets/placeholder.png')}
+        style={styles.placeholder}
+        />
+      </View>
+    )
+  }
+
+  renderCameraIcon(){
+    if (this.state.submission.status !== 2){
+      return(
+        <View>
+          <TouchableOpacity onPress={this.toCameraPressed.bind(this)}>
+            <Image
+            source={require('../assets/ic_photo_camera_36pt.png')}
+            style={styles.center}
+            />
+          </TouchableOpacity>
+        </View>
+      )
+    }
+  }
+
+  renderStatus(){
+    console.log("rendering the status")
+    console.log(this.state.submission.status)
+
+    if (this.state.submission.status == 1){
+      return(
+        <Text style={styles.status1}> submission is awaiting approval </Text>
+      )
+    }
+
+    if (this.state.submission.status == 2){
+      return(
+        <View>
+          <Text style={styles.status2}> Submission approved! </Text>
+          <Text style={styles.status2}> {this.props.directive.point_value} point(s) </Text>
+        </View>
+      )
+    }
+
+    if (this.state.submission.status == 3){
+      return(
+        <Text style={styles.status3}> Submission denied. Try again. </Text>
+      )
+    }
+  }
+
   render(){
     return (
       <ScrollView style={styles.container}>
 
-        <Text style={styles.huntname}>{this.props.hunt.name} </Text>
+        <TouchableOpacity onPress={() =>this.seeHuntPressed()}>
+          <Text style={styles.huntname}>{this.props.hunt.name} </Text>
+        </TouchableOpacity>
 
         <Text style={styles.directive}> {this.checkCompletion()}{this.props.directive.name}
         </Text>
 
         <Text>{this.props.directive.description}</Text>
 
+        { this.renderStatus() }
+
         { this.renderPhoto() }
         { this.renderCameraIcon() }
         { this.renderCaption() }
+        { this.renderCaptionButton() }
 
-        <Button onPress={this.updateCaptionPressed.bind(this)}> Update Caption </Button>
       </ScrollView>
     )
   }
@@ -228,6 +305,30 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontFamily: "Chalkboard SE",
     color: '#DCDCDC',
+  },
+  status1:{
+    fontSize: 16,
+    textAlign: 'center',
+    paddingBottom: 5,
+    marginTop: -5,
+    fontFamily: "Chalkboard SE",
+    color: '#DCDCDC',
+  },
+  status2:{
+    fontSize: 18,
+    textAlign: 'center',
+    paddingBottom: 5,
+    marginBottom: 5,
+    fontFamily: "Chalkboard SE",
+    color: '#24AE62',
+  },
+  status3:{
+    fontSize: 16,
+    textAlign: 'center',
+    paddingBottom: 5,
+    marginTop: -5,
+    fontFamily: "Chalkboard SE",
+    color: '#991c1c',
   },
   directive: {
     fontSize: 18,
