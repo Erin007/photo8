@@ -15,84 +15,116 @@ import huntDetails from './HuntDetails';
 
 class DirectiveList extends Component {
 
-    state = { directives: [], directive: {} };
+  state = { directives: [], directive: {}, completeDirectives: [], incompleteDirectives: []};
 
-    componentWillMount (){
-      console.log('Component will Mount in DirectiveList called')
-      //change this to send the url of the specific hunt once everything is working!
-      const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
+  componentWillMount (){
+    console.log('Component will Mount in DirectiveList called')
+    //change this to send the url of the specific hunt once everything is working!
+    const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
 
-      axios.get(url).then( response => {
-        console.log("response from directivelist", response)
-        return this.setState( { directives: response.data })
-       })
-        .catch(function (error) {
-          console.log(error);
-        });;
-    }
+    axios.get(url).then( response => {
+      console.log("response from directivelist", response)
+      return this.setState( { directives: response.data })
+     })
+      .then(this.sortDirectives.bind(this))
+      .catch(function (error) {
+        console.log(error);
+      });;
+  }
 
-    directiveShowPressed(directive) {
-      console.log('>>> Directive Detail Pressed!');
-      console.log("this.state", this.state)
-      this._toDirectiveShow(directive);
-    }
+  sortDirectives(){
+    const completeDirectives = []
+    const incompleteDirectives =[]
 
-    _toDirectiveShow = (directive) => {
-      this.props.navigator.push({
-        title: 'Directive',
-        component: DirectiveShow,
-        passProps: { directive: directive,
-                     hunt: this.props.hunt,
-                     user: this.props.user}
-      });
-    }
+    for (i = 0; i < this.state.directives.length; i++) {
+      if (this.state.directives[i].complete == true){
+          completeDirectives.push(this.state.directives[i])
+      }
 
-    renderDirectives() {
-      console.log('<<<Render Directives Called')
-      console.log('this.state.directives', this.state.directives)
-      //console.log('this.state.directives.length', this.state.directives.directives.length)
-      if (this.state.directives.length > 0)  {
-
-        return this.state.directives.map(directive =>
-
-          <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
-
-            <Text style={styles.directive}>
-               ❏  {directive.name}
-            </Text>
-          </TouchableOpacity>
-          );
+      if (this.state.directives[i].complete == false){
+          incompleteDirectives.push(this.state.directives[i])
       }
     }
+    this.setState({ completeDirectives: completeDirectives, incompleteDirectives: incompleteDirectives})
+  }
 
-    _toHuntDetails = (hunt) => {
-      this.props.navigator.push({
-        title: 'Hunt Details',
-        component: huntDetails,
-        passProps: { hunt: this.props.hunt,
-                     user: this.props.user }
-      });
-    }
+  renderIncompleteDirectives(){
+    if (this.state.incompleteDirectives.length > 0)  {
 
-    render() {
-      console.log('this.state from DirectiveList render', this.state);
-      console.log('this.props', this.props)
+      return this.state.incompleteDirectives.map(directive =>
 
-      return (
-        <View style={styles.container}>
+        <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
 
-          <TouchableOpacity onPress={this._toHuntDetails.bind(this)}>
-            <Text style={styles.text}> { this.props.hunt.name } </Text>
-          </TouchableOpacity>
-
-          <Text style={styles.listname}> Directives </Text>
-
-          <ScrollView style={styles.scrollview}>
-            { this.renderDirectives() }
-          </ScrollView>
-         </View>
+          <Text style={styles.directive}>
+             ❏  {directive.name}
+          </Text>
+        </TouchableOpacity>
       );
     }
+  }
+
+  renderCompleteDirectives(){
+    if (this.state.completeDirectives.length > 0)  {
+
+      return this.state.completeDirectives.map(directive =>
+
+        <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
+
+          <Text style={styles.directive}>
+             ✔︎ {directive.name}
+          </Text>
+        </TouchableOpacity>
+      );
+    }
+  }
+
+
+//navigation functions
+  _toHuntDetails = (hunt) => {
+    this.props.navigator.push({
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: this.props.hunt,
+                   user: this.props.user }
+    });
+  }
+
+  directiveShowPressed(directive) {
+    console.log('>>> Directive Detail Pressed!');
+    console.log("this.state", this.state)
+    this._toDirectiveShow(directive);
+  }
+
+  _toDirectiveShow = (directive) => {
+    this.props.navigator.push({
+      title: 'Directive',
+      component: DirectiveShow,
+      passProps: { directive: directive,
+                   hunt: this.props.hunt,
+                   user: this.props.user}
+    });
+  }
+
+  render() {
+    console.log('this.state from DirectiveList render', this.state);
+    console.log('this.props', this.props)
+
+    return (
+      <View style={styles.container}>
+
+        <TouchableOpacity onPress={this._toHuntDetails.bind(this)}>
+          <Text style={styles.text}> { this.props.hunt.name } </Text>
+        </TouchableOpacity>
+
+        <Text style={styles.listname}> Directives </Text>
+
+        <ScrollView style={styles.scrollview}>
+          { this.renderIncompleteDirectives() }
+          { this.renderCompleteDirectives() }
+        </ScrollView>
+       </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
