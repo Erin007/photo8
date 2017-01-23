@@ -12,6 +12,8 @@ import Button from './common/Button';
 import Input from './common/Input';
 import axios from 'axios';
 import DirectiveShow from './DirectiveShow';
+import huntDetails from './HuntDetails';
+
 
 class addCaption extends Component {
 state = { caption: '', error: '', loading: false, submission: '' }
@@ -60,15 +62,34 @@ state = { caption: '', error: '', loading: false, submission: '' }
     });
   }
 
+//navigate to huntDetails
+  seeHuntPressed() {
+    console.log('seeHunt pressed');
+    this._toHuntDetails()
+  }
+
+  _toHuntDetails = () => {
+    this.props.navigator.push({
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: this.props.hunt,
+                  user: this.props.user}
+    });
+  }
 
   render(){
     return(
       <View style={styles.container}>
 
-        <Text style={styles.huntname}> {this.props.hunt.name}</Text>
+        <TouchableOpacity onPress={() => this.seeHuntPressed()}>
+          <Text style={styles.huntname}> {this.props.hunt.name}</Text>
+        </TouchableOpacity>
 
-        <Text style={styles.directive}> { this.props.directive.name }
-        </Text>
+        <TouchableOpacity onPress={() => this._toDirectiveShow()}>
+          <Text style={styles.directive}>
+            { this.props.directive.name }
+          </Text>
+        </TouchableOpacity>
 
         <View style={styles.captionbox}>
           <Input

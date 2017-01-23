@@ -95,7 +95,7 @@ class DirectiveShow extends Component {
   updateStatus(){
     console.log('update status called')
     // check if a photo and caption have been submitted
-    if (this.state.submission.photo !== '' && this.state.submission.caption !== ''){
+    if (this.state.submission.photo !== '' && this.state.submission.caption !== '' && this.state.submission.status !== 2){
     //update the submission status to 1 in the backend
       const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.state.submission.id
       axios.patch(url, {

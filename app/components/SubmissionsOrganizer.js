@@ -67,7 +67,7 @@ class SubmissionsOrganizer extends Component{
     //get the team for the this directive from the backend so you can set state and increment the points
     const url3 = 'https://treasure-chest-api.herokuapp.com/teams/' + submission.team_id
 
-    axios.get(url).then(response => {
+    axios.get(url3).then(response => {
       console.log("response from getting the team", response)
     this.setState({ team: response.data })
     })

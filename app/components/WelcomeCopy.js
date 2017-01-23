@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 10,
     fontFamily: 'Pacifico',
-    justifyContent: 'flex-start'
+    // justifyContent: 'flex-start'
   },
   smalltext: {
     fontSize: 25,
@@ -272,9 +272,10 @@ const styles = StyleSheet.create({
     marginTop: -50,
     fontFamily: 'Chalkboard SE'
   },
-  scrollview: {
-    marginTop: -45
-  }
+  scrollview:{
+    marginTop: 20,
+    height: 200
+  },
 });
 
 export default welcomeCopy;

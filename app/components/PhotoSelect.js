@@ -17,7 +17,9 @@ import {
  import Button from './common/Button';
  import Example from '../Camera';
  import axios from 'axios';
- import DirectiveShow from './DirectiveShow'
+ import DirectiveShow from './DirectiveShow';
+ import huntDetails from './HuntDetails';
+
 
 var RCTCameraRollManager = require('NativeModules').CameraRollManager;
 
@@ -118,11 +120,32 @@ class PhotoSelect extends Component {
    });
  }
 
+//navigate to huntDetails
+ seeHuntPressed() {
+   console.log('seeHunt pressed');
+   this._toHuntDetails()
+ }
+
+ _toHuntDetails = () => {
+   this.props.navigator.push({
+     title: 'Hunt Details',
+     component: huntDetails,
+     passProps: { hunt: this.props.hunt,
+                 user: this.props.user}
+   });
+ }
+
  render() {
    return (
      <View style={styles.container}>
 
-      <Text style={styles.text}> {this.props.directive.name} </Text>
+     <TouchableOpacity onPress={() => this.seeHuntPressed()}>
+       <Text style={styles.huntname}> {this.props.hunt.name}</Text>
+     </TouchableOpacity>
+
+     <TouchableOpacity onPress={() => this._toDirectiveShow()}>
+        <Text style={styles.text}>    {this.props.directive.name} </Text>
+      </TouchableOpacity>
 
       <Image style={styles.image} source={{ uri: this.state.image.uri }} />
 
@@ -140,7 +163,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
-    marginTop: 50,
+    marginTop: 45,
+  },
+  huntname: {
+    // marginTop: 65,
+    fontSize: 30,
+    textAlign: 'center',
+    fontFamily: 'Pacifico'
   },
   imageGrid: {
     flex: 1,
@@ -149,10 +178,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 275,
+    height: 275,
     margin: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    alignSelf: 'center'
   },
   camerabutton:{
     borderRadius: 5,

@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   scrollview:{
     height: 400,
-    marginTop: -10
+    marginTop: -40
   },
   caption: {
     fontSize: 16,
