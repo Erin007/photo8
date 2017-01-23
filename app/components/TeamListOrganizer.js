@@ -105,7 +105,6 @@ class TeamListOrganizer extends Component {
     });
   }
 
-
 //render the team list
   renderTeams(){
     //makes a clickable box for each team name, like in directive list
