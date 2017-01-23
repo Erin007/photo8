@@ -14,6 +14,7 @@ import Submissions from './Submissions';
 import DirectiveListOrganizer from './DirectiveListOrganizer';
 import TeamListOrganizer from './TeamListOrganizer';
 import SubmissionsOrganizer from './SubmissionsOrganizer';
+import welcomeCopy from './WelcomeCopy';
 
 class huntDetails extends Component{
 
@@ -103,6 +104,21 @@ class huntDetails extends Component{
     });
   }
 
+//navigate the user to the 'home' page
+toHome(){
+  console.log('The user wants to go home');
+  this._toHome();
+}
+
+_toHome = () => {
+  this.props.navigator.push({
+    title: 'Home',
+    component: welcomeCopy,
+    passProps: { hunt : this.props.hunt,
+                 user : this.props.user}
+  });
+}
+
   renderButtons(){
     //if the user is the organizer
     if (this.props.hunt.organizer_id == this.props.user.id){
@@ -113,6 +129,8 @@ class huntDetails extends Component{
           <Button onPress={this.teamsOrganizer.bind(this)}> Teams </Button>
 
           <Button onPress={this.submissionsOrganizer.bind(this)}> Submissions </Button>
+
+          <Button onPress={this.toHome.bind(this)}> Home </Button>
         </View>
       );
     }
@@ -124,6 +142,8 @@ class huntDetails extends Component{
         <Button onPress={this.seeTeams.bind(this)}> Teams </Button>
 
         <Button onPress={this.seeSubmissions.bind(this)}> Submissions </Button>
+
+        <Button onPress={this.toHome.bind(this)}> Home </Button>
       </View>
     )
   }
