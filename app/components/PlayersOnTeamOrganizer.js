@@ -76,6 +76,9 @@ class RosterOrganizer extends Component {
       </View>
       );
     }
+    return(
+      <Text style={styles.smallertext}> There are not any players on this team yet. </Text>
+    )
   }
 
 //navigate to huntDetails
@@ -156,6 +159,15 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     fontFamily: 'Chalkboard SE'
+  },
+  smallertext: {
+    fontSize: 18,
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    fontFamily: 'Chalkboard SE',
+    color: '#DCDCDC',
   },
   team:{
     fontSize: 20,

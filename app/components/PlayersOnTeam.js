@@ -40,6 +40,9 @@ class Roster extends Component {
         </Text>
       );
     }
+    return(
+      <Text style={styles.smallertext}> There are not any players on this team yet. </Text>
+    )
   }
 
   renderButtons(){
@@ -207,7 +210,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color: '#DCDCDC',
   },
   team:{
     fontSize: 16,

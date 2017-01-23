@@ -12,6 +12,7 @@ import axios from 'axios';
 import Roster from './PlayersOnTeam';
 import Button from './common/Button';
 import DirectiveList from './DirectiveList';
+import huntDetails from './HuntDetails';
 
 class TeamList extends Component {
   state = { teams: [], thisplayersteam: {} };

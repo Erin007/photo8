@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 40,
-    paddingBottom: 70
+    paddingBottom: 40
   },
   welcome: {
     fontSize: 42,
@@ -169,7 +169,8 @@ const styles = StyleSheet.create({
   },
   scrollview: {
     marginBottom: 10,
-    height: 250,
+    height: 300,
+    marginTop: -45
   }
 });
 
