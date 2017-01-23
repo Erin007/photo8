@@ -15,7 +15,7 @@ import huntDetails from './HuntDetails';
 import axios from 'axios';
 
 class SubmissionsOrganizer extends Component{
-  state = { submissions: [], error: '', loading: false }
+  state = { submissions: [], error: '', loading: false, submission: '', team: '' }
 
   componentWillMount(){
     console.log("componentwillmount in submissions organizer")
@@ -26,10 +26,96 @@ class SubmissionsOrganizer extends Component{
     axios.get(url).then( response => {
       console.log(response)
       return this.setState( { submissions: response.data })
-    })
+      })
       .catch(function (error) {
         console.log(error);
       });;
+  }
+
+  approveSubmission(submission){
+    console.log('approve submission called')
+    //patch to the back to change the  submission status to 2
+    const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + submission.id
+
+    axios.patch(url, {
+      status: 2,
+    })
+    .then(response => {
+      console.log("response from changing submission status to 2", response)
+    this.setState({ submission: response.data })
+    })
+    .catch((error) => {
+      console.log("Error from changing submission status to 2", error)
+      this.setState({ error: "There was an error. Please try again.", loading: false })
+    });
+
+    //patch to the directive to change complete to true
+    const url2 = 'https://treasure-chest-api.herokuapp.com/directives/' + submission.directive_id
+
+    axios.patch(url2, {
+      complete: true,
+    })
+    .then(response => {
+      console.log("response from changing complete to true for the directive", response)
+    this.setState({ submission: response.data })
+    })
+    .catch((error) => {
+      console.log("Error from changing the directive complete to true", error)
+      this.setState({ error: "There was an error. Please try again.", loading: false })
+    });
+
+    //get the team for the this directive from the backend so you can set state and increment the points
+    const url3 = 'https://treasure-chest-api.herokuapp.com/teams/' + submission.team_id
+
+    axios.get(url).then(response => {
+      console.log("response from getting the team", response)
+    this.setState({ team: response.data })
+    })
+    .catch((error) => {
+      console.log("Error from getting the team", error)
+      this.setState({ error: "There was an error. Please try again.", loading: false })
+    });
+
+    //determine what the new team point value should be
+    const newPoints = this.state.team.points + 1
+    //****** CHANGE 1 to point value in added features *********////
+
+    //patch to team to give them points for this directive
+    axios.patch(url3, {
+      points: newPoints,
+    })
+    .then(response => {
+      console.log("response from setting the points in team", response)
+    this.setState({ submission: response.data })
+    })
+    .catch((error) => {
+      console.log("Error from setting the points in team", error)
+      this.setState({ error: "There was an error. Please try again.", loading: false })
+    });
+
+    //re-call to backend for the updated list of submissions and re-render
+    this.componentWillMount()
+  }
+
+  denySubmission(submission){
+    console.log('deny submission called')
+    //patch to this submission to change the status to 3
+    const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + submission.id
+
+    axios.patch(url, {
+      status: 3,
+    })
+    .then(response => {
+      console.log("response", response)
+    this.setState({ submission: response.data })
+    })
+    .catch((error) => {
+      console.log("Error:", error)
+      this.setState({ error: "There was an error. Please try again.", loading: false })
+    });
+
+    //re-call to backend for the updated list of submissions and re-render
+    this.componentWillMount()
   }
 
 //navigate to huntDetails
@@ -71,11 +157,11 @@ class SubmissionsOrganizer extends Component{
              <Text style={styles.caption}> {submissionsToRender[i].caption} </Text>
 
             <View style={styles.buttonbox}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.denySubmission(submissionsToRender[i])}>
                <Text style={styles.x}>✘</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.approveSubmission(submissionsToRender[i])}>
                <Text style={styles.check}>✔︎</Text>
               </TouchableOpacity>
             </View>
@@ -106,6 +192,10 @@ class SubmissionsOrganizer extends Component{
              style={styles.status3}/>
 
              <Text style={styles.caption}> {submissionsToRender[i].caption} </Text>
+
+             <TouchableOpacity onPress={() => this.approveSubmission(submissionsToRender[i])}>
+              <Text style={styles.check2}>✔︎</Text>
+             </TouchableOpacity>
 
           </View>
         )
@@ -239,6 +329,22 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     marginTop: 12
+  },
+  check2:{
+    fontSize: 36,
+    width: 50,
+    height: 50,
+    backgroundColor: '#24AE62',
+    borderWidth: 2,
+    paddingLeft: 10,
+    alignItems: 'center',
+    shadowColor: '#167c89',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginTop: 12,
+    marginLeft: 125
   },
   buttonbox:{
     flexDirection: 'row',
