@@ -14,6 +14,7 @@ import Button from './common/Button';
 import findHunt from './HuntFinder';
 import huntDetails from './HuntDetails';
 import axios from 'axios';
+import welcomeCopy from './WelcomeCopy';
 
 class HuntListPlayer extends Component {
 
@@ -62,6 +63,21 @@ class HuntListPlayer extends Component {
     });
   }
 
+//navigate the user to the 'home' page
+  toHome(){
+    console.log('The user wants to go home');
+    this._toHome();
+  }
+
+  _toHome = () => {
+    this.props.navigator.push({
+      title: 'Home',
+      component: welcomeCopy,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
+
   joinHuntPressed() {
     console.log('>>> Join Hunt Button Pressed!');
     this._toJoinHunt();
@@ -79,9 +95,11 @@ class HuntListPlayer extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.welcome}>
-           Snapenger Hunt
-        </Text>
+        <TouchableOpacity onPress={this.toHome.bind(this)}>
+          <Text style={styles.welcome}>
+             Snapenger Hunt
+          </Text>
+        </TouchableOpacity>
 
         <Text style={styles.text}>
            Hunts You Play
@@ -102,7 +120,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 30,
+    marginTop: 40,
     paddingBottom: 70
   },
   welcome: {

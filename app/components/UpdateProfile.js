@@ -12,8 +12,8 @@ import {
 import Input from './common/Input';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
-import welcome from './Welcome';
 import axios from 'axios';
+import welcomeCopy from './WelcomeCopy';
 
 class UpdateProfile extends Component {
 
@@ -70,13 +70,30 @@ class UpdateProfile extends Component {
     })
   }
 
+//navigate the user to the 'home' page
+  toHome(){
+    console.log('The user wants to go home');
+    this._toHome();
+  }
+
+  _toHome = () => {
+    this.props.navigator.push({
+      title: 'Home',
+      component: welcomeCopy,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
+
   render(){
     return (
       <View style={styles.container}>
 
-        <Text style={styles.welcome}>
-           Snapenger Hunt
-        </Text>
+        <TouchableOpacity onPress={this.toHome.bind(this)}>
+          <Text style={styles.welcome}>
+             Snapenger Hunt
+          </Text>
+        </TouchableOpacity>
 
         <ScrollView>
           <Text style={styles.text}> What would you like your username to be? </Text>
