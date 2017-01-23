@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   huntname:{
     fontSize: 32,
     textAlign: 'center',
-    margin: 10,
+    margin: 5,
     fontFamily: 'Pacifico',
   },
   text: {

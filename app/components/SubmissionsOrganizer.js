@@ -143,7 +143,12 @@ class SubmissionsOrganizer extends Component{
         submissionsToRender.push(this.state.submissions[i])
       }
     }
-    console.log("filtered submissions", submissionsToRender)
+
+    if (submissionsToRender.length == 0){
+      return(
+          <Text style={styles.smallertext}> No one has submitted anything to this hunt yet. </Text>
+      )
+    }
 
     for (i = 0; i < submissionsToRender.length; i++) {
       if (submissionsToRender[i].status == 1){
@@ -226,7 +231,7 @@ class SubmissionsOrganizer extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
+    marginTop: 45,
     backgroundColor: '#F5FCFF',
   },
   name: {
@@ -244,6 +249,15 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: -20,
     fontFamily: 'Chalkboard SE'
+  },
+  smallertext: {
+    fontSize: 18,
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    fontFamily: 'Chalkboard SE',
+    color: '#DCDCDC',
   },
   submissionbox:{
     borderWidth: 1,
