@@ -10,7 +10,7 @@ import {
   Text } from 'react-native';
 import axios from 'axios';
 import Button from './common/Button';
-import DirectiveList from './DirectiveList';
+import huntDetails from './HuntDetails';
 
 
 class Roster extends Component {
@@ -69,11 +69,9 @@ class Roster extends Component {
         if (this.state.users[i].id == currentUserId){
           //the user is on this team
           return(
-                <View style={styles.bottombuttons}>
-                  <Button onPress={() => this.leaveTeamPressed() }> Leave Team </Button>
-
-                  <Button onPress={() => this.seeDirectives() }> See Directives </Button>
-                </View>
+            <View style={styles.bottombuttons}>
+              <Button onPress={() => this.leaveTeamPressed() }> Leave Team </Button>
+            </View>
           );
         }
       }
@@ -143,17 +141,18 @@ class Roster extends Component {
       });;
   }
 
-  seeDirectives() {
-    console.log('>>> seeDirectives Button Pressed!');
-    this._toDirectiveList();
+//navigate to huntDetails
+  seeHuntPressed() {
+    console.log('seeHunt pressed');
+    this._toHuntDetails()
   }
 
-  _toDirectiveList = () => {
+  _toHuntDetails = () => {
     this.props.navigator.push({
-      title: 'Hunt',
-      component: DirectiveList,
-      passProps: { hunt : this.props.hunt,
-                   user : this.props.user}
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: this.props.hunt,
+                  user: this.props.user}
     });
   }
 
@@ -162,7 +161,9 @@ class Roster extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.text}>{this.props.hunt.name}</Text>
+        <TouchableOpacity onPress={() => this.seeHuntPressed()}>
+          <Text style={styles.text}>{this.props.hunt.name}</Text>
+        </TouchableOpacity>
 
         <Text style={styles.smalltext}> Players on {this.props.team.name} </Text>
 
@@ -182,8 +183,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 50,
-    // flex: 1
-    paddingBottom: 50
+    flex: 1,
+    paddingBottom: 60
   },
   text: {
     fontSize: 30,
@@ -229,15 +230,12 @@ const styles = StyleSheet.create({
     width: 250
   },
   scrollview: {
-    marginTop: 0,
-    // marginBottom: 25,
-    // borderWidth: 3,
-    borderRadius: 5,
-    height: 200,
+    marginTop: -55,
+    marginBottom: 25,
+    height: 300,
   },
   bottombuttons:{
     marginTop: 20,
-    // paddingBottom: 40
   }
 });
 

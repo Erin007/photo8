@@ -115,7 +115,7 @@ class TeamListOrganizer extends Component {
           <TouchableOpacity onPress={() => this.seeRosterPressed(team)} key={ team.id } team={team}>
 
             <Text style={styles.team}>
-                 {team.name}
+                 {team.name}     {team.points} pts
             </Text>
           </TouchableOpacity>
 

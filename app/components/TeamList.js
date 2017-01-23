@@ -74,17 +74,18 @@ class TeamList extends Component {
     });
   }
 
-  seeHuntPressed(hunt){
-    console.log('>>> See Hunt Pressed!');
-    this._toHunt(hunt);
+//navigate to huntDetails
+  seeHuntPressed() {
+    console.log('seeHunt pressed');
+    this._toHuntDetails()
   }
 
-  _toHunt(hunt){
+  _toHuntDetails = () => {
     this.props.navigator.push({
-      title: 'Hunt',
-      component: DirectiveList,
-      passProps: { hunt : hunt,
-                   user: this.props.user }
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: this.props.hunt,
+                  user: this.props.user}
     });
   }
 
@@ -97,7 +98,7 @@ class TeamList extends Component {
         <TouchableOpacity onPress={() => this.seeRosterPressed(team)} key={ team.id } team={team}>
 
           <Text style={styles.team}>
-               {team.name}
+               {team.name}                {team.points} pts
           </Text>
         </TouchableOpacity>
         );
@@ -108,7 +109,9 @@ class TeamList extends Component {
     return (
       <View style={styles.container}>
 
+      <TouchableOpacity onPress={() => this.seeHuntPressed()}>
         <Text style={styles.text}> { this.props.hunt.name } </Text>
+      </TouchableOpacity>
 
         <Text style={styles.smalltext}> Teams </Text>
 
@@ -118,7 +121,6 @@ class TeamList extends Component {
           { this.renderTeams() }
         </ScrollView>
 
-        <Button onPress={() => this.seeHuntPressed(this.props.hunt)}> See Hunt </Button>
       </View>
     );
   }
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 50,
-    paddingBottom: 60
+    paddingBottom: 100
   },
   text: {
     fontSize: 30,
@@ -177,10 +179,7 @@ const styles = StyleSheet.create({
   scrollview: {
     marginTop: -55,
     marginBottom: 25,
-    //borderWidth: 3,
-    //borderRadius: 5,
-    height: 250,
-  //  borderColor: '#ddd',
+    height: 300,
   }
 });
 
