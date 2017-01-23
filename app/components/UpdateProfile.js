@@ -109,7 +109,7 @@ const styles = {
     textAlign: 'center'
   },
   text: {
-    fontSize: 14,
+    fontSize: 18,
     flex: 1,
     textAlign: 'center',
     marginLeft: 10,
@@ -123,7 +123,7 @@ const styles = {
     color: 'red'
   },
   welcome: {
-    fontSize: 40,
+    fontSize: 42,
     textAlign: 'center',
     margin: 5,
     paddingTop: 10,

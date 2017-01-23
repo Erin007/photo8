@@ -104,15 +104,13 @@ class HuntListOrganizer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50,
-    paddingBottom: 50
+    marginTop: 30,
+    paddingBottom: 55
   },
   welcome: {
-    fontSize: 36,
+    fontSize: 42,
     textAlign: 'center',
     margin: 10,
     paddingTop: 10,
@@ -120,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   text: {
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'left',
     padding: 5,
     marginLeft: 5,
@@ -128,7 +126,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   hunt:{
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
     borderWidth: 1,
@@ -159,7 +157,6 @@ const styles = StyleSheet.create({
   scrollview:{
     height: 250,
     marginBottom: 10,
-    // borderWidth: 3
   }
 });
 

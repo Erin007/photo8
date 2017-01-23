@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   huntname:{
-    fontSize: 30,
+    fontSize: 32,
     textAlign: 'center',
     margin: 10,
     fontFamily: 'Pacifico',

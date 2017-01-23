@@ -241,13 +241,13 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50
+    marginTop: 40
   },
   content:{
-    marginTop: 20,
+    marginTop: 25,
   },
   welcome: {
-    fontSize: 36,
+    fontSize: 42,
     textAlign: 'center',
     margin: 10,
     paddingTop: 10,
@@ -255,12 +255,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   smalltext: {
-    fontSize: 18,
+    fontSize: 25,
     textAlign: 'left',
     padding: 10,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: -50,
+    marginTop: -20,
     fontFamily: 'Chalkboard SE'
   },
   smallertext: {

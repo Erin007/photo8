@@ -160,14 +160,15 @@ class addDirectives extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    marginTop: 40,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    paddingBottom: 60
   },
   scrollview: {
     marginTop: 10,
     marginBottom: 10,
-    height: 180,
+    height: 200,
   },
   directivebox: {
     flexDirection: 'row',
@@ -175,10 +176,10 @@ const styles = StyleSheet.create({
     width: 300
   },
   plus:{
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     backgroundColor: "#21b6cb",
-    padding: 7,
+    paddingTop: 12,
     borderRadius: 5,
     borderWidth: 1,
     shadowColor: '#167c89',
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     borderColor:'#167c89',
-    marginTop: 15,
+    marginTop: 12,
     alignItems: 'center',
   },
   name: {

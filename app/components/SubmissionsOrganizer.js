@@ -226,7 +226,7 @@ class SubmissionsOrganizer extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 45,
+    marginTop: 25,
     backgroundColor: '#F5FCFF',
   },
   name: {
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   },
   scrollview:{
     height: 450,
-    marginTop: -10
+    marginTop: -20
   },
   caption: {
     fontSize: 16,

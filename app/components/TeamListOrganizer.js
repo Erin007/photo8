@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50,
+    marginTop: 40,
     paddingBottom: 50
   },
   text: {
@@ -223,6 +223,7 @@ const styles = StyleSheet.create({
   scrollview: {
     marginTop: -55,
     height: 325,
+    marginBottom: 15
   }
 });
 

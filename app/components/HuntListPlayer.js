@@ -100,15 +100,13 @@ class HuntListPlayer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
-    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50,
+    marginTop: 30,
     paddingBottom: 70
   },
   welcome: {
-    fontSize: 36,
+    fontSize: 42,
     textAlign: 'center',
     margin: 10,
     paddingTop: 10,
@@ -117,13 +115,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 25,
     textAlign: 'left',
-    // padding: 10,
+    padding: 5,
     marginLeft: 5,
     marginRight: 5,
     fontFamily: 'Chalkboard SE'
   },
   hunt:{
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
     borderWidth: 1,
@@ -143,7 +141,7 @@ const styles = StyleSheet.create({
     width: 275
   },
   smallertext: {
-    fontSize: 14,
+    fontSize: 18,
     textAlign: 'center',
     padding: 10,
     marginLeft: 10,
@@ -152,10 +150,8 @@ const styles = StyleSheet.create({
     color: '#DCDCDC',
   },
   scrollview: {
-    marginTop: -50,
-    marginBottom: 25,
-    height: 275,
-    // borderBottomWidth: 3
+    marginBottom: 10,
+    height: 250,
   }
 });
 
