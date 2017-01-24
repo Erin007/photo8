@@ -12,8 +12,6 @@ import DirectiveList from './DirectiveList';
 import Button from './common/Button';
 import InputPlus from './common/InputPlus';
 import Spinner from './common/Spinner';
-import Card from './common/Card';
-import CardSection from './common/CardSection';
 import huntDetails from './HuntDetails';
 import TeamListOrganizer from './TeamListOrganizer';
 import axios from 'axios';

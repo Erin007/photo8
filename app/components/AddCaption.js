@@ -58,7 +58,8 @@ state = { caption: '', error: '', loading: false, submission: '' }
       passProps: { submission: this.state.submission,
                    directive: this.props.directive,
                    hunt: this.props.hunt,
-                   user: this.props.user },
+                   user: this.props.user,
+                   thisplayersteam: this.props.thisplayersteam},
     });
   }
 

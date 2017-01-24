@@ -54,7 +54,8 @@ class Example extends Component {
       passProps: { directive : this.props.directive,
         hunt: this.props.hunt,
         user: this.props.user,
-      submission: this.props.submission },
+        submission: this.props.submission,
+        thisplayersteam: this.props.thisplayersteam },
     });
   }
 

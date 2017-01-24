@@ -11,7 +11,6 @@ import TeamList from './TeamList';
 import Button from './common/Button';
 import Input from './common/Input';
 import Spinner from './common/Spinner';
-import CardSection from './common/CardSection';
 import axios from 'axios';
 
 class findHunt extends Component{

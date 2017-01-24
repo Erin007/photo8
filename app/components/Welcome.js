@@ -11,13 +11,11 @@ import {
 
 import Button from './common/Button';
 import LoginForm from './LoginForm';
-import Card from './common/Card';
-import CardSection from './common/CardSection';
 import Spinner from './common/Spinner';
 import Input from './common/Input';
 import newHunt from './MakeHuntForm';
 import findHunt from './HuntFinder';
-import UpdateProfile from './UpdateProfile';
+import Profile from './Profile';
 import HuntListOrganizer from './HuntListOrganizer';
 import HuntListPlayer from './HuntListPlayer';
 import axios from 'axios';
@@ -147,16 +145,16 @@ class welcome extends Component {
     firebase.auth().signOut()
   }
 
-  updateProfilePressed(){
-    console.log('<<< Update Profile was pressed')
-    this._toUpdateProfile();
+  profilePressed(){
+    console.log('<<< Profile was pressed')
+    this._toProfile();
   }
 
-  _toUpdateProfile = () => {
+  _toProfile = () => {
     this.props.navigator.push({
       title: 'Profile',
-      component: UpdateProfile,
-      passProps: { user: this.state.user},
+      component: Profile,
+      passProps: { user: this.state.user[0]},
     });
   }
 
@@ -196,15 +194,14 @@ class welcome extends Component {
             { this.renderUsername() }
 
           <ScrollView style={styles.scrollview}>
-            <Button onPress={() => this.signOut()}>
-              Log Out
-            </Button>
 
-            <Button onPress={this.updateProfilePressed.bind(this)}> Update Profile </Button>
+            <Button onPress={this.playPressed.bind(this)}> Play </Button>
 
             <Button style={{margin:0}} onPress={this.organizePressed.bind(this)}> Organize </Button>
 
-            <Button onPress={this.playPressed.bind(this)}> Play </Button>
+            <Button onPress={this.profilePressed.bind(this)}> Profile </Button>
+
+            <Button onPress={() => this.signOut()}>  Log Out </Button>
 
           </ScrollView>
 
@@ -243,7 +240,7 @@ const styles = StyleSheet.create({
     marginTop: 40
   },
   scrollview:{
-    marginTop: 20,
+    marginTop: 50,
     height: 200
   },
   content:{

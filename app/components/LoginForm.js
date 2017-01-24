@@ -1,8 +1,6 @@
 //LoginForm.js
 import React, { Component } from 'react';
 import Button from './common/Button';
-import Card from './common/Card';
-import CardSection from './common/CardSection';
 import Input from './common/Input';
 import Spinner from './common/Spinner';
 import firebase from 'firebase';
@@ -75,9 +73,8 @@ class LoginForm extends Component {
           { this.state.error }
         </Text>
 
-        <CardSection>
-          { this.renderButton() }
-        </CardSection>
+        { this.renderButton() }
+
       </ScrollView>
     )
   }

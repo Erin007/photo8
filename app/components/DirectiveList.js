@@ -15,11 +15,10 @@ import huntDetails from './HuntDetails';
 
 class DirectiveList extends Component {
 
-  state = { directives: [], directive: {}, completeDirectives: [], incompleteDirectives: []};
+  state = { directives: [], directive: {}, completeDirectives: [], incompleteDirectives: [], thisplayersteam: ''};
 
   componentWillMount (){
     console.log('Component will Mount in DirectiveList called')
-    //change this to send the url of the specific hunt once everything is working!
     const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
 
     axios.get(url).then( response => {
@@ -30,6 +29,17 @@ class DirectiveList extends Component {
       .catch(function (error) {
         console.log(error);
       });;
+
+      //make an axios call to get the team that this player is on for this hunt
+      const url2 = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id + '/' + this.props.user.id
+
+      axios.get(url2).then( response => {
+        console.log("TEAM", response)
+        return this.setState( { thisplayersteam: response.data })
+      })
+        .catch(function (error) {
+          console.log(error);
+        });;
   }
 
   sortDirectives(){
@@ -101,7 +111,8 @@ class DirectiveList extends Component {
       component: DirectiveShow,
       passProps: { directive: directive,
                    hunt: this.props.hunt,
-                   user: this.props.user}
+                   user: this.props.user,
+                   thisplayersteam: this.state.thisplayersteam}
     });
   }
 
@@ -117,6 +128,8 @@ class DirectiveList extends Component {
         </TouchableOpacity>
 
         <Text style={styles.listname}> Directives </Text>
+
+        <Text style={styles.smalltext}>{this.props.hunt.description}</Text>
 
         <ScrollView style={styles.scrollview}>
           { this.renderIncompleteDirectives() }

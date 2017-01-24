@@ -12,8 +12,6 @@ import DirectiveList from './DirectiveList'
 import addDirectives from './AddDirectives';
 import Button from './common/Button';
 import Input from './common/Input';
-import Card from './common/Card';
-import CardSection from './common/CardSection';
 import Spinner from './common/Spinner';
 
 class newHunt extends Component{
