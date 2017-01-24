@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     marginTop: 40
   },
   scrollview:{
-    marginTop: 50,
+    // marginTop: 50,
     height: 200
   },
   content:{

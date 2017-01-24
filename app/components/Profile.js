@@ -66,9 +66,9 @@ class Profile extends Component {
 
         <Text style={styles.smalltext}>Username: { this.props.user.username }</Text>
 
-        <Text style={styles.smallertext}>Location: Seattle, WA </Text>
+        <Text style={styles.smallertext}>Location: { this.props.user.location } </Text>
 
-        <Text style={styles.smallertext}>Founder of Scientific Computing & Scavenger Hunt Extraordinaire </Text>
+        <Text style={styles.smallertext}>{ this.props.user.bio }</Text>
 
         <Button onPress={this.updateProfilePressed.bind(this)}>
           Update Profile
