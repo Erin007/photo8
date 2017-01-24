@@ -98,6 +98,8 @@ class Submissions extends Component{
 
         <View style={styles.submissionbox} key={submission.id}>
 
+          <Text style={styles.caption}> {submission.directive_name} </Text>
+
           <Image
            source={{ uri: submission.photo}}
            style={styles.status1}/>

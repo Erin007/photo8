@@ -43,7 +43,11 @@ class DirectiveShow extends Component {
     console.log("CHECKING FOR SUBMISSION")
     console.log(this.state.submission)
     //if there isn't a submission
-    if (this.state.submission == []){
+    if (this.state.submission.length == 0){
+      console.log("directive_id:", this.props.directive.id)
+      console.log("this.props.thisplayersteam.id", this.props.thisplayersteam.id)
+      console.log("directive_name:", this.props.directive.name)
+
       // make a new 'shell' submission so adding a caption and adding a photo can both be updates/put requests
       const url3 = 'https://treasure-chest-api.herokuapp.com/submissions/'
 
@@ -52,14 +56,15 @@ class DirectiveShow extends Component {
         team_id: this.props.thisplayersteam.id,
         photo: '',
         caption: '',
-        status: 0
+        status: 0,
+        directive_name: this.props.directive.name
       })
       .then(response => {
         console.log("response from handling the submission", response.data)
         this.setState({ submission: response.data })
       })
       .catch((error) => {
-        console.log("Error:", error)
+        console.log("Error from trying to post a new submission:", error)
       });
     }
     this.updateStatus()
@@ -75,8 +80,8 @@ class DirectiveShow extends Component {
 
   updateStatus(){
     console.log('update status called')
+    console.log("this.state.submission", this.state.submission)
     // check if a photo and caption have been submitted
-    if ( this.state.submission !== null){
       if (this.state.submission.photo !== '' && this.state.submission.status !== 2){
       //update the submission status to 1 in the backend
         const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.state.submission.id
@@ -88,10 +93,10 @@ class DirectiveShow extends Component {
          this.setState({ submission: response.data })
         })
         .catch((error) => {
-          console.log("Error:", error)
+          console.log("Error from trying to update the status:", error)
         });
       }
-    }
+    // }
   }
 
 //render helper methods
