@@ -98,7 +98,7 @@ class Submissions extends Component{
 
         <View style={styles.submissionbox} key={submission.id}>
 
-          <Text style={styles.caption}> {submission.directive_name} </Text>
+          <Text style={styles.caption}>❏ {submission.directive_name} </Text>
 
           <Image
            source={{ uri: submission.photo}}
@@ -119,6 +119,8 @@ class Submissions extends Component{
 
         <View style={styles.submissionbox} key={submission.id}>
 
+          <Text style={styles.caption}>✔︎ {submission.directive_name} </Text>
+
           <Image
            source={{ uri: submission.photo}}
            style={styles.status2}/>
@@ -137,6 +139,8 @@ class Submissions extends Component{
       return submissions.map(submission =>
 
         <View style={styles.submissionbox} key={submission.id}>
+
+          <Text style={styles.caption}>❏ {submission.directive_name} </Text>
 
           <Image
            source={{ uri: submission.photo}}
