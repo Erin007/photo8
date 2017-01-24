@@ -104,15 +104,6 @@ class Submissions extends Component{
 
            <Text style={styles.caption}> {submission.caption} </Text>
 
-          <View style={styles.buttonbox}>
-            <TouchableOpacity onPress={() => this.denySubmission(submission)}>
-             <Text style={styles.x}>✘</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => this.approveSubmission(submission)}>
-             <Text style={styles.check}>✔︎</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       )
     }
