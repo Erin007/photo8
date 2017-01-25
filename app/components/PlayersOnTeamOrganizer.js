@@ -13,21 +13,44 @@ import huntDetails from './HuntDetails';
 import Profile from './Profile';
 
 class RosterOrganizer extends Component {
-  state = { users: [], teamplayer: ''};
+  state = { players: [], teamplayer: ''};
 
   componentWillMount(){
-    console.log("componentwillmount in player organizer")
-    console.log("this.state", this.state)
     //axios fetch all of the players associated with this team
     const url = 'https://treasure-chest-api.herokuapp.com/users/find/team/' + this.props.team.id
 
     axios.get(url).then( response => {
       console.log("response for Players on Team Organizer", response)
-      return this.setState( { users: response.data })
+      return this.setState( { players: response.data })
       })
       .catch(function (error) {
         console.log(error);
       });;
+  }
+
+//navigate to huntDetails
+  seeHuntPressed() {
+    console.log('seeHunt pressed');
+    this._toHuntDetails()
+  }
+
+  _toHuntDetails = () => {
+    this.props.navigator.push({
+      title: 'Hunt Details',
+      component: huntDetails,
+      passProps: { hunt: this.props.hunt,
+                   user: this.props.user}
+    });
+  }
+
+  //navigate to the player's Profile
+  _toProfile = (player) => {
+    this.props.navigator.push({
+      title: 'Profile',
+      component: Profile,
+      passProps: { player: player,
+                  user: this.props.user},
+    });
   }
 
   deletePlayerPressed(user){
@@ -61,30 +84,21 @@ class RosterOrganizer extends Component {
       });;
   }
 
-//navigate to the player's Profile
-_toProfile = (user) => {
-  this.props.navigator.push({
-    title: 'Profile',
-    component: Profile,
-    passProps: { user: user},
-  });
-}
-
   renderPlayers(){
     console.log("rendering players organizer")
 
-    if (typeof this.state.users[0] !== 'undefined')  {
+    if (typeof this.state.players[0] !== 'undefined')  {
 
-    return this.state.users.map(user =>
-      <View style={styles.playerbox} key={user.id}>
+    return this.state.players.map(player =>
+      <View style={styles.playerbox} key={player.id}>
 
-        <TouchableOpacity onPress={() => this._toProfile(user)}>
+        <TouchableOpacity onPress={() => this._toProfile(player)}>
           <Text style={styles.team} >
-               {user.username}
+               {player.username}
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.x} onPress={() => this.deletePlayerPressed(user)}>
+        <TouchableOpacity style={styles.x} onPress={() => this.deletePlayerPressed(player)}>
           <Text>✘</Text>
         </TouchableOpacity>
       </View>
@@ -93,21 +107,6 @@ _toProfile = (user) => {
     return(
       <Text style={styles.smallertext}> There are not any players on this team yet. </Text>
     )
-  }
-
-//navigate to huntDetails
-  seeHuntPressed() {
-    console.log('seeHunt pressed');
-    this._toHuntDetails()
-  }
-
-  _toHuntDetails = () => {
-    this.props.navigator.push({
-      title: 'Hunt Details',
-      component: huntDetails,
-      passProps: { hunt: this.props.hunt,
-                   user: this.props.user}
-    });
   }
 
   render(){

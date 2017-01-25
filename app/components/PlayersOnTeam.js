@@ -15,16 +15,15 @@ import Profile from './Profile';
 
 
 class Roster extends Component {
-  state = { users: [], teamplayer: {}, thisplayersteam: ''}; // thisplayersteam is a teamplayer object
+  state = { players: [], teamplayer: {}, thisplayersteam: ''}; // thisplayersteam is a teamplayer object
 
   componentWillMount(){
     //axios fetch all of the players associated with this team
-    console.log('PlayerOnTeam team_id', this.props.team.id)
     const url = 'https://treasure-chest-api.herokuapp.com/users/find/team/' + this.props.team.id
 
     axios.get(url).then( response => {
       console.log("response for Players on Team", response)
-      return this.setState( { users: response.data })
+      return this.setState( { players: response.data })
       })
       .catch(function (error) {
         console.log(error);
@@ -32,25 +31,26 @@ class Roster extends Component {
   }
 
 //navigate to the player's Profile
-  _toProfile = (user) => {
+  _toProfile = (player) => {
     this.props.navigator.push({
       title: 'Profile',
       component: Profile,
-      passProps: { user: user},
+      passProps: { player: player,
+                   user: this.props.user},
     });
   }
 
   renderPlayers(){
     console.log("rendering players")
 
-    if (typeof this.state.users[0] !== 'undefined')  {
+    if (typeof this.state.players[0] !== 'undefined')  {
 
-    return this.state.users.map(user =>
-      <View key={user.id}>
+    return this.state.players.map(player =>
+      <View key={player.id}>
 
-        <TouchableOpacity onPress={() => this._toProfile(user)}>
-          <Text style={styles.team} key={user.id}>
-               {user.username}
+        <TouchableOpacity onPress={() => this._toProfile(player)}>
+          <Text style={styles.team}>
+               {player.username}
           </Text>
         </TouchableOpacity>
 
@@ -65,7 +65,6 @@ class Roster extends Component {
   renderButtons(){
     console.log("RENDERING BUTTONS ON ROSTER")
     //if the user is not on a team show them join team button
-    console.log("this.props.thisplayersteam", this.props.thisplayersteam)
     console.log("this.props.thisplayersteam.name", this.props.thisplayersteam.name)
     if (typeof this.props.thisplayersteam.name == 'undefined' && this.state.thisplayersteam == ''){
       console.log("We a have a lonewolf!!!!!!!!! ")
@@ -77,16 +76,15 @@ class Roster extends Component {
     }
     //if the user is on this team, show them a leave team button
     console.log("checking if the user is on this team")
-    console.log("this.state.users", this.state.users)
 
     const currentUserId = this.props.user.id
     const that = this
 
-    if (typeof this.state.users !== 'undefined'){
+    if (typeof this.state.players !== 'undefined'){
       console.log("in the first if")
 
-      for (i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].id == currentUserId){
+      for (i = 0; i < this.state.players.length; i++) {
+        if (this.state.players[i].id == currentUserId){
           //the user is on this team
           return(
             <View style={styles.bottombuttons}>
@@ -154,7 +152,7 @@ class Roster extends Component {
 
     axios.get(url).then( response => {
       console.log("response for Players on Team", response)
-      return this.setState( { users: response.data })
+      return this.setState( { players: response.data })
       })
       .catch(function (error) {
         console.log(error);
@@ -172,7 +170,7 @@ class Roster extends Component {
       title: 'Hunt Details',
       component: huntDetails,
       passProps: { hunt: this.props.hunt,
-                  user: this.props.user}
+                   user: this.props.user}
     });
   }
 

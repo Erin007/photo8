@@ -69,9 +69,6 @@ class welcome extends Component {
 
   checkForUser(){
     console.log('<<< checkForUser called')
-    console.log(this.state.user)
-    console.log(this.state.user.length)
-    console.log(this.state.user.length !== 0)
 
     if(this.state.user.length !== 0){
       this.userFound()
@@ -84,7 +81,6 @@ class welcome extends Component {
   userFound(){
     console.log('a user was found!')
     //if a user is returned, check for their username
-    console.log(this.state.user.username)
     this.setState( { username: this.state.user.username })
     this.renderUsername()
   }
@@ -124,7 +120,7 @@ class welcome extends Component {
 
   renderUsername(){
     console.log('rendering username')
-  
+
     if (typeof this.state.user !== 'undefined' ){
       if (this.state.user.username !== ''){
         return (
@@ -154,7 +150,8 @@ class welcome extends Component {
     this.props.navigator.push({
       title: 'Profile',
       component: Profile,
-      passProps: { user: this.state.user},
+      passProps: { user: this.state.user,
+                   player: this.state.user},
     });
   }
 

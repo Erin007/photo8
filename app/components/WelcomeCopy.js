@@ -69,9 +69,6 @@ class welcomeCopy extends Component {
 
   checkForUser(){
     console.log('<<< checkForUser called')
-    console.log(this.state.user)
-    console.log(this.state.user.length)
-    console.log(this.state.user.length !== 0)
 
     if(this.state.user.length !== 0){
       this.userFound()
@@ -124,7 +121,7 @@ class welcomeCopy extends Component {
 
   renderUsername(){
     console.log('rendering username')
-  
+
     if (typeof this.state.user !== 'undefined' ){
       if (this.state.user.username !== ''){
         return (
@@ -154,7 +151,8 @@ class welcomeCopy extends Component {
     this.props.navigator.push({
       title: 'Profile',
       component: Profile,
-      passProps: { user: this.state.user},
+      passProps: { user: this.state.user,
+                   player: this.state.user},
     });
   }
 

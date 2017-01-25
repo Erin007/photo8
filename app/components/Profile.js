@@ -49,6 +49,18 @@ class Profile extends Component {
     });
   }
 
+//helper render functions
+  renderUpdateButton(){
+    //*** This should be conditional based on whether the current user is the one who "owns" this profile
+    if(this.props.player.id == this.props.user.id){
+      return(
+        <Button onPress={this.updateProfilePressed.bind(this)}>
+          Update Profile
+        </Button>
+      )
+    }
+  }
+
   render(){
     console.log("Profile this.props", this.props)
     return(
@@ -65,16 +77,14 @@ class Profile extends Component {
         />
 
         <View style={styles.profilebox}>
-          <Text style={styles.smalltext}>{ this.props.user.username }</Text>
+          <Text style={styles.smalltext}>{ this.props.player.username }</Text>
 
-          <Text style={styles.smallertext}>{ this.props.user.location } </Text>
+          <Text style={styles.smallertext}>{ this.props.player.location } </Text>
 
-          <Text style={styles.smallertext}>{ this.props.user.bio }</Text>
+          <Text style={styles.smallertext}>{ this.props.player.bio }</Text>
         </View>
 
-        <Button onPress={this.updateProfilePressed.bind(this)}>
-          Update Profile
-        </Button>
+        {this.renderUpdateButton()}
       </View>
     )
   }
