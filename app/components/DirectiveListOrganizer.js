@@ -10,7 +10,6 @@ import {
   Text } from 'react-native';
 import axios from 'axios';
 import Button from './common/Button';
-import DirectiveShowOrganizer from './DirectiveShowOrganizer';
 import addDirectives from './AddDirectives';
 import huntDetails from './HuntDetails';
 
