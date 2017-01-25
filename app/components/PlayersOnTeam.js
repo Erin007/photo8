@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import Button from './common/Button';
 import huntDetails from './HuntDetails';
+import Profile from './Profile';
 
 
 class Roster extends Component {
@@ -30,14 +31,30 @@ class Roster extends Component {
       });;
   }
 
+//navigate to the player's Profile
+  _toProfile = (user) => {
+    this.props.navigator.push({
+      title: 'Profile',
+      component: Profile,
+      passProps: { user: user},
+    });
+  }
+
   renderPlayers(){
+    console.log("rendering players")
+
     if (typeof this.state.users[0] !== 'undefined')  {
 
     return this.state.users.map(user =>
+      <View key={user.id}>
 
-        <Text style={styles.team} key={user.id}>
-             {user.username}
-        </Text>
+        <TouchableOpacity onPress={() => this._toProfile(user)}>
+          <Text style={styles.team} key={user.id}>
+               {user.username}
+          </Text>
+        </TouchableOpacity>
+
+      </View>
       );
     }
     return(
@@ -190,14 +207,14 @@ const styles = StyleSheet.create({
     paddingBottom: 60
   },
   text: {
-    fontSize: 30,
+    fontSize: 32,
     textAlign: 'center',
     paddingTop: 10,
     fontFamily: 'Pacifico',
     marginTop: 10,
   },
   smalltext: {
-    fontSize: 22,
+    fontSize: 25,
     textAlign: 'center',
     padding: 5,
     marginLeft: 5,
@@ -214,7 +231,7 @@ const styles = StyleSheet.create({
     color: '#DCDCDC',
   },
   team:{
-    fontSize: 16,
+    fontSize: 20,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
     borderWidth: 1,

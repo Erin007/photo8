@@ -10,6 +10,7 @@ import {
 import axios from 'axios';
 import Button from './common/Button';
 import huntDetails from './HuntDetails';
+import Profile from './Profile';
 
 class RosterOrganizer extends Component {
   state = { users: [], teamplayer: ''};
@@ -44,7 +45,8 @@ class RosterOrganizer extends Component {
       console.log(error);
     });
   }
-    //delete the returned teamplayer
+
+//delete the returned teamplayer
   deleteTeamPlayer(){
     const url2 = 'https://treasure-chest-api.herokuapp.com/teamplayers/' + this.state.teamplayer.id
 
@@ -59,16 +61,28 @@ class RosterOrganizer extends Component {
       });;
   }
 
+//navigate to the player's Profile
+_toProfile = (user) => {
+  this.props.navigator.push({
+    title: 'Profile',
+    component: Profile,
+    passProps: { user: user},
+  });
+}
+
   renderPlayers(){
     console.log("rendering players organizer")
-    console.log('this.state', this.state)
+
     if (typeof this.state.users[0] !== 'undefined')  {
 
     return this.state.users.map(user =>
-      <View style={styles.playerbox}>
-        <Text style={styles.team} key={user.id}>
-             {user.username}
-        </Text>
+      <View style={styles.playerbox} key={user.id}>
+
+        <TouchableOpacity onPress={() => this._toProfile(user)}>
+          <Text style={styles.team} >
+               {user.username}
+          </Text>
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.x} onPress={() => this.deletePlayerPressed(user)}>
           <Text>✘</Text>
