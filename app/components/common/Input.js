@@ -29,7 +29,7 @@ const styles = {
   //  paddingRight: 5,
   //  paddingLeft: -50,
   // padding: 0,
-   fontSize: 18,
+   fontSize: 16,
    lineHeight: 23,
    flex: 2,
    textAlign: 'center',

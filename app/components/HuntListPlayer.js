@@ -119,7 +119,7 @@ class HuntListPlayer extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: 'F5FCFF',
+    backgroundColor: '#F5FCFF',
     marginTop: 40,
     paddingBottom: 40
   },

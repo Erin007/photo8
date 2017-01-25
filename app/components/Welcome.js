@@ -124,7 +124,7 @@ class welcome extends Component {
 
   renderUsername(){
     console.log('rendering username')
-    console.log('this.state.user[0]', this.state.user[0])
+  
     if (typeof this.state.user !== 'undefined' ){
       if (this.state.user.username !== ''){
         return (

@@ -64,11 +64,13 @@ class Profile extends Component {
         style={styles.image}
         />
 
-        <Text style={styles.smalltext}>Username: { this.props.user.username }</Text>
+        <View style={styles.profilebox}>
+          <Text style={styles.smalltext}>{ this.props.user.username }</Text>
 
-        <Text style={styles.smallertext}>Location: { this.props.user.location } </Text>
+          <Text style={styles.smallertext}>{ this.props.user.location } </Text>
 
-        <Text style={styles.smallertext}>{ this.props.user.bio }</Text>
+          <Text style={styles.smallertext}>{ this.props.user.bio }</Text>
+        </View>
 
         <Button onPress={this.updateProfilePressed.bind(this)}>
           Update Profile
@@ -83,7 +85,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 45
+    marginTop: 20
+  },
+  profilebox: {
+    marginBottom: 30
   },
   welcome: {
     fontSize: 42,
