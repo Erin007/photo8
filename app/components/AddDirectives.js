@@ -33,9 +33,6 @@ class addDirectives extends Component {
   }
 
   addDirectivePressed(directive){
-    console.log('>>> Add Directive pressed');
-    console.log(this.state.directive)
-    console.log(this.props.hunt.id)
 
     axios.post('https://treasure-chest-api.herokuapp.com/directives',{
       name: this.state.directive,

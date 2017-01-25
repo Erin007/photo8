@@ -42,6 +42,7 @@ class RosterOrganizer extends Component {
                  team: this.props.team }
     });
   }
+  
 //navigate to huntDetails
   seeHuntPressed() {
     console.log('seeHunt pressed');
@@ -57,7 +58,7 @@ class RosterOrganizer extends Component {
     });
   }
 
-  //navigate to the player's Profile
+//navigate to the player's Profile
   _toProfile = (player) => {
     this.props.navigator.push({
       title: 'Profile',
