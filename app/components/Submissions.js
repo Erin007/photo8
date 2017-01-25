@@ -148,10 +148,6 @@ class Submissions extends Component{
 
            <Text style={styles.caption}> {submission.caption} </Text>
 
-           <TouchableOpacity onPress={() => this.approveSubmission(submission)}>
-            <Text style={styles.check2}>✔︎</Text>
-           </TouchableOpacity>
-
         </View>
       )
     }
