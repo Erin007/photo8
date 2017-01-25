@@ -132,7 +132,7 @@ class PhotoSelect extends Component {
      title: 'Hunt Details',
      component: huntDetails,
      passProps: { hunt: this.props.hunt,
-                 user: this.props.user}
+                  user: this.props.user}
    });
  }
 
@@ -145,7 +145,7 @@ class PhotoSelect extends Component {
      </TouchableOpacity>
 
      <TouchableOpacity onPress={() => this._toDirectiveShow()}>
-        <Text style={styles.text}>    {this.props.directive.name} </Text>
+        <Text style={styles.text}>{this.props.directive.name}</Text>
       </TouchableOpacity>
 
       <Image style={styles.image} source={{ uri: this.state.image.uri }} />
@@ -191,9 +191,11 @@ const styles = StyleSheet.create({
     marginTop: 15
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
     paddingTop: 10,
+    marginLeft: 5,
+    marginRight: 5,
     fontFamily: 'Chalkboard SE'
   },
 });

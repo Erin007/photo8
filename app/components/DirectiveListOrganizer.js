@@ -56,22 +56,6 @@ class DirectiveListOrganizer extends Component {
       });;
   }
 
-//navigate to the details of the directive available to the organizer
-  // directiveShowPressed(directive) {
-  //   console.log('>>> Directive Detail Pressed!');
-  //   console.log("this.state", this.state)
-  //   this._toDirectiveShow(directive);
-  // }
-  //
-  // _toDirectiveShow = (directive) => {
-  //   this.props.navigator.push({
-  //     title: 'Directive',
-  //     component: DirectiveShowOrganizer,
-  //     passProps: { directive: directive,
-  //                 hunt: this.props.hunt}
-  //   });
-  // }
-
 //navigate to form to add more directives
   _toAddMoreDirectives = () => {
     this.props.navigator.push({
@@ -149,7 +133,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 50,
+    marginTop: 35,
     paddingBottom: 20
   },
   text: {
@@ -208,9 +192,9 @@ const styles = StyleSheet.create({
     width: 300
   },
   scrollview: {
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 15,
-    height: 275
+    height: 300
   }
 });
 

@@ -179,7 +179,7 @@ class Submissions extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 45,
+    marginTop: 30,
     backgroundColor: '#F5FCFF',
     flex: 1
   },

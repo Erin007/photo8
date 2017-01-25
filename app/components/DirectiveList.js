@@ -144,7 +144,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    marginTop: 40,
+    marginTop: 30,
+  },
+  scrollview:{
+    height: 400,
   },
   listname: {
     fontSize: 25,
@@ -166,7 +169,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
   },
   directive:{
     fontSize: 16,
