@@ -134,6 +134,23 @@ class SubmissionsOrganizer extends Component{
     });
   }
 
+//deleting submissions
+deleteSubmissionPressed(submission){
+  console.log("delete directive pressed.")
+//delete the submission from the backend
+  const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + submission.id
+
+  axios.delete(url)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//fetch the new submissions list and change the state to reflect the deletion
+  this.componentWillMount()
+}
+
 //helper functions for render
   filterSubmissions(){
     console.log("filtering submissions")
@@ -184,7 +201,13 @@ class SubmissionsOrganizer extends Component{
 
         <View style={styles.submissionbox} key={submission.id}>
 
-          <Text style={styles.caption}>❏ {submission.directive_name} </Text>
+          <View style={styles.deletebox}>
+            <Text style={styles.caption}>❏ {submission.directive_name} </Text>
+
+            <TouchableOpacity style={styles.delete} onPress={() => this.deleteSubmissionPressed(submission)}>
+              <Text>✘</Text>
+            </TouchableOpacity>
+          </View>
 
           <Image
            source={{ uri: submission.photo}}
@@ -214,7 +237,13 @@ class SubmissionsOrganizer extends Component{
 
         <View style={styles.submissionbox} key={submission.id}>
 
-          <Text style={styles.caption}>✔︎ {submission.directive_name} </Text>
+          <View style={styles.deletebox}>
+            <Text style={styles.caption}>❏ {submission.directive_name} </Text>
+
+            <TouchableOpacity style={styles.delete} onPress={() => this.deleteSubmissionPressed(submission)}>
+              <Text>✘</Text>
+            </TouchableOpacity>
+          </View>
 
           <Image
            source={{ uri: submission.photo}}
@@ -233,9 +262,15 @@ class SubmissionsOrganizer extends Component{
 
       return submissions.map(submission =>
 
-        <View style={styles.submissionbox} key={submission.id}>
+          <View style={styles.submissionbox} key={submission.id}>
 
-          <Text style={styles.caption}>❏ {submission.directive_name} </Text>
+          <View style={styles.deletebox}>
+            <Text style={styles.caption}>❏ {submission.directive_name} </Text>
+
+            <TouchableOpacity style={styles.delete} onPress={() => this.deleteSubmissionPressed(submission)}>
+              <Text>✘</Text>
+            </TouchableOpacity>
+          </View>
 
           <Image
            source={{ uri: submission.photo}}
@@ -305,6 +340,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE',
     color: '#DCDCDC',
   },
+  deletebox: {
+    flexDirection: 'row',
+    marginBottom: 5,
+    width: 300
+  },
   submissionbox:{
     borderWidth: 1,
     borderRadius: 5,
@@ -327,7 +367,25 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     paddingTop: 5,
-    fontFamily: "Chalkboard SE"
+    fontFamily: "Chalkboard SE",
+    width: 240
+  },
+  delete:{
+    width: 30,
+    height: 30,
+    backgroundColor: "#21b6cb",
+    padding: 5,
+    alignItems: 'center',
+    borderRadius: 5,
+    borderWidth: 1,
+    shadowColor: '#167c89',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    borderColor:'#167c89',
+    marginTop: 5,
+    alignSelf: 'flex-end'
   },
   status1:{
     borderColor: '#DCDCDC',
