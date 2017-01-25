@@ -84,8 +84,8 @@ class welcomeCopy extends Component {
   userFound(){
     console.log('a user was found!')
     //if a user is returned, check for their username
-    console.log(this.state.user[0].username)
-    this.setState( { username: this.state.user[0].username })
+    console.log(this.state.user.username)
+    this.setState( { username: this.state.user.username })
     this.renderUsername()
   }
 
@@ -125,10 +125,10 @@ class welcomeCopy extends Component {
   renderUsername(){
     console.log('rendering username')
     console.log('this.state.user[0]', this.state.user[0])
-    if (typeof this.state.user[0] !== 'undefined' ){
-      if (this.state.user[0].username !== ''){
+    if (typeof this.state.user !== 'undefined' ){
+      if (this.state.user.username !== ''){
         return (
-          <Text style={styles.smalltext}> Welcome, {this.state.user[0].username}! </Text>
+          <Text style={styles.smalltext}> Welcome, {this.state.user.username}! </Text>
         )
       }
     }
@@ -154,7 +154,7 @@ class welcomeCopy extends Component {
     this.props.navigator.push({
       title: 'Profile',
       component: Profile,
-      passProps: { user: this.state.user[0]},
+      passProps: { user: this.state.user},
     });
   }
 
@@ -167,7 +167,7 @@ class welcomeCopy extends Component {
     this.props.navigator.push({
       title: 'Organize Hunts',
       component: HuntListOrganizer,
-      passProps: { user: this.state.user[0]}
+      passProps: { user: this.state.user}
     })
   }
 
@@ -180,7 +180,7 @@ class welcomeCopy extends Component {
     this.props.navigator.push({
       title: 'Play',
       component: HuntListPlayer,
-      passProps: { user: this.state.user[0]}
+      passProps: { user: this.state.user}
     })
   }
 
