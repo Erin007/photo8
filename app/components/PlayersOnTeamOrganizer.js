@@ -11,6 +11,7 @@ import axios from 'axios';
 import Button from './common/Button';
 import huntDetails from './HuntDetails';
 import Profile from './Profile';
+import addPlayers from './AddPlayers';
 
 class RosterOrganizer extends Component {
   state = { players: [], teamplayer: ''};
@@ -28,6 +29,19 @@ class RosterOrganizer extends Component {
       });;
   }
 
+  addPlayersPressed(){
+    this._toAddPlayers()
+  }
+
+  _toAddPlayers = () => {
+    this.props.navigator.push({
+      title: 'Add Players',
+      component: addPlayers,
+      passProps: { hunt: this.props.hunt,
+                   user: this.props.user,
+                 team: this.props.team }
+    });
+  }
 //navigate to huntDetails
   seeHuntPressed() {
     console.log('seeHunt pressed');
@@ -125,6 +139,7 @@ class RosterOrganizer extends Component {
           { this.renderPlayers() }
         </ScrollView>
 
+        <Button onPress={() => this.addPlayersPressed()}> Add Players </Button>
       </View>
     )
   }
@@ -135,7 +150,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 40,
-    paddingBottom: 90
   },
   playerbox: {
     flexDirection: 'row',
@@ -204,6 +218,7 @@ const styles = StyleSheet.create({
   },
   scrollview: {
     height: 300,
+    marginBottom: 15
   },
 })
 export default RosterOrganizer;
