@@ -188,7 +188,7 @@ class Roster extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 35,
     flex: 1,
     paddingBottom: 60

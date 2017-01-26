@@ -303,7 +303,7 @@ deleteSubmissionPressed(submission){
 const styles = StyleSheet.create({
   container: {
     marginTop: 35,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
   },
   name: {
     fontSize: 32,

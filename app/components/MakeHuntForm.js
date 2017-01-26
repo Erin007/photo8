@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   Text,
-  ScrollView
+  ScrollView,
+  KeyboardAvoidingView
 } from 'react-native';
 import axios from 'axios';
 import huntDetails from './HuntDetails';
@@ -82,35 +83,37 @@ class newHunt extends Component{
            Snapenger Hunt
         </Text>
 
-        <ScrollView style={styles.scrollview}>
-          <Text style={styles.text}>
-             Make a New Hunt
-          </Text>
+        <KeyboardAvoidingView behavior = 'padding'>
+          <ScrollView style={styles.scrollview}>
+            <Text style={styles.text}>
+               Make a New Hunt
+            </Text>
 
-          <Input
-            label = ""
-            placeholder = "name"
-            value = {this.state.huntName}
-            onChangeText = {huntName => this.setState({ huntName })}/>
+            <Input
+              label = ""
+              placeholder = "name"
+              value = {this.state.huntName}
+              onChangeText = {huntName => this.setState({ huntName })}/>
 
-          <Input
-            label = ""
-            placeholder = "passcode"
-            value = {this.state.passcode}
-            onChangeText = {passcode => this.setState({ passcode })}/>
+            <Input
+              label = ""
+              placeholder = "passcode"
+              value = {this.state.passcode}
+              onChangeText = {passcode => this.setState({ passcode })}/>
 
-          <Input
-            label = ""
-            placeholder = "description"
-            value = {this.state.description}
-            onChangeText = {description => this.setState({ description })}/>
+            <Input
+              label = ""
+              placeholder = "description"
+              value = {this.state.description}
+              onChangeText = {description => this.setState({ description })}/>
 
-          <Text style= {styles.errorTextStyle}>
-            { this.state.error }
-          </Text>
+            <Text style= {styles.errorTextStyle}>
+              { this.state.error }
+            </Text>
 
-          {this.renderSaveButton()}
-        </ScrollView>
+            {this.renderSaveButton()}
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     );
   }
@@ -120,18 +123,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    marginTop: 50
+    backgroundColor: '#cce5e5',
+    marginTop: 30
   },
   scrollview:{
-    marginTop: -50
+    // marginTop: -50
   },
   text: {
     fontSize: 20,
     textAlign: 'center',
     paddingTop: 10,
     paddingBottom: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   errorTextStyle: {
     fontSize: 16,
@@ -139,17 +143,22 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: "Chalkboard SE",
     marginLeft: 5,
-    //marginRight: 15,
     textAlign: 'center',
     paddingLeft: 35,
     paddingRight: 35,
     marginBottom: 10
   },
   welcome: {
-    fontSize: 36,
+    fontSize: 42,
     textAlign: 'center',
-    margin: 10,
     fontFamily: 'Pacifico',
+    margin: 5,
+    marginBottom: 20,
+    padding: 5,
+    color: '#006666',
+    textShadowColor: 'white',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
 });
 

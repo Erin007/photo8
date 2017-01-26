@@ -128,7 +128,7 @@ class addDirectives extends Component {
             onChangeText = {directive => this.setState({ directive })}/>
 
             <TouchableOpacity style={styles.plus} onPress={() => this.addDirectivePressed(this.state.directive)}>
-              <Text>✚</Text>
+              <Text style={styles.plussymbol}>✚</Text>
             </TouchableOpacity>
         </View>
 
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 40,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     paddingBottom: 20
   },
   scrollview: {
@@ -169,32 +169,41 @@ const styles = StyleSheet.create({
   plus:{
     width: 40,
     height: 40,
-    backgroundColor: "#21b6cb",
+    backgroundColor: '#006666',
     paddingTop: 12,
     borderRadius: 5,
     borderWidth: 1,
-    shadowColor: '#167c89',
+    shadowColor: '#006666',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-    borderColor:'#167c89',
+    borderColor:'#006666',
     marginTop: 12,
     alignItems: 'center',
   },
+  plussymbol: {
+    color: 'white'
+  },
   name: {
-    fontSize: 32,
+    fontSize: 38,
     textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontFamily: 'Pacifico'
+    fontFamily: 'Pacifico',
+    margin: 5,
+    marginBottom: 20,
+    padding: 5,
+    color: '#006666',
+    textShadowColor: 'white',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
   text: {
     fontSize: 16,
     textAlign: 'center',
     marginLeft: 10,
     marginRight: 10,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   errorTextStyle: {
     fontSize: 16,
@@ -208,7 +217,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 5,
     fontFamily: 'Chalkboard SE',
-    color: '#DCDCDC',
+    color: '#353839',
   }
 });
 

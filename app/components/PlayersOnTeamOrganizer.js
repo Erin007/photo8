@@ -145,7 +145,7 @@ class RosterOrganizer extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 40,
   },
   playerbox: {

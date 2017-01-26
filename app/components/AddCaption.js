@@ -107,7 +107,7 @@ state = { caption: '', error: '', loading: false, submission: '' }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     flex: 1
   },
   captionbox: {
@@ -119,7 +119,11 @@ const styles = StyleSheet.create({
     marginTop: 65,
     fontSize: 30,
     textAlign: 'center',
-    fontFamily: 'Pacifico'
+    fontFamily: 'Pacifico',
+    color: '#FFFFFF',
+    textShadowColor: '#008080',
+    textShadowOffset:( {width: 1, height: 3} ),
+    textShadowRadius: 5
   },
   directive: {
     fontSize: 18,

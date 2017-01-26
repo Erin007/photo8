@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 20
   },
   profilebox: {
@@ -102,27 +102,34 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 42,
     textAlign: 'center',
-    margin: 10,
-    paddingTop: 10,
     fontFamily: 'Pacifico',
+    margin: 5,
+    marginTop: 10,
+    padding: 5,
+    color: '#006666',
+    textShadowColor: 'white',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
   smalltext: {
     fontSize: 25,
     alignSelf: 'flex-start',
     paddingTop: 10,
     paddingBottom: 10,
-    marginLeft: 20,
+    marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   smallertext: {
     fontSize: 18,
     alignSelf: 'flex-start',
     paddingTop: 5,
     paddingBottom: 5,
-    marginLeft: 20,
+    marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   image: {
     margin: 2,
@@ -130,7 +137,7 @@ const styles = StyleSheet.create({
     width: 150,
     borderWidth: 5,
     borderRadius: 5,
-    borderColor: 'black',
+    borderColor: '#353839',
     alignSelf: 'center',
     marginLeft: 15
   },

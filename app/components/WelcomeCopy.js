@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 40
   },
   scrollview:{
@@ -214,9 +214,13 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 42,
     textAlign: 'center',
-    margin: 10,
-    paddingTop: 10,
     fontFamily: 'Pacifico',
+    margin: 5,
+    padding: 5,
+    color: '#006666',
+    textShadowColor: 'white',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
   smalltext: {
     fontSize: 25,
@@ -225,7 +229,8 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     marginTop: -20,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   smallertext: {
     fontSize: 14,
@@ -234,7 +239,8 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     marginTop: -50,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
 });
 

@@ -23,8 +23,6 @@ const InputPlus = ({ label, value, onChangeText, placeholder, secureTextEntry, o
 const styles = {
  inputStyle: {
    color: '#000',
-   //paddingRight: 5,
-  //  paddingLeft: -105,
    fontSize: 18,
    lineHeight: 23,
    flex: 2,
@@ -32,14 +30,13 @@ const styles = {
  },
  containerStyle: {
    height: 50,
-  // flex: 1,
    width: 250,
    margin: 8,
    flexDirection: 'row',
    alignItems: 'center',
    borderWidth: 1,
    borderRadius: 5,
-   borderColor: '#21b6cb',
+   borderColor: '#006666',
    backgroundColor: '#fff',
  }
 };

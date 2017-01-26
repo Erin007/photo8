@@ -113,7 +113,7 @@ class DirectiveList extends Component {
   }
 
   render() {
-  
+
     return (
       <View style={styles.container}>
 
@@ -122,8 +122,6 @@ class DirectiveList extends Component {
         </TouchableOpacity>
 
         <Text style={styles.listname}> Directives </Text>
-
-        <Text style={styles.smalltext}>{this.props.hunt.description}</Text>
 
         <ScrollView style={styles.scrollview}>
           { this.renderIncompleteDirectives() }
@@ -137,7 +135,7 @@ class DirectiveList extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 30,
   },
   scrollview:{
@@ -149,7 +147,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   text: {
     fontSize: 30,
@@ -164,6 +163,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   directive:{
     fontSize: 16,
@@ -182,7 +182,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     padding: 5,
-    paddingLeft: 10
+    paddingLeft: 10,
+    color:  '#353839',
   }
 });
 

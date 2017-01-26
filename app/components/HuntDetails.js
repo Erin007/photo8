@@ -162,13 +162,18 @@ _toHome = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
   },
   huntname:{
-    fontSize: 32,
+    fontSize: 36,
     textAlign: 'center',
-    margin: 5,
     fontFamily: 'Pacifico',
+    margin: 5,
+    padding: 5,
+    color: '#006666',
+    textShadowColor: 'white',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
   text: {
     fontSize: 18,
@@ -176,7 +181,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 25,
     marginRight: 15,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   smallertext: {
     fontSize: 14,
@@ -184,7 +190,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 25,
     marginRight: 15,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
 });
 

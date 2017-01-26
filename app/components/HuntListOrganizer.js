@@ -115,17 +115,20 @@ class HuntListOrganizer extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 40,
-    paddingBottom: 55
+    paddingBottom: 60
   },
   welcome: {
     fontSize: 42,
     textAlign: 'center',
-    margin: 10,
-    paddingTop: 10,
+    margin: 5,
+    padding: 5,
     fontFamily: 'Pacifico',
-    justifyContent: 'flex-start'
+    color: '#006666',
+    textShadowColor: '#003333',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
   text: {
     fontSize: 25,
@@ -133,15 +136,16 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   hunt:{
     fontSize: 20,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 2,
-    borderColor: '#ddd',
+    borderColor: '#4ca6a6',
     borderBottomWidth: 0,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -153,7 +157,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 5,
     paddingLeft: 15,
-    width: 275
+    width: 275,
+    backgroundColor: 'white',
+    color:  '#353839',
   },
   smallertext: {
     fontSize: 18,
@@ -162,7 +168,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     fontFamily: 'Chalkboard SE',
-    color: '#DCDCDC',
+    color:  '#353839',
   },
   scrollview:{
     height: 250,

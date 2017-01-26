@@ -156,8 +156,9 @@ const styles = {
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 30,
+    paddingBottom: 10
   },
   camerabutton:{
     borderRadius: 5,
@@ -170,7 +171,8 @@ const styles = {
     marginLeft: 10,
     marginRight: 10,
     paddingBottom: 5,
-    fontFamily: "Chalkboard SE"
+    fontFamily: "Chalkboard SE",
+    color:  '#353839',
   },
   errorTextStyle: {
     fontSize: 14,
@@ -181,10 +183,14 @@ const styles = {
   welcome: {
     fontSize: 42,
     textAlign: 'center',
-    margin: 5,
-    paddingTop: 10,
     fontFamily: 'Pacifico',
-    justifyContent: 'flex-start'
+    margin: 5,
+    marginTop: 10,
+    padding: 5,
+    color: '#006666',
+    textShadowColor: 'white',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
 };
 

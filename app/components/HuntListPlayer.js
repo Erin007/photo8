@@ -46,7 +46,7 @@ class HuntListPlayer extends Component {
         </TouchableOpacity>
       );
     }
-    return <Text style={styles.smallertext}> You are not participating in any hunts </Text>
+    return <Text style={styles.smallertext}> You are not participating in any hunts yet. </Text>
   }
 
   huntShowPressed(hunt){
@@ -116,16 +116,20 @@ class HuntListPlayer extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 40,
-    paddingBottom: 40
+    paddingBottom: 55
   },
   welcome: {
     fontSize: 42,
     textAlign: 'center',
-    margin: 10,
-    paddingTop: 10,
     fontFamily: 'Pacifico',
+    margin: 5,
+    padding: 5,
+    color: '#006666',
+    textShadowColor: 'white',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
   text: {
     fontSize: 25,
@@ -133,7 +137,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   hunt:{
     fontSize: 20,
@@ -162,7 +167,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     fontFamily: 'Chalkboard SE',
-    color: '#DCDCDC',
+    color:'#353839',
   },
   scrollview: {
     marginBottom: 10,

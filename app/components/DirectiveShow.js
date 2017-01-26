@@ -280,7 +280,7 @@ class DirectiveShow extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
   },
   caption: {
     paddingLeft: 15,
@@ -294,7 +294,6 @@ const styles = StyleSheet.create({
   captiontext:{
     fontSize: 16,
     textAlign: 'center',
-    paddingTop: 5,
     fontFamily: "Chalkboard SE"
   },
   center:{
@@ -304,7 +303,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     textAlign: 'center',
-    paddingTop: 10,
     fontFamily: "Chalkboard SE",
     color: '#DCDCDC',
   },
@@ -315,7 +313,7 @@ const styles = StyleSheet.create({
     height: 250,
     width: 250,
     borderRadius: 5,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   status2image:{
     borderColor: '#24AE62',

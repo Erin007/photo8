@@ -1,5 +1,4 @@
 //DirectiveListOrganizer.js
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -124,15 +123,20 @@ class DirectiveListOrganizer extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cce5e5',
     marginTop: 35,
     paddingBottom: 20
   },
   text: {
-    fontSize: 30,
+    fontSize: 36,
     textAlign: 'center',
-    paddingTop: 10,
-    fontFamily: 'Pacifico'
+    fontFamily: 'Pacifico',
+    margin: 5,
+    padding: 5,
+    color: '#006666',
+    textShadowColor: 'white',
+    textShadowOffset:( {width: 1, height: 1} ),
+    textShadowRadius: 1
   },
   smalltext: {
     fontSize: 25,
@@ -140,7 +144,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 5,
     marginRight: 5,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
   },
   directive:{
     fontSize: 16,
@@ -148,7 +153,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     borderWidth: 1,
     borderRadius: 2,
-    borderColor: '#ddd',
+    borderColor: '#006666',
+    backgroundColor: 'white',
     borderBottomWidth: 0,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -160,12 +166,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 5,
     paddingLeft: 10,
-    width: 245
+    width: 245,
+    color:  '#353839',
   },
   x:{
     width: 30,
     height: 30,
-    backgroundColor: "#21b6cb",
+    backgroundColor: "#006666",
     padding: 5,
     alignItems: 'center',
     borderRadius: 5,
@@ -175,7 +182,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-    borderColor:'#167c89',
+    borderColor:'#006666',
     marginTop: 12,
   },
   directivebox: {
