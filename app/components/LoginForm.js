@@ -4,7 +4,7 @@ import Button from './common/Button';
 import Input from './common/Input';
 import Spinner from './common/Spinner';
 import firebase from 'firebase';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import axios from 'axios';
 
 class LoginForm extends Component {
@@ -54,28 +54,30 @@ class LoginForm extends Component {
 
   render(){
     return (
-      <ScrollView style={styles.scrollview}>
+      <KeyboardAvoidingView behavior = 'padding'>
+        <ScrollView style={styles.scrollview}>
 
-          <Input
-            label = ""
-            placeholder = "email"
-            value = {this.state.email}
-            onChangeText = {email => this.setState({ email })}/>
+            <Input
+              label = ""
+              placeholder = "email"
+              value = {this.state.email}
+              onChangeText = {email => this.setState({ email })}/>
 
-          <Input
-            label = ""
-            placeholder = "password"
-            secureTextEntry
-            value = {this.state.password}
-            onChangeText = {password => this.setState({ password })}/>
+            <Input
+              label = ""
+              placeholder = "password"
+              secureTextEntry
+              value = {this.state.password}
+              onChangeText = {password => this.setState({ password })}/>
 
-        <Text style= {styles.errorTextStyle}>
-          { this.state.error }
-        </Text>
+          <Text style= {styles.errorTextStyle}>
+            { this.state.error }
+          </Text>
 
-        { this.renderButton() }
+          { this.renderButton() }
 
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 };

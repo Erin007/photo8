@@ -12,6 +12,7 @@ import Button from './common/Button';
 import InputPlus from './common/InputPlus';
 import huntDetails from './HuntDetails';
 import RosterOrganizer from './PlayersOnTeamOrganizer';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 
 class addPlayers extends Component {
@@ -31,6 +32,7 @@ class addPlayers extends Component {
   }
 
   addPlayerPressed(email){
+    dismissKeyboard()
     //look for the player by email in the backend => Axios find-user-by-email-post request that returns access to the player id (This is a post request, because as a get request the email isn't a viable param to put in a url)
     const url = 'https://treasure-chest-api.herokuapp.com/users/find/email'
 

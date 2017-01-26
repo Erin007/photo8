@@ -93,7 +93,6 @@ class SubmissionsOrganizer extends Component{
       console.log("Error from setting the points in team", error)
       this.setState({ error: "There was an error. Please try again.", loading: false })
     });
-
     //re-call to backend for the updated list of submissions and re-render
     this.componentWillMount()
   }
@@ -114,7 +113,6 @@ class SubmissionsOrganizer extends Component{
       console.log("Error:", error)
       this.setState({ error: "There was an error. Please try again.", loading: false })
     });
-
     //re-call to backend for the updated list of submissions and re-render
     this.componentWillMount()
   }
@@ -137,6 +135,7 @@ class SubmissionsOrganizer extends Component{
 //deleting submissions
 deleteSubmissionPressed(submission){
   console.log("delete directive pressed.")
+  console.log('submission.id', submission.id)
 //delete the submission from the backend
   const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + submission.id
 
@@ -147,7 +146,7 @@ deleteSubmissionPressed(submission){
   .catch(function (error) {
     console.log(error);
   });
-//fetch the new submissions list and change the state to reflect the deletion
+  //fetch the new submissions list and change the state to reflect the deletion
   this.componentWillMount()
 }
 

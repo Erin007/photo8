@@ -15,6 +15,7 @@ import Spinner from './common/Spinner';
 import huntDetails from './HuntDetails';
 import TeamListOrganizer from './TeamListOrganizer';
 import axios from 'axios';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 
 class addTeams extends Component{
@@ -34,6 +35,7 @@ class addTeams extends Component{
   }
 
   addTeamPressed(teamName){
+    dismissKeyboard()
     console.log('>>> Add Team pressed');
     //axios post the team
 

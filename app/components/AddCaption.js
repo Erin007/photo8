@@ -13,12 +13,13 @@ import Input from './common/Input';
 import axios from 'axios';
 import DirectiveShow from './DirectiveShow';
 import huntDetails from './HuntDetails';
-
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class addCaption extends Component {
 state = { caption: '', error: '', loading: false, submission: '' }
 
   saveCaptionPressed(){
+    dismissKeyboard()
     console.log('>>> Save caption pressed')
 
     //make an update request to the backend with the caption info for the submission
