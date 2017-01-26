@@ -18,21 +18,17 @@ class findHunt extends Component{
   state = { huntName: '', passcode: '', error: '', loading: false, huntId: '', hunt: ''}
 
   findPressed() {
-    console.log('>>> Find Hunt Button Pressed!');
 
     const { huntName, passcode } = this.state;
 
     this.setState({ error: '', loading: true });
-    console.log("this.state.huntName", this.state.huntName)
 
     //send the huntName to the API
     const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/name/' + this.state.huntName
 
     axios.get(url).then( response => {
       console.log("response", response)
-      console.log("this.state.hunt", this.state.hunt)
       this.setState( { hunt: response.data })
-      console.log("this.state.hunt", this.state.hunt)
       this.checkForHunt()
     })
       .catch(function (error) {
@@ -41,9 +37,7 @@ class findHunt extends Component{
   }
 
   checkForHunt(){
-    console.log('<<< CheckForHunt called')
-    console.log(this.state.hunt.length)
-    console.log(this.state.hunt.length === 0)
+
     if (this.state.hunt.length !== 0){
       //if the API finds a hunt that matches
       this.huntFound(this.state.hunt[0])
@@ -54,13 +48,10 @@ class findHunt extends Component{
   }
 
   noHuntFound(){
-    console.log('>>>> no hunt found called')
     this.setState({ error: 'No hunt matching that name and passcode could be found.', loading: false, hunt: '' })
   }
 
   huntFound(){
-    console.log("this.state.hunt[0]", this.state.hunt[0])
-    console.log('a hunt was found!')
     //clear the form
     this.setState({
       huntName: '',
@@ -101,24 +92,23 @@ class findHunt extends Component{
            Please enter the hunt name and passcode given to you by the organizer.
         </Text>
 
-          <Input
-            label = ""
-            placeholder = "hunt name"
-            value = {this.state.huntName}
-            onChangeText = {huntName => this.setState({ huntName })}/>
+        <Input
+          label = ""
+          placeholder = "hunt name"
+          value = {this.state.huntName}
+          onChangeText = {huntName => this.setState({ huntName })}/>
 
-          <Input
-            label = "passcode:"
-            placeholder = "passcode"
-            //secureTextEntry
-            value = {this.state.passcode}
-            onChangeText = {passcode => this.setState({ passcode })}/>
+        <Input
+          label = "passcode:"
+          placeholder = "passcode"
+          value = {this.state.passcode}
+          onChangeText = {passcode => this.setState({ passcode })}/>
 
         <Text style= {styles.errorTextStyle}>
           { this.state.error }
         </Text>
 
-          { this.renderFindButton() }
+        { this.renderFindButton() }
 
       </View>
     );
@@ -128,7 +118,6 @@ class findHunt extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 60
@@ -136,16 +125,12 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 36,
     textAlign: 'center',
-    // marginTop: -70,
-    // paddingTop: 10,
     fontFamily: 'Pacifico',
-    //justifyContent: 'flex-start'
   },
   text: {
     fontSize: 16,
     textAlign: 'center',
     margin: 10,
-    // marginTop: 70,
     paddingTop: 10,
     fontFamily: 'Chalkboard SE'
   },

@@ -42,11 +42,6 @@ class Example extends Component {
     }
   }
 
-  // handlePicture(path){
-  //   //this.props.updateImagesState(path);
-  //   this.props.navigator.pop();
-  // }
-
   _toPhotoSelect = (path) => {
     this.props.navigator.push({
       title: 'Photo',
@@ -120,7 +115,6 @@ class Example extends Component {
     } else if (this.state.camera.flashMode === off) {
       icon = require('./assets/ic_flash_off_white.png');
     }
-
     return icon;
   }
 

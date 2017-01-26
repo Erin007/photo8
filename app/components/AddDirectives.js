@@ -44,17 +44,13 @@ class addDirectives extends Component {
     })
     .then(response => {
       console.log("response", response)
-      console.log("response.data", response.data)
       return this.setState( { directive: response.data })
     })
       //if the directive is saved successfully
     .then(this.componentWillMount())
-    //if there was a problem saving the hunt
+    //if there was a problem saving the directive
     .catch((error) => {
-      console.log("The directive did not save")
-
       this.setState({ error: "There was an error saving your directive. Please try again.", loading: false })
-
       console.log(error)
     });
 
@@ -68,7 +64,6 @@ class addDirectives extends Component {
 
 //navigate to huntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 
@@ -83,7 +78,6 @@ class addDirectives extends Component {
 
 //navigate back to the DirectiveListOrganizer
   seeDirectivesPressed() {
-    console.log("seeDirectivesPressed")
     this._toDirectiveList()
   }
 
@@ -98,7 +92,6 @@ class addDirectives extends Component {
 
 //helper functions to render things
   renderDirectives() {
-    console.log("rendering directives")
 
     if (this.state.directives[0] !== '')  {
       console.log(this.state.directives)
@@ -131,7 +124,6 @@ class addDirectives extends Component {
           <InputPlus
             label = ""
             placeholder = "directive"
-            //secureTextEntry
             value = {this.state.directive}
             onChangeText = {directive => this.setState({ directive })}/>
 
@@ -210,7 +202,6 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: "Chalkboard SE",
     textAlign: 'center',
-    // marginTop: -20,
   },
   directive: {
     fontSize: 16,

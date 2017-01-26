@@ -18,7 +18,6 @@ class Submissions extends Component{
   state = { submissions: [], error: '', loading: false, submission: '', team: '', submissionsAwaitingApproval: [], approvedSubmissions: [], deniedSubmissions: []}
 
   componentWillMount(){
-    console.log("componentwillmount in submissions")
 
     //call for all of the submissions associated with this hunt
     const url = 'https://treasure-chest-api.herokuapp.com/submissions/hunt/' + this.props.hunt.id
@@ -35,7 +34,6 @@ class Submissions extends Component{
 
 //navigate to huntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 
@@ -50,7 +48,7 @@ class Submissions extends Component{
 
 //helper functions for render
   filterSubmissions(){
-    console.log("filtering submissions")
+
     const submissionsToRender = []
 
     for (i = 0; i < this.state.submissions.length; i++) {
@@ -83,15 +81,12 @@ class Submissions extends Component{
         deniedSubmission3.push(submissionsToRender[i])
       }
     }
-    console.log("submissionsAwaitingApproval1", submissionsAwaitingApproval1)
-    console.log("approvedSubmissions2", approvedSubmissions2)
-    console.log("deniedSubmission3", deniedSubmission3)
 
     this.setState({ submissionsAwaitingApproval: submissionsAwaitingApproval1, approvedSubmissions: approvedSubmissions2, deniedSubmissions: deniedSubmission3 });
   }
 
   renderAwaitingSubmissions(){
-    console.log("rendering submission awaiting approval")
+
     if (typeof this.state.submissionsAwaitingApproval !== 'undefined'){
 
       return this.state.submissionsAwaitingApproval.map(submission =>
@@ -112,7 +107,7 @@ class Submissions extends Component{
   }
 
   renderApprovedSubmissions(submissions){
-    console.log("rendering approved submissions")
+
     if (typeof this.state.approvedSubmissions !== 'undefined'){
 
       return submissions.map(submission =>
@@ -133,7 +128,7 @@ class Submissions extends Component{
   }
 
   renderDeniedSubmissions(submissions){
-    console.log("rendering denied submissions")
+
     if (typeof this.state.deniedSubmissions !== 'undefined'){
 
       return submissions.map(submission =>
@@ -167,9 +162,9 @@ class Submissions extends Component{
         <Text style={styles.smalltext}> Submissions </Text>
 
         <ScrollView style={styles.scrollview}>
-        { this.renderAwaitingSubmissions() }
-        { this.renderDeniedSubmissions(this.state.deniedSubmissions) }
-        { this.renderApprovedSubmissions(this.state.approvedSubmissions) }
+          { this.renderAwaitingSubmissions() }
+          { this.renderDeniedSubmissions(this.state.deniedSubmissions) }
+          { this.renderApprovedSubmissions(this.state.approvedSubmissions) }
         </ScrollView>
 
       </View>
@@ -260,7 +255,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignSelf: 'center'
   },
-
 })
 
 export default Submissions;

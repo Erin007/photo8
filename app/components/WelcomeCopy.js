@@ -24,19 +24,9 @@ class welcomeCopy extends Component {
   state = { loggedIn: null, userId: '', username: '', user: '', email: '' }; //are you logged in?
 
   componentWillMount(){
-    // firebase.initializeApp({
-    // apiKey: 'AIzaSyDZrPj54Bk9o1h47dwAijBTKZjBWYt3At0',
-    // authDomain: 'hunt-cec80.firebaseapp.com',
-    // databaseURL: 'https://hunt-cec80.firebaseio.com',
-    // storageBucket: 'hunt-cec80.appspot.com',
-    // messagingSenderId: '348722860624'
-    // });
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log("<<<<USER:", user)
-        console.log("user.uid:", user.uid)
-        console.log("user.email:", user.email)
 
         this.setState({ loggedIn: true, userId: user.uid, email: user.email});
 
@@ -48,9 +38,7 @@ class welcomeCopy extends Component {
   }
 
   verifyUserWithBackend(){
-    //see if that user already exists by searching for a user with that uid
-    console.log('verifying user with backend function called')
-    //Once the user is logged in, axios find-user-by-firebase get
+    //see if that user already exists by searching for a user with that firebase uid
     console.log(this.state.userId)
     const url = 'https://treasure-chest-api.herokuapp.com/users/find/firebase/' + this.state.userId
 
@@ -58,7 +46,6 @@ class welcomeCopy extends Component {
       console.log("response", response)
 
       this.setState( { user: response.data })
-      console.log('this.state.user', this.state.user)
 
       this.checkForUser()
       })
@@ -68,9 +55,8 @@ class welcomeCopy extends Component {
   }
 
   checkForUser(){
-    console.log('<<< checkForUser called')
 
-    if(this.state.user.length !== 0){
+    if (this.state.user.length !== 0){
       this.userFound()
       return
     }
@@ -79,19 +65,13 @@ class welcomeCopy extends Component {
   }
 
   userFound(){
-    console.log('a user was found!')
     //if a user is returned, check for their username
-    console.log(this.state.user.username)
     this.setState( { username: this.state.user.username })
     this.renderUsername()
   }
 
   makeUser() {
-    console.log('>>> Make User called!');
-
     //send the information to the API to make a new user
-    console.log(this.state.email)
-    console.log(this.state.userId)
 
     axios.post('https://treasure-chest-api.herokuapp.com/users',{
       username: '',
@@ -102,8 +82,6 @@ class welcomeCopy extends Component {
       console.log("response", response)
       return this.setState( { user: response.data })
     })
-      //if the user is saved successfully
-    .then(this.userSaved.bind(this))
     //if there was a problem saving the hunt
     .catch((error) => {
       console.log("The user did not save")
@@ -114,13 +92,7 @@ class welcomeCopy extends Component {
     });
   }
 
-  userSaved(){
-    console.log("the user was saved")
-    console.log(this.state.user)
-  }
-
   renderUsername(){
-    console.log('rendering username')
 
     if (typeof this.state.user !== 'undefined' ){
       if (this.state.user.username !== ''){
@@ -132,7 +104,6 @@ class welcomeCopy extends Component {
   }
 
   userNotFound(){
-    console.log('a user was not found')
     //if a user is not returned, make one
       this.makeUser()
   }
@@ -143,7 +114,6 @@ class welcomeCopy extends Component {
   }
 
   profilePressed(){
-    console.log('<<< Profile was pressed')
     this._toProfile();
   }
 
@@ -157,7 +127,6 @@ class welcomeCopy extends Component {
   }
 
   organizePressed(){
-    console.log('>>> Organize Pressed')
     this._toHuntListOrganizer();
   }
 
@@ -170,7 +139,6 @@ class welcomeCopy extends Component {
   }
 
   playPressed(){
-    console.log('>>> Play Pressed')
     this._toHuntListPlayer();
   }
 
@@ -222,10 +190,9 @@ class welcomeCopy extends Component {
            Snapenger Hunt
         </Text>
 
-          { this.renderContent()  }
+        { this.renderContent()  }
 
       </View>
-
     );
   }
 }

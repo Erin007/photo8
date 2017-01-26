@@ -18,7 +18,6 @@ class DirectiveListOrganizer extends Component {
   state = { directives: [], directive: {} }; //initial or empty state, property of this
 
   componentWillMount (){
-    console.log('Component will Mount in DirectiveList called')
 
     const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
 
@@ -32,7 +31,6 @@ class DirectiveListOrganizer extends Component {
   }
 
   deleteDirectivePressed(directive){
-    console.log("delete directive pressed.")
   //delete the directive from the backend
     const url = 'https://treasure-chest-api.herokuapp.com/directives/' + directive.id
     console.log(url)
@@ -67,7 +65,6 @@ class DirectiveListOrganizer extends Component {
 
 //navigate back to HuntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 
@@ -82,8 +79,6 @@ class DirectiveListOrganizer extends Component {
 
 //helper functions to render things
   renderDirectives() {
-    console.log('<<<Render Directives Called')
-    console.log('this.state.directives', this.state.directives)
 
     if (this.state.directives.length > 0)  {
 
@@ -108,18 +103,16 @@ class DirectiveListOrganizer extends Component {
     return (
       <View style={styles.container}>
 
-      <TouchableOpacity onPress={() =>
-      this.seeHuntPressed()}>
-        <Text style={styles.text}> { this.props.hunt.name } </Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() =>
+        this.seeHuntPressed()}>
+          <Text style={styles.text}> { this.props.hunt.name } </Text>
+        </TouchableOpacity>
 
-      <Text style={styles.smalltext}> Directives </Text>
+        <Text style={styles.smalltext}> Directives </Text>
 
-      <ScrollView style={styles.scrollview}>
-
-        { this.renderDirectives() }
-
-      </ScrollView>
+        <ScrollView style={styles.scrollview}>
+          { this.renderDirectives() }
+        </ScrollView>
 
         <Button style={styles.button} onPress={this._toAddMoreDirectives.bind(this)}> Add Directives </Button>
 

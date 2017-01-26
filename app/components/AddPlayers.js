@@ -84,7 +84,6 @@ class addPlayers extends Component {
     });
   }
 
-
 //navigate to the hunt details
   seeHuntPressed() {
     console.log('seeHunt pressed');
@@ -155,7 +154,6 @@ class addPlayers extends Component {
           <InputPlus
             label = ""
             placeholder = "player email"
-            //secureTextEntry
             value = {this.state.email}
             onChangeText = {email => this.setState({ email })}/>
 
@@ -237,7 +235,6 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: "Chalkboard SE",
     textAlign: 'center',
-    // marginTop: -20,
   },
   player: {
     fontSize: 16,

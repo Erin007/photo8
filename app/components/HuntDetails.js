@@ -20,7 +20,6 @@ class huntDetails extends Component{
 
 //to the player pages for directives, teams and submissions
   seeDirectives() {
-    console.log('>>> seeDirectives Button Pressed!');
     this._toDirectiveList();
   }
 
@@ -34,7 +33,6 @@ class huntDetails extends Component{
   }
 
   seeTeams() {
-    console.log(' a player wants to see the teams');
     this._toTeamList();
   }
 
@@ -48,7 +46,6 @@ class huntDetails extends Component{
   }
 
   seeSubmissions(){
-    console.log('a player wants to the see the submissions');
     this._toSubmissions();
   }
 
@@ -63,7 +60,6 @@ class huntDetails extends Component{
 
 //to the organizer pages for directives, teams and submissions
   directivesOrganizer(){
-    console.log('The Organizer wants to the see the directives');
     this._toDirectiveListOrganizer();
   }
 
@@ -77,7 +73,6 @@ class huntDetails extends Component{
   }
 
   teamsOrganizer(){
-    console.log('The Organizer wants to the see the teams');
     this._toTeamListOrganizer();
   }
 
@@ -91,7 +86,6 @@ class huntDetails extends Component{
   }
 
   submissionsOrganizer(){
-    console.log('The Organizer wants to the see the submissions');
     this._toSubmissionsOrganizer();
   }
 
@@ -106,7 +100,6 @@ class huntDetails extends Component{
 
 //navigate the user to the 'home' page
 toHome(){
-  console.log('The user wants to go home');
   this._toHome();
 }
 

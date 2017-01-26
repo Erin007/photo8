@@ -21,7 +21,7 @@ import HuntListPlayer from './HuntListPlayer';
 import axios from 'axios';
 
 class welcome extends Component {
-  state = { loggedIn: null, userId: '', username: '', user: '', email: '' }; //are you logged in?
+  state = { loggedIn: null, userId: '', username: '', user: '', email: '' };
 
   componentWillMount(){
     firebase.initializeApp({
@@ -34,10 +34,7 @@ class welcome extends Component {
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log("<<<<USER:", user)
-        console.log("user.uid:", user.uid)
-        console.log("user.email:", user.email)
-
+    
         this.setState({ loggedIn: true, userId: user.uid, email: user.email});
 
         this.verifyUserWithBackend()
@@ -48,10 +45,7 @@ class welcome extends Component {
   }
 
   verifyUserWithBackend(){
-    //see if that user already exists by searching for a user with that uid
-    console.log('verifying user with backend function called')
-    //Once the user is logged in, axios find-user-by-firebase get
-    console.log(this.state.userId)
+    //see if that user already exists by searching for a user with that firebase uid
     const url = 'https://treasure-chest-api.herokuapp.com/users/find/firebase/' + this.state.userId
 
     axios.get(url).then( response => {
@@ -68,7 +62,6 @@ class welcome extends Component {
   }
 
   checkForUser(){
-    console.log('<<< checkForUser called')
 
     if(this.state.user.length !== 0){
       this.userFound()
@@ -79,19 +72,13 @@ class welcome extends Component {
   }
 
   userFound(){
-    console.log('a user was found!')
     //if a user is returned, check for their username
     this.setState( { username: this.state.user.username })
     this.renderUsername()
   }
 
   makeUser() {
-    console.log('>>> Make User called!');
-
     //send the information to the API to make a new user
-    console.log(this.state.email)
-    console.log(this.state.userId)
-
     axios.post('https://treasure-chest-api.herokuapp.com/users',{
       username: '',
       email: this.state.email,
@@ -101,9 +88,7 @@ class welcome extends Component {
       console.log("response", response)
       return this.setState( { user: response.data })
     })
-      //if the user is saved successfully
-    .then(this.userSaved.bind(this))
-    //if there was a problem saving the hunt
+    //if there was a problem saving the user
     .catch((error) => {
       console.log("The user did not save")
 
@@ -113,13 +98,7 @@ class welcome extends Component {
     });
   }
 
-  userSaved(){
-    console.log("the user was saved")
-    console.log(this.state.user)
-  }
-
   renderUsername(){
-    console.log('rendering username')
 
     if (typeof this.state.user !== 'undefined' ){
       if (this.state.user.username !== ''){
@@ -131,7 +110,6 @@ class welcome extends Component {
   }
 
   userNotFound(){
-    console.log('a user was not found')
     //if a user is not returned, make one
       this.makeUser()
   }
@@ -142,7 +120,6 @@ class welcome extends Component {
   }
 
   profilePressed(){
-    console.log('<<< Profile was pressed')
     this._toProfile();
   }
 
@@ -156,7 +133,6 @@ class welcome extends Component {
   }
 
   organizePressed(){
-    console.log('>>> Organize Pressed')
     this._toHuntListOrganizer();
   }
 
@@ -169,7 +145,6 @@ class welcome extends Component {
   }
 
   playPressed(){
-    console.log('>>> Play Pressed')
     this._toHuntListPlayer();
   }
 
@@ -221,10 +196,9 @@ class welcome extends Component {
            Snapenger Hunt
         </Text>
 
-          { this.renderContent()  }
+        { this.renderContent()  }
 
       </View>
-
     );
   }
 }
@@ -237,7 +211,6 @@ const styles = StyleSheet.create({
     marginTop: 40
   },
   scrollview:{
-    // marginTop: 50,
     height: 200
   },
   content:{

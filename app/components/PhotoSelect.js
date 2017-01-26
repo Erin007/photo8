@@ -20,19 +20,17 @@ import {
  import DirectiveShow from './DirectiveShow';
  import huntDetails from './HuntDetails';
 
-
 var RCTCameraRollManager = require('NativeModules').CameraRollManager;
 
 class PhotoSelect extends Component {
- //
-  state = { image:'', error: '', loading: false, submission: '' }
+
+state = { image:'', error: '', loading: false, submission: '' }
 
  componentDidMount() {
      console.log(this.props)
      CameraRoll.getPhotos({ first: 1}).done(
         (data) =>{
        console.log("data", data);
-       console.log("data.edges", data.edges)
        this.storeImages(data);
         },
         (error) => {
@@ -42,7 +40,6 @@ class PhotoSelect extends Component {
   }
 
  storeImages(data) {
-    console.log(data.edges[0].node.image)
      this.setState({
          image: data.edges[0].node.image
      });
@@ -53,7 +50,6 @@ class PhotoSelect extends Component {
  }
 
  renderCameraIcon(){
-   console.log('<<< Render CameraIcon called')
 
    return(
      <View>
@@ -68,7 +64,6 @@ class PhotoSelect extends Component {
  }
 
  toCameraPressed() {
-   console.log('>>> To Camera Pressed');
    this._toCamera();
  }
 
@@ -84,9 +79,7 @@ class PhotoSelect extends Component {
  }
 
  usePhotoPressed(){
-   console.log('<<< usePhotoPressed')
    //store the image uri in the backend
-   console.log("submission", this.props.submission)
 
    const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.props.submission.id
 
@@ -105,7 +98,6 @@ class PhotoSelect extends Component {
  }
 
  photoSaved(){
-   console.log('<<<Photo Saved Called')
    this._toDirectiveShow();
  }
 
@@ -123,7 +115,6 @@ class PhotoSelect extends Component {
 
 //navigate to huntDetails
  seeHuntPressed() {
-   console.log('seeHunt pressed');
    this._toHuntDetails()
  }
 
@@ -140,22 +131,21 @@ class PhotoSelect extends Component {
    return (
      <View style={styles.container}>
 
-     <TouchableOpacity onPress={() => this.seeHuntPressed()}>
-       <Text style={styles.huntname}> {this.props.hunt.name}</Text>
-     </TouchableOpacity>
+       <TouchableOpacity onPress={() => this.seeHuntPressed()}>
+         <Text style={styles.huntname}> {this.props.hunt.name}</Text>
+       </TouchableOpacity>
 
-     <TouchableOpacity onPress={() => this._toDirectiveShow()}>
-        <Text style={styles.text}>{this.props.directive.name}</Text>
-      </TouchableOpacity>
+       <TouchableOpacity onPress={() => this._toDirectiveShow()}>
+          <Text style={styles.text}>{this.props.directive.name}</Text>
+       </TouchableOpacity>
 
-      <Image style={styles.image} source={{ uri: this.state.image.uri }} />
+       <Image style={styles.image} source={{ uri: this.state.image.uri }} />
 
        <Button onPress={this.usePhotoPressed.bind(this)}> Use Photo </Button>
 
        { this.renderCameraIcon() }
 
     </View>
-
    );
  }
 }
@@ -167,7 +157,6 @@ const styles = StyleSheet.create({
     marginTop: 45,
   },
   huntname: {
-    // marginTop: 65,
     fontSize: 30,
     textAlign: 'center',
     fontFamily: 'Pacifico'

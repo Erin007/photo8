@@ -23,12 +23,10 @@ class DirectiveShow extends Component {
   componentWillMount(){
 
     //get the submission by searching with this teamid and this directive id
-    console.log("team_id", this.props.thisplayersteam.id)
-    console.log("directive_id", this.props.directive.id )
     const url2 = 'https://treasure-chest-api.herokuapp.com/submissions/find/' + this.props.thisplayersteam.id + '/' + this.props.directive.id
 
     axios.get(url2).then( response => {
-      console.log("response SUBMISSION", response.data)
+
       if (response.data !== null){
         this.setState( { submission: response.data })
       }
@@ -40,13 +38,9 @@ class DirectiveShow extends Component {
   }
 
   checkForSubmission(){
-    console.log("CHECKING FOR SUBMISSION")
-    console.log(this.state.submission)
+
     //if there isn't a submission
     if (this.state.submission.length == 0){
-      console.log("directive_id:", this.props.directive.id)
-      console.log("this.props.thisplayersteam.id", this.props.thisplayersteam.id)
-      console.log("directive_name:", this.props.directive.name)
 
       // make a new 'shell' submission so adding a caption and adding a photo can both be updates/put requests
       const url3 = 'https://treasure-chest-api.herokuapp.com/submissions/'
@@ -79,30 +73,26 @@ class DirectiveShow extends Component {
   }
 
   updateStatus(){
-    console.log('update status called')
-    console.log("this.state.submission", this.state.submission)
-    // check if a photo and caption have been submitted
-      if (this.state.submission.photo !== '' && this.state.submission.status !== 2){
-      //update the submission status to 1 in the backend
-        const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.state.submission.id
-        axios.patch(url, {
-          status: 1
-        })
-        .then(response => {
-          console.log("response", response)
-         this.setState({ submission: response.data })
-        })
-        .catch((error) => {
-          console.log("Error from trying to update the status:", error)
-        });
-      }
-    // }
+
+  // check if a photo and caption have been submitted
+    if (this.state.submission.photo !== '' && this.state.submission.status !== 2){
+    //update the submission status to 1 in the backend
+      const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.state.submission.id
+      axios.patch(url, {
+        status: 1
+      })
+      .then(response => {
+        console.log("response", response)
+       this.setState({ submission: response.data })
+      })
+      .catch((error) => {
+        console.log("Error from trying to update the status:", error)
+      });
+    }
   }
 
 //render helper methods
   renderCaption(){
-    console.log("RENDERING THE CAPTION")
-    console.log("this.state.submission.caption", this.state.submission.caption)
 
     if (this.state.submission.caption !== '' && typeof this.state.submission.caption !== 'undefined'){
       return(
@@ -117,8 +107,6 @@ class DirectiveShow extends Component {
   }
 
   renderCaptionButton(){
-    console.log("renderingCaptionButton")
-    console.log("this.state.submission", this.state.submission)
 
     if (this.state.submission !== null ){
       if (this.state.submission.status !== 2){
@@ -130,7 +118,6 @@ class DirectiveShow extends Component {
   }
 
   renderPhoto(){
-    console.log("Render Photo called")
 
       //if there is a photo, awaiting approval
       if (this.state.submission.status == 1){
@@ -193,7 +180,6 @@ class DirectiveShow extends Component {
   }
 
   renderStatus(){
-    console.log("rendering the status")
 
     if (this.state.submission.status == 1){
       return(
@@ -231,7 +217,6 @@ class DirectiveShow extends Component {
         <Text style={styles.text}>{this.props.directive.description}</Text>
 
         { this.renderStatus() }
-
         { this.renderPhoto() }
         { this.renderCameraIcon() }
         { this.renderCaption() }
@@ -240,7 +225,6 @@ class DirectiveShow extends Component {
       </ScrollView>
     )
   }
-
 
 //navigate to the camera
   toCameraPressed() {
@@ -292,7 +276,6 @@ class DirectiveShow extends Component {
                   user: this.props.user}
     });
   }
-
 };
 
 const styles = StyleSheet.create({

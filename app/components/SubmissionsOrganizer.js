@@ -18,7 +18,6 @@ class SubmissionsOrganizer extends Component{
   state = { submissions: [], error: '', loading: false, submission: '', team: '', submissionsAwaitingApproval: [], approvedSubmissions: [], deniedSubmissions: []}
 
   componentWillMount(){
-    console.log("componentwillmount in submissions organizer")
 
     //call for all of the submissions associated with this hunt
     const url = 'https://treasure-chest-api.herokuapp.com/submissions/hunt/' + this.props.hunt.id
@@ -34,7 +33,7 @@ class SubmissionsOrganizer extends Component{
   }
 
   approveSubmission(submission){
-    console.log('approve submission called')
+
     //patch to the back to change the  submission status to 2
     const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + submission.id
 
@@ -80,7 +79,7 @@ class SubmissionsOrganizer extends Component{
     //determine what the new team point value should be
     const newPoints = this.state.team.points + 1
     //****** CHANGE 1 to point value in added features *********////
-    console.log("newPoints", newPoints)
+
     //patch to team to give them points for this directive
     axios.patch(url3, {
       points: newPoints,
@@ -98,7 +97,6 @@ class SubmissionsOrganizer extends Component{
   }
 
   denySubmission(submission){
-    console.log('deny submission called')
     //patch to this submission to change the status to 3
     const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + submission.id
 
@@ -119,7 +117,6 @@ class SubmissionsOrganizer extends Component{
 
 //navigate to huntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 
@@ -132,11 +129,8 @@ class SubmissionsOrganizer extends Component{
     });
   }
 
-//deleting submissions
 deleteSubmissionPressed(submission){
-  console.log("delete directive pressed.")
-  console.log('submission.id', submission.id)
-//delete the submission from the backend
+  //delete the submission from the backend
   const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + submission.id
 
   axios.delete(url)
@@ -152,7 +146,7 @@ deleteSubmissionPressed(submission){
 
 //helper functions for render
   filterSubmissions(){
-    console.log("filtering submissions")
+
     const submissionsToRender = []
 
     for (i = 0; i < this.state.submissions.length; i++) {
@@ -185,15 +179,12 @@ deleteSubmissionPressed(submission){
         deniedSubmission3.push(submissionsToRender[i])
       }
     }
-    console.log("submissionsAwaitingApproval1", submissionsAwaitingApproval1)
-    console.log("approvedSubmissions2", approvedSubmissions2)
-    console.log("deniedSubmission3", deniedSubmission3)
 
     this.setState({ submissionsAwaitingApproval: submissionsAwaitingApproval1, approvedSubmissions: approvedSubmissions2, deniedSubmissions: deniedSubmission3 });
   }
 
   renderAwaitingSubmissions(){
-    console.log("rendering submission awaiting approval")
+
     if (typeof this.state.submissionsAwaitingApproval !== 'undefined'){
 
       return this.state.submissionsAwaitingApproval.map(submission =>
@@ -229,7 +220,7 @@ deleteSubmissionPressed(submission){
   }
 
   renderApprovedSubmissions(submissions){
-    console.log("rendering approved submissions")
+
     if (typeof this.state.approvedSubmissions !== 'undefined'){
 
       return submissions.map(submission =>
@@ -256,7 +247,7 @@ deleteSubmissionPressed(submission){
   }
 
   renderDeniedSubmissions(submissions){
-    console.log("rendering denied submissions")
+  
     if (typeof this.state.deniedSubmissions !== 'undefined'){
 
       return submissions.map(submission =>

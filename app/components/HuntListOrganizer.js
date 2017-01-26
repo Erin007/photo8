@@ -21,8 +21,6 @@ class HuntListOrganizer extends Component {
   state = { hunts: [], hunt: {}, user: this.props.user };
 
   componentWillMount (){
-    console.log('componentWillMount HuntsListOrganizer')
-    console.log( "HuntsListOrganizer props", this.props)
 
     const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/organizer/' + this.props.user.id
 
@@ -36,7 +34,6 @@ class HuntListOrganizer extends Component {
   }
 
   huntShowPressed(hunt){
-    console.log("huntShowPressed")
     this._toHuntShow(hunt);
   }
 
@@ -51,7 +48,6 @@ class HuntListOrganizer extends Component {
 
 //navigate the user to the 'home' page
   toHome(){
-    console.log('The user wants to go home');
     this._toHome();
   }
 
@@ -65,26 +61,22 @@ class HuntListOrganizer extends Component {
   }
 
   renderHunts() {
-    console.log('<<<renderHunts in HuntListOrganizer')
-    console.log('this.state.hunts', this.state.hunts)
 
     if (this.state.hunts.length > 0)  {
 
       return this.state.hunts.map(hunt =>
 
         <TouchableOpacity onPress={() => this.huntShowPressed(hunt)} key={ hunt.id } hunt={hunt}>
-
           <Text style={styles.hunt}>
               {hunt.name}
           </Text>
         </TouchableOpacity>
-        );
+      );
     }
     return <Text style={styles.smallertext}> You are not organizing any hunts </Text>
   }
 
   newHuntPressed() {
-    console.log('>>> Make New Hunt Button Pressed!');
     this._toMakeHunt();
   }
 

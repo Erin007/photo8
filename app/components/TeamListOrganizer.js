@@ -29,35 +29,32 @@ class TeamListOrganizer extends Component {
       });;
   }
 
-//handle deleting a team
+
   deleteTeamPressed(team){
-    console.log("deleteTeamPressed")
   //delete the team from the backend
-  const url = 'https://treasure-chest-api.herokuapp.com/teams/' + team.id
+    const url = 'https://treasure-chest-api.herokuapp.com/teams/' + team.id
 
-  axios.delete(url)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
-  //fetch the new team list and update the state to show that list
-  const url2 = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id
-
-  axios.get(url2).then( response => {
-    return this.setState( { teams: response.data })
+    axios.delete(url)
+    .then(function (response) {
+      console.log(response);
     })
     .catch(function (error) {
       console.log(error);
-    });;
+    });
+
+  //fetch the new team list and update the state to show that list
+    const url2 = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id
+
+    axios.get(url2).then( response => {
+      return this.setState( { teams: response.data })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });;
   }
 
 //navigate to the player list
   seeRosterPressed(team){
-    //handles going to the roster
-    console.log('>>> A Team has been pressed!');
     this._toRoster(team);
   }
 
@@ -75,7 +72,6 @@ class TeamListOrganizer extends Component {
 
 //navigate to the addTeams component
   addTeamsPressed(){
-    console.log("addTeamsPressed")
     this._toAddTeams()
   }
 
@@ -91,7 +87,6 @@ class TeamListOrganizer extends Component {
 
 //navigate to huntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 

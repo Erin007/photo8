@@ -28,12 +28,10 @@ class LoginForm extends Component {
   }
 
   onLoginFail(){
-    console.log('Login Fail called')
     this.setState({ error: 'Authenication Failed', loading: false })
   }
 
   onLoginSuccess() {
-    console.log('Login Success called')
     this.setState({
       email: '',
       password: '',
@@ -57,18 +55,18 @@ class LoginForm extends Component {
       <KeyboardAvoidingView behavior = 'padding'>
         <ScrollView style={styles.scrollview}>
 
-            <Input
-              label = ""
-              placeholder = "email"
-              value = {this.state.email}
-              onChangeText = {email => this.setState({ email })}/>
+          <Input
+            label = ""
+            placeholder = "email"
+            value = {this.state.email}
+            onChangeText = {email => this.setState({ email })}/>
 
-            <Input
-              label = ""
-              placeholder = "password"
-              secureTextEntry
-              value = {this.state.password}
-              onChangeText = {password => this.setState({ password })}/>
+          <Input
+            label = ""
+            placeholder = "password"
+            secureTextEntry
+            value = {this.state.password}
+            onChangeText = {password => this.setState({ password })}/>
 
           <Text style= {styles.errorTextStyle}>
             { this.state.error }

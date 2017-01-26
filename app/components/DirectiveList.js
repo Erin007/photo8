@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Text } from 'react-native';
 import axios from 'axios';
-//import DirectiveDetail from './DirectiveDetail';
 import DirectiveShow from './DirectiveShow'
 import huntDetails from './HuntDetails';
 
@@ -18,7 +17,7 @@ class DirectiveList extends Component {
   state = { directives: [], directive: {}, completeDirectives: [], incompleteDirectives: [], thisplayersteam: ''};
 
   componentWillMount (){
-    console.log('Component will Mount in DirectiveList called')
+
     const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
 
     axios.get(url).then( response => {
@@ -88,7 +87,6 @@ class DirectiveList extends Component {
     }
   }
 
-
 //navigation functions
   _toHuntDetails = (hunt) => {
     this.props.navigator.push({
@@ -100,8 +98,6 @@ class DirectiveList extends Component {
   }
 
   directiveShowPressed(directive) {
-    console.log('>>> Directive Detail Pressed!');
-    console.log("this.state", this.state)
     this._toDirectiveShow(directive);
   }
 
@@ -117,9 +113,7 @@ class DirectiveList extends Component {
   }
 
   render() {
-    console.log('this.state from DirectiveList render', this.state);
-    console.log('this.props', this.props)
-
+  
     return (
       <View style={styles.container}>
 

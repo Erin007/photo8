@@ -36,12 +36,8 @@ class addTeams extends Component{
 
   addTeamPressed(teamName){
     dismissKeyboard()
-    console.log('>>> Add Team pressed');
+
     //axios post the team
-
-    console.log(this.state.teamName)
-    console.log(this.props.hunt.name)
-
     axios.post('https://treasure-chest-api.herokuapp.com/teams',{
       name: this.state.teamName,
       points: 0,
@@ -56,10 +52,7 @@ class addTeams extends Component{
     .then(this.componentWillMount())
     //if there was a problem saving the team
     .catch((error) => {
-      console.log("The team did not save")
-
       this.setState({ error: "There was an error saving the team. Please try again.", loading: false })
-
       console.log(error)
     });
 
@@ -73,7 +66,6 @@ class addTeams extends Component{
 
 //navigate to huntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 
@@ -88,7 +80,6 @@ class addTeams extends Component{
 
 //navigate back to the TeamsListOrganizer
   seeTeamsPressed(){
-    console.log("seeTeamsPressed")
     this._toTeamList()
   }
 
@@ -103,7 +94,7 @@ class addTeams extends Component{
 
 //helper functions to render things
   renderTeamNames() {
-    console.log("rendering teams")
+
     if (this.state.teams[0] !== '')  {
       console.log(this.state.teams)
 
@@ -135,7 +126,6 @@ class addTeams extends Component{
           <InputPlus
             label = ""
             placeholder = "team name"
-            //secureTextEntry
             value = {this.state.teamName}
             onChangeText = {teamName => this.setState({ teamName })}/>
 
@@ -147,7 +137,6 @@ class addTeams extends Component{
         <Text style= {styles.errorTextStyle}>
           { this.state.error }
         </Text>
-
 
         <ScrollView style={styles.scrollview}>
           {this.renderTeamNames()}

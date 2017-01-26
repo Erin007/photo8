@@ -21,7 +21,7 @@ class HuntListPlayer extends Component {
   state = { hunts: [], hunt: {}, user: this.props.user };
 
   componentWillMount(){
-    console.log("huntListPlayer", this.props.user )
+
     const url = 'https://treasure-chest-api.herokuapp.com/hunts/find/player/' + this.props.user.id
 
     axios.get(url).then( response => {
@@ -34,7 +34,7 @@ class HuntListPlayer extends Component {
   }
 
   renderHunts(){
-    console.log(this.state.hunts)
+
     if (this.state.hunts.length > 0) {
       return this.state.hunts.map(hunt =>
 
@@ -44,13 +44,12 @@ class HuntListPlayer extends Component {
               {hunt.name}
           </Text>
         </TouchableOpacity>
-        );
+      );
     }
     return <Text style={styles.smallertext}> You are not participating in any hunts </Text>
   }
 
   huntShowPressed(hunt){
-    console.log("huntShowPressed")
     this._toHuntShow(hunt);
   }
 
@@ -65,7 +64,6 @@ class HuntListPlayer extends Component {
 
 //navigate the user to the 'home' page
   toHome(){
-    console.log('The user wants to go home');
     this._toHome();
   }
 
@@ -79,7 +77,6 @@ class HuntListPlayer extends Component {
   }
 
   joinHuntPressed() {
-    console.log('>>> Join Hunt Button Pressed!');
     this._toJoinHunt();
   }
 

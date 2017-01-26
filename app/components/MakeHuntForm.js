@@ -19,7 +19,6 @@ class newHunt extends Component{
   state = { huntName: '', passcode: '', description: '', organizerId:'', huntID: '', error: '', loading: false, hunt: {}}
 
   savePressed() {
-    console.log('>>> Save Button Pressed!');
 
     const { huntName, passcode, description, directives, organizerId } = this.state;
 
@@ -40,17 +39,12 @@ class newHunt extends Component{
     .then(this.huntSaved.bind(this))
     //if there was a problem saving the hunt
     .catch((error) => {
-      console.log("The hunt did not save")
-
       this.setState({ error: "There was an error with your hunt. Please try again.", loading: false })
-
       console.log("Error:", error)
     });
   }
 
   huntSaved(){
-    console.log("The hunt successfully saved")
-
     //clear the form
     this.setState({
       huntName:'',
@@ -59,8 +53,6 @@ class newHunt extends Component{
       loading: false,
       error: ''
     })
-    console.log("hunt is: ", this.state.hunt)
-    //go to the AddDirectives page for this Hunt, have to pass the hunt id as props to the AddDirectives navigator action
     this._toAddDirectives(this.state.hunt);
   }
 
@@ -110,7 +102,6 @@ class newHunt extends Component{
           <Input
             label = ""
             placeholder = "description"
-            //secureTextEntry
             value = {this.state.description}
             onChangeText = {description => this.setState({ description })}/>
 
@@ -118,10 +109,8 @@ class newHunt extends Component{
             { this.state.error }
           </Text>
 
-
-            {this.renderSaveButton()}
+          {this.renderSaveButton()}
         </ScrollView>
-
       </View>
     );
   }
@@ -160,7 +149,6 @@ const styles = StyleSheet.create({
     fontSize: 36,
     textAlign: 'center',
     margin: 10,
-    // paddingTop: 10,
     fontFamily: 'Pacifico',
   },
 });

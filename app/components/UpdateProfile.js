@@ -23,8 +23,7 @@ class UpdateProfile extends Component {
   state = { error: '', loading: false, user: this.props.user, username: this.props.user.username, location: this.props.user.location, bio: this.props.user.bio }
 
   renderButton(){
-    console.log("rendering button on update profile")
-    console.log("this.props on update profile", this.props)
+
     if (this.state.loading) {
       return <Spinner size="small"/>
     }
@@ -34,14 +33,13 @@ class UpdateProfile extends Component {
   }
 
   onButtonPress(){
-    console.log('update pressed')
+
     const { username } = this.state;
 
     this.setState({ error: '', loading: true });
 
     //send the updated info to the backend
     const url = 'https://treasure-chest-api.herokuapp.com/users/' + this.props.user.id
-    console.log(this.props.user.id)
 
     axios.patch(url, {
       username: this.state.username,
@@ -57,15 +55,12 @@ class UpdateProfile extends Component {
     //if there was a problem saving the user
     .catch((error) => {
       console.log("The username did not save")
-
       this.setState({ error: "There was an error with your information. Please try again.", loading: false })
-
       console.log("Error:", error)
     });
   }
 
   userUpdated(){
-    console.log("the user's information was updated")
     this.setState({
       bio: '',
       location: '',
@@ -141,8 +136,8 @@ class UpdateProfile extends Component {
             <Text style={styles.text}>picture</Text>
 
             <Image
-            source={require('../assets/ic_photo_camera_36pt.png')}
-            style={styles.camerabutton}
+              source={require('../assets/ic_photo_camera_36pt.png')}
+              style={styles.camerabutton}
             />
 
             <Text style= {styles.errorTextStyle}>
@@ -159,7 +154,6 @@ class UpdateProfile extends Component {
 
 const styles = {
   container: {
-    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
@@ -172,7 +166,6 @@ const styles = {
   },
   text: {
     fontSize: 18,
-    // flex: 1,
     textAlign: 'center',
     marginLeft: 10,
     marginRight: 10,

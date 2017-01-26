@@ -20,12 +20,8 @@ state = { caption: '', error: '', loading: false, submission: '' }
 
   saveCaptionPressed(){
     dismissKeyboard()
-    console.log('>>> Save caption pressed')
 
     //make an update request to the backend with the caption info for the submission
-    console.log("caption", this.state.caption)
-    console.log("submission", this.props.submission)
-
     const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.props.submission.id
 
     axios.patch(url,{

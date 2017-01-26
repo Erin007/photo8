@@ -31,7 +31,7 @@ class TeamList extends Component {
   }
 
   checkUserTeam(){
-    console.log('checking if the user is on a team')
+
     //make an axios call to see if the user is on a team
     const url = 'https://treasure-chest-api.herokuapp.com/teams/find/' + this.props.hunt.id + '/' + this.props.user.id
 
@@ -47,7 +47,6 @@ class TeamList extends Component {
 
   teamFound(){
     //tell the user which team they are on
-    console.log('telling the user which team they are on')
     if (this.state.thisplayersteam.name != null){
       return (
         <Text style={styles.smallertext}>You are on {this.state.thisplayersteam.name} </Text>
@@ -58,8 +57,6 @@ class TeamList extends Component {
   }
 
   seeRosterPressed(team){
-    //handles going to the roster
-    console.log('>>> A Team has been pressed!');
     this._toRoster(team);
   }
 
@@ -77,7 +74,6 @@ class TeamList extends Component {
 
 //navigate to huntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 
@@ -110,9 +106,9 @@ class TeamList extends Component {
     return (
       <View style={styles.container}>
 
-      <TouchableOpacity onPress={() => this.seeHuntPressed()}>
-        <Text style={styles.text}> { this.props.hunt.name } </Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.seeHuntPressed()}>
+          <Text style={styles.text}> { this.props.hunt.name } </Text>
+        </TouchableOpacity>
 
         <Text style={styles.smalltext}> Teams </Text>
 

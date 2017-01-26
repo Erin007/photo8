@@ -42,10 +42,9 @@ class RosterOrganizer extends Component {
                  team: this.props.team }
     });
   }
-  
+
 //navigate to huntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 
@@ -69,7 +68,6 @@ class RosterOrganizer extends Component {
   }
 
   deletePlayerPressed(user){
-    console.log('delete player pressed')
     //find the teamplayer that associates this player with this team
     const url = 'https://treasure-chest-api.herokuapp.com/teamplayers/find/' + this.props.team.id + '/' + user.id
 
@@ -100,7 +98,6 @@ class RosterOrganizer extends Component {
   }
 
   renderPlayers(){
-    console.log("rendering players organizer")
 
     if (typeof this.state.players[0] !== 'undefined')  {
 
@@ -126,7 +123,6 @@ class RosterOrganizer extends Component {
 
   render(){
     return(
-
       <View style={styles.container}>
 
         <TouchableOpacity onPress={() =>

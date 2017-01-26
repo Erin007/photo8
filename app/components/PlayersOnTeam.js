@@ -41,7 +41,6 @@ class Roster extends Component {
   }
 
   renderPlayers(){
-    console.log("rendering players")
 
     if (typeof this.state.players[0] !== 'undefined')  {
 
@@ -63,11 +62,9 @@ class Roster extends Component {
   }
 
   renderButtons(){
-    console.log("RENDERING BUTTONS ON ROSTER")
     //if the user is not on a team show them join team button
-    console.log("this.props.thisplayersteam.name", this.props.thisplayersteam.name)
     if (typeof this.props.thisplayersteam.name == 'undefined' && this.state.thisplayersteam == ''){
-      console.log("We a have a lonewolf!!!!!!!!! ")
+
       return(
             <View style={styles.bottombuttons}>
               <Button onPress={() => this.joinTeamPressed() }> Join Team </Button>
@@ -75,13 +72,10 @@ class Roster extends Component {
       );
     }
     //if the user is on this team, show them a leave team button
-    console.log("checking if the user is on this team")
-
     const currentUserId = this.props.user.id
     const that = this
 
     if (typeof this.state.players !== 'undefined'){
-      console.log("in the first if")
 
       for (i = 0; i < this.state.players.length; i++) {
         if (this.state.players[i].id == currentUserId){
@@ -97,7 +91,6 @@ class Roster extends Component {
   }
 
   joinTeamPressed(){
-    console.log("Join Team Pressed")
       //make an axios post to make a team-player object
       axios.post('https://treasure-chest-api.herokuapp.com/teamplayers',{
         player_id: this.props.user.id ,
@@ -116,7 +109,6 @@ class Roster extends Component {
   }
 
   leaveTeamPressed(){
-    console.log('leaveTeamPressed')
     //make an axios get call for the teamplayer that pairs this user with this team
     const url = 'https://treasure-chest-api.herokuapp.com/teamplayers/find/' + this.props.team.id + '/' + this.props.user.id
 
@@ -131,10 +123,8 @@ class Roster extends Component {
   }
 
   deleteTeamPlayer(){
-    console.log('<<<<<< DELETE TEAM PLAYER CALLED')
     //make an axios delete call using the returned id
     const url2 = 'https://treasure-chest-api.herokuapp.com/teamplayers/' + this.state.teamplayer.id
-    console.log("this.state.teamplayer.id", this.state.teamplayer.id)
 
     axios.delete(url2).then( response => {
       console.log("teamplayer delete", response)
@@ -161,7 +151,6 @@ class Roster extends Component {
 
 //navigate to huntDetails
   seeHuntPressed() {
-    console.log('seeHunt pressed');
     this._toHuntDetails()
   }
 

@@ -51,8 +51,8 @@ class Profile extends Component {
 
 //helper render functions
   renderUpdateButton(){
-    //*** This should be conditional based on whether the current user is the one who "owns" this profile
-    if(this.props.player.id == this.props.user.id){
+    //conditional based on whether the current user is the one who "owns" this profile
+    if (this.props.player.id == this.props.user.id){
       return(
         <Button onPress={this.updateProfilePressed.bind(this)}>
           Update Profile
@@ -62,7 +62,6 @@ class Profile extends Component {
   }
 
   render(){
-    console.log("Profile this.props", this.props)
     return(
       <View style={styles.container}>
         <TouchableOpacity onPress={this.toHome.bind(this)}>
