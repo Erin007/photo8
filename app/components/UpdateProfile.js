@@ -8,7 +8,8 @@ import {
   SideMenu,
   ScrollView,
   TouchableOpacity,
-  Image
+  Image,
+  KeyboardAvoidingView
 } from 'react-native';
 import Input from './common/Input';
 import Button from './common/Button';
@@ -96,7 +97,8 @@ class UpdateProfile extends Component {
       title: 'Profile',
       component: Profile,
       passProps: { hunt : this.props.hunt,
-                   user : this.state.user}
+                   user : this.state.user,
+                   player: this.state.user}
     });
   }
 
@@ -110,45 +112,46 @@ class UpdateProfile extends Component {
           </Text>
         </TouchableOpacity>
 
-        <ScrollView style={styles.scrollview}>
-          <Text style={styles.text}>username</Text>
+        <KeyboardAvoidingView behavior = 'padding'>
+            <View>
+            <Text style={styles.text}>username</Text>
 
-          <Input
-              label = ""
-              placeholder = "username"
-              value = {this.state.username}
-              onChangeText = {username => this.setState({ username })}/>
+            <Input
+                label = ""
+                placeholder = "username"
+                value = {this.state.username}
+                onChangeText = {username => this.setState({ username })}/>
 
-          <Text style={styles.text}>location</Text>
+            <Text style={styles.text}>location</Text>
 
-          <Input
-              label = ""
-              placeholder = "location"
-              value = {this.state.location}
-              onChangeText = {location => this.setState({ location })}/>
+            <Input
+                label = ""
+                placeholder = "location"
+                value = {this.state.location}
+                onChangeText = {location => this.setState({ location })}/>
 
-          <Text style={styles.text}>bio</Text>
+            <Text style={styles.text}>bio</Text>
 
-          <Input
-              label = ""
-              placeholder = "bio"
-              value = {this.state.bio}
-              onChangeText = {bio => this.setState({ bio })}/>
+            <Input
+                label = ""
+                placeholder = "bio"
+                value = {this.state.bio}
+                onChangeText = {bio => this.setState({ bio })}/>
 
-          <Text style={styles.text}>picture</Text>
+            <Text style={styles.text}>picture</Text>
 
-          <Image
-          source={require('../assets/ic_photo_camera_36pt.png')}
-          style={styles.camerabutton}
-          />
+            <Image
+            source={require('../assets/ic_photo_camera_36pt.png')}
+            style={styles.camerabutton}
+            />
 
-          <Text style= {styles.errorTextStyle}>
-            { this.state.error }
-          </Text>
+            <Text style= {styles.errorTextStyle}>
+              { this.state.error }
+            </Text>
 
-          { this.renderButton() }
-
-        </ScrollView>
+            { this.renderButton() }
+          </View>
+        </KeyboardAvoidingView>
       </View>
     );
   }
@@ -156,14 +159,11 @@ class UpdateProfile extends Component {
 
 const styles = {
   container: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     marginTop: 30,
-  },
-  scrollview: {
-    marginTop: -40
   },
   camerabutton:{
     borderRadius: 5,
@@ -172,7 +172,7 @@ const styles = {
   },
   text: {
     fontSize: 18,
-    flex: 1,
+    // flex: 1,
     textAlign: 'center',
     marginLeft: 10,
     marginRight: 10,

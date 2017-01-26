@@ -15,12 +15,13 @@ import Spinner from './common/Spinner';
 import DirectiveListOrganizer from './DirectiveListOrganizer';
 import huntDetails from './HuntDetails';
 import axios from 'axios';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class addDirectives extends Component {
   state = { directive: '', huntId:'', error: '', loading: false, hunt: {}, directives : []}
 
   componentWillMount (){
-
+    //find the directives by the the hunt id
     const url = 'https://treasure-chest-api.herokuapp.com/directives/find/' + this.props.hunt.id
 
     axios.get(url).then( response => {
@@ -33,6 +34,7 @@ class addDirectives extends Component {
   }
 
   addDirectivePressed(directive){
+    dismissKeyboard()
 
     axios.post('https://treasure-chest-api.herokuapp.com/directives',{
       name: this.state.directive,
@@ -160,12 +162,12 @@ const styles = StyleSheet.create({
     marginTop: 40,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    paddingBottom: 60
+    paddingBottom: 20
   },
   scrollview: {
     marginTop: 10,
     marginBottom: 10,
-    height: 200,
+    height: 250,
   },
   directivebox: {
     flexDirection: 'row',
@@ -208,7 +210,7 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: "Chalkboard SE",
     textAlign: 'center',
-    marginTop: -20,
+    // marginTop: -20,
   },
   directive: {
     fontSize: 16,

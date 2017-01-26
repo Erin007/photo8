@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    paddingBottom: 60
+    paddingBottom: 10
   },
   scrollview: {
     marginTop: 10,
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: "Chalkboard SE",
     textAlign: 'center',
-    marginTop: -20,
+    // marginTop: -20,
   },
   player: {
     fontSize: 16,
