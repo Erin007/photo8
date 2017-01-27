@@ -13,6 +13,7 @@ import {
 import Button from './common/Button';
 import huntDetails from './HuntDetails';
 import axios from 'axios';
+import styles from './styles';
 
 class SubmissionsOrganizer extends Component{
   state = { submissions: [], error: '', loading: false, submission: '', team: '', submissionsAwaitingApproval: [], approvedSubmissions: [], deniedSubmissions: []}
@@ -192,22 +193,22 @@ deleteSubmissionPressed(submission){
         <View style={styles.submissionbox} key={submission.id}>
 
           <View style={styles.deletebox}>
-            <Text style={styles.caption}>❏ {submission.directive_name} </Text>
-
             <TouchableOpacity style={styles.delete} onPress={() => this.deleteSubmissionPressed(submission)}>
               <Text>✘</Text>
             </TouchableOpacity>
+
+            <Text style={styles.smallesttext}>❏ {submission.directive_name} </Text>
           </View>
 
           <Image
            source={{ uri: submission.photo}}
-           style={styles.status1}/>
+           style={styles.status1image}/>
 
-           <Text style={styles.caption}> {submission.caption} </Text>
+           <Text style={styles.smallcenteredtext}> {submission.caption} </Text>
 
           <View style={styles.buttonbox}>
             <TouchableOpacity onPress={() => this.denySubmission(submission)}>
-             <Text style={styles.x}>✘</Text>
+             <Text style={styles.deny}>✘</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => this.approveSubmission(submission)}>
@@ -228,18 +229,18 @@ deleteSubmissionPressed(submission){
         <View style={styles.submissionbox} key={submission.id}>
 
           <View style={styles.deletebox}>
-            <Text style={styles.caption}>❏ {submission.directive_name} </Text>
-
             <TouchableOpacity style={styles.delete} onPress={() => this.deleteSubmissionPressed(submission)}>
               <Text>✘</Text>
             </TouchableOpacity>
+
+            <Text style={styles.smallesttext}>❏ {submission.directive_name} </Text>
           </View>
 
           <Image
            source={{ uri: submission.photo}}
-           style={styles.status2}/>
+           style={styles.status2image}/>
 
-           <Text style={styles.caption}> {submission.caption} </Text>
+           <Text style={styles.smallcenteredtext}> {submission.caption} </Text>
 
         </View>
       )
@@ -247,7 +248,7 @@ deleteSubmissionPressed(submission){
   }
 
   renderDeniedSubmissions(submissions){
-  
+
     if (typeof this.state.deniedSubmissions !== 'undefined'){
 
       return submissions.map(submission =>
@@ -255,18 +256,19 @@ deleteSubmissionPressed(submission){
           <View style={styles.submissionbox} key={submission.id}>
 
           <View style={styles.deletebox}>
-            <Text style={styles.caption}>❏ {submission.directive_name} </Text>
-
+          
             <TouchableOpacity style={styles.delete} onPress={() => this.deleteSubmissionPressed(submission)}>
               <Text>✘</Text>
             </TouchableOpacity>
+
+            <Text style={styles.smallcenteredtext}>❏ {submission.directive_name} </Text>
           </View>
 
           <Image
            source={{ uri: submission.photo}}
-           style={styles.status3}/>
+           style={styles.status3image}/>
 
-           <Text style={styles.caption}> {submission.caption} </Text>
+           <Text style={styles.smallcenteredtext}> {submission.caption} </Text>
 
            <TouchableOpacity onPress={() => this.approveSubmission(submission)}>
             <Text style={styles.check2}>✔︎</Text>
@@ -283,12 +285,12 @@ deleteSubmissionPressed(submission){
 
         <TouchableOpacity onPress={() =>
           this.seeHuntPressed()}>
-          <Text style={styles.name}>
+          <Text style={styles.huntname}>
             {this.props.hunt.name}
           </Text>
         </TouchableOpacity>
 
-        <Text style={styles.smalltext}> Submissions </Text>
+        <Text style={styles.submissionssmalltext}> Submissions </Text>
 
         <ScrollView style={styles.scrollview}>
           { this.renderAwaitingSubmissions() }
@@ -300,161 +302,4 @@ deleteSubmissionPressed(submission){
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 35,
-    backgroundColor: '#cce5e5',
-  },
-  name: {
-    fontSize: 32,
-    textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontFamily: 'Pacifico'
-  },
-  smalltext: {
-    fontSize: 25,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: -20,
-    fontFamily: 'Chalkboard SE'
-  },
-  smallertext: {
-    fontSize: 18,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color: '#DCDCDC',
-  },
-  deletebox: {
-    flexDirection: 'row',
-    marginBottom: 5,
-    width: 300
-  },
-  submissionbox:{
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 5,
-    margin: 5,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-  },
-  scrollview:{
-    height: 450,
-  },
-  caption: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    paddingTop: 5,
-    fontFamily: "Chalkboard SE",
-    width: 240
-  },
-  delete:{
-    width: 30,
-    height: 30,
-    backgroundColor: "#21b6cb",
-    padding: 5,
-    alignItems: 'center',
-    borderRadius: 5,
-    borderWidth: 1,
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    borderColor:'#167c89',
-    marginTop: 5,
-    alignSelf: 'flex-end'
-  },
-  status1:{
-    borderColor: '#DCDCDC',
-    borderWidth: 5,
-    margin: 2,
-    height: 275,
-    width: 275,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-  status2:{
-    borderColor: '#24AE62',
-    borderWidth: 5,
-    margin: 2,
-    height: 275,
-    width: 275,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-  status3:{
-    borderColor: '#991c1c',
-    borderWidth: 5,
-    margin: 2,
-    height: 275,
-    width: 275,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-  x:{
-    fontSize: 32,
-    width: 40,
-    height: 40,
-    backgroundColor: '#b22121',
-    borderWidth: 2,
-    paddingLeft: 6,
-    alignItems: 'center',
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginTop: 5,
-    marginBottom: 12,
-    marginLeft: 65,
-    marginRight: 65,
-  },
-  check:{
-    fontSize: 32,
-    width: 40,
-    height: 40,
-    backgroundColor: '#24AE62',
-    borderWidth: 2,
-    paddingLeft: 10,
-    alignItems: 'center',
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginTop: 5,
-  },
-  check2:{
-    fontSize: 32,
-    width: 40,
-    height: 40,
-    backgroundColor: '#24AE62',
-    borderWidth: 2,
-    paddingLeft: 10,
-    alignItems: 'center',
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginTop: 5,
-    marginLeft: 125,
-  },
-  buttonbox:{
-    flexDirection: 'row',
-  }
-})
 export default SubmissionsOrganizer;

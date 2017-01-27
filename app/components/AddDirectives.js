@@ -16,6 +16,7 @@ import DirectiveListOrganizer from './DirectiveListOrganizer';
 import huntDetails from './HuntDetails';
 import axios from 'axios';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
+import styles from './styles';
 
 class addDirectives extends Component {
   state = { directive: '', huntId:'', error: '', loading: false, hunt: {}, directives : []}
@@ -98,7 +99,7 @@ class addDirectives extends Component {
 
       return this.state.directives.map(directive =>
 
-          <Text style={styles.directive} key={directive.id}>
+          <Text style={styles.smallcenteredtext} key={directive.id}>
               {directive.name}
           </Text>
       );
@@ -111,12 +112,12 @@ class addDirectives extends Component {
 
         <TouchableOpacity onPress={() =>
         this.seeHuntPressed()}>
-          <Text style={styles.name}>
+          <Text style={styles.huntname}>
             {this.props.hunt.name}
           </Text>
         </TouchableOpacity>
 
-        <Text style={styles.text}>
+        <Text style={styles.smallcenteredtext}>
           What should the hunters look for?
         </Text>
 
@@ -140,7 +141,7 @@ class addDirectives extends Component {
           {this.renderDirectives()}
         </ScrollView>
 
-        <Button style={styles.button} onPress={() =>
+        <Button style={styles.bottombutton} onPress={() =>
           this.seeDirectivesPressed()}> See Directives
         </Button>
 
@@ -148,77 +149,5 @@ class addDirectives extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    paddingBottom: 20
-  },
-  scrollview: {
-    marginTop: 10,
-    marginBottom: 10,
-    height: 250,
-  },
-  directivebox: {
-    flexDirection: 'row',
-    marginBottom: 5,
-    width: 300
-  },
-  plus:{
-    width: 40,
-    height: 40,
-    backgroundColor: '#006666',
-    paddingTop: 12,
-    borderRadius: 5,
-    borderWidth: 1,
-    shadowColor: '#006666',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    borderColor:'#006666',
-    marginTop: 12,
-    alignItems: 'center',
-  },
-  plussymbol: {
-    color: 'white'
-  },
-  name: {
-    fontSize: 38,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    marginBottom: 20,
-    padding: 5,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-  text: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  errorTextStyle: {
-    fontSize: 16,
-    alignSelf: 'center',
-    color: 'red',
-    fontFamily: "Chalkboard SE",
-    textAlign: 'center',
-  },
-  directive: {
-    fontSize: 16,
-    textAlign: 'center',
-    paddingTop: 5,
-    fontFamily: 'Chalkboard SE',
-    color: '#353839',
-  }
-});
 
 export default addDirectives;

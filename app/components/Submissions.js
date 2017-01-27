@@ -160,7 +160,7 @@ class Submissions extends Component{
           </Text>
         </TouchableOpacity>
 
-        <Text style={styles.smalltext}> Submissions </Text>
+        <Text style={styles.submissionssmalltext}> Submissions </Text>
 
         <ScrollView style={styles.scrollview}>
           { this.renderAwaitingSubmissions() }

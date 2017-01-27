@@ -12,6 +12,7 @@ import Button from './common/Button';
 import RosterOrganizer from './PlayersOnTeamOrganizer';
 import addTeams from './AddTeams';
 import huntDetails from './HuntDetails';
+import styles from './styles';
 
 class TeamListOrganizer extends Component {
 
@@ -104,11 +105,11 @@ class TeamListOrganizer extends Component {
 
       return this.state.teams.map(team =>
 
-        <View key={team.id} style={styles.teambox}>
+        <View key={team.id} style={styles.directivebox}>
           <TouchableOpacity onPress={() => this.seeRosterPressed(team)} key={ team.id } team={team}>
 
-            <Text style={styles.team}>
-                 {team.name}     {team.points} pts
+            <Text style={styles.listitemsmallO}>
+                 {team.name}               {team.points} pts
             </Text>
           </TouchableOpacity>
 
@@ -130,105 +131,21 @@ class TeamListOrganizer extends Component {
 
         <TouchableOpacity onPress={() =>
           this.seeHuntPressed()}>
-          <Text style={styles.text}> { this.props.hunt.name } </Text>
+          <Text style={styles.huntname}> { this.props.hunt.name } </Text>
         </TouchableOpacity>
 
         <Text style={styles.smalltext}> Teams </Text>
 
-        <ScrollView style={styles.scrollview}>
+        <View style={styles.smush}>
+        <ScrollView style={styles.scrollviewplayer}>
           { this.renderTeams() }
         </ScrollView>
+        </View>
 
-        <Button onPress={() => this.addTeamsPressed()}> Add Teams </Button>
+        <Button style={styles.addbutton} onPress={() => this.addTeamsPressed()}> Add Teams </Button>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 40,
-    paddingBottom: 50
-  },
-  text: {
-    fontSize: 36,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    padding: 5,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-  smalltext: {
-    fontSize: 25,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  smallertext: {
-    fontSize: 18,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  team:{
-    fontSize: 20,
-    fontFamily: 'Chalkboard SE',
-    textAlign: 'left',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#006666',
-    backgroundColor: 'white',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 15,
-    marginRight: 10,
-    marginTop: 10,
-    padding: 5,
-    paddingLeft: 10,
-    width: 225,
-    color:  '#353839',
-  },
-  teambox: {
-    flexDirection: 'row',
-    marginBottom: 5,
-    width: 300
-  },
-  x:{
-    width: 40,
-    height: 40,
-    backgroundColor: "#006666",
-    padding: 10,
-    alignItems: 'center',
-    borderRadius: 5,
-    borderWidth: 1,
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    borderColor: "#006666",
-    marginTop: 12
-  },
-  scrollview: {
-    marginTop: -55,
-    height: 325,
-    marginBottom: 15
-  }
-});
 
 export default TeamListOrganizer;

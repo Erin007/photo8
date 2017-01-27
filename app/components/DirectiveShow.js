@@ -75,8 +75,8 @@ class DirectiveShow extends Component {
 
   updateStatus(){
 
-  // check if a photo and caption have been submitted
-    if (this.state.submission.photo !== '' && this.state.submission.status !== 2){
+  // check if a photo has been submitted
+    if (this.state.submission.photo !== '' && this.state.submission.status !== 2 && this.state.submission.status !== 3){
     //update the submission status to 1 in the backend
       const url = 'https://treasure-chest-api.herokuapp.com/submissions/' + this.state.submission.id
       axios.patch(url, {
@@ -211,17 +211,16 @@ class DirectiveShow extends Component {
           <Text style={styles.huntname}>{this.props.hunt.name} </Text>
         </TouchableOpacity>
 
-        <Text style={styles.text}> {this.checkCompletion()}{this.props.directive.name}
-        </Text>
+        <View style={styles.directiveshow}>
+          <Text style={styles.smallesttext}>{this.checkCompletion()}{this.props.directive.name}
+          </Text>
 
-        <Text style={styles.text}>{this.props.directive.description}</Text>
-
-        { this.renderStatus() }
-        { this.renderPhoto() }
-        { this.renderCameraIcon() }
-        { this.renderCaption() }
-        { this.renderCaptionButton() }
-
+          { this.renderStatus() }
+          { this.renderPhoto() }
+          { this.renderCameraIcon() }
+          { this.renderCaption() }
+          { this.renderCaptionButton() }
+        </View>
       </View>
     )
   }
@@ -246,7 +245,6 @@ class DirectiveShow extends Component {
 
 //navigate to add a caption
   updateCaptionPressed(){
-    console.log("update caption was pressed")
     this._toAddCaption()
   }
 
@@ -277,28 +275,5 @@ class DirectiveShow extends Component {
     });
   }
 };
-
-// const styles = StyleSheet.create({
-//
-//   caption: {
-//     paddingLeft: 15,
-//     paddingRight: 15,
-//   },
-//   captiontext:{
-//     fontSize: 16,
-//     textAlign: 'center',
-//     fontFamily: "Chalkboard SE"
-//   },
-//   center:{
-//     alignSelf: 'center',
-//     margin: 3
-//   },
-//   text: {
-//     fontSize: 14,
-//     textAlign: 'center',
-//     fontFamily: "Chalkboard SE",
-//     color: '#DCDCDC',
-//   },
-// });
 
 export default DirectiveShow;

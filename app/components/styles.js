@@ -149,6 +149,28 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     color:  '#353839',
   },
+  listitemsmallO:{
+    fontSize: 16,
+    fontFamily: 'Chalkboard SE',
+    textAlign: 'left',
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#006666',
+    backgroundColor: 'white',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    padding: 5,
+    paddingLeft: 10,
+    width: 245,
+    color:  '#353839',
+  },
 //login form
   loginform: {
     marginTop: 50
@@ -239,7 +261,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     paddingBottom: 5,
-    marginTop: -15,
+    // marginTop: -5,
     fontFamily: "Chalkboard SE",
     color: '#353839',
   },
@@ -279,16 +301,132 @@ const styles = StyleSheet.create({
   },
 //submissions
   submissionbox:{
-    borderWidth: 2,
-    borderRadius: 5,
     padding: 5,
     margin: 5,
-    borderColor: '#008080',
-    shadowColor: '#008080',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 1,
+  },
+  submissionssmalltext: {
+    fontSize: 25,
+    textAlign: 'left',
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: -13,
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
+  },
+//organizer
+  x:{
+    width: 30,
+    height: 30,
+    backgroundColor: "#006666",
+    padding: 5,
+    alignItems: 'center',
+    borderRadius: 5,
+    borderWidth: 1,
+    shadowColor: '#167c89',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
+    borderColor:'#006666',
+    marginTop: 12,
+  },
+  directivebox: {
+    flexDirection: 'row',
+    marginBottom: 5,
+    width: 300
+  },
+  plus:{
+    width: 40,
+    height: 40,
+    backgroundColor: '#006666',
+    paddingTop: 12,
+    borderRadius: 5,
+    borderWidth: 1,
+    shadowColor: '#006666',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    borderColor:'#006666',
+    marginTop: 12,
+    alignItems: 'center',
+  },
+  plussymbol: {
+    color: 'white'
+  },
+  deletebox: {
+    flexDirection: 'row',
+    marginBottom: 5,
+    width: 280
+  },
+  delete:{
+    width: 30,
+    height: 30,
+    padding: 5,
+    alignItems: 'center',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginTop: 5,
+  },
+  check:{
+    fontSize: 25,
+    width: 30,
+    height: 30,
+    backgroundColor: '#24AE62',
+    paddingLeft: 7,
+    alignSelf: 'center',
+    elevation: 1,
+    color: '#353839',
+    borderColor: '#353839',
+    borderWidth: 2
+  },
+  check2:{
+    fontSize: 25,
+    width: 30,
+    height: 30,
+    backgroundColor: '#24AE62',
+    paddingLeft: 7,
+    alignSelf: 'center',
+    elevation: 1,
+    color: '#353839',
+    borderColor: '#353839',
+    borderWidth: 2
+  },
+  buttonbox:{
+    flexDirection: 'row',
+  },
+  center: {
+    alignSelf: 'center'
+  },
+  deny:{
+    fontSize: 25,
+    width: 30,
+    height: 30,
+    backgroundColor: '#b22121',
+    paddingLeft: 5,
+    alignSelf: 'center',
+    elevation: 1,
+    color: '#353839',
+    marginLeft: 65,
+    marginRight: 65,
+    borderColor: '#353839',
+    borderWidth: 2
+  },
+  directiveshow: {
+    marginTop: -10
+  },
+  addbutton: {
+    marginBottom: 10
+  },
+  smush:{
+    height: 320
   },
 });
 

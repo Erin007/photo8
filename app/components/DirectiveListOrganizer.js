@@ -11,6 +11,7 @@ import axios from 'axios';
 import Button from './common/Button';
 import addDirectives from './AddDirectives';
 import huntDetails from './HuntDetails';
+import styles from './styles';
 
 class DirectiveListOrganizer extends Component {
 
@@ -84,7 +85,7 @@ class DirectiveListOrganizer extends Component {
       return this.state.directives.map(directive =>
         <View style={styles.directivebox}>
 
-          <Text style={styles.directive} key={ directive.id } directive={directive}>
+          <Text style={styles.listitemsmallO} key={ directive.id } directive={directive}>
              {directive.name}
           </Text>
 
@@ -104,97 +105,22 @@ class DirectiveListOrganizer extends Component {
 
         <TouchableOpacity onPress={() =>
         this.seeHuntPressed()}>
-          <Text style={styles.text}> { this.props.hunt.name } </Text>
+          <Text style={styles.huntname}> { this.props.hunt.name } </Text>
         </TouchableOpacity>
 
-        <Text style={styles.smalltext}> Directives </Text>
+        <Text style={styles.submissionssmalltext}> Directives </Text>
 
-        <ScrollView style={styles.scrollview}>
+        <View style={styles.smush}>
+        <ScrollView style={styles.scrollviewdirective}>
           { this.renderDirectives() }
         </ScrollView>
+      </View>
 
-        <Button style={styles.button} onPress={this._toAddMoreDirectives.bind(this)}> Add Directives </Button>
+        <Button style={styles.addbutton} onPress={this._toAddMoreDirectives.bind(this)}> Add Directives </Button>
 
        </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 35,
-    paddingBottom: 20
-  },
-  text: {
-    fontSize: 36,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    padding: 5,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-  smalltext: {
-    fontSize: 25,
-    textAlign: 'left',
-    padding: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  directive:{
-    fontSize: 16,
-    fontFamily: 'Chalkboard SE',
-    textAlign: 'left',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#006666',
-    backgroundColor: 'white',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    padding: 5,
-    paddingLeft: 10,
-    width: 245,
-    color:  '#353839',
-  },
-  x:{
-    width: 30,
-    height: 30,
-    backgroundColor: "#006666",
-    padding: 5,
-    alignItems: 'center',
-    borderRadius: 5,
-    borderWidth: 1,
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    borderColor:'#006666',
-    marginTop: 12,
-  },
-  directivebox: {
-    flexDirection: 'row',
-    marginBottom: 5,
-    width: 300
-  },
-  scrollview: {
-    marginTop: 10,
-    marginBottom: 15,
-    height: 300
-  }
-});
 
 export default DirectiveListOrganizer;
