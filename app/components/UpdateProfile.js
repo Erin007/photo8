@@ -17,6 +17,7 @@ import Spinner from './common/Spinner';
 import axios from 'axios';
 import welcomeCopy from './WelcomeCopy';
 import Profile from './Profile';
+import styles from './styles';
 
 class UpdateProfile extends Component {
 
@@ -28,7 +29,7 @@ class UpdateProfile extends Component {
       return <Spinner size="small"/>
     }
     return(
-      <Button onPress={this.onButtonPress.bind(this)}> Update </Button>
+        <Button onPress={this.onButtonPress.bind(this)}> Update </Button>
     );
   }
 
@@ -108,7 +109,7 @@ class UpdateProfile extends Component {
         </TouchableOpacity>
 
         <KeyboardAvoidingView behavior = 'padding'>
-            <View>
+            <View style={styles.updateprofile}>
             <Text style={styles.text}>username</Text>
 
             <Input
@@ -151,47 +152,5 @@ class UpdateProfile extends Component {
     );
   }
 }
-
-const styles = {
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 30,
-    paddingBottom: 10
-  },
-  camerabutton:{
-    borderRadius: 5,
-    alignSelf: 'center',
-    marginTop: 10
-  },
-  text: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    paddingBottom: 5,
-    fontFamily: "Chalkboard SE",
-    color:  '#353839',
-  },
-  errorTextStyle: {
-    fontSize: 14,
-    alignSelf: 'center',
-    color: 'red',
-    fontFamily: "Chalkboard SE"
-  },
-  welcome: {
-    fontSize: 42,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    marginTop: 10,
-    padding: 5,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-};
 
 export default UpdateProfile;

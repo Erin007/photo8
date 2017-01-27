@@ -6,6 +6,7 @@ import Spinner from './common/Spinner';
 import firebase from 'firebase';
 import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import axios from 'axios';
+import styles from './styles'
 
 class LoginForm extends Component {
 
@@ -53,7 +54,7 @@ class LoginForm extends Component {
   render(){
     return (
       <KeyboardAvoidingView behavior = 'padding'>
-        <ScrollView style={styles.scrollview}>
+        <ScrollView style={styles.loginform}>
 
           <Input
             label = ""
@@ -78,17 +79,6 @@ class LoginForm extends Component {
       </KeyboardAvoidingView>
     )
   }
-};
-
-const styles = {
-  errorTextStyle: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
-  },
-  scrollview:{
-    marginTop: 25
-  },
 };
 
 export default LoginForm;

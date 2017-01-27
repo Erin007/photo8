@@ -15,6 +15,7 @@ import DirectiveListOrganizer from './DirectiveListOrganizer';
 import TeamListOrganizer from './TeamListOrganizer';
 import SubmissionsOrganizer from './SubmissionsOrganizer';
 import welcomeCopy from './WelcomeCopy';
+import styles from './styles';
 
 class huntDetails extends Component{
 
@@ -144,55 +145,19 @@ _toHome = () => {
   render() {
 
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.huntdetails}>
 
         <Text style={styles.huntname}> { this.props.hunt.name } </Text>
 
-        <Text style={styles.text}>Passcode: { this.props.hunt.passcode }</Text>
+        <Text style={styles.smallesttext}>Passcode: { this.props.hunt.passcode }</Text>
 
-        <Text style={styles.smallertext}>{this.props.hunt.description} </Text>
+        <Text style={styles.tinytext}>{this.props.hunt.description} </Text>
 
         {this.renderButtons()}
 
-      </ScrollView>
+      </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#cce5e5',
-  },
-  huntname:{
-    fontSize: 36,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    padding: 5,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-  text: {
-    fontSize: 18,
-    textAlign: 'left',
-    padding: 5,
-    marginLeft: 25,
-    marginRight: 15,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  smallertext: {
-    fontSize: 14,
-    textAlign: 'left',
-    padding: 5,
-    marginLeft: 25,
-    marginRight: 15,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-});
 
 export default huntDetails;

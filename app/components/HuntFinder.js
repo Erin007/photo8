@@ -15,6 +15,7 @@ import Input from './common/Input';
 import Spinner from './common/Spinner';
 import axios from 'axios';
 import welcomeCopy from './WelcomeCopy';
+import styles from'./styles';
 
 class findHunt extends Component{
 
@@ -109,7 +110,7 @@ class findHunt extends Component{
         </TouchableOpacity>
 
         <Text style={styles.text}>
-           Please enter the hunt name and passcode given to you by the organizer.
+           Please enter the hunt name and passcode from the organizer.
         </Text>
 
       <KeyboardAvoidingView behavior = 'padding'>
@@ -135,38 +136,5 @@ class findHunt extends Component{
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 40
-  },
-  welcome: {
-    fontSize: 42,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    padding: 5,
-    color:  '#353839',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-  text: {
-    fontSize: 16,
-    textAlign: 'center',
-    margin: 10,
-    paddingTop: 10,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  errorTextStyle: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
-  }
-});
 
 export default findHunt;

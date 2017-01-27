@@ -18,6 +18,7 @@ import Input from './common/Input';
 import UpdateProfile from './UpdateProfile';
 import welcomeCopy from './WelcomeCopy';
 import axios from 'axios';
+import styles from './styles';
 
 class Profile extends Component {
 
@@ -72,7 +73,7 @@ class Profile extends Component {
 
         <Image
         source={require('../assets/imgres.jpg')}
-        style={styles.image}
+        style={styles.profileimage}
         />
 
         <View style={styles.profilebox}>
@@ -84,63 +85,10 @@ class Profile extends Component {
         </View>
 
         {this.renderUpdateButton()}
+
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 20
-  },
-  profilebox: {
-    marginBottom: 30
-  },
-  welcome: {
-    fontSize: 42,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    marginTop: 10,
-    padding: 5,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-  smalltext: {
-    fontSize: 25,
-    alignSelf: 'flex-start',
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  smallertext: {
-    fontSize: 18,
-    alignSelf: 'flex-start',
-    paddingTop: 5,
-    paddingBottom: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  image: {
-    margin: 2,
-    height: 150,
-    width: 150,
-    borderWidth: 5,
-    borderRadius: 5,
-    borderColor: '#353839',
-    alignSelf: 'center',
-    marginLeft: 15
-  },
-})
 
 export default Profile;

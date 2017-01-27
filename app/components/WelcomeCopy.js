@@ -16,6 +16,7 @@ import Input from './common/Input';
 import newHunt from './MakeHuntForm';
 import findHunt from './HuntFinder';
 import Profile from './Profile';
+import styles from './styles';
 import HuntListOrganizer from './HuntListOrganizer';
 import HuntListPlayer from './HuntListPlayer';
 import axios from 'axios';
@@ -196,52 +197,5 @@ class welcomeCopy extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 40
-  },
-  scrollview:{
-    marginTop: -10,
-    height: 200
-  },
-  content:{
-    marginTop: 25,
-  },
-  welcome: {
-    fontSize: 42,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    padding: 5,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-  smalltext: {
-    fontSize: 25,
-    textAlign: 'left',
-    padding: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: -20,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  smallertext: {
-    fontSize: 14,
-    textAlign: 'left',
-    padding: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: -50,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-});
 
 export default welcomeCopy;

@@ -8,7 +8,7 @@ import {
   SideMenu,
   ScrollView
 } from 'react-native';
-
+import styles from "./styles"
 import Button from './common/Button';
 import LoginForm from './LoginForm';
 import Spinner from './common/Spinner';
@@ -203,51 +203,6 @@ class welcome extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 40
-  },
-  scrollview:{
-    height: 200
-  },
-  content:{
-    marginTop: 25,
-  },
-  welcome: {
-    fontSize: 42,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    padding: 5,
-    marginBottom: 30,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-  smalltext: {
-    fontSize: 25,
-    textAlign: 'left',
-    padding: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: -20,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  smallertext: {
-    fontSize: 14,
-    textAlign: 'left',
-    padding: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: -50,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-});
+
 
 export default welcome;
