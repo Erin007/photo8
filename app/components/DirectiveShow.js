@@ -14,6 +14,7 @@ import Example from '../Camera';
 import axios from 'axios';
 import addCaption from './AddCaption'
 import huntDetails from './HuntDetails';
+import styles from './styles';
 
 class DirectiveShow extends Component {
 
@@ -96,12 +97,12 @@ class DirectiveShow extends Component {
 
     if (this.state.submission.caption !== '' && typeof this.state.submission.caption !== 'undefined'){
       return(
-        <Text style={styles.captiontext}> {this.state.submission.caption} </Text>
+        <Text style={styles.smallcenteredtext}> {this.state.submission.caption} </Text>
       )
     }
 
     return(
-      <Text style={styles.text}> You have not yet submitted a caption.
+      <Text style={styles.tinytext}> You have not yet submitted a caption.
       </Text>
     )
   }
@@ -118,7 +119,6 @@ class DirectiveShow extends Component {
   }
 
   renderPhoto(){
-
       //if there is a photo, awaiting approval
       if (this.state.submission.status == 1){
         return (
@@ -205,13 +205,13 @@ class DirectiveShow extends Component {
 
   render(){
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
 
         <TouchableOpacity onPress={() =>this.seeHuntPressed()}>
           <Text style={styles.huntname}>{this.props.hunt.name} </Text>
         </TouchableOpacity>
 
-        <Text style={styles.directive}> {this.checkCompletion()}{this.props.directive.name}
+        <Text style={styles.text}> {this.checkCompletion()}{this.props.directive.name}
         </Text>
 
         <Text style={styles.text}>{this.props.directive.description}</Text>
@@ -222,7 +222,7 @@ class DirectiveShow extends Component {
         { this.renderCaption() }
         { this.renderCaptionButton() }
 
-      </ScrollView>
+      </View>
     )
   }
 
@@ -278,102 +278,27 @@ class DirectiveShow extends Component {
   }
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#cce5e5',
-  },
-  caption: {
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
-  huntname: {
-    fontSize: 30,
-    textAlign: 'center',
-    fontFamily: 'Pacifico'
-  },
-  captiontext:{
-    fontSize: 16,
-    textAlign: 'center',
-    fontFamily: "Chalkboard SE"
-  },
-  center:{
-    alignSelf: 'center',
-    margin: 3
-  },
-  text: {
-    fontSize: 14,
-    textAlign: 'center',
-    fontFamily: "Chalkboard SE",
-    color: '#DCDCDC',
-  },
-  status1image:{
-    borderColor: '#DCDCDC',
-    borderWidth: 5,
-    margin: 2,
-    height: 250,
-    width: 250,
-    borderRadius: 5,
-    alignSelf: 'center',
-  },
-  status2image:{
-    borderColor: '#24AE62',
-    borderWidth: 5,
-    margin: 2,
-    height: 250,
-    width: 250,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-  status3image:{
-    borderColor: '#991c1c',
-    borderWidth: 5,
-    margin: 2,
-    height: 250,
-    width: 250,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-  status1:{
-    fontSize: 16,
-    textAlign: 'center',
-    paddingBottom: 5,
-    marginTop: -5,
-    fontFamily: "Chalkboard SE",
-    color: '#DCDCDC',
-  },
-  status2:{
-    fontSize: 18,
-    textAlign: 'center',
-    paddingBottom: 5,
-    marginBottom: 5,
-    fontFamily: "Chalkboard SE",
-    color: '#24AE62',
-  },
-  status3:{
-    fontSize: 16,
-    textAlign: 'center',
-    paddingBottom: 5,
-    marginTop: -5,
-    fontFamily: "Chalkboard SE",
-    color: '#b22121',
-  },
-  directive: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    paddingTop: 5,
-    fontFamily: "Chalkboard SE"
-  },
-  placeholder: {
-    margin: 2,
-    height: 250,
-    width: 250,
-    borderWidth: 5,
-    borderRadius: 5,
-    borderColor: '#21b6cb',
-    alignSelf: 'center'
-  },
-});
+// const styles = StyleSheet.create({
+//
+//   caption: {
+//     paddingLeft: 15,
+//     paddingRight: 15,
+//   },
+//   captiontext:{
+//     fontSize: 16,
+//     textAlign: 'center',
+//     fontFamily: "Chalkboard SE"
+//   },
+//   center:{
+//     alignSelf: 'center',
+//     margin: 3
+//   },
+//   text: {
+//     fontSize: 14,
+//     textAlign: 'center',
+//     fontFamily: "Chalkboard SE",
+//     color: '#DCDCDC',
+//   },
+// });
 
 export default DirectiveShow;

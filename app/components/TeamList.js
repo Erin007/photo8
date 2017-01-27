@@ -13,6 +13,7 @@ import Roster from './PlayersOnTeam';
 import Button from './common/Button';
 import DirectiveList from './DirectiveList';
 import huntDetails from './HuntDetails';
+import styles from './styles';
 
 class TeamList extends Component {
   state = { teams: [], thisplayersteam: {} };
@@ -94,8 +95,8 @@ class TeamList extends Component {
 
         <TouchableOpacity onPress={() => this.seeRosterPressed(team)} key={ team.id } team={team}>
 
-          <Text style={styles.team}>
-               {team.name}                {team.points} pts
+          <Text style={styles.listitem}>
+               {team.name}             {team.points} pts
           </Text>
         </TouchableOpacity>
         );
@@ -107,7 +108,7 @@ class TeamList extends Component {
       <View style={styles.container}>
 
         <TouchableOpacity onPress={() => this.seeHuntPressed()}>
-          <Text style={styles.text}> { this.props.hunt.name } </Text>
+          <Text style={styles.huntname}> { this.props.hunt.name } </Text>
         </TouchableOpacity>
 
         <Text style={styles.smalltext}> Teams </Text>
@@ -122,62 +123,5 @@ class TeamList extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 35,
-    paddingBottom: 100
-  },
-  text: {
-    fontSize: 30,
-    textAlign: 'center',
-    paddingTop: 10,
-    fontFamily: 'Pacifico',
-    marginTop: 10,
-  },
-  smalltext: {
-    fontSize: 25,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE'
-  },
-  smallertext: {
-    fontSize: 18,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE'
-  },
-  team:{
-    fontSize: 16,
-    fontFamily: 'Chalkboard SE',
-    textAlign: 'left',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    padding: 5,
-    paddingLeft: 10,
-    width: 250
-  },
-  scrollview: {
-    marginTop: -30,
-    marginBottom: 25,
-    height: 300,
-  }
-});
 
 export default TeamList;

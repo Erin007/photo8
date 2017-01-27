@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   scrollview:{
     height: 200,
-    // borderBottomWidth: 3
+    // borderBottomWidth: 3,
   },
   content:{
     marginTop: 25,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Pacifico',
     margin: 5,
     padding: 5,
-    // marginBottom: 0,
+    marginBottom: 8,
     color: '#006666',
     textShadowColor: 'white',
     textShadowOffset:( {width: 1, height: 1} ),
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: -20,
+    // marginTop: -20,
     fontFamily: 'Chalkboard SE',
     color:  '#353839',
   },
@@ -83,10 +83,19 @@ const styles = StyleSheet.create({
   tinytext: {
     fontSize: 14,
     textAlign: 'left',
-    padding: 10,
+    padding: 5,
     marginLeft: 5,
     marginRight: 5,
     // marginTop: -50,
+    fontFamily: 'Chalkboard SE',
+    color:  '#353839',
+  },
+  smallcenteredtext: {
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5,
     fontFamily: 'Chalkboard SE',
     color:  '#353839',
   },
@@ -98,6 +107,28 @@ const styles = StyleSheet.create({
   },
   listitem:{
     fontSize: 18,
+    fontFamily: 'Chalkboard SE',
+    textAlign: 'left',
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#008080',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    padding: 5,
+    paddingLeft: 15,
+    width: 275,
+    backgroundColor: 'white',
+    color:  '#353839',
+  },
+  listitemsmall:{
+    fontSize: 16,
     fontFamily: 'Chalkboard SE',
     textAlign: 'left',
     borderWidth: 1,
@@ -151,11 +182,82 @@ const styles = StyleSheet.create({
   bottombutton:{
     paddingBottom: 20,
   },
-  //huntDetails
+//huntDetails
   huntdetails: {
     flex: 1,
     backgroundColor: '#cce5e5',
     marginTop: 35,
+  },
+//playersonTeam
+  teambutton: {
+    marginBottom: 30
+  },
+  scrollviewplayer:{
+    height: 150,
+    marginTop: -15,
+    marginBottom: 50,
+    // borderBottomWidth: 3,
+  },
+//directive show
+  status1image:{
+    borderColor: '#353839',
+    borderWidth: 5,
+    margin: 2,
+    height: 250,
+    width: 250,
+    borderRadius: 5,
+    alignSelf: 'center',
+  },
+  status2image:{
+    borderColor: '#24AE62',
+    borderWidth: 5,
+    margin: 2,
+    height: 250,
+    width: 250,
+    borderRadius: 5,
+    alignSelf: 'center'
+  },
+  status3image:{
+    borderColor: '#991c1c',
+    borderWidth: 5,
+    margin: 2,
+    height: 250,
+    width: 250,
+    borderRadius: 5,
+    alignSelf: 'center'
+  },
+  placeholder: {
+    margin: 2,
+    height: 250,
+    width: 250,
+    borderWidth: 5,
+    borderRadius: 5,
+    borderColor: '#008080',
+    alignSelf: 'center'
+  },
+  status1:{
+    fontSize: 16,
+    textAlign: 'center',
+    paddingBottom: 5,
+    marginTop: -15,
+    fontFamily: "Chalkboard SE",
+    color: '#353839',
+  },
+  status2:{
+    fontSize: 18,
+    textAlign: 'center',
+    paddingBottom: 5,
+    marginBottom: 5,
+    fontFamily: "Chalkboard SE",
+    color: '#24AE62',
+  },
+  status3:{
+    fontSize: 16,
+    textAlign: 'center',
+    paddingBottom: 5,
+    marginTop: -5,
+    fontFamily: "Chalkboard SE",
+    color: '#b22121',
   },
 });
 

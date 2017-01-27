@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import DirectiveShow from './DirectiveShow'
 import huntDetails from './HuntDetails';
+import styles from './styles';
 
 class DirectiveList extends Component {
 
@@ -64,7 +65,7 @@ class DirectiveList extends Component {
 
         <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
 
-          <Text style={styles.directive}>
+          <Text style={styles.listitemsmall}>
              ❏  {directive.name}
           </Text>
         </TouchableOpacity>
@@ -79,7 +80,7 @@ class DirectiveList extends Component {
 
         <TouchableOpacity onPress={() => this.directiveShowPressed(directive)} key={ directive.id } directive={directive}>
 
-          <Text style={styles.directive}>
+          <Text style={styles.listitemsmall}>
              ✔︎ {directive.name}
           </Text>
         </TouchableOpacity>
@@ -118,10 +119,10 @@ class DirectiveList extends Component {
       <View style={styles.container}>
 
         <TouchableOpacity onPress={this._toHuntDetails.bind(this)}>
-          <Text style={styles.text}> { this.props.hunt.name } </Text>
+          <Text style={styles.huntname}> { this.props.hunt.name } </Text>
         </TouchableOpacity>
 
-        <Text style={styles.listname}> Directives </Text>
+        <Text style={styles.smalltext}> Directives </Text>
 
         <ScrollView style={styles.scrollview}>
           { this.renderIncompleteDirectives() }
@@ -131,60 +132,5 @@ class DirectiveList extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 30,
-  },
-  scrollview:{
-    height: 400,
-  },
-  listname: {
-    fontSize: 25,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  text: {
-    fontSize: 30,
-    textAlign: 'center',
-    paddingTop: 20,
-    fontFamily: 'Pacifico'
-  },
-  smalltext: {
-    fontSize: 14,
-    textAlign: 'left',
-    padding: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  directive:{
-    fontSize: 16,
-    fontFamily: 'Chalkboard SE',
-    textAlign: 'left',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    padding: 5,
-    paddingLeft: 10,
-    color:  '#353839',
-  }
-});
 
 export default DirectiveList;

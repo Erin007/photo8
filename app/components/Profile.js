@@ -24,7 +24,6 @@ class Profile extends Component {
 
 //navigate the user to the 'home' page
   toHome(){
-    console.log('The user wants to go home');
     this._toHome();
   }
 

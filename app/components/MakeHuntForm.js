@@ -5,7 +5,8 @@ import {
   View,
   Text,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableOpacity
 } from 'react-native';
 import axios from 'axios';
 import huntDetails from './HuntDetails';
@@ -13,7 +14,9 @@ import DirectiveList from './DirectiveList'
 import addDirectives from './AddDirectives';
 import Button from './common/Button';
 import Input from './common/Input';
+import styles from './styles';
 import Spinner from './common/Spinner';
+import welcomeCopy from './WelcomeCopy';
 
 class newHunt extends Component{
 
@@ -66,6 +69,20 @@ class newHunt extends Component{
     });
   }
 
+//navigate the user to the 'home' page
+  toHome(){
+    this._toHome();
+  }
+
+  _toHome = () => {
+    this.props.navigator.push({
+      title: 'Home',
+      component: welcomeCopy,
+      passProps: { hunt : this.props.hunt,
+                   user : this.props.user}
+    });
+  }
+
   renderSaveButton(){
     if (this.state.loading){
       return <Spinner size="small"/>
@@ -79,12 +96,14 @@ class newHunt extends Component{
 
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-           Snapenger Hunt
-        </Text>
+        <TouchableOpacity onPress={this.toHome.bind(this)}>
+          <Text style={styles.welcome}>
+             Snapenger Hunt
+          </Text>
+        </TouchableOpacity>
 
         <KeyboardAvoidingView behavior = 'padding'>
-          <ScrollView style={styles.scrollview}>
+          <View>
             <Text style={styles.text}>
                Make a New Hunt
             </Text>
@@ -112,54 +131,11 @@ class newHunt extends Component{
             </Text>
 
             {this.renderSaveButton()}
-          </ScrollView>
+          </View>
         </KeyboardAvoidingView>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 30
-  },
-  scrollview:{
-    // marginTop: -50
-  },
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    paddingTop: 10,
-    paddingBottom: 5,
-    fontFamily: 'Chalkboard SE',
-    color:  '#353839',
-  },
-  errorTextStyle: {
-    fontSize: 16,
-    alignSelf: 'center',
-    color: 'red',
-    fontFamily: "Chalkboard SE",
-    marginLeft: 5,
-    textAlign: 'center',
-    paddingLeft: 35,
-    paddingRight: 35,
-    marginBottom: 10
-  },
-  welcome: {
-    fontSize: 42,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    margin: 5,
-    marginBottom: 20,
-    padding: 5,
-    color: '#006666',
-    textShadowColor: 'white',
-    textShadowOffset:( {width: 1, height: 1} ),
-    textShadowRadius: 1
-  },
-});
 
 export default newHunt;
