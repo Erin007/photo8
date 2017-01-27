@@ -13,6 +13,7 @@ import Input from './common/Input';
 import axios from 'axios';
 import DirectiveShow from './DirectiveShow';
 import huntDetails from './HuntDetails';
+import styles from './styles';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class addCaption extends Component {
@@ -83,13 +84,13 @@ state = { caption: '', error: '', loading: false, submission: '' }
           <Text style={styles.huntname}> {this.props.hunt.name}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => this._toDirectiveShow()}>
-          <Text style={styles.directive}>
-            { this.props.directive.name }
-          </Text>
-        </TouchableOpacity>
-
         <View style={styles.captionbox}>
+          <TouchableOpacity onPress={() => this._toDirectiveShow()}>
+            <Text style={styles.text}>
+              { this.props.directive.name }
+            </Text>
+          </TouchableOpacity>
+
           <Input
             label = ""
             placeholder = "caption"
@@ -100,39 +101,8 @@ state = { caption: '', error: '', loading: false, submission: '' }
 
           <Button onPress={this.saveCaptionPressed.bind(this)}>Save Caption</Button>
       </View>
-
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#cce5e5',
-    flex: 1
-  },
-  captionbox: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginTop: 20
-  },
-  huntname: {
-    marginTop: 65,
-    fontSize: 30,
-    textAlign: 'center',
-    fontFamily: 'Pacifico',
-    color: '#FFFFFF',
-    textShadowColor: '#008080',
-    textShadowOffset:( {width: 1, height: 3} ),
-    textShadowRadius: 5
-  },
-  directive: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    paddingTop: 20,
-    fontFamily: "Chalkboard SE"
-  },
-});
 
 export default addCaption;

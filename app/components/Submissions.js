@@ -13,6 +13,7 @@ import {
 import Button from './common/Button';
 import huntDetails from './HuntDetails';
 import axios from 'axios';
+import styles from './styles';
 
 class Submissions extends Component{
   state = { submissions: [], error: '', loading: false, submission: '', team: '', submissionsAwaitingApproval: [], approvedSubmissions: [], deniedSubmissions: []}
@@ -93,13 +94,13 @@ class Submissions extends Component{
 
         <View style={styles.submissionbox} key={submission.id}>
 
-          <Text style={styles.caption}>❏ {submission.directive_name} </Text>
+          <Text style={styles.smallcenteredtext}>❏ {submission.directive_name} </Text>
 
           <Image
            source={{ uri: submission.photo}}
-           style={styles.status1}/>
+           style={styles.status1image}/>
 
-           <Text style={styles.caption}> {submission.caption} </Text>
+           <Text style={styles.smallcenteredtext}> {submission.caption} </Text>
 
         </View>
       )
@@ -114,13 +115,13 @@ class Submissions extends Component{
 
         <View style={styles.submissionbox} key={submission.id}>
 
-          <Text style={styles.caption}>✔︎ {submission.directive_name} </Text>
+          <Text style={styles.smallcenteredtext}>✔︎ {submission.directive_name} </Text>
 
           <Image
            source={{ uri: submission.photo}}
-           style={styles.status2}/>
+           style={styles.status2image}/>
 
-           <Text style={styles.caption}> {submission.caption} </Text>
+           <Text style={styles.smallcenteredtext}> {submission.caption} </Text>
 
         </View>
       )
@@ -135,13 +136,13 @@ class Submissions extends Component{
 
         <View style={styles.submissionbox} key={submission.id}>
 
-          <Text style={styles.caption}>❏ {submission.directive_name} </Text>
+          <Text style={styles.smallcenteredtext}>❏ {submission.directive_name} </Text>
 
           <Image
            source={{ uri: submission.photo}}
-           style={styles.status3}/>
+           style={styles.status3image}/>
 
-           <Text style={styles.caption}> {submission.caption} </Text>
+           <Text style={styles.smallcenteredtext}> {submission.caption} </Text>
 
         </View>
       )
@@ -154,7 +155,7 @@ class Submissions extends Component{
 
         <TouchableOpacity onPress={() =>
           this.seeHuntPressed()}>
-          <Text style={styles.name}>
+          <Text style={styles.huntname}>
             {this.props.hunt.name}
           </Text>
         </TouchableOpacity>
@@ -171,90 +172,5 @@ class Submissions extends Component{
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 30,
-    backgroundColor: '#cce5e5',
-    flex: 1
-  },
-  name: {
-    fontSize: 32,
-    textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontFamily: 'Pacifico'
-  },
-  smalltext: {
-    fontSize: 25,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: -20,
-    fontFamily: 'Chalkboard SE'
-  },
-  smallertext: {
-    fontSize: 18,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color: '#DCDCDC',
-  },
-  submissionbox:{
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 5,
-    margin: 5,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-  },
-  scrollview:{
-    height: 400,
-    marginTop: -40
-  },
-  caption: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    paddingTop: 5,
-    fontFamily: "Chalkboard SE"
-  },
-  status1:{
-    borderColor: '#DCDCDC',
-    borderWidth: 5,
-    margin: 2,
-    height: 300,
-    width: 300,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-  status2:{
-    borderColor: '#24AE62',
-    borderWidth: 5,
-    margin: 2,
-    height: 300,
-    width: 300,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-  status3:{
-    borderColor: '#991c1c',
-    borderWidth: 5,
-    margin: 2,
-    height: 300,
-    width: 300,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-})
 
 export default Submissions;

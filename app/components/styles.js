@@ -259,6 +259,37 @@ const styles = StyleSheet.create({
     fontFamily: "Chalkboard SE",
     color: '#b22121',
   },
+//add caption
+  captionbox: {
+    marginTop: 30
+  },
+//photo select
+  image: {
+    width: 275,
+    height: 275,
+    margin: 10,
+    borderRadius: 5,
+    alignSelf: 'center'
+  },
+  imageGrid: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
+  },
+//submissions
+  submissionbox:{
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 5,
+    margin: 5,
+    borderColor: '#008080',
+    shadowColor: '#008080',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+  },
 });
 
 module.exports = styles

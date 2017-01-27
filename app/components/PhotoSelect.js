@@ -19,6 +19,7 @@ import {
  import axios from 'axios';
  import DirectiveShow from './DirectiveShow';
  import huntDetails from './HuntDetails';
+ import styles from './styles';
 
 var RCTCameraRollManager = require('NativeModules').CameraRollManager;
 
@@ -136,7 +137,7 @@ state = { image:'', error: '', loading: false, submission: '' }
        </TouchableOpacity>
 
        <TouchableOpacity onPress={() => this._toDirectiveShow()}>
-          <Text style={styles.text}>{this.props.directive.name}</Text>
+          <Text style={styles.smallcenteredtext}>{this.props.directive.name}</Text>
        </TouchableOpacity>
 
        <Image style={styles.image} source={{ uri: this.state.image.uri }} />
@@ -149,44 +150,5 @@ state = { image:'', error: '', loading: false, submission: '' }
    );
  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#cce5e5',
-    marginTop: 45,
-  },
-  huntname: {
-    fontSize: 30,
-    textAlign: 'center',
-    fontFamily: 'Pacifico'
-  },
-  imageGrid: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center'
-  },
-  image: {
-    width: 275,
-    height: 275,
-    margin: 10,
-    borderRadius: 5,
-    alignSelf: 'center'
-  },
-  camerabutton:{
-    borderRadius: 5,
-    marginLeft: 150,
-    marginTop: 15
-  },
-  text: {
-    fontSize: 16,
-    textAlign: 'center',
-    paddingTop: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE'
-  },
-});
 
 export default PhotoSelect;
