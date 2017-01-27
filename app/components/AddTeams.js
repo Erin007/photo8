@@ -16,7 +16,7 @@ import huntDetails from './HuntDetails';
 import TeamListOrganizer from './TeamListOrganizer';
 import axios from 'axios';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
-
+import styles from './styles';
 
 class addTeams extends Component{
   state = { error: '', loading: false, hunt: {}, teamName:'', teams: [], team: {} }
@@ -100,7 +100,7 @@ class addTeams extends Component{
 
       return this.state.teams.map(team=>
 
-          <Text style={styles.teamname} key={team.id}>
+          <Text style={styles.smallcenteredtext} key={team.id}>
               {team.name}
           </Text>
       );
@@ -113,16 +113,16 @@ class addTeams extends Component{
 
         <TouchableOpacity onPress={() =>
           this.seeHuntPressed()}>
-          <Text style={styles.name}>
+          <Text style={styles.huntname}>
             {this.props.hunt.name}
           </Text>
         </TouchableOpacity>
 
-        <Text style={styles.text}>
+        <Text style={styles.smallcenteredtext}>
           Which teams will participate in this hunt?
         </Text>
 
-        <View style={styles.teambox}>
+        <View style={styles.directivebox}>
           <InputPlus
             label = ""
             placeholder = "team name"
@@ -138,11 +138,13 @@ class addTeams extends Component{
           { this.state.error }
         </Text>
 
-        <ScrollView style={styles.scrollview}>
-          {this.renderTeamNames()}
-        </ScrollView>
+        <View style={styles.smush2}>
+          <ScrollView>
+            {this.renderTeamNames()}
+          </ScrollView>
+        </View>
 
-        <Button style={styles.button} onPress={() =>
+        <Button style={styles.addbutton} onPress={() =>
           this.seeTeamsPressed()}> See Teams
         </Button>
 
@@ -151,68 +153,68 @@ class addTeams extends Component{
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    paddingBottom: 50
-  },
-  scrollview:{
-    marginTop: 10,
-    marginBottom: 10,
-    height: 180,
-  },
-  teambox:{
-    flexDirection: 'row',
-    marginBottom: 5,
-    width: 300
-  },
-  plus:{
-    width: 40,
-    height: 40,
-    backgroundColor: "#21b6cb",
-    paddingTop: 12,
-    borderRadius: 5,
-    borderWidth: 1,
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    borderColor:'#167c89',
-    marginTop: 12,
-    alignItems: 'center',
-  },
-  name: {
-    fontSize: 32,
-    textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontFamily: 'Pacifico'
-  },
-  text: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    fontFamily: 'Chalkboard SE'
-  },
-  errorTextStyle: {
-    fontSize: 16,
-    alignSelf: 'center',
-    color: 'red',
-    fontFamily: "Chalkboard SE",
-    textAlign: 'center',
-    marginTop: -20,
-  },
-  teamname: {
-    fontSize: 16,
-    textAlign: 'center',
-    paddingTop: 5,
-    fontFamily: 'Chalkboard SE',
-    color: '#DCDCDC',
-  }
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     marginTop: 40,
+//     alignItems: 'center',
+//     backgroundColor: '#cce5e5',
+//     paddingBottom: 50
+//   },
+//   scrollview:{
+//     marginTop: 10,
+//     marginBottom: 10,
+//     height: 180,
+//   },
+//   teambox:{
+//     flexDirection: 'row',
+//     marginBottom: 5,
+//     width: 300
+//   },
+//   plus:{
+//     width: 40,
+//     height: 40,
+//     backgroundColor: "#21b6cb",
+//     paddingTop: 12,
+//     borderRadius: 5,
+//     borderWidth: 1,
+//     shadowColor: '#167c89',
+//     shadowOffset: { width: 0, height: 2 },
+//     shadowOpacity: 0.1,
+//     shadowRadius: 2,
+//     elevation: 1,
+//     borderColor:'#167c89',
+//     marginTop: 12,
+//     alignItems: 'center',
+//   },
+//   name: {
+//     fontSize: 32,
+//     textAlign: 'center',
+//     paddingTop: 20,
+//     paddingBottom: 20,
+//     fontFamily: 'Pacifico'
+//   },
+//   text: {
+//     fontSize: 16,
+//     textAlign: 'center',
+//     marginLeft: 10,
+//     marginRight: 10,
+//     fontFamily: 'Chalkboard SE'
+//   },
+//   errorTextStyle: {
+//     fontSize: 16,
+//     alignSelf: 'center',
+//     color: 'red',
+//     fontFamily: "Chalkboard SE",
+//     textAlign: 'center',
+//     marginTop: -20,
+//   },
+//   teamname: {
+//     fontSize: 16,
+//     textAlign: 'center',
+//     paddingTop: 5,
+//     fontFamily: 'Chalkboard SE',
+//     color: '#DCDCDC',
+//   }
+// });
 
 export default addTeams;

@@ -428,6 +428,12 @@ const styles = StyleSheet.create({
   smush:{
     height: 320
   },
+  smush2:{
+    height: 225,
+  },
+  smush3:{
+    height: 175,
+  },
 });
 
 module.exports = styles

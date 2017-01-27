@@ -137,11 +137,13 @@ class addDirectives extends Component {
           { this.state.error }
         </Text>
 
-        <ScrollView style={styles.scrollview}>
-          {this.renderDirectives()}
-        </ScrollView>
+        <View style={styles.smush2}>
+          <ScrollView>
+            {this.renderDirectives()}
+          </ScrollView>
+        </View>
 
-        <Button style={styles.bottombutton} onPress={() =>
+        <Button style={styles.addbutton} onPress={() =>
           this.seeDirectivesPressed()}> See Directives
         </Button>
 

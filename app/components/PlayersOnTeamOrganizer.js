@@ -12,6 +12,7 @@ import Button from './common/Button';
 import huntDetails from './HuntDetails';
 import Profile from './Profile';
 import addPlayers from './AddPlayers';
+import styles from './styles';
 
 class RosterOrganizer extends Component {
   state = { players: [], teamplayer: ''};
@@ -102,10 +103,10 @@ class RosterOrganizer extends Component {
     if (typeof this.state.players[0] !== 'undefined')  {
 
     return this.state.players.map(player =>
-      <View style={styles.playerbox} key={player.id}>
+      <View style={styles.directivebox} key={player.id}>
 
         <TouchableOpacity onPress={() => this._toProfile(player)}>
-          <Text style={styles.team} >
+          <Text style={styles.listitemsmallO} >
                {player.username}
           </Text>
         </TouchableOpacity>
@@ -127,14 +128,16 @@ class RosterOrganizer extends Component {
 
         <TouchableOpacity onPress={() =>
           this.seeHuntPressed()}>
-          <Text style={styles.text}> { this.props.hunt.name } </Text>
+          <Text style={styles.huntname}> { this.props.hunt.name } </Text>
         </TouchableOpacity>
 
         <Text style={styles.smalltext}> Players on {this.props.team.name} </Text>
 
-        <ScrollView style={styles.scrollview}>
-          { this.renderPlayers() }
-        </ScrollView>
+        <View style={styles.smush}>
+          <ScrollView>
+            { this.renderPlayers() }
+          </ScrollView>
+        </View>
 
         <Button onPress={() => this.addPlayersPressed()}> Add Players </Button>
       </View>
@@ -142,80 +145,4 @@ class RosterOrganizer extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    marginTop: 40,
-  },
-  playerbox: {
-    flexDirection: 'row',
-    marginBottom: 5,
-    width: 300
-  },
-  x:{
-    width: 40,
-    height: 40,
-    backgroundColor: "#21b6cb",
-    paddingTop: 10,
-    alignItems: 'center',
-    borderRadius: 5,
-    borderWidth: 1,
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    borderColor:'#167c89',
-    marginTop: 12
-  },
-  text: {
-    fontSize: 32,
-    textAlign: 'center',
-    paddingTop: 10,
-    fontFamily: 'Pacifico',
-    marginTop: 10,
-  },
-  smalltext: {
-    fontSize: 25,
-    textAlign: 'center',
-    padding: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE'
-  },
-  smallertext: {
-    fontSize: 18,
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    fontFamily: 'Chalkboard SE',
-    color: '#DCDCDC',
-  },
-  team:{
-    fontSize: 20,
-    fontFamily: 'Chalkboard SE',
-    textAlign: 'left',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    padding: 5,
-    paddingLeft: 10,
-    width: 225
-  },
-  scrollview: {
-    height: 300,
-    marginBottom: 15
-  },
-})
 export default RosterOrganizer;

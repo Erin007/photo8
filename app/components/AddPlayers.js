@@ -13,6 +13,7 @@ import InputPlus from './common/InputPlus';
 import huntDetails from './HuntDetails';
 import RosterOrganizer from './PlayersOnTeamOrganizer';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
+import styles from './styles';
 
 
 class addPlayers extends Component {
@@ -122,7 +123,7 @@ class addPlayers extends Component {
       return this.state.players.map(player =>
         <View key={player.id}>
 
-            <Text style={styles.player}>
+            <Text style={styles.smallcenteredtext}>
                  {player.username}
             </Text>
 
@@ -137,20 +138,20 @@ class addPlayers extends Component {
 
         <TouchableOpacity onPress={() =>
         this.seeHuntPressed()}>
-          <Text style={styles.name}>
+          <Text style={styles.huntname}>
             {this.props.hunt.name}
           </Text>
         </TouchableOpacity>
 
-        <Text style={styles.teamname}>
+        <Text style={styles.smalltext}>
           {this.props.team.name}
         </Text>
 
-        <Text style={styles.text}>
+        <Text style={styles.smallcenteredtext}>
           Enter the email address of the player you would like to add to this team.
         </Text>
 
-        <View style={styles.playerbox}>
+        <View style={styles.directivebox}>
           <InputPlus
             label = ""
             placeholder = "player email"
@@ -166,83 +167,16 @@ class addPlayers extends Component {
           { this.state.error }
         </Text>
 
-        <ScrollView style={styles.scrollview}>
-          {this.renderPlayers()}
-        </ScrollView>
+        <View style={styles.smush3}>
+          <ScrollView>
+            {this.renderPlayers()}
+          </ScrollView>
+        </View>
 
         <Button onPress={() => this.seeTeamPressed()}> See Team </Button>
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    alignItems: 'center',
-    backgroundColor: '#cce5e5',
-    paddingBottom: 10
-  },
-  scrollview: {
-    marginTop: 10,
-    marginBottom: 10,
-    height: 200,
-  },
-  playerbox: {
-    flexDirection: 'row',
-    marginBottom: 5,
-    width: 300
-  },
-  plus:{
-    width: 40,
-    height: 40,
-    backgroundColor: "#21b6cb",
-    paddingTop: 12,
-    borderRadius: 5,
-    borderWidth: 1,
-    shadowColor: '#167c89',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    borderColor:'#167c89',
-    marginTop: 12,
-    alignItems: 'center',
-  },
-  name: {
-    fontSize: 32,
-    textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 10,
-    fontFamily: 'Pacifico'
-  },
-  teamname: {
-    fontSize: 25,
-    textAlign: 'center',
-    fontFamily: 'Chalkboard SE',
-    paddingBottom: 15
-  },
-  text: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    fontFamily: 'Chalkboard SE'
-  },
-  errorTextStyle: {
-    fontSize: 16,
-    alignSelf: 'center',
-    color: 'red',
-    fontFamily: "Chalkboard SE",
-    textAlign: 'center',
-  },
-  player: {
-    fontSize: 16,
-    textAlign: 'center',
-    paddingTop: 5,
-    fontFamily: 'Chalkboard SE',
-    color: '#DCDCDC',
-  }
-});
 
 export default addPlayers;
